@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gml:FeatureCollection xmlns:rrgs="http://www.risicokaart.nl/schemas/rrgs"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns:gml="http://www.opengis.net/gml/3.2" gml:id="id3e69967d-e357-4fe3-85fb-49f370be3888"
+	xsi:schemaLocation="http://www.risicokaart.nl/schemas/rrgs RRGS-Aanleverformat-buisleidingen-v0.5.xsd http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd">
+	<gml:boundedBy>
+		<gml:Envelope srsName="EPSG:28992" srsDimension="2">
+			<gml:lowerCorner>77523.1 434062.6</gml:lowerCorner>
+			<gml:upperCorner>250801.4 575025</gml:upperCorner>
+		</gml:Envelope>
+	</gml:boundedBy>
+	<gml:featureMember>
+		<rrgs:Transportroutedeel gml:id="id43724f2e-e148-48a9-a566-8cd8dbbd80e6">
+			<rrgs:transportrouteId>200532973</rrgs:transportrouteId>
+			<rrgs:transportroutedeelId>200345184</rrgs:transportroutedeelId>
+			<rrgs:laatsteMutatiedatumtijd>2012-12-18T00:00:00</rrgs:laatsteMutatiedatumtijd>
+			<rrgs:transportrouteNaam>A-501</rrgs:transportrouteNaam>
+			<rrgs:omschrijving>Leiding Gasunie</rrgs:omschrijving>
+			<rrgs:buisleidingtype>37</rrgs:buisleidingtype>
+			<rrgs:naamEigenaar>N.V. Nederlandse Gasunie</rrgs:naamEigenaar>
+			<rrgs:uitwendigeDiameter>914</rrgs:uitwendigeDiameter>
+			<rrgs:wanddikte>15</rrgs:wanddikte>
+			<rrgs:maximaleWerkdruk>662</rrgs:maximaleWerkdruk>
+			<rrgs:geometrie>
+				<gml:MultiCurve gml:id="idc5bfe9f7-cef0-4299-b195-c6bbecd91df6"
+					srsName="EPSG:28992" srsDimension="2">
+					<gml:curveMember>
+						<gml:LineString gml:id="id43724f2e-e148-48a9-a566-8cd8dbbd80e6-0"
+							srsName="EPSG:28992" srsDimension="2">
+							<gml:posList>249789.4 574986.5 249789.4 574985.8 249789.4
+								574985.5
+								249789.5 574985.2 249789.5 574984.9 249789.5 574984</gml:posList>
+						</gml:LineString>
+					</gml:curveMember>
+				</gml:MultiCurve>
+			</rrgs:geometrie>
+			<rrgs:liggingBovenkant>2.53</rrgs:liggingBovenkant>
+			<rrgs:materiaalsoort>X56</rrgs:materiaalsoort>
+			<rrgs:casNrMaatgevendeStof>74-82-8</rrgs:casNrMaatgevendeStof>
+			<rrgs:transportroutedeelToestand>Bestaand</rrgs:transportroutedeelToestand>
+		</rrgs:Transportroutedeel>
+	</gml:featureMember>
+	<gml:featureMember>
+		<rrgs:Transportroutedeel gml:id="id284e90d3-0033-4f66-8e03-742a2773fc69">
+			<rrgs:transportrouteId>200532973</rrgs:transportrouteId>
+			<rrgs:transportroutedeelId>200345185</rrgs:transportroutedeelId>
+			<rrgs:laatsteMutatiedatumtijd>2012-12-18T00:00:00</rrgs:laatsteMutatiedatumtijd>
+			<rrgs:transportrouteNaam>A-501</rrgs:transportrouteNaam>
+			<rrgs:omschrijving>Leiding Gasunie</rrgs:omschrijving>
+			<rrgs:buisleidingtype>37</rrgs:buisleidingtype>
+			<rrgs:naamEigenaar>N.V. Nederlandse Gasunie</rrgs:naamEigenaar>
+			<rrgs:uitwendigeDiameter>914</rrgs:uitwendigeDiameter>
+			<rrgs:wanddikte>15</rrgs:wanddikte>
+			<rrgs:maximaleWerkdruk>662</rrgs:maximaleWerkdruk>
+			<rrgs:geometrie>
+				<gml:MultiCurve gml:id="id0a575f9e-496b-4072-b383-e76e7fd68d46"
+					srsName="EPSG:28992" srsDimension="2">
+					<gml:curveMember>
+						<gml:LineString gml:id="id284e90d3-0033-4f66-8e03-742a2773fc69-0"
+							srsName="EPSG:28992" srsDimension="2">
+							<gml:posList>249789 574994.6 249789 574994.2 249789 574993.8
+								249789
+								574993.4 249789.1 574992.1
+							</gml:posList>
+						</gml:LineString>
+					</gml:curveMember>
+				</gml:MultiCurve>
+			</rrgs:geometrie>
+			<rrgs:liggingBovenkant>1.17</rrgs:liggingBovenkant>
+			<rrgs:materiaalsoort>X56</rrgs:materiaalsoort>
+			<rrgs:casNrMaatgevendeStof>74-82-8</rrgs:casNrMaatgevendeStof>
+			<rrgs:transportroutedeelToestand>Bestaand</rrgs:transportroutedeelToestand>
+		</rrgs:Transportroutedeel>
+	</gml:featureMember>
+	<gml:featureMember>
+		<rrgs:Transportroutedeel gml:id="id15b96a60-0f87-450b-8ce9-afa3b85504c1">
+			<rrgs:transportrouteId>200532973</rrgs:transportrouteId>
+			<rrgs:transportroutedeelId>200356271</rrgs:transportroutedeelId>
+			<rrgs:laatsteMutatiedatumtijd>2012-12-18T00:00:00</rrgs:laatsteMutatiedatumtijd>
+			<rrgs:transportrouteNaam>A-501</rrgs:transportrouteNaam>
+			<rrgs:omschrijving>Leiding Gasunie</rrgs:omschrijving>
+			<rrgs:buisleidingtype>37</rrgs:buisleidingtype>
+			<rrgs:naamEigenaar>N.V. Nederlandse Gasunie</rrgs:naamEigenaar>
+			<rrgs:uitwendigeDiameter>914</rrgs:uitwendigeDiameter>
+			<rrgs:wanddikte>15</rrgs:wanddikte>
+			<rrgs:maximaleWerkdruk>662</rrgs:maximaleWerkdruk>
+			<rrgs:geometrie>
+				<gml:MultiCurve gml:id="id587ac82d-db32-4400-a5ff-a7e72ca446f9"
+					srsName="EPSG:28992" srsDimension="2">
+					<gml:curveMember>
+						<gml:LineString gml:id="id15b96a60-0f87-450b-8ce9-afa3b85504c1-0"
+							srsName="EPSG:28992" srsDimension="2">
+							<gml:posList>249789.5 574984 249789.6 574983.6 249789.6 574983.5
+								249789.6 574982.5 249789.7 574981.1 249789.8 574979.4 249790
+								574977.2 249790.6 574966.9 249790.8 574963.8 249790.8 574962.7</gml:posList>
+						</gml:LineString>
+					</gml:curveMember>
+				</gml:MultiCurve>
+			</rrgs:geometrie>
+			<rrgs:liggingBovenkant>2.57</rrgs:liggingBovenkant>
+			<rrgs:materiaalsoort>X56</rrgs:materiaalsoort>
+			<rrgs:casNrMaatgevendeStof>74-82-8</rrgs:casNrMaatgevendeStof>
+			<rrgs:transportroutedeelToestand>Bestaand</rrgs:transportroutedeelToestand>
+		</rrgs:Transportroutedeel>
+	</gml:featureMember>
+	<gml:featureMember>
+		<rrgs:Transportroutedeel gml:id="id6a0fe21d-443a-4002-be8c-df00ba83bae2">
+			<rrgs:transportrouteId>200533431</rrgs:transportrouteId>
+			<rrgs:transportroutedeelId>200329298</rrgs:transportroutedeelId>
+			<rrgs:laatsteMutatiedatumtijd>2000-01-01T00:00:00</rrgs:laatsteMutatiedatumtijd>
+			<rrgs:transportrouteNaam>W-537-30</rrgs:transportrouteNaam>
+			<rrgs:omschrijving>Leiding Gasunie</rrgs:omschrijving>
+			<rrgs:buisleidingtype>37</rrgs:buisleidingtype>
+			<rrgs:naamEigenaar>N.V. Nederlandse Gasunie</rrgs:naamEigenaar>
+			<rrgs:uitwendigeDiameter>168</rrgs:uitwendigeDiameter>
+			<rrgs:wanddikte>5</rrgs:wanddikte>
+			<rrgs:maximaleWerkdruk>400</rrgs:maximaleWerkdruk>
+			<rrgs:geometrie>
+				<gml:MultiCurve gml:id="id726f6289-b015-4afe-bdca-d84ea5573e71"
+					srsName="EPSG:28992" srsDimension="2">
+					<gml:curveMember>
+						<gml:LineString gml:id="id6a0fe21d-443a-4002-be8c-df00ba83bae2-0"
+							srsName="EPSG:28992" srsDimension="2">
+							<gml:posList>77944.5 434993.5 77944.6 434993.3 77944.8 434992.8
+								77945.2 434992.4 77945.4 434992.3</gml:posList>
+						</gml:LineString>
+					</gml:curveMember>
+				</gml:MultiCurve>
+			</rrgs:geometrie>
+			<rrgs:liggingBovenkant>1.29</rrgs:liggingBovenkant>
+			<rrgs:materiaalsoort>GRADE B</rrgs:materiaalsoort>
+			<rrgs:casNrMaatgevendeStof>74-82-8</rrgs:casNrMaatgevendeStof>
+			<rrgs:transportroutedeelToestand>Bestaand</rrgs:transportroutedeelToestand>
+		</rrgs:Transportroutedeel>
+	</gml:featureMember>
+	<gml:featureMember>
+		<rrgs:Transportroutedeel gml:id="id9ee13de6-4dca-491c-8320-2984a71d010e">
+			<rrgs:transportrouteId>200533431</rrgs:transportrouteId>
+			<rrgs:transportroutedeelId>200329297</rrgs:transportroutedeelId>
+			<rrgs:laatsteMutatiedatumtijd>2000-01-01T00:00:00</rrgs:laatsteMutatiedatumtijd>
+			<rrgs:transportrouteNaam>W-537-30</rrgs:transportrouteNaam>
+			<rrgs:omschrijving>Leiding Gasunie</rrgs:omschrijving>
+			<rrgs:buisleidingtype>37</rrgs:buisleidingtype>
+			<rrgs:naamEigenaar>N.V. Nederlandse Gasunie</rrgs:naamEigenaar>
+			<rrgs:uitwendigeDiameter>168</rrgs:uitwendigeDiameter>
+			<rrgs:wanddikte>5</rrgs:wanddikte>
+			<rrgs:maximaleWerkdruk>400</rrgs:maximaleWerkdruk>
+			<rrgs:geometrie>
+				<gml:MultiCurve gml:id="id41e62033-006d-48ea-8f69-cb6b835d8375"
+					srsName="EPSG:28992" srsDimension="2">
+					<gml:curveMember>
+						<gml:LineString gml:id="id9ee13de6-4dca-491c-8320-2984a71d010e-0"
+							srsName="EPSG:28992" srsDimension="2">
+							<gml:posList>77950.6 434989.5 77950.7 434989.4 77951.1 434989
+								77951.4 434988.5 77951.5 434988.3</gml:posList>
+						</gml:LineString>
+					</gml:curveMember>
+				</gml:MultiCurve>
+			</rrgs:geometrie>
+			<rrgs:liggingBovenkant>1.28</rrgs:liggingBovenkant>
+			<rrgs:materiaalsoort>GRADE B</rrgs:materiaalsoort>
+			<rrgs:casNrMaatgevendeStof>74-82-8</rrgs:casNrMaatgevendeStof>
+			<rrgs:transportroutedeelToestand>Bestaand</rrgs:transportroutedeelToestand>
+		</rrgs:Transportroutedeel>
+	</gml:featureMember>
+	<gml:featureMember>
+		<rrgs:Transportroutedeel gml:id="id215c8a23-12ef-4aa2-8fc5-3ca6f0d345f4">
+			<rrgs:transportrouteId>200533431</rrgs:transportrouteId>
+			<rrgs:transportroutedeelId>200329296</rrgs:transportroutedeelId>
+			<rrgs:laatsteMutatiedatumtijd>2000-01-01T00:00:00</rrgs:laatsteMutatiedatumtijd>
+			<rrgs:transportrouteNaam>W-537-30</rrgs:transportrouteNaam>
+			<rrgs:omschrijving>Leiding Gasunie</rrgs:omschrijving>
+			<rrgs:buisleidingtype>37</rrgs:buisleidingtype>
+			<rrgs:naamEigenaar>N.V. Nederlandse Gasunie</rrgs:naamEigenaar>
+			<rrgs:uitwendigeDiameter>168</rrgs:uitwendigeDiameter>
+			<rrgs:wanddikte>5</rrgs:wanddikte>
+			<rrgs:maximaleWerkdruk>400</rrgs:maximaleWerkdruk>
+			<rrgs:geometrie>
+				<gml:MultiCurve gml:id="id6a9d9da5-3c3c-4a4d-9f7e-e09ea5a083cd"
+					srsName="EPSG:28992" srsDimension="2">
+					<gml:curveMember>
+						<gml:LineString gml:id="id215c8a23-12ef-4aa2-8fc5-3ca6f0d345f4-0"
+							srsName="EPSG:28992" srsDimension="2">
+							<gml:posList>78062.1 434862.8 78062.3 434862.9 78063.5 434862.8
+								78064.2 434861.9 78064.3 434861.7</gml:posList>
+						</gml:LineString>
+					</gml:curveMember>
+				</gml:MultiCurve>
+			</rrgs:geometrie>
+			<rrgs:liggingBovenkant>1.79</rrgs:liggingBovenkant>
+			<rrgs:materiaalsoort>GRADE B</rrgs:materiaalsoort>
+			<rrgs:casNrMaatgevendeStof>74-82-8</rrgs:casNrMaatgevendeStof>
+			<rrgs:transportroutedeelToestand>Bestaand</rrgs:transportroutedeelToestand>
+		</rrgs:Transportroutedeel>
+	</gml:featureMember>
+</gml:FeatureCollection>

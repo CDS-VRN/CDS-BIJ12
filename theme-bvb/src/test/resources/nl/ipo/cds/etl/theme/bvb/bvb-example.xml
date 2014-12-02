@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BVB      
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.web-bvb.nl/ bvb-cds-export.xsd"
+  xmlns="http://www.web-bvb.nl/">
+  <Stalgroep>
+    <Gemeente>1734</Gemeente>
+    <Dossier>2131</Dossier>
+    <BedrijfsPCHN>6674AN1</BedrijfsPCHN>
+    <Emissienummer>Stal </Emissienummer>
+    <Stalnummer>bedrijf</Stalnummer>
+    <X_Coordinaat>180614</X_Coordinaat>
+    <Y_Coordinaat>435039</Y_Coordinaat>
+    <Herkomst_XY>bedrijf</Herkomst_XY>
+    <Datum_besluit>2008/01/30 00:00:00</Datum_besluit>
+    <Status>definitief</Status>
+    <Diercategorie>D3.</Diercategorie>
+    <RAV_code>D3.2.1.2</RAV_code>
+    <Dieraantal>140</Dieraantal>
+    <NH3_factor>4</NH3_factor>
+    <Gebouwhoogte>6</Gebouwhoogte>
+    <Diameter>0.5</Diameter>
+    <Schoorsteenhoogte>6</Schoorsteenhoogte>
+    <Herkomst_ep_info>onbekend</Herkomst_ep_info>
+  </Stalgroep>
+  <Stalgroep>
+    <Gemeente>1734</Gemeente>
+    <Dossier>2131</Dossier>
+    <BedrijfsPCHN>6674AN1</BedrijfsPCHN>
+    <Emissienummer>Stal </Emissienummer>
+    <Stalnummer>bedrijf</Stalnummer>
+    <X_Coordinaat>180614</X_Coordinaat>
+    <Y_Coordinaat>435039</Y_Coordinaat>
+    <Herkomst_XY>bedrijf</Herkomst_XY>
+    <Datum_besluit>2008/01/30 00:00:00</Datum_besluit>
+    <Status>definitief</Status>
+    <Diercategorie>D3.</Diercategorie>
+    <RAV_code>D3.2.1.1</RAV_code>
+    <Dieraantal>1850</Dieraantal>
+    <NH3_factor>3</NH3_factor>
+    <Gebouwhoogte>6</Gebouwhoogte>
+    <Diameter>0.5</Diameter>
+    <Schoorsteenhoogte>6</Schoorsteenhoogte>
+    <Herkomst_ep_info>onbekend</Herkomst_ep_info>
+  </Stalgroep>
+  <Stalgroep>
+    <Gemeente>1734</Gemeente>
+    <Dossier>1904</Dossier>
+    <BedrijfsPCHN>6674AG9</BedrijfsPCHN>
+    <Emissienummer>Stal </Emissienummer>
+    <Stalnummer>bedrijf</Stalnummer>
+    <X_Coordinaat>179778</X_Coordinaat>
+    <Y_Coordinaat>434012</Y_Coordinaat>
+    <Herkomst_XY>bedrijf</Herkomst_XY>
+    <Datum_besluit>2008/07/16 00:00:00</Datum_besluit>
+    <Status>definitief</Status>
+    <Diercategorie>D3.</Diercategorie>
+    <RAV_code>D3.100.2</RAV_code>
+    <Dieraantal>899</Dieraantal>
+    <NH3_factor>3.5</NH3_factor>
+    <Gebouwhoogte>6</Gebouwhoogte>
+    <Diameter>0.5</Diameter>
+    <Schoorsteenhoogte>6</Schoorsteenhoogte>
+    <Herkomst_ep_info>onbekend</Herkomst_ep_info>
+  </Stalgroep>
+  <Stalgroep>
+    <Gemeente>1734</Gemeente>
+    <Dossier>1904</Dossier>
+    <BedrijfsPCHN>6674AG9</BedrijfsPCHN>
+    <Emissienummer>Stal </Emissienummer>
+    <Stalnummer>bedrijf</Stalnummer>
+    <X_Coordinaat>179778</X_Coordinaat>
+    <Y_Coordinaat>434012</Y_Coordinaat>
+    <Herkomst_XY>bedrijf</Herkomst_XY>
+    <Datum_besluit>2008/07/16 00:00:00</Datum_besluit>
+    <Status>definitief</Status>
+    <Diercategorie>A3</Diercategorie>
+    <RAV_code>A3</RAV_code>
+    <Dieraantal>68</Dieraantal>
+    <NH3_factor>3.9</NH3_factor>
+    <Gebouwhoogte>6</Gebouwhoogte>
+    <Diameter>0.5</Diameter>
+    <Schoorsteenhoogte>6</Schoorsteenhoogte>
+    <Herkomst_ep_info>onbekend</Herkomst_ep_info>
+  </Stalgroep>
+  <Stalgroep>
+    <Gemeente>1734</Gemeente>
+    <Dossier>1904</Dossier>
+    <BedrijfsPCHN>6674AG9</BedrijfsPCHN>
+    <Emissienummer>Stal </Emissienummer>
+    <Stalnummer>bedrijf</Stalnummer>
+    <X_Coordinaat>179778</X_Coordinaat>
+    <Y_Coordinaat>434012</Y_Coordinaat>
+    <Herkomst_XY>bedrijf</Herkomst_XY>
+    <Datum_besluit>2008/07/16 00:00:00</Datum_besluit>
+    <Status>definitief</Status>
+    <Diercategorie>A1</Diercategorie>
+    <RAV_code>A1.100.1</RAV_code>
+    <Dieraantal>140</Dieraantal>
+    <NH3_factor>9.5</NH3_factor>
+    <Gebouwhoogte>6</Gebouwhoogte>
+    <Diameter>0.5</Diameter>
+    <Schoorsteenhoogte>6</Schoorsteenhoogte>
+    <Herkomst_ep_info>onbekend</Herkomst_ep_info>
+  </Stalgroep>
+  <Stalgroep>
+    <Gemeente>1734</Gemeente>
+    <Dossier>1904</Dossier>
+    <BedrijfsPCHN>6674AG9</BedrijfsPCHN>
+    <Emissienummer>Stal </Emissienummer>
+    <Stalnummer>bedrijf</Stalnummer>
+    <X_Coordinaat>179778</X_Coordinaat>
+    <Y_Coordinaat>434012</Y_Coordinaat>
+    <Herkomst_XY>bedrijf</Herkomst_XY>
+    <Datum_besluit>2008/07/16 00:00:00</Datum_besluit>
+    <Status>definitief</Status>
+    <Diercategorie>D3.</Diercategorie>
+    <RAV_code>D3.2.7.1.1</RAV_code>
+    <Dieraantal>1020</Dieraantal>
+    <NH3_factor>1</NH3_factor>
+    <Gebouwhoogte>6</Gebouwhoogte>
+    <Diameter>0.5</Diameter>
+    <Schoorsteenhoogte>6</Schoorsteenhoogte>
+    <Herkomst_ep_info>onbekend</Herkomst_ep_info>
+  </Stalgroep>
+  <Stalgroep>
+    <Gemeente>1734</Gemeente>
+    <Dossier>1904</Dossier>
+    <BedrijfsPCHN>6674AG9</BedrijfsPCHN>
+    <Emissienummer>Stal </Emissienummer>
+    <Stalnummer>bedrijf</Stalnummer>
+    <X_Coordinaat>179778</X_Coordinaat>
+    <Y_Coordinaat>434012</Y_Coordinaat>
+    <Herkomst_XY>bedrijf</Herkomst_XY>
+    <Datum_besluit>2008/07/16 00:00:00</Datum_besluit>
+    <Status>definitief</Status>
+    <Diercategorie>A6.</Diercategorie>
+    <RAV_code>A6</RAV_code>
+    <Dieraantal>20</Dieraantal>
+    <NH3_factor>7.2</NH3_factor>
+    <Gebouwhoogte>6</Gebouwhoogte>
+    <Diameter>0.5</Diameter>
+    <Schoorsteenhoogte>6</Schoorsteenhoogte>
+    <Herkomst_ep_info>onbekend</Herkomst_ep_info>
+  </Stalgroep>
+  <Stalgroep>
+    <Gemeente>1734</Gemeente>
+    <Dossier>1904</Dossier>
+    <BedrijfsPCHN>6674AG9</BedrijfsPCHN>
+    <Emissienummer>Stal </Emissienummer>
+    <Stalnummer>bedrijf</Stalnummer>
+    <X_Coordinaat>179778</X_Coordinaat>
+    <Y_Coordinaat>434012</Y_Coordinaat>
+    <Herkomst_XY>bedrijf</Herkomst_XY>
+    <Datum_besluit>2008/07/16 00:00:00</Datum_besluit>
+    <Status>definitief</Status>
+    <Diercategorie>A4</Diercategorie>
+    <RAV_code>A4.100</RAV_code>
+    <Dieraantal>7</Dieraantal>
+    <NH3_factor>2.5</NH3_factor>
+    <Gebouwhoogte>6</Gebouwhoogte>
+    <Diameter>0.5</Diameter>
+    <Schoorsteenhoogte>6</Schoorsteenhoogte>
+    <Herkomst_ep_info>onbekend</Herkomst_ep_info>
+  </Stalgroep>
+  <Stalgroep>
+    <Gemeente>1734</Gemeente>
+    <Dossier>2579</Dossier>
+    <BedrijfsPCHN>6674AD130</BedrijfsPCHN>
+    <Emissienummer>Stal </Emissienummer>
+    <Stalnummer>bedrijf</Stalnummer>
+    <X_Coordinaat>180144</X_Coordinaat>
+    <Y_Coordinaat>434839</Y_Coordinaat>
+    <Herkomst_XY>bedrijf</Herkomst_XY>
+    <Datum_besluit>2003/07/16 00:00:00</Datum_besluit>
+    <Status>definitief</Status>
+    <Diercategorie>A1</Diercategorie>
+    <RAV_code>A1.100.1</RAV_code>
+    <Dieraantal>16</Dieraantal>
+    <NH3_factor>9.5</NH3_factor>
+    <Gebouwhoogte>6</Gebouwhoogte>
+    <Diameter>0.5</Diameter>
+    <Schoorsteenhoogte>6</Schoorsteenhoogte>
+    <Herkomst_ep_info>onbekend</Herkomst_ep_info>
+  </Stalgroep>
+  <Stalgroep>
+    <Gemeente>1734</Gemeente>
+    <Dossier>2579</Dossier>
+    <BedrijfsPCHN>6674AD130</BedrijfsPCHN>
+    <Emissienummer>Stal </Emissienummer>
+    <Stalnummer>bedrijf</Stalnummer>
+    <X_Coordinaat>180144</X_Coordinaat>
+    <Y_Coordinaat>434839</Y_Coordinaat>
+    <Herkomst_XY>bedrijf</Herkomst_XY>
+    <Datum_besluit>2003/07/16 00:00:00</Datum_besluit>
+    <Status>definitief</Status>
+    <Diercategorie>A4</Diercategorie>
+    <RAV_code>A4.100</RAV_code>
+    <Dieraantal>34</Dieraantal>
+    <NH3_factor>2.5</NH3_factor>
+    <Gebouwhoogte>6</Gebouwhoogte>
+    <Diameter>0.5</Diameter>
+    <Schoorsteenhoogte>6</Schoorsteenhoogte>
+    <Herkomst_ep_info>onbekend</Herkomst_ep_info>
+  </Stalgroep>
+  <Stalgroep>
+    <Gemeente>1734</Gemeente>
+    <Dossier>1943</Dossier>
+    <BedrijfsPCHN>6674AD140</BedrijfsPCHN>
+    <Emissienummer>Stal </Emissienummer>
+    <Stalnummer>bedrijf</Stalnummer>
+    <X_Coordinaat>179824</X_Coordinaat>
+    <Y_Coordinaat>434885</Y_Coordinaat>
+    <Herkomst_XY>bedrijf</Herkomst_XY>
+    <Datum_besluit>2008/08/28 00:00:00</Datum_besluit>
+    <Status>definitief</Status>
+    <Diercategorie>D3.</Diercategorie>
+    <RAV_code>D3.100.2</RAV_code>
+    <Dieraantal>72</Dieraantal>
+    <NH3_factor>3.5</NH3_factor>
+    <Gebouwhoogte>6</Gebouwhoogte>
+    <Diameter>0.5</Diameter>
+    <Schoorsteenhoogte>6</Schoorsteenhoogte>
+    <Herkomst_ep_info>onbekend</Herkomst_ep_info>
+  </Stalgroep>
+  <Stalgroep>
+    <Gemeente>1734</Gemeente>
+    <Dossier>1943</Dossier>
+    <BedrijfsPCHN>6674AD140</BedrijfsPCHN>
+    <Emissienummer>Stal </Emissienummer>
+    <Stalnummer>bedrijf</Stalnummer>
+    <X_Coordinaat>179824</X_Coordinaat>
+    <Y_Coordinaat>434885</Y_Coordinaat>
+    <Herkomst_XY>bedrijf</Herkomst_XY>
+    <Datum_besluit>2008/08/28 00:00:00</Datum_besluit>
+    <Status>definitief</Status>
+    <Diercategorie>D1.3</Diercategorie>
+    <RAV_code>D1.3.100</RAV_code>
+    <Dieraantal>33</Dieraantal>
+    <NH3_factor>4.2</NH3_factor>
+    <Gebouwhoogte>6</Gebouwhoogte>
+    <Diameter>0.5</Diameter>
+    <Schoorsteenhoogte>6</Schoorsteenhoogte>
+    <Herkomst_ep_info>onbekend</Herkomst_ep_info>
+  </Stalgroep>
+  <Stalgroep>
+    <Gemeente>1734</Gemeente>
+    <Dossier>1943</Dossier>
+    <BedrijfsPCHN>6674AD140</BedrijfsPCHN>
+    <Emissienummer>Stal </Emissienummer>
+    <Stalnummer>bedrijf</Stalnummer>
+    <X_Coordinaat>179824</X_Coordinaat>
+    <Y_Coordinaat>434885</Y_Coordinaat>
+    <Herkomst_XY>bedrijf</Herkomst_XY>
+    <Datum_besluit>2008/08/28 00:00:00</Datum_besluit>
+    <Status>definitief</Status>
+    <Diercategorie>D1.2</Diercategorie>
+    <RAV_code>D1.2.16</RAV_code>
+    <Dieraantal>79</Dieraantal>
+    <NH3_factor>2.9</NH3_factor>
+    <Gebouwhoogte>6</Gebouwhoogte>
+    <Diameter>0.5</Diameter>
+    <Schoorsteenhoogte>6</Schoorsteenhoogte>
+    <Herkomst_ep_info>onbekend</Herkomst_ep_info>
+  </Stalgroep>
+  <Stalgroep>
+    <Gemeente>1734</Gemeente>
+    <Dossier>1943</Dossier>
+    <BedrijfsPCHN>6674AD140</BedrijfsPCHN>
+    <Emissienummer>Stal </Emissienummer>
+    <Stalnummer>bedrijf</Stalnummer>
+    <X_Coordinaat>179824</X_Coordinaat>
+    <Y_Coordinaat>434885</Y_Coordinaat>
+    <Herkomst_XY>bedrijf</Herkomst_XY>
+    <Datum_besluit>2008/08/28 00:00:00</Datum_besluit>
+    <Status>definitief</Status>
+    <Diercategorie>D2.</Diercategorie>
+    <RAV_code>D2.100</RAV_code>
+    <Dieraantal>2</Dieraantal>
+    <NH3_factor>5.5</NH3_factor>
+    <Gebouwhoogte>6</Gebouwhoogte>
+    <Diameter>0.5</Diameter>
+    <Schoorsteenhoogte>6</Schoorsteenhoogte>
+    <Herkomst_ep_info>onbekend</Herkomst_ep_info>
+  </Stalgroep>
+  <Stalgroep>
+    <Gemeente>1734</Gemeente>
+    <Dossier>1943</Dossier>
+    <BedrijfsPCHN>6674AD140</BedrijfsPCHN>
+    <Emissienummer>Stal </Emissienummer>
+    <Stalnummer>bedrijf</Stalnummer>
+    <X_Coordinaat>179824</X_Coordinaat>
+    <Y_Coordinaat>434885</Y_Coordinaat>
+    <Herkomst_XY>bedrijf</Herkomst_XY>
+    <Datum_besluit>2008/08/28 00:00:00</Datum_besluit>
+    <Status>definitief</Status>
+    <Diercategorie>D1.1</Diercategorie>
+    <RAV_code>D1.1.100.2</RAV_code>
+    <Dieraantal>860</Dieraantal>
+    <NH3_factor>0.75</NH3_factor>
+    <Gebouwhoogte>6</Gebouwhoogte>
+    <Diameter>0.5</Diameter>
+    <Schoorsteenhoogte>6</Schoorsteenhoogte>
+    <Herkomst_ep_info>onbekend</Herkomst_ep_info>
+  </Stalgroep>
+  <Stalgroep>
+    <Gemeente>1734</Gemeente>
+    <Dossier>2028</Dossier>
+    <BedrijfsPCHN>6674AA5</BedrijfsPCHN>
+    <Emissienummer>Stal </Emissienummer>
+    <Stalnummer>bedrijf</Stalnummer>
+    <X_Coordinaat>180720</X_Coordinaat>
+    <Y_Coordinaat>434355</Y_Coordinaat>
+    <Herkomst_XY>bedrijf</Herkomst_XY>
+    <Datum_besluit>2006/03/01 00:00:00</Datum_besluit>
+    <Status>definitief</Status>
+    <Diercategorie>E5</Diercategorie>
+    <RAV_code>E5.100</RAV_code>
+    <Dieraantal>40000</Dieraantal>
+    <NH3_factor>0.08</NH3_factor>
+    <Gebouwhoogte>6</Gebouwhoogte>
+    <Diameter>0.5</Diameter>
+    <Schoorsteenhoogte>6</Schoorsteenhoogte>
+    <Herkomst_ep_info>onbekend</Herkomst_ep_info>
+  </Stalgroep>
+  <Stalgroep>
+    <Gemeente>1734</Gemeente>
+    <Dossier>2028</Dossier>
+    <BedrijfsPCHN>6674AA5</BedrijfsPCHN>
+    <Emissienummer>Stal </Emissienummer>
+    <Stalnummer>bedrijf</Stalnummer>
+    <X_Coordinaat>180720</X_Coordinaat>
+    <Y_Coordinaat>434355</Y_Coordinaat>
+    <Herkomst_XY>bedrijf</Herkomst_XY>
+    <Datum_besluit>2006/03/01 00:00:00</Datum_besluit>
+    <Status>definitief</Status>
+    <Diercategorie>E3</Diercategorie>
+    <RAV_code>E3.100</RAV_code>
+    <Dieraantal>34400</Dieraantal>
+    <NH3_factor>0.25</NH3_factor>
+    <Gebouwhoogte>6</Gebouwhoogte>
+    <Diameter>0.5</Diameter>
+    <Schoorsteenhoogte>6</Schoorsteenhoogte>
+    <Herkomst_ep_info>onbekend</Herkomst_ep_info>
+  </Stalgroep>
+  <Stalgroep>
+    <Gemeente>1734</Gemeente>
+    <Dossier>2028</Dossier>
+    <BedrijfsPCHN>6674AA5</BedrijfsPCHN>
+    <Emissienummer>Stal </Emissienummer>
+    <Stalnummer>bedrijf</Stalnummer>
+    <X_Coordinaat>180720</X_Coordinaat>
+    <Y_Coordinaat>434355</Y_Coordinaat>
+    <Herkomst_XY>bedrijf</Herkomst_XY>
+    <Datum_besluit>2006/03/01 00:00:00</Datum_besluit>
+    <Status>definitief</Status>
+    <Diercategorie>E3</Diercategorie>
+    <RAV_code>E3.100</RAV_code>
+    <Dieraantal>34400</Dieraantal>
+    <NH3_factor>0.25</NH3_factor>
+    <Gebouwhoogte>6</Gebouwhoogte>
+    <Diameter>0.5</Diameter>
+    <Schoorsteenhoogte>6</Schoorsteenhoogte>
+    <Herkomst_ep_info>onbekend</Herkomst_ep_info>
+  </Stalgroep>
+</BVB>

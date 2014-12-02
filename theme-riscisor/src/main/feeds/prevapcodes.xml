@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+
+	<!-- 
+	select 
+		E'<entry>\n' 
+		|| '<id>http://www.risicokaart.nl/codes/prevapcodes/' || prevapcode || E'</id>\n'
+		|| '<title>' || prevapcode || E'</title>\n'
+		|| E'<category term="CodeListValue"/>\n'
+		|| '</entry>' 
+	from 
+		bron.riscisor_prevapcode;
+	-->
+	
+	<id>http://www.risicokaart.nl/codes/prevapcodes</id>
+	<title>Prevapcode</title>
+
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/1100</id>
+		<title>1100</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/1200</id>
+		<title>1200</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/1300</id>
+		<title>1300</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/1500</id>
+		<title>1500</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/1600</id>
+		<title>1600</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/1700</id>
+		<title>1700</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/1800</id>
+		<title>1800</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/2100</id>
+		<title>2100</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/2200</id>
+		<title>2200</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/2310</id>
+		<title>2310</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/2320</id>
+		<title>2320</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/2330</id>
+		<title>2330</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/2410</id>
+		<title>2410</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/2420</id>
+		<title>2420</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/2430</id>
+		<title>2430</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/2510</id>
+		<title>2510</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/2520</id>
+		<title>2520</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/2610</id>
+		<title>2610</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/2620</id>
+		<title>2620</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/2710</id>
+		<title>2710</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/2720</id>
+		<title>2720</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/2730</id>
+		<title>2730</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/2800</id>
+		<title>2800</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/2910</id>
+		<title>2910</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/2920</id>
+		<title>2920</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/2930</id>
+		<title>2930</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/2999</id>
+		<title>2999</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/3100</id>
+		<title>3100</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/4100</id>
+		<title>4100</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/4200</id>
+		<title>4200</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/4300</id>
+		<title>4300</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/4400</id>
+		<title>4400</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/5110</id>
+		<title>5110</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/5120</id>
+		<title>5120</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/5130</id>
+		<title>5130</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/6110</id>
+		<title>6110</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/6120</id>
+		<title>6120</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/6130</id>
+		<title>6130</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/7110</id>
+		<title>7110</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/7120</id>
+		<title>7120</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/7210</id>
+		<title>7210</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/7220</id>
+		<title>7220</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/7310</id>
+		<title>7310</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/7320</id>
+		<title>7320</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/8100</id>
+		<title>8100</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/8210</id>
+		<title>8210</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/8220</id>
+		<title>8220</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/8230</id>
+		<title>8230</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/9100</id>
+		<title>9100</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/9210</id>
+		<title>9210</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/9220</id>
+		<title>9220</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/9230</id>
+		<title>9230</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/9300</id>
+		<title>9300</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/10110</id>
+		<title>10110</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/10120</id>
+		<title>10120</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/10130</id>
+		<title>10130</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/10140</id>
+		<title>10140</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/11100</id>
+		<title>11100</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/11210</id>
+		<title>11210</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/11220</id>
+		<title>11220</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/11230</id>
+		<title>11230</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/11999</id>
+		<title>11999</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/13120</id>
+		<title>13120</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/13220</id>
+		<title>13220</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/14110</id>
+		<title>14110</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/14120</id>
+		<title>14120</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/14130</id>
+		<title>14130</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/14200</id>
+		<title>14200</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>http://www.risicokaart.nl/codes/prevapcodes/14300</id>
+		<title>14300</title>
+		<category term="CodeListValue" />
+	</entry>
+
+</feed>

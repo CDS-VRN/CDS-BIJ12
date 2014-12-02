@@ -1,0 +1,99 @@
+TRANSPORTROUTE_ID_NULL=Feature ${0} heeft geen transportroute ID
+TRANSPORTROUTE_ID_EMPTY=Feature ${0} heeft een leeg transportroute ID
+TRANSPORTROUTE_ID_TOO_LONG=Feature ${0} heeft een te lange waarde voor transportroute ID (maximaal toegestaan: ${2} karakters)
+
+TRANSPORTROUTEDEEL_ID_NULL=Feature ${0} heeft geen transportroutedeel ID
+TRANSPORTROUTEDEEL_ID_EMPTY=Feature ${0} heeft een leeg transportroutedeel ID
+TRANSPORTROUTEDEEL_ID_DUPLICATE=Transportroutedeel ID ${1} is niet uniek
+TRANSPORTROUTEDEEL_ID_TOO_LONG=Transportroutedeel ID ${1} is te lang (maximaal toegestaan: ${2} karakters)
+
+RISICOKAART_MEDEWERKER_NAAM_NULL=Transportroutedeel ${1} heeft geen Risicokaart medewerker naam
+RISICOKAART_MEDEWERKER_NAAM_EMPTY=Transportroutedeel ${1} heeft een lege Risicokaart medewerker naam
+RISICOKAART_MEDEWERKER_NAAM_NOT_CONSTANT=Transportroutedeel ${1} heeft een afwijkende Risicokaart medewerker naam ${2}
+
+LAATSTE_MUTATIEDATUM_NULL=Transportroutedeel ${1} heeft geen laatste mutatiedatum
+LAATSTE_MUTATIEDATUM_FUTURE=De laatste mutatiedatum van transportroutedeel ${1} ($2) moet in het verleden liggen
+
+TRANSPORTROUTE_NAAM_NULL=Transportroutedeel ${1} heeft geen transportroutenaam
+TRANSPORTROUTE_NAAM_EMPTY=Transportroutedeel ${1} heeft een lege transportroutenaam
+TRANSPORTROUTE_NAAM_CHANGED=De transportroutenaam ${2} van transportroutedeel ${1} is niet consistent met de eerdere naam van deze transportroute
+
+BUISLEIDING_TYPE_NULL=Transportroutedeel ${1} heeft geen buisleiding type
+BUISLEIDING_TYPE_INVALID=Transportroutedeel ${1} heeft een ongeldig buisleiding type ${2}
+
+OMSCHRIJVING_NULL=Transportroutedeel ${1} heeft geen omschrijving
+OMSCHRIJVING_EMPTY=Transportroutedeel ${1} heeft een lege omschrijving
+OMSCHRIJVING_TOO_LONG=Transportroutedeel ${1} heeft een te lange omschrijving (maximaal toegestaan: ${2} karakters)
+
+NAAM_EIGENAAR_NULL=Transportroutedeel ${1} heeft geen naam eigenaar
+NAAM_EIGENAAR_EMPTY=Transportroutedeel ${1} heeft een lege naam eigenaar
+NAAM_EIGENAAR_TOO_LONG=Transportroutedeel ${1} heeft een te lange waarde voor naam eigenaar (maximaal toegestaan: ${2} karakters)
+
+UITWENDIGE_DIAMETER_NULL=Transportroutedeel ${1} heeft geen uitwendige diameter
+UITWENDIGE_DIAMETER_INVALID=Transportroutedeel ${1} heeft een ongeldige uitwendige diameter ${2}
+
+WAND_DIKTE_NULL=Transportroutedeel ${1} heeft geen wanddikte
+WAND_DIKTE_INVALID=Transportroutedeel ${1} heeft een ongeldige wanddikte ${2}
+
+MAXIMALE_WERKDRUK_NULL=Transportroutedeel ${1} heeft geen maximale werkdruk
+MAXIMALE_WERKDRUK_INVALID=Transportroutedeel ${1} heeft een ongeldige maximale werkdruk ${2}
+
+GEOMETRIE_NULL=Transportroutedeel ${1} heeft geen geometrie
+GEOMETRIE_NOT_LINESTRING=De geometrie van transportroutedeel ${1} is niet van het type LineString
+GEOMETRIE_NO_SRS=De geometrie van transportroutedeel ${1} heeft geen SRS
+GEOMETRIE_NOT_RD=De geometrie van transportroutedeel ${1} heeft een ongeldig SRS "${2}" (verwacht: "EPSG:28992")
+GEOMETRIE_POINT_DUPLICATION=De geometrie van transportroutedeel ${1} heeft een dubbel punt: ${2}
+GEOMETRIE_DISCONTINUITY=De geometrie van transportroutedeel ${1} bevat lijndelen die niet aansluiten
+GEOMETRIE_SELF_INTERSECTION=De geometrie van transportroutedeel ${1} snijdt zichzelf in de buurt van ${2}
+
+LIGGING_BOVENKANT_NULL=Transportroutedeel ${1} heeft geen ligging bovenkant
+
+MATERIAAL_SOORT_NULL=Transportroutedeel ${1} heeft geen materiaalsoort
+MATERIAAL_SOORT_EMPTY=Transportroutedeel ${1} heeft een leeg materiaalsoort
+MATERIAAL_SOORT_TOO_LONG=Transportroutedeel ${1} heeft een te lange waarde voor materiaalsoort (maximaal toegestaan: ${2} karakters)
+
+CAS_NR_MAATGEVENDE_STOF_NULL=Transportroutedeel ${1} heeft geen CAS NR. maatgevende stof
+CAS_NR_MAATGEVENDE_STOF_EMPTY=Transportroutedeel ${1} heeft een leeg CAS NR. maatgevende stof
+CAS_NR_MAATGEVENDE_STOF_INVALID=Transportroutedeel ${1} heeft een ongeldig CAS NR. maatgevende stof: ${2}
+
+TOELICHTING_MAATGEVENDE_STOF_NULL=Transportroutedeel ${1} heeft geen toelichting maatgevende stof
+TOELICHTING_MAATGEVENDE_STOF_EMPTY=Transportroutedeel ${1} heeft een lege toelichting maatgevende stof
+
+STATUS_NULL=Transportroutedeel ${1} heeft geen stats
+STATUS_INVALID=Transportroutedeel ${1} heeft een ongeldige status: ${2}
+
+EFFECTAFSTAND_DODELIJK_INVALID=Transportroutedeel ${1} heeft een ongeldige waarde voor "effectafstand dodelijk": ${2}
+
+MAATGEVEND_SCENARIO_DODELIJK_INVALID=Transportroutedeel ${1} heeft een ongeldige waarde voor "maatgevend scenario dodelijk": ${2}
+
+RISICOCONTOUR_TRANSPORTROUTE_NOT_FOUND=Transportroute ${1} kon niet worden gevonden
+RISICOCONTOUR_MISSING=De volgende transportroutes hebben geen contour: ${0}
+
+RISICOCONTOUR_NULL=De risicocontour bij transportroute ${1} is niet ingevuld
+RISICOCONTOUR_IN_M_AND_REDEN=De risicocontour bij transportroute ${1} heeft zowel een afstand als een reden
+RISICOCONTOUR_IN_M_AND_RISICOCONTOUR=De risicocontour bij transportroute ${1} heeft zowel een afstand als een geometrie
+RISICOCONTOUR_IN_M_INVALID=De risicocontour bij transportroute ${1} heeft een ongeldige afstand: ${2}
+RISICOCONTOUR_AND_GEEN_REDEN=De risicocontour bij transportroute ${1} heeft zowel een geometrie als een reden
+RISICOCONTOUR_EMPTY=De risicocontour bij transportroute ${1} bevat een lege geometrie
+RISICOCONTOUR_POINT_DUPLICATION=De risicocontour bij transportroute ${1} bevat een dubbel punt: ${2}
+RISICOCONTOUR_DISCONTINUITY=De risicocontour bij transportroute ${1} bevat lijndelen die niet aansluiten
+RISICOCONTOUR_SELF_INTERSECTION=De risicocontour bij transportroute ${1} snijdt zichzelf in de buurt van ${2}
+RISICOCONTOUR_RING_NOT_CLOSED=De risicocontour bij transportroute ${1} bevat een ongesloten ring
+RISICOCONTOUR_RING_SELF_INTERSECTION=De risicocontour bij transportroute ${1} bevat een ring die zichzelf snijdt in de buurt van ${2}
+RISICOCONTOUR_INTERIOR_RINGS_TOUCH=De risicocontour bij transportroute ${1} bevat twee ringen die elkaar raken in de buurt van ${2}
+RISICOCONTOUR_INTERIOR_RINGS_WITHIN=De risicocontour bij transportroute ${1} bevat een binnenring in een andere binnenring
+RISICOCONTOUR_INTERIOR_DISCONNECTED=De risicocontour bij transportroute ${1} bevat een verbroken polygoon
+RISICOCONTOUR_EXTERIOR_RING_CW=De risicocontour bij transportroute ${1} bevat een buitenste ring met CW oriëntatie
+RISICOCONTOUR_INTERIOR_RING_CCW=De risicocontour bij transportroute ${1} bevat een binnenste ring met CCW oriëntatie
+RISICOCONTOUR_INTERIOR_RING_TOUCHES_EXTERIOR=De risicocontour bij transportroute ${1} bevat een binnenste ring die een buitenste ring raakt in de buurt van ${2}
+RISICOCONTOUR_INTERIOR_RING_OUTSIDE_EXTERIOR=De risicocontour bij transportroute ${1} bevat een binnenste ring buiten een buitenste ring
+RISICOCONTOUR_SRS_NULL=De risicocontour bij transportroute ${1} heeft geen SRS
+RISICOCONTOUR_SRS_NOT_RD=De risicocontour bij transportroute ${1} heeft een ongeldige SRS "${2}" (verwacht: "EPSG:28992")
+GEEN_RISICOCONTOUR_REDEN_EMPTY=De risicocontour bij transportroute ${1} heeft een lege reden
+RISICOCONTOUR_NOT_MULTIPOLYGON=De risicocontour bij transportroute ${1} heeft een ongeldig type (verwacht: MultiSurface of MultiPolygon)
+RISICOCONTOUR_LAATSTE_MUTATIEDATUM_NULL=Transportrouterisico ${1} heeft geen laatste mutatiedatum
+RISICOCONTOUR_LAATSTE_MUTATIEDATUM_FUTURE=De laatste mutatiedatum van transportrouterisico ${1} ($2) moet in het verleden liggen
+
+RISICOCONTOUR_NOT_SET=De risicocontour bij transportroute ${1} moet een contour, een afstand of een reden hebben
+
+HAS_MORE_ERRORS=Er zijn meer meldingen die niet werden gerapporteerd.

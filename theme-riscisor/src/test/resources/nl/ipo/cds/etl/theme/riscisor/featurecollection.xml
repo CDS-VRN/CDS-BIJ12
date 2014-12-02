@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gml:FeatureCollection 
+	xmlns:isor="http://www.risicokaart.nl/schemas/isor" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:gml="http://www.opengis.net/gml/3.2"
+	xsi:schemaLocation="
+		http://www.risicokaart.nl/schemas/isor RISC-ISOR-Aanleverformat-v0.4.xsd
+		http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd"
+	gml:id="id.53a9f83d-bd57-4b1c-a95b-ad90776db1c5">
+
+	<gml:featureMember>
+		<isor:KwetsbaarObject gml:id="id.a2f0ba97-5ebd-4620-9827-d4235cc8183d">
+			<isor:externId>VRU-6651</isor:externId>
+			<isor:laatsteMutatiedatumtijd>2013-09-10T15:30:00</isor:laatsteMutatiedatumtijd>
+			<isor:geometrie>
+				<gml:Point xmlns:xlink="http://www.w3.org/1999/xlink"
+					srsName="urn:ogc:def:crs:EPSG::28992"
+					gml:id="id.8c51a8a3-3783-4ee1-853c-94e14ae4710f">
+					<gml:pos srsDimension="2">141117 459197</gml:pos>
+				</gml:Point>
+			</isor:geometrie>
+			<isor:instellingcode codeSpace="http://www.risicokaart.nl/codes/instellingen">0310</isor:instellingcode>
+			<isor:naam>KDV De steenuiltjes</isor:naam>
+			<isor:postcode>3721LA</isor:postcode>
+			<isor:huisnummer>2</isor:huisnummer>
+			<isor:huisletter>B</isor:huisletter>
+			<isor:identificatiecodeNummeraanduidingBAG>0310200000722183</isor:identificatiecodeNummeraanduidingBAG>
+			<isor:autorisatieDatum>2013-09-16</isor:autorisatieDatum>
+			<isor:prevapcode codeSpace="http://www.risicokaart.nl/codes/prevapcodes">02100</isor:prevapcode>
+			<isor:prevapPrio>1</isor:prevapPrio>
+		</isor:KwetsbaarObject>
+	</gml:featureMember>
+	<gml:featureMember>
+		<isor:KwetsbaarObject gml:id="id.7b3611c7-af56-4199-be61-1574f9a24b59">
+			<isor:externId>VRU-6652</isor:externId>
+			<isor:laatsteMutatiedatumtijd>2013-09-10T15:31:00</isor:laatsteMutatiedatumtijd>
+			<isor:geometrie>
+				<gml:Point xmlns:xlink="http://www.w3.org/1999/xlink"
+					srsName="urn:ogc:def:crs:EPSG::28992"
+					gml:id="id.b746105a-1308-486e-bd58-f7178725c618">
+					<gml:pos srsDimension="2">140614 457611</gml:pos>
+				</gml:Point>
+			</isor:geometrie>
+			<isor:instellingcode codeSpace="http://www.risicokaart.nl/codes/instellingen">0310</isor:instellingcode>
+			<isor:naam>KDV Small Society</isor:naam>
+			<isor:postcode>3721HA</isor:postcode>
+			<isor:huisnummer>15</isor:huisnummer>
+			<isor:huisnummertoevoeging>17</isor:huisnummertoevoeging>
+			<isor:identificatiecodeNummeraanduidingBAG>0310200000716742</isor:identificatiecodeNummeraanduidingBAG>
+			<isor:autorisatieDatum>2013-09-16</isor:autorisatieDatum>
+			<isor:prevapcode codeSpace="http://www.risicokaart.nl/codes/prevapcodes">02100</isor:prevapcode>
+			<isor:prevapPrio>1</isor:prevapPrio>
+		</isor:KwetsbaarObject>
+	</gml:featureMember>
+	<gml:featureMember>
+		<isor:KwetsbaarObject gml:id="id.a6af9d99-5a87-49c0-8a50-ab0f43175591">
+			<isor:externId>VRU-6659</isor:externId>
+			<isor:laatsteMutatiedatumtijd>2013-09-10T15:36:00</isor:laatsteMutatiedatumtijd>
+			<isor:geometrie>
+				<gml:Point xmlns:xlink="http://www.w3.org/1999/xlink"
+					srsName="urn:ogc:def:crs:EPSG::28992"
+					gml:id="id.50a1b7df-3aa1-4ca2-8fdc-cdff179b5346">
+					<gml:pos srsDimension="2">141070 457450</gml:pos>
+				</gml:Point>
+			</isor:geometrie>
+			<isor:instellingcode codeSpace="http://www.risicokaart.nl/codes/instellingen">0310</isor:instellingcode>
+			<isor:naam>KDV Villa Kakelbont</isor:naam>
+			<isor:postcode>3732VJ</isor:postcode>
+			<isor:huisnummer>3</isor:huisnummer>
+			<isor:identificatiecodeNummeraanduidingBAG>0310200000708334</isor:identificatiecodeNummeraanduidingBAG>
+			<isor:autorisatieDatum>2013-09-16</isor:autorisatieDatum>
+			<isor:prevapcode codeSpace="http://www.risicokaart.nl/codes/prevapcodes">02100</isor:prevapcode>
+			<isor:prevapPrio>1</isor:prevapPrio>
+		</isor:KwetsbaarObject>
+	</gml:featureMember>
+		
+</gml:FeatureCollection>

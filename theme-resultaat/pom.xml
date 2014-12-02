@@ -1,0 +1,45 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>nl.ipo.cds.ipo</groupId>
+		<artifactId>cds-ipo</artifactId>
+		<version>2.2</version>
+	</parent>
+	<artifactId>theme-resultaat</artifactId>
+	<name>CDS - Theme Resultaat</name>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<phase>package</phase>
+					</execution>
+				</executions>
+				<configuration>
+					<appendAssemblyId>true</appendAssemblyId>
+					<descriptors>
+						<descriptor>src/main/assembly/assembly-sql.xml</descriptor>
+					</descriptors>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>	
+	<dependencies>
+		<dependency>
+			<groupId>nl.ipo.cds</groupId>
+			<artifactId>etl-proces</artifactId>
+			<version>${cds.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>nl.ipo.cds</groupId>
+			<artifactId>etl-test</artifactId>
+			<version>${cds.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+</project>

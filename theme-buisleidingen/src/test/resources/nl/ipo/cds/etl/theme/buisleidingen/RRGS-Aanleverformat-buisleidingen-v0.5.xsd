@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:rrgs="http://www.risicokaart.nl/schemas/rrgs" elementFormDefault="qualified" targetNamespace="http://www.risicokaart.nl/schemas/rrgs" version="0.5">
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BuisleidingtypeType">
+    <restriction base="string">
+      <enumeration value="31">
+        <annotation>
+          <documentation>Aardgasleiding (niet NEN)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="32">
+        <annotation>
+          <documentation>K1-leiding</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="33">
+        <annotation>
+          <documentation>K2-leiding</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="34">
+        <annotation>
+          <documentation>K3-leiding</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="35">
+        <annotation>
+          <documentation>Defensieleiding</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="36">
+        <annotation>
+          <documentation>Overig</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="37">
+        <annotation>
+          <documentation>Aardgasleiding NEN-3650</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EffectScenarioType">
+    <restriction base="string">
+      <enumeration value="1">
+        <annotation>
+          <documentation>Brandbaar</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2">
+        <annotation>
+          <documentation>Explosief</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="3">
+        <annotation>
+          <documentation>Toxisch</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="4">
+        <annotation>
+          <documentation>Scherfwerking</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <element name="TransportrouteRisico" substitutionGroup="gml:AbstractFeature" type="rrgs:TransportrouteRisicoType">
+    <annotation>
+      <documentation>Hoofdtransportroute met o.a. de risicocontour als kenmerk.</documentation>
+    </annotation>
+  </element>
+  <complexType name="TransportrouteRisicoType">
+    <complexContent>
+      <extension base="gml:AbstractFeatureType">
+        <sequence>
+          <element name="transportrouteId">
+            <annotation>
+              <documentation>ID v.d. (hoofd)transportroute, door bronhouder toegekend, mag niet wijzigen tussen verschillende leveringen voor dezelfde (hoofd)transportroute.</documentation>
+            </annotation>
+            <simpleType>
+              <restriction base="string">
+                <maxLength value="30"/>
+              </restriction>
+            </simpleType>
+          </element>
+          <element name="risicocontour10_6" type="gml:MultiSurfacePropertyType">
+            <annotation>
+              <documentation>Geometrie v.d. risicontour 10-6</documentation>
+            </annotation>
+          </element>
+          <element name="laatsteMutatiedatumtijd" type="dateTime">
+            <annotation>
+              <documentation>Datumtijd waarop één of meer kenmerken van de Transportroute voor het laatst door de bronhouder zijn gewijzgd.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TransportrouteRisicoPropertyType">
+    <sequence minOccurs="0">
+      <element ref="rrgs:TransportrouteRisico"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Transportroutedeel" substitutionGroup="gml:AbstractFeature" type="rrgs:TransportroutedeelType">
+    <annotation>
+      <documentation>Deel van een buisleiding met gelijke waarden voor bepaalde buiskenmerken</documentation>
+    </annotation>
+  </element>
+  <complexType name="TransportroutedeelType">
+    <complexContent>
+      <extension base="gml:AbstractFeatureType">
+        <sequence>
+          <element name="transportrouteId" type="string"/>
+          <element name="transportroutedeelId">
+            <annotation>
+              <documentation>ID van het Transportroutedeel binnen de (hoofd)transportroute. Mag niet wijzigen tussen verschillende leveringen van hetzelfde Transportroutedeel. Een Transportroutedeel wordt uniek geïdentificeerd door de combinate van transporrouteId en transportroutede</documentation>
+            </annotation>
+            <simpleType>
+              <restriction base="string">
+                <maxLength value="30"/>
+              </restriction>
+            </simpleType>
+          </element>
+          <element name="laatsteMutatiedatumtijd" type="dateTime">
+            <annotation>
+              <documentation>Datumtijd waarop één of meer kenmerken van het Transportroutedeel voor het laatst door de bronhouder zijn gewijzgd.</documentation>
+            </annotation>
+          </element>
+          <element name="transportrouteNaam" type="string">
+            <annotation>
+              <documentation>Naam van de (hoofd)transportroute.</documentation>
+            </annotation>
+          </element>
+          <element name="omschrijving">
+            <simpleType>
+              <restriction base="string">
+                <maxLength value="240"/>
+              </restriction>
+            </simpleType>
+          </element>
+          <element name="buisleidingtype" type="rrgs:BuisleidingtypeType"/>
+          <element name="naamEigenaar">
+            <annotation>
+              <documentation>Naam v.d. eigenaar v.d. buisleiding (conform Registratiebesluit externe veiligheid, art. 11, lid 1.f) (=naam_beheerder in RK db)</documentation>
+            </annotation>
+            <simpleType>
+              <restriction base="string">
+                <maxLength value="240"/>
+              </restriction>
+            </simpleType>
+          </element>
+          <element name="uitwendigeDiameter" type="integer">
+            <annotation>
+              <documentation>De uitwendige diameter van de buisleiding in millimeters;</documentation>
+            </annotation>
+          </element>
+          <element name="wanddikte" type="integer">
+            <annotation>
+              <documentation>De wanddikte van de buis in millimeters</documentation>
+            </annotation>
+          </element>
+          <element name="maximaleWerkdruk" type="integer">
+            <annotation>
+              <documentation>De maximale werkdruk uitgedrukt in kiloPascal</documentation>
+            </annotation>
+          </element>
+          <element name="geometrie" type="gml:MultiCurvePropertyType">
+            <annotation>
+              <documentation>Ligging van de buis, in het RD-stelsel</documentation>
+            </annotation>
+          </element>
+          <element name="liggingBovenkant" type="double">
+            <annotation>
+              <documentation>Ligging bovenkant buis in cm tov maaiveld</documentation>
+            </annotation>
+          </element>
+          <element name="materiaalsoort">
+            <annotation>
+              <documentation>materiaalsoort = staalsoort in RK db</documentation>
+            </annotation>
+            <simpleType>
+              <restriction base="string">
+                <maxLength value="40"/>
+              </restriction>
+            </simpleType>
+          </element>
+          <element name="casNrMaatgevendeStof" type="gml:CodeType">
+            <annotation>
+              <documentation>het CAS-nummer van de voor het risico maatgevende stof</documentation>
+            </annotation>
+          </element>
+          <element name="transportroutedeelToestand" type="rrgs:TransportroutedeelToestandType"/>
+          <element minOccurs="0" name="effectafstandDodelijk" type="integer">
+            <annotation>
+              <documentation>effectafstand 1% letaliteit</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="maatgevendScenarioDodelijk" type="rrgs:EffectScenarioType">
+            <annotation>
+              <documentation>Scenario dat maatgevend is geweest voor de gegeven effectafstand dodelijk.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TransportroutedeelPropertyType">
+    <sequence minOccurs="0">
+      <element ref="rrgs:Transportroutedeel"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TransportroutedeelToestandType">
+    <restriction base="string">
+      <enumeration value="Bestaand"/>
+      <enumeration value="Gepland"/>
+    </restriction>
+  </simpleType>
+</schema>
+

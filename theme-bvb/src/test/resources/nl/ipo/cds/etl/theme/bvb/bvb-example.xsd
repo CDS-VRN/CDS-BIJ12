@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.web-bvb.nl/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns1="http://www.web-bvb.nl/">
+  <xs:import namespace="http://www.w3.org/2001/XMLSchema-instance" />
+  <xs:element name="BVB">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="ns1:Stalgroep"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Stalgroep">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ns1:Gemeente"/>
+        <xs:element ref="ns1:Dossier"/>
+        <xs:element ref="ns1:BedrijfsPCHN"/>
+        <xs:element ref="ns1:Gebouwnummer" minOccurs="0" />
+        <xs:element ref="ns1:Emissienummer"/>
+        <xs:element ref="ns1:Stalnummer"/>
+        <xs:element ref="ns1:X_Coordinaat"/>
+        <xs:element ref="ns1:Y_Coordinaat"/>
+        <xs:element ref="ns1:Herkomst_XY"/>
+        <xs:element ref="ns1:Datum_besluit"/>
+        <xs:element ref="ns1:Status"/>
+        <xs:element ref="ns1:Diercategorie"/>
+        <xs:element ref="ns1:RAV_code"/>
+        <xs:element ref="ns1:Dieraantal"/>
+        <xs:element ref="ns1:NH3_factor"/>
+        <xs:element ref="ns1:Gebouwhoogte"/>
+        <xs:element ref="ns1:Diameter"/>
+        <xs:element ref="ns1:Schoorsteenhoogte"/>
+        <xs:element ref="ns1:Herkomst_ep_info"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Gemeente" type="xs:integer"/>
+  <xs:element name="Dossier" type="xs:integer"/>
+  <xs:element name="BedrijfsPCHN" type="xs:string"/>
+  <xs:element name="Gebouwnummer" type="xs:string"/>  
+  <xs:element name="Emissienummer" type="xs:string"/>
+  <xs:element name="Stalnummer" type="xs:string"/>
+  <xs:element name="X_Coordinaat" type="xs:integer"/>
+  <xs:element name="Y_Coordinaat" type="xs:integer"/>
+  <xs:element name="Herkomst_XY" type="xs:string"/>
+  <xs:element name="Datum_besluit" type="xs:string"/>
+  <xs:element name="Status" type="xs:string"/>
+  <xs:element name="Diercategorie" type="xs:string"/>
+  <xs:element name="RAV_code" type="xs:string"/>
+  <xs:element name="Dieraantal" type="xs:integer"/>
+  <xs:element name="NH3_factor" type="xs:decimal"/>
+  <xs:element name="Gebouwhoogte" type="xs:integer"/>
+  <xs:element name="Diameter" type="xs:decimal"/>
+  <xs:element name="Schoorsteenhoogte" type="xs:integer"/>
+  <xs:element name="Herkomst_ep_info" type="xs:string"/>
+</xs:schema>

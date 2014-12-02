@@ -1,0 +1,39 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>ipo-admin</artifactId>
+    <parent>
+        <groupId>nl.ipo.cds.ipo</groupId>
+        <artifactId>cds-ipo</artifactId>
+        <version>2.2</version>
+    </parent>
+    <packaging>war</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>nl.ipo.cds.ipo</groupId>
+            <artifactId>ipo-themes</artifactId>
+            <version>2.2</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>nl.ipo.cds</groupId>
+            <artifactId>admin</artifactId>
+            <version>${cds.version}</version>
+            <classifier>prod</classifier>
+            <type>war</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

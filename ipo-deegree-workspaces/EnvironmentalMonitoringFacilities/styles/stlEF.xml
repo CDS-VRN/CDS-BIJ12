@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sld:StyledLayerDescriptor version="1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:top10nl="http://www.kadaster.nl/top10nl" xmlns:ogc="http://www.opengis.net/ogc"
+  xmlns:sld="http://www.opengis.net/sld" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:se="http://www.opengis.net/se"
+  xmlns:myapp="http://www.ipo.nl/InSpider"
+  xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd">
+
+  <sld:NamedLayer>
+    <se:Name>EF.Monsterpunt</se:Name>
+    <sld:UserStyle>
+      <se:Name>EF.EnvironmentalMonitoringFacilities.Default.representativePoint</se:Name>
+      <sld:IsDefault>1</sld:IsDefault>
+      
+      <se:FeatureTypeStyle>
+        <se:Name>tFTSname</se:Name>
+        <se:Description>
+          <se:Title>Environmental Monitoring Facilities Default Style Representative
+            Point</se:Title>
+          <se:Abstract>Style using the representativePoint attribute. The geometry
+            is rendered as a square with a size of 6 pixels, with a 50% grey (#808080) fill and
+            a black (#000000) outline.</se:Abstract>
+        </se:Description>        
+        <se:Rule>
+          <se:PointSymbolizer>
+            <se:Graphic>
+              <se:Mark>
+                <se:WellKnownName>square</se:WellKnownName>
+                <se:Fill>												
+                  <se:SvgParameter name="fill-opacity">1.0</se:SvgParameter>
+                  <se:SvgParameter name="fill">#808080</se:SvgParameter>
+                </se:Fill>
+                <se:Stroke>
+                  <se:SvgParameter name="stroke">#000000</se:SvgParameter>
+                  <se:SvgParameter name="stroke-width">1</se:SvgParameter> 
+                  
+                  <se:SvgParameter name="stroke-opacity">1.0</se:SvgParameter>
+                  <se:SvgParameter name="stroke-linecap">round</se:SvgParameter>
+                  
+                </se:Stroke>
+              </se:Mark>
+              <se:Size>6</se:Size>
+              <se:Rotation>0</se:Rotation>
+            </se:Graphic>
+          </se:PointSymbolizer>
+        </se:Rule>
+        
+      </se:FeatureTypeStyle>
+    </sld:UserStyle>
+  </sld:NamedLayer>
+  
+</sld:StyledLayerDescriptor>

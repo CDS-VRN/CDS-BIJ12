@@ -1,0 +1,51 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
+    <modelVersion>4.0.0</modelVersion>	
+    <artifactId>ipo-job-executor-exec</artifactId>	
+    <parent>
+        <groupId>nl.ipo.cds.ipo</groupId>
+        <artifactId>cds-ipo</artifactId>
+        <version>2.2</version>
+    </parent>
+    <packaging>jar</packaging>
+    
+    <dependencies>
+        <dependency>
+            <groupId>nl.ipo.cds.ipo</groupId>
+            <artifactId>ipo-themes</artifactId>
+            <version>2.2</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>nl.ipo.cds</groupId>
+            <artifactId>job-executor-exec</artifactId>                        
+            <version>${cds.version}</version>
+        </dependency>
+    </dependencies>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.0</version>
+                <configuration>
+                    <artifactSet>
+                        <includes>
+                            <include>nl.ipo.cds:job-executor-exec</include>
+                            <include>nl.ipo.cds.ipo:*</include>
+                        </includes>
+                    </artifactSet>
+                </configuration>                
+                <executions>
+                    <execution>                        
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

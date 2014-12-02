@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:isor="http://www.risicokaart.nl/schemas/isor" elementFormDefault="qualified" targetNamespace="http://www.risicokaart.nl/schemas/isor" version="0.4">
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="KwetsbaarObject" substitutionGroup="gml:AbstractFeature" type="isor:KwetsbaarObjectType">
+    <annotation>
+      <documentation>Kwetsbaar object volgens het InformatieSysteem Overige Risico's</documentation>
+    </annotation>
+  </element>
+  <complexType name="KwetsbaarObjectType">
+    <complexContent>
+      <extension base="gml:AbstractFeatureType">
+        <sequence>
+          <element name="externId">
+            <annotation>
+              <documentation>Identificatie van het object, toe te wijzen door bronhouder, bedoeld voor uitwisseling tussen organisaties, mag niet wijzigen.</documentation>
+            </annotation>
+            <simpleType>
+              <restriction base="string">
+                <maxLength value="36"/>
+              </restriction>
+            </simpleType>
+          </element>
+          <element name="laatsteMutatiedatumtijd" type="dateTime">
+            <annotation>
+              <documentation>Datumtijd van de laatste mutatie op betreffend kwetsbaar object; wordt samen met externId gebruikt om binnen CDS de updates op RK af te leiden.</documentation>
+            </annotation>
+          </element>
+          <element name="geometrie" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>Puntlocatie v.d. ligging; in het RD-stelsel.</documentation>
+            </annotation>
+          </element>
+          <element name="instellingcode" type="gml:CodeType"/>
+          <element name="naam">
+            <simpleType>
+              <restriction base="string">
+                <maxLength value="240"/>
+              </restriction>
+            </simpleType>
+          </element>
+          <element minOccurs="0" name="postcode">
+            <simpleType>
+              <restriction base="string">
+                <maxLength value="6"/>
+              </restriction>
+            </simpleType>
+          </element>
+          <element minOccurs="0" name="huisnummer" type="integer"/>
+          <element minOccurs="0" name="huisletter">
+            <simpleType>
+              <restriction base="string">
+                <maxLength value="1"/>
+              </restriction>
+            </simpleType>
+          </element>
+          <element minOccurs="0" name="huisnummertoevoeging">
+            <simpleType>
+              <restriction base="string">
+                <maxLength value="4"/>
+              </restriction>
+            </simpleType>
+          </element>
+          <element minOccurs="0" name="identificatiecodeNummeraanduidingBAG">
+            <simpleType>
+              <restriction base="string">
+                <maxLength value="16"/>
+              </restriction>
+            </simpleType>
+          </element>
+          <element minOccurs="0" name="autorisatieDatum" type="date">
+            <annotation>
+              <documentation>Datum waarop de status=GEAUTORISEERD is toegekend.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="aantalAanwezigen" type="integer">
+            <annotation>
+              <documentation>Aantal aanwezige personen in het kwetsbare object.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="aantalBouwlagen" type="integer">
+            <annotation>
+              <documentation>Prioriteit volgens PRWVAP systematiek, indien deze ontbreekt dan wordt deze afgeleid uit de prevapcode</documentation>
+            </annotation>
+          </element>
+          <element name="prevapcode" type="gml:CodeType">
+            <annotation>
+              <documentation>Code voor o.a. de functie van het object volgens de PREVAP systematiek.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prevapPrio" type="isor:PrevapPrioType">
+            <annotation>
+              <documentation>Prioriteit volgens PRWVAP systematiek. Als deze ontbreekt wordt de waarde automatisch afgeleid uit prevapcode.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="KwetsbaarObjectPropertyType">
+    <sequence minOccurs="0">
+      <element ref="isor:KwetsbaarObject"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="PrevapPrioType">
+    <restriction base="string">
+      <enumeration value="1"/>
+      <enumeration value="2"/>
+      <enumeration value="3"/>
+      <enumeration value="4"/>
+      <enumeration value="-"/>
+      <enumeration value="onbekend"/>
+    </restriction>
+  </simpleType>
+</schema>

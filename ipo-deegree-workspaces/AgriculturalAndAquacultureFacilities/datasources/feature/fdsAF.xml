@@ -1,0 +1,38 @@
+<SQLFeatureStore xmlns="http://www.deegree.org/datasource/feature/sql" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  configVersion="3.2.0" 
+  xmlns:app="http://www.ipo.nl/InSpider"
+  xsi:schemaLocation="http://www.deegree.org/datasource/feature/sql http://schemas.deegree.org/datasource/feature/sql/3.2.0/sql.xsd">
+
+  <JDBCConnId>conAF</JDBCConnId>
+
+  <FeatureTypeMapping table="bron.bvb" name="app:Stalgroep">
+    <FIDMapping>
+        <Column name="id" />
+    </FIDMapping>
+      
+    <Primitive path="app:identificatie" mapping="identificatie" />
+    <Primitive path="app:gemeente" mapping="gemeente" />
+    <Primitive path="app:dossier" mapping="dossier" />
+    <Primitive path="app:bedrijfs_pchn" mapping="bedrijfs_pchn" />
+    <Primitive path="app:gebouwnummer" mapping="gebouwnummer" />
+    <Primitive path="app:emissienummer" mapping="emissienummer" />
+    <Primitive path="app:herkomst_xy" mapping="herkomst_xy" />
+    <Primitive path="app:datum_besluit" mapping="datum_besluit" />
+    <Primitive path="app:status" mapping="status" />
+    <Primitive path="app:diercategorie" mapping="diercategorie" />
+    <Primitive path="app:rav_code" mapping="rav_code" />
+    <Primitive path="app:dieraantal" mapping="dieraantal" />
+    <Primitive path="app:nh3_factor" mapping="nh3_factor" />
+    <Primitive path="app:gebouwhoogte" mapping="gebouwhoogte" />
+    <Primitive path="app:diameter" mapping="diameter" />
+    <Primitive path="app:schoorsteenhoogte" mapping="schoorsteenhoogte" />
+    <Primitive path="app:herkomst_ep_info" mapping="herkomst_ep_info" />
+    
+    <Geometry path="app:geometry" mapping="geometry">
+      <StorageCRS srid="28992">EPSG:28992</StorageCRS>
+    </Geometry>
+    
+  </FeatureTypeMapping>
+
+</SQLFeatureStore>

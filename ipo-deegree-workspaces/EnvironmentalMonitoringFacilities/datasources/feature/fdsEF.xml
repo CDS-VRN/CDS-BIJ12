@@ -1,0 +1,81 @@
+<SQLFeatureStore xmlns="http://www.deegree.org/datasource/feature/sql" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  configVersion="3.2.0" 
+  xmlns:app="http://www.ipo.nl/InSpider"
+  xsi:schemaLocation="http://www.deegree.org/datasource/feature/sql http://schemas.deegree.org/datasource/feature/sql/3.2.0/sql.xsd">
+
+  <JDBCConnId>conEF</JDBCConnId>
+
+  <FeatureTypeMapping table="bron.monsterpunt" name="app:Monsterpunt">
+    <FIDMapping>
+        <Column name="id" />
+    </FIDMapping>
+      
+    <Primitive path="app:id_property" mapping="id_property" />
+    <Primitive path="app:meting_omschrijving" mapping="meting_omschrijving" />
+    <Primitive path="app:zwemwaterlocatie_id" mapping="zwemwaterlocatie_id" />
+    <Primitive path="app:waterbeheerder_code" mapping="waterbeheerder_code" />
+    <Primitive path="app:waterbeheerder_omschrijving" mapping="waterbeheerder_omschrijving" />
+    <Primitive path="app:type_code" mapping="type_code" />
+    <Primitive path="app:type_omschrijving" mapping="type_omschrijving" />
+      
+    <Geometry path="app:geometry" mapping="locatie">
+      <StorageCRS srid="28992">EPSG:28992</StorageCRS>
+    </Geometry>
+    
+  </FeatureTypeMapping>
+
+  <FeatureTypeMapping table="bron.monster" name="app:Monster">
+    <FIDMapping>
+      <Column name="id" />
+    </FIDMapping>
+    
+    <Primitive path="app:id_property" mapping="id_property" />
+    <Primitive path="app:monster_status" mapping="monster_status" />
+    <Primitive path="app:naam" mapping="naam" />
+    <Primitive path="app:object_begin_tijd" mapping="object_begin_tijd" />
+    <Primitive path="app:compartiment_code" mapping="compartiment_code" />
+    <Primitive path="app:compartiment_omschrijving" mapping="compartiment_omschrijving" />
+    <Primitive path="app:monsterpunt_id" mapping="monsterpunt_id" />
+    
+  </FeatureTypeMapping>
+  
+  <FeatureTypeMapping table="bron.resultaat" name="app:Monsterresultaat">
+    <FIDMapping>
+      <Column name="id" />
+    </FIDMapping>
+    
+    <Primitive path="app:id_property" mapping="id_property" />
+    <Primitive path="app:monster_id" mapping="monster_id" />
+    <Primitive path="app:type" mapping="type" />
+    <Primitive path="app:object_begin_tijd" mapping="object_begin_tijd" />
+    <Primitive path="app:datum_invoeren" mapping="datum_invoeren" />
+    <Primitive path="app:datum_gepubliceerd" mapping="datum_gepubliceerd" />
+    <Primitive path="app:publiceren" mapping="publiceren" />
+    <Primitive path="app:risico_niveau" mapping="risico_niveau" />
+    <Primitive path="app:numerieke_waarde" mapping="numerieke_waarde" />
+    <Primitive path="app:eenheid_code" mapping="eenheid_code" />
+    <Primitive path="app:eenheid_omschrijving" mapping="eenheid_omschrijving" />
+    <Primitive path="app:taxon_code" mapping="taxon_code" />
+    <Primitive path="app:taxon_omschrijving" mapping="taxon_omschrijving" />
+    <Primitive path="app:kwaliteits_oordeel_code" mapping="kwaliteits_oordeel_code" />
+    <Primitive path="app:kwaliteits_oordeel_omschrijving" mapping="kwaliteits_oordeel_omschrijving" />
+    <Primitive path="app:waarde_bewerkings_methode_code" mapping="waarde_bewerkings_methode_code" />
+    <Primitive path="app:waarde_bewerkings_methode_omschrijving" mapping="waarde_bewerkings_methode_omschrijving" />
+    <Primitive path="app:object_omschrijving" mapping="object_omschrijving" />
+    <Primitive path="app:typering_waarneming_code" mapping="typering_waarneming_code" />
+    <Primitive path="app:typering_waarneming_omschrijving" mapping="typering_waarneming_omschrijving" />
+    <Primitive path="app:limiet_symbool_code" mapping="limiet_symbool_code" />
+    <Primitive path="app:limiet_symbool_omschrijving" mapping="limiet_symbool_omschrijving" />
+    <Primitive path="app:hoedanigheid_code" mapping="hoedanigheid_code" />
+    <Primitive path="app:hoedanigheid_omschrijving" mapping="hoedanigheid_omschrijving" />
+    <Primitive path="app:waarde_bepalings_methode_code" mapping="waarde_bepalings_methode_code" />
+    <Primitive path="app:waarde_bepalings_methode_omschrijving" mapping="waarde_bepalings_methode_omschrijving" />
+    <Primitive path="app:chemische_stof_code" mapping="chemische_stof_code" />
+    <Primitive path="app:chemische_stof_omschrijving" mapping="chemische_stof_omschrijving" />
+    <Primitive path="app:grootheid_code" mapping="grootheid_code" />
+    <Primitive path="app:grootheid_omschrijving" mapping="grootheid_omschrijving" />
+    
+  </FeatureTypeMapping>
+  
+</SQLFeatureStore>

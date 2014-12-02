@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<id>http://www.inspire-provincies.nl/codeList/DatasetTypeCode/Monsterpunt</id>
+	<title>DatasetTypeCode Monsterpunt</title>
+	<entry>
+		<id>http://www.inspire-provincies.nl/codeList/DatasetTypeCode/Monsterpunt/zwrmsp</id>
+		<title>Zwemwater monsterpunt</title>
+		<category term="CodeListValue" />
+	</entry>
+</feed>

@@ -1,0 +1,71 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>nl.ipo.cds.ipo</groupId>
+    <artifactId>cds-ipo</artifactId>
+    <version>2.2</version>
+    <packaging>pom</packaging>
+    
+    <properties>
+        <cds.version>2.2</cds.version>
+    </properties>
+    
+    <scm>
+        <connection>scm:svn:svn+ssh://repos.idgis.eu/cds-inspire/cds-ipo/tags/cds-ipo-2.2</connection>
+        <developerConnection>scm:svn:svn+ssh://repos.idgis.eu/cds-inspire/cds-ipo/tags/cds-ipo-2.2</developerConnection>
+    </scm>
+    
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>xml-apis</groupId>
+                <artifactId>xml-apis</artifactId>
+                <version>1.4.01</version>
+                <type>jar</type>
+                <scope>compile</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    
+    <build>
+      <pluginManagement>
+          <plugins>
+              <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-compiler-plugin</artifactId>
+                  <version>2.3.2</version>
+                  <configuration>
+                      <source>1.7</source>
+                      <target>1.7</target>
+                      <fork>true</fork>
+                      <maxmem>1024</maxmem>
+                  </configuration>
+              </plugin>
+          </plugins>
+      </pluginManagement>
+	  
+	  <plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-release-plugin</artifactId>
+			<version>2.4.1</version>
+			<configuration>				
+				<autoVersionSubmodules>true</autoVersionSubmodules>
+			</configuration>
+		</plugin>
+	  </plugins>
+    </build>
+
+    <modules>
+        <module>ipo-themes</module>
+        <module>ipo-admin</module>
+        <module>ipo-job-executor-exec</module>
+        <module>theme-buisleidingen</module>
+        <module>theme-riscisor</module>
+        <module>theme-monsterpunt</module>
+        <module>theme-monster</module>
+        <module>theme-resultaat</module>
+        <module>theme-bvb</module>
+    </modules>
+</project>

@@ -1,0 +1,55 @@
+RISICOKAART_MEDEWERKER_NAAM_NULL=Kwetsbaar object ${1} heeft geen Risicokaart medewerker naam
+RISICOKAART_MEDEWERKER_NAAM_EMPTY=Kwetsbaar object ${1} heeft een lege Risicokaart medewerker naam
+RISICOKAART_MEDEWERKER_NAAM_NOT_CONSTANT=Kwetsbaar object ${1} heeft een afwijkende Risicokaart medewerker naam ${2}
+
+EXTERN_ID_NULL=Kwetsbaar object ${1} heeft geen extern ID
+EXTERN_ID_EMPTY=Kwetsbaar object ${1} heeft een lege waarde als extern ID
+EXTERN_ID_TOO_LONG=Kwetsbaar object ${1} heeft een te lange waarde voor extern ID: ${2} karakters waar ${3} is toegestaan
+EXTERN_ID_DUPLICATE=Kwetsbaar object ${1} heeft een extern ID dat al in gebruik is bij een ander kwetsbaar object
+
+LAATSTE_MUTATIEDATUMTIJD_NULL=Kwetsbaar object ${1} heeft geen laatste mutatiedatum
+LAATSTE_MUTATIEDATUMTIJD_FUTURE=Kwetsbaar object ${1} heeft een laatste mutatiedatum in de toekomst
+
+INSTELLINGCODE_NULL=Kwetsbaar object ${1} heeft geen instellingcode
+INSTELLINGCODE_INVALID_CODESPACE=Kwetsbaar object ${1} heeft een lege waarde voor instellingcode
+INSTELLINGCODE_INVALID=Kwetsbaar object ${1} heeft een ongeldige instellingcode ${2}
+
+NAAM_NULL=Kwetsbaar object ${1} heeft geen naam
+NAAM_EMPTY=Kwetsbaar object ${1} heeft een lege waarde voor naam
+NAAM_TOO_LONG=Kwetsbaar object ${1} heeft een te lange waarde voor naam: ${2} karakters, waar ${3} is toegestaan
+
+POSTCODE_INVALID=Kwetsbaar object ${1} heeft een ongeldige postcode ${2}. Postcode wordt verwacht in het formaat 9999AA
+
+HUISNUMMER_INVALID=Kwetsbaar object ${1} heeft een ongeldig huisnummer ${2}
+
+HUISLETTER_INVALID=Kwetsbaar object ${1} heeft een ongeldige huisnummer letter ${2}
+
+HUISNUMMERTOEVOEGING_INVALID=Kwetsbaar object ${1} heeft een ongeldige huisnummer toevoeging ${2}
+
+IDENTIFICATIECODE_NUMMERAANDUIDING_BAG_EMPTY=Kwetsbaar object ${1} heeft een lege waarde voor identificatie nummeraanduiding BAG
+IDENTIFICATIECODE_NUMMERAANDUIDING_BAG_TOO_LONG=Kwetsbaar object ${1} heeft een ongeldige waarde voor identificatie nummeraanduiding BAG: ${2}
+
+COORDINAAT_NULL=Kwetsbaar object ${1} heeft geen geometrie
+COORDINAAT_NOT_POINT=Kwetsbaar object ${1} heeft geometrie van een ander type dan punt
+COORDINAAT_NO_SRS=Kwetsbaar object ${1} heeft geen SRS
+COORDINAAT_NOT_RD=De geometrie van kwetsbaar object ${1} heeft een ongeldig SRS "${2}" (verwacht: "EPSG:28992")
+
+AANTAL_AANWEZIGEN_INVALID=Kwetsbaar object ${1} heeft een ongeldig aantal aanwezigen ${2}
+
+AANTAL_BOUWLAGEN_INVALID=Kwetsbaar object ${1} heeft een ongeldig aantal bouwlagen ${2}
+
+PREVAPCODE_NULL=Kwetsbaar object ${1} heeft geen prevapcode
+PREVAPCODE_INVALID=Kwetsbaar object ${1} heeft een ongeldige prevapcode: ${2}
+PREVAPCODE_INVALID_CODESPACE=De prevapcode van kwetsbaar object ${1} heeft een ongeldige codeSpace (verwacht: http://www.risicokaart.nl/codes/prevapcodes)
+
+PREVAP_PRIO_INVALID=Kwetsbaar object ${1} heeft een ongeldige waarde voor prevap prioriteit: ${2}
+
+NUMMERAANDUIDING_AND_POSTCODE_NULL=Kwetsbaar object ${1} moet een identificatie nummeraanduiding BAG of een postcode en huisnummer hebben
+POSTCODE_NULL=Kwetsbaar object ${1} heeft geen postcode
+HUISNUMMER_NULL=Kwetsbaar object ${1} heeft geen huisnummer
+POSTCODE_MUST_BE_NULL=Kwetsbaar object ${1} mag geen postcode hebben als er een identificatie nummeraanduiding BAG is ingevuld
+HUISNUMMER_MUST_BE_NULL=Kwetsbaar object ${1} mag geen huisnummer hebben als er een identificatie nummeraanduiding BAG is ingevuld
+HUISLETTER_MUST_BE_NULL=Kwetsbaar object ${1} mag geen huisnummer letter hebben als er een identificatie nummeraanduiding BAG is ingevuld
+HUISNUMMERTOEVOEGING_MUST_BE_NULL=Kwetsbaar object ${1} mag geen huisnummer toevoeging hebben als er een identificatie nummeraanduiding BAG is ingevuld
+
+HAS_MORE_ERRORS=Er zijn meer meldingen die niet werden gerapporteerd
