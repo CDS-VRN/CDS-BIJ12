@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="762.1818181818182" y="336.0">nl.ipo.vrn.etl.theme.verwerving.AbstractGebiedVerwerving</node>
+    <node x="882.0" y="494.0">nl.ipo.vrn.etl.theme.verwerving.LandelijkGebiedVerwerving</node>
+    <node x="162.0" y="494.0">nl.ipo.vrn.etl.theme.beheer.ProvinciaalGebiedBeheer</node>
+    <node x="690.0" y="494.0">nl.ipo.vrn.etl.theme.verwerving.ProvinciaalGebiedVerwerving</node>
+    <node x="364.5" y="98.0">nl.ipo.vrn.etl.theme.AbstractGebied</node>
+    <node x="334.0" y="494.0">nl.ipo.vrn.etl.theme.inrichting.LandelijkGebiedInrichting</node>
+    <node x="398.93181818181824" y="336.0">nl.ipo.vrn.etl.theme.inrichting.AbstractGebiedInrichting</node>
+    <node x="0.0" y="494.0">nl.ipo.vrn.etl.theme.beheer.LandelijkGebiedBeheer</node>
+    <node x="39.5" y="316.0">nl.ipo.vrn.etl.theme.beheer.AbstractGebiedBeheer</node>
+    <node x="507.0" y="494.0">nl.ipo.vrn.etl.theme.inrichting.ProvinciaalGebiedInrichting</node>
+    <node x="437.5" y="0.0">nl.ipo.cds.etl.PersistableFeature</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="nl.ipo.vrn.etl.theme.verwerving.AbstractGebiedVerwerving" target="nl.ipo.vrn.etl.theme.AbstractGebied">
+      <point x="0.0" y="-44.0" />
+      <point x="867.1818181818182" y="291.0" />
+      <point x="589.5" y="291.0" />
+      <point x="90.0" y="84.0" />
+    </edge>
+    <edge source="nl.ipo.vrn.etl.theme.AbstractGebied" target="nl.ipo.cds.etl.PersistableFeature">
+      <point x="0.0" y="-84.0" />
+      <point x="0.0" y="24.0" />
+    </edge>
+    <edge source="nl.ipo.vrn.etl.theme.beheer.LandelijkGebiedBeheer" target="nl.ipo.vrn.etl.theme.beheer.AbstractGebiedBeheer">
+      <point x="0.0" y="-14.0" />
+      <point x="71.0" y="469.0" />
+      <point x="97.0" y="469.0" />
+      <point x="-57.5" y="64.0" />
+    </edge>
+    <edge source="nl.ipo.vrn.etl.theme.beheer.AbstractGebiedBeheer" target="nl.ipo.vrn.etl.theme.AbstractGebied">
+      <point x="0.0" y="-64.0" />
+      <point x="154.5" y="291.0" />
+      <point x="409.5" y="291.0" />
+      <point x="-90.0" y="84.0" />
+    </edge>
+    <edge source="nl.ipo.vrn.etl.theme.verwerving.ProvinciaalGebiedVerwerving" target="nl.ipo.vrn.etl.theme.verwerving.AbstractGebiedVerwerving">
+      <point x="0.0" y="-14.0" />
+      <point x="776.0" y="469.0" />
+      <point x="814.6818181818182" y="469.0" />
+      <point x="-52.5" y="44.0" />
+    </edge>
+    <edge source="nl.ipo.vrn.etl.theme.inrichting.LandelijkGebiedInrichting" target="nl.ipo.vrn.etl.theme.inrichting.AbstractGebiedInrichting">
+      <point x="0.0" y="-14.0" />
+      <point x="410.5" y="469.0" />
+      <point x="449.18181818181824" y="469.0" />
+      <point x="-50.25" y="44.0" />
+    </edge>
+    <edge source="nl.ipo.vrn.etl.theme.inrichting.ProvinciaalGebiedInrichting" target="nl.ipo.vrn.etl.theme.inrichting.AbstractGebiedInrichting">
+      <point x="0.0" y="-14.0" />
+      <point x="588.5" y="469.0" />
+      <point x="549.6818181818182" y="469.0" />
+      <point x="50.25" y="44.0" />
+    </edge>
+    <edge source="nl.ipo.vrn.etl.theme.inrichting.AbstractGebiedInrichting" target="nl.ipo.vrn.etl.theme.AbstractGebied">
+      <point x="0.0" y="-44.0" />
+      <point x="0.0" y="84.0" />
+    </edge>
+    <edge source="nl.ipo.vrn.etl.theme.verwerving.LandelijkGebiedVerwerving" target="nl.ipo.vrn.etl.theme.verwerving.AbstractGebiedVerwerving">
+      <point x="0.0" y="-14.0" />
+      <point x="963.0" y="469.0" />
+      <point x="919.6818181818182" y="469.0" />
+      <point x="52.5" y="44.0" />
+    </edge>
+    <edge source="nl.ipo.vrn.etl.theme.beheer.ProvinciaalGebiedBeheer" target="nl.ipo.vrn.etl.theme.beheer.AbstractGebiedBeheer">
+      <point x="0.0" y="-14.0" />
+      <point x="238.0" y="469.0" />
+      <point x="212.0" y="469.0" />
+      <point x="57.5" y="64.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="522.0" y="261.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

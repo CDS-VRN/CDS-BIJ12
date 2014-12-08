@@ -67,5 +67,7 @@
         <module>theme-monster</module>
         <module>theme-resultaat</module>
         <module>theme-bvb</module>
+        <!-- VRN themes -->
+        <module>vrn-themes</module>
     </modules>
 </project>

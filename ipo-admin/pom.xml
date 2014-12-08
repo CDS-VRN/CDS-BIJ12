@@ -16,6 +16,12 @@
             <version>2.2</version>
             <type>pom</type>
         </dependency>
+         <!-- VRN themes -->
+        <dependency>
+            <groupId>nl.ipo.cds.ipo</groupId>
+            <artifactId>vrn-themes</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>nl.ipo.cds</groupId>
             <artifactId>admin</artifactId>
