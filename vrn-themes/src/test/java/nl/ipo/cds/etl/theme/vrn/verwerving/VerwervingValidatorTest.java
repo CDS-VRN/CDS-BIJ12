@@ -1,24 +1,25 @@
-package nl.ipo.vrn.etl.theme.verwerving;
+package nl.ipo.cds.etl.theme.vrn.verwerving;
 
-import static nl.ipo.vrn.etl.theme.verwerving.Message.ATTRIBUTES_EXCLUSIVE;
-import static nl.ipo.vrn.etl.theme.verwerving.Message.ATTRIBUTE_CODE_CODESPACE_INVALID;
-import static nl.ipo.vrn.etl.theme.verwerving.Message.ATTRIBUTE_CODE_INVALID;
-import static nl.ipo.vrn.etl.theme.verwerving.Message.ATTRIBUTE_EMPTY;
-import static nl.ipo.vrn.etl.theme.verwerving.Message.ATTRIBUTE_GROUP_INCONSISTENT;
-import static nl.ipo.vrn.etl.theme.verwerving.Message.ATTRIBUTE_NULL;
-import static nl.ipo.vrn.etl.theme.verwerving.Message.ATTRIBUTE_VALUE_INVALID;
-import static nl.ipo.vrn.etl.theme.verwerving.Message.ATTRIBUTE_VALUE_NEGATIVE;
-import static nl.ipo.vrn.etl.theme.verwerving.Message.ATTRIBUTE_VALUE_TOO_HIGH;
-import static nl.ipo.vrn.etl.theme.verwerving.Message.GEOMETRY_EMPTY_MULTIGEOMETRY;
-import static nl.ipo.vrn.etl.theme.verwerving.Message.GEOMETRY_ONLY_SURFACE_OR_MULTISURFACE;
-import static nl.ipo.vrn.etl.theme.verwerving.Message.GEOMETRY_SRS_NULL;
-import static nl.ipo.vrn.etl.theme.verwerving.Message.QUALITATIVE_OR_QUANTITATIVE_LIKELIKHOOD_EXCLUSIVE;
-import static nl.ipo.vrn.etl.theme.verwerving.Message.QUALITATIVE_OR_QUANTITATIVE_LIKELIKHOOD_REQUIRED;
+import static nl.ipo.cds.etl.theme.vrn.verwerving.Message.ATTRIBUTES_EXCLUSIVE;
+import static nl.ipo.cds.etl.theme.vrn.verwerving.Message.ATTRIBUTE_CODE_CODESPACE_INVALID;
+import static nl.ipo.cds.etl.theme.vrn.verwerving.Message.ATTRIBUTE_CODE_INVALID;
+import static nl.ipo.cds.etl.theme.vrn.verwerving.Message.ATTRIBUTE_EMPTY;
+import static nl.ipo.cds.etl.theme.vrn.verwerving.Message.ATTRIBUTE_GROUP_INCONSISTENT;
+import static nl.ipo.cds.etl.theme.vrn.verwerving.Message.ATTRIBUTE_NULL;
+import static nl.ipo.cds.etl.theme.vrn.verwerving.Message.ATTRIBUTE_VALUE_INVALID;
+import static nl.ipo.cds.etl.theme.vrn.verwerving.Message.ATTRIBUTE_VALUE_NEGATIVE;
+import static nl.ipo.cds.etl.theme.vrn.verwerving.Message.ATTRIBUTE_VALUE_TOO_HIGH;
+import static nl.ipo.cds.etl.theme.vrn.verwerving.Message.GEOMETRY_EMPTY_MULTIGEOMETRY;
+import static nl.ipo.cds.etl.theme.vrn.verwerving.Message.GEOMETRY_ONLY_SURFACE_OR_MULTISURFACE;
+import static nl.ipo.cds.etl.theme.vrn.verwerving.Message.GEOMETRY_SRS_NULL;
+import static nl.ipo.cds.etl.theme.vrn.verwerving.Message.QUALITATIVE_OR_QUANTITATIVE_LIKELIKHOOD_EXCLUSIVE;
+import static nl.ipo.cds.etl.theme.vrn.verwerving.Message.QUALITATIVE_OR_QUANTITATIVE_LIKELIKHOOD_REQUIRED;
 
 import java.util.Collections;
 
 import nl.ipo.cds.etl.test.GeometryConstants;
 import nl.ipo.cds.etl.test.ValidationRunner;
+import nl.ipo.cds.etl.theme.vrn.verwerving.AbstractGebiedVerwerving;
 
 import org.deegree.commons.tom.ows.CodeType;
 import org.junit.Before;

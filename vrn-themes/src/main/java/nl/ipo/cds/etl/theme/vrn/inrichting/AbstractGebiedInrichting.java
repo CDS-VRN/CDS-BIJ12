@@ -1,8 +1,8 @@
-package nl.ipo.vrn.etl.theme.inrichting;
+package nl.ipo.cds.etl.theme.vrn.inrichting;
 
 import nl.ipo.cds.etl.db.annotation.Column;
 import nl.ipo.cds.etl.db.annotation.Table;
-import nl.ipo.vrn.etl.theme.AbstractGebied;
+import nl.ipo.cds.etl.theme.vrn.AbstractGebied;
 
 @Table(name = "hazard_area", schema = "bron")
 public abstract class AbstractGebiedInrichting extends AbstractGebied {

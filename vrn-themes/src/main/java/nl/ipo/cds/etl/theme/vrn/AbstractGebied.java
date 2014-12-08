@@ -1,4 +1,4 @@
-package nl.ipo.vrn.etl.theme;
+package nl.ipo.cds.etl.theme.vrn;
 
 import java.sql.Timestamp;
 

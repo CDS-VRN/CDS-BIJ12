@@ -1,4 +1,4 @@
-package nl.ipo.vrn.etl.theme.verwerving;
+package nl.ipo.cds.etl.theme.vrn.verwerving;
 
 import java.util.Collections;
 
