@@ -7,7 +7,7 @@
     <packaging>pom</packaging>
     
     <properties>
-        <cds.version>2.2</cds.version>
+        <cds.version>2.3-SNAPSHOT</cds.version>
     </properties>
     
     <scm>
