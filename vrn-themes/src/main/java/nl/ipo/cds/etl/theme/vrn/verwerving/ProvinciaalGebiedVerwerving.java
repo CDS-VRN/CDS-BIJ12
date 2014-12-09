@@ -1,6 +1,5 @@
 package nl.ipo.cds.etl.theme.vrn.verwerving;
 
-import nl.ipo.cds.etl.db.annotation.Column;
 
 
 /**
@@ -8,7 +7,6 @@ import nl.ipo.cds.etl.db.annotation.Column;
  */
 public class ProvinciaalGebiedVerwerving extends AbstractGebiedVerwerving{
 	
-	 @Column(name = "doel_verwerving")
-	 private String doelVerwerving;
+	
 	
 }
