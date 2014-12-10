@@ -5,7 +5,7 @@
     <parent>
         <groupId>nl.ipo.cds.ipo</groupId>
         <artifactId>cds-ipo</artifactId>
-        <version>2.2</version>
+        <version>2.3-SNAPSHOT</version>
     </parent>
     <packaging>pom</packaging>
     
@@ -13,32 +13,32 @@
         <dependency>
             <groupId>nl.ipo.cds.ipo</groupId>
             <artifactId>theme-buisleidingen</artifactId>
-            <version>2.2</version>
+            <version>2.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>nl.ipo.cds.ipo</groupId>
             <artifactId>theme-riscisor</artifactId>
-            <version>2.2</version>
+            <version>2.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>nl.ipo.cds.ipo</groupId>
             <artifactId>theme-monsterpunt</artifactId>
-            <version>2.2</version>
+            <version>2.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>nl.ipo.cds.ipo</groupId>
             <artifactId>theme-monster</artifactId>
-            <version>2.2</version>
+            <version>2.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>nl.ipo.cds.ipo</groupId>
             <artifactId>theme-resultaat</artifactId>
-            <version>2.2</version>
+            <version>2.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>nl.ipo.cds.ipo</groupId>
             <artifactId>theme-bvb</artifactId>
-            <version>2.2</version>
+            <version>2.3-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>

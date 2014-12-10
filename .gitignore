@@ -1,10 +1,5 @@
-/vrn-themes/.settings
-/theme-riscisor/.settings
-/theme-resultaat/.settings
-/theme-monster/.settings
-/theme-bvb/.settings/*.prefs
-/theme-monsterpunt/.settings/*.prefs
-*.prefs
 *.project
 *.classpath
-.settings
+bin/
+target/
+.settings/
