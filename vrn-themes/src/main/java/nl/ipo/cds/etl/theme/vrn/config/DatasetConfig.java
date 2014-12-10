@@ -25,11 +25,7 @@ public class DatasetConfig {
 			final AbstractVrnValidator validator,
 			final OperationDiscoverer operationDiscoverer) {
 
-		/**
-		 * TODO: maken we twee contructors van de VrnThemeConfig
-		 *  met verschillende validators, een voor Landelijke datasets, en een voor provinciale datasets???
-		 */
-		return null;// new VrnThemeConfig (validator, operationDiscoverer);
+		return new VrnThemeConfig (validator, operationDiscoverer);
 	}
 
 	@Configuration (value = "vrn.Validators")
@@ -38,10 +34,8 @@ public class DatasetConfig {
 		@Inject
 		public AbstractVrnValidator VrnValidator (
 				final @Named ("VrnValidationMessages") Properties validatorMessages) throws CompilerException {
-			/**
-			 * TODO: maken we twee validators, een voor Landelijke datasets, en een voor provinciale datasets???
-			 */
-			return null; //new AbstractVrnValidator (validatorMessages);
+
+			return new AbstractVrnValidator (validatorMessages);
 		}
 	}
 

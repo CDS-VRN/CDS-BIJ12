@@ -1,5 +1,6 @@
 package nl.ipo.cds.etl.theme.vrn;
 
+import nl.ipo.cds.attributemapping.operations.discover.OperationDiscoverer;
 import nl.ipo.cds.dao.ManagerDao;
 import nl.ipo.cds.domain.EtlJob;
 import nl.ipo.cds.etl.DatasetHandlers;
@@ -9,11 +10,18 @@ import nl.ipo.cds.etl.theme.ThemeConfigException;
 
 public class VrnThemeConfig extends ThemeConfig<AbstractGebied>{
 
-	public VrnThemeConfig(String themeName, Class<AbstractGebied> featureTypeClass) {
-		super(themeName, featureTypeClass);
-		// TODO Auto-generated constructor stub
-	}
+	private final Validator<AbstractGebied> validator;
 
+	private final OperationDiscoverer operationDiscoverer;
+
+
+	public VrnThemeConfig(final Validator<AbstractGebied> validator, final OperationDiscoverer operationDiscoverer) {
+		super ("AbstractGebied", AbstractGebied.class);
+		this.validator = validator;
+		this.operationDiscoverer = operationDiscoverer;
+	}
+	
+	
 	@Override
 	public DatasetHandlers<AbstractGebied> createDatasetHandlers(EtlJob job, ManagerDao managerDao) {
 		// TODO Auto-generated method stub
