@@ -20,12 +20,14 @@
             <groupId>nl.ipo.cds</groupId>
             <artifactId>admin</artifactId>
             <version>${cds.version}</version>
+            <classifier>prod</classifier>
             <type>war</type>
         </dependency>
          <dependency>
             <groupId>nl.ipo.cds</groupId>
             <artifactId>admin</artifactId>
             <version>${cds.version}</version>
+            <classifier>prod</classifier>
             <type>pom</type>
         </dependency>
     </dependencies>
