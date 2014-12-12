@@ -38,6 +38,12 @@ import nl.ipo.cds.validation.gml.codelists.CodeListFactory;
 
 import org.deegree.geometry.Geometry;
 
+/**
+ * @author annes
+ *
+ * Base class for IMNa validation. Specifies the validations that are required for all IMNa themes
+ * @param <T>
+ */
 public class AbstractVrnValidator<T extends AbstractGebied> extends AbstractValidator<T, Message, Context> {
 
 	private final AttributeExpression<Message, Context, String> inspireIdLocalId = stringAttr("inspireIdLocalId");

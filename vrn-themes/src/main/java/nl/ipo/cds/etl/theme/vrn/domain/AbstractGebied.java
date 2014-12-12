@@ -8,6 +8,12 @@ import nl.ipo.cds.etl.theme.annotation.MappableAttribute;
 
 import com.vividsolutions.jts.geom.Geometry;
 
+/**
+ * @author annes
+ *
+ *	Base class for all IMNa gebied classes and themes
+ *
+ */
 public abstract class AbstractGebied extends PersistableFeature {
 
 	@Column(name = "begintijd")

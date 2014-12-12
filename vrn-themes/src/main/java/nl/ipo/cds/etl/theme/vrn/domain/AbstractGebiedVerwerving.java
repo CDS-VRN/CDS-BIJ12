@@ -7,6 +7,11 @@ import nl.ipo.cds.etl.db.annotation.Table;
 import nl.ipo.cds.etl.theme.annotation.CodeSpace;
 import nl.ipo.cds.etl.theme.annotation.MappableAttribute;
 
+/**
+ * @author annes
+ *
+ * Baseclass for IMNa theme verwerving
+ */
 @Table(name = "hazard_area", schema = "bron")
 public abstract  class AbstractGebiedVerwerving extends AbstractGebied {
 
