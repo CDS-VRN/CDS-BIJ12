@@ -13,14 +13,8 @@
         <dependency>
             <groupId>nl.ipo.cds.ipo</groupId>
             <artifactId>ipo-themes</artifactId>
-            <version>2.3-SNAPSHOT</version>
+            <version>${cds.version}</version>
             <type>pom</type>
-        </dependency>
-         <!-- VRN themes -->
-        <dependency>
-            <groupId>nl.ipo.cds.ipo</groupId>
-            <artifactId>vrn-themes</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>nl.ipo.cds</groupId>
@@ -28,6 +22,13 @@
             <version>${cds.version}</version>
             <classifier>prod</classifier>
             <type>war</type>
+        </dependency>
+         <dependency>
+            <groupId>nl.ipo.cds</groupId>
+            <artifactId>admin</artifactId>
+            <version>${cds.version}</version>
+            <classifier>prod</classifier>
+            <type>pom</type>
         </dependency>
     </dependencies>
 
