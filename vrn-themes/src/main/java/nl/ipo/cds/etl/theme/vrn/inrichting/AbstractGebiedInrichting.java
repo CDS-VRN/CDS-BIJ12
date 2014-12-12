@@ -1,7 +1,10 @@
 package nl.ipo.cds.etl.theme.vrn.inrichting;
 
+import org.deegree.commons.tom.ows.CodeType;
+
 import nl.ipo.cds.etl.db.annotation.Column;
 import nl.ipo.cds.etl.db.annotation.Table;
+import nl.ipo.cds.etl.theme.annotation.CodeSpace;
 import nl.ipo.cds.etl.theme.annotation.MappableAttribute;
 import nl.ipo.cds.etl.theme.vrn.AbstractGebied;
 
@@ -9,42 +12,48 @@ import nl.ipo.cds.etl.theme.vrn.AbstractGebied;
 public abstract class AbstractGebiedInrichting extends AbstractGebied {
 
     @Column(name = "status_inrichting")
-    private String statusInrichting;
+    private CodeType statusInrichting;
 
     @Column(name = "doel_inrichting")
-    private String doelInrichting;
+    private CodeType doelInrichting;
 
     @Column(name = "type_beheerder")
-    private String typeBeheerder;
+    private CodeType typeBeheerder;
 
     
     @MappableAttribute
-	public String getStatusInrichting() {
+    @CodeSpace("StatusInrichting")
+	public CodeType getStatusInrichting() {
 		return statusInrichting;
 	}
 
     @MappableAttribute
-	public void setStatusInrichting(String statusInrichting) {
+    @CodeSpace("StatusInrichting")
+	public void setStatusInrichting(CodeType statusInrichting) {
 		this.statusInrichting = statusInrichting;
 	}
 
     @MappableAttribute
-	public String getDoelInrichting() {
+    @CodeSpace("DoelRealisatie")
+	public CodeType getDoelInrichting() {
 		return doelInrichting;
 	}
 
     @MappableAttribute
-	public void setDoelInrichting(String doelInrichting) {
+    @CodeSpace("DoelRealisatie")
+	public void setDoelInrichting(CodeType doelInrichting) {
 		this.doelInrichting = doelInrichting;
 	}
 
     @MappableAttribute
-	public String getTypeBeheerder() {
+    @CodeSpace("TypeBeheerderEnEigenaar")
+	public CodeType getTypeBeheerder() {
 		return typeBeheerder;
 	}
 
     @MappableAttribute
-	public void setTypeBeheerder(String typeBeheerder) {
+    @CodeSpace("TypeBeheerderEnEigenaar")
+	public void setTypeBeheerder(CodeType typeBeheerder) {
 		this.typeBeheerder = typeBeheerder;
 	}
 

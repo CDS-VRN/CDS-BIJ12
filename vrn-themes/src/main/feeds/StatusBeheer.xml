@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+
+	<id>StatusBeheer</id>
+	<title>IMNa Codelijst StatusBeheer</title>
+
+	<entry>
+		<id>1</id>
+		<title>In beheer met contract</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>2</id>
+		<title>In beheer zonder contract</title>
+		<category term="CodeListValue" />
+	</entry>
+
+</feed>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+
+	<id>StatusIngericht</id>
+	<title>IMNa Codelijst Status ingericht</title>
+
+	<entry>
+		<id>1</id>
+		<title>Ingericht</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>2</id>
+		<title>Niet ingericht?</title>
+		<category term="CodeListValue" />
+	</entry>
+</feed>
