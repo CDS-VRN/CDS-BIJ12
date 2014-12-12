@@ -1,4 +1,4 @@
-package nl.ipo.cds.etl.theme.vrn.verwerving;
+package nl.ipo.cds.etl.theme.vrn.domain;
 
 import org.deegree.commons.tom.ows.CodeType;
 
@@ -6,7 +6,6 @@ import nl.ipo.cds.etl.db.annotation.Column;
 import nl.ipo.cds.etl.db.annotation.Table;
 import nl.ipo.cds.etl.theme.annotation.CodeSpace;
 import nl.ipo.cds.etl.theme.annotation.MappableAttribute;
-import nl.ipo.cds.etl.theme.vrn.AbstractGebied;
 
 @Table(name = "hazard_area", schema = "bron")
 public abstract  class AbstractGebiedVerwerving extends AbstractGebied {

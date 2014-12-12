@@ -1,4 +1,4 @@
-package nl.ipo.cds.etl.theme.vrn.verwerving;
+package nl.ipo.cds.etl.theme.vrn.domain;
 
 
 /**

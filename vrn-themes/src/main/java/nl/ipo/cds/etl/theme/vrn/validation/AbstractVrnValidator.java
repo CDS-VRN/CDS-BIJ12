@@ -1,4 +1,4 @@
-package nl.ipo.cds.etl.theme.vrn;
+package nl.ipo.cds.etl.theme.vrn.validation;
 
 import static nl.ipo.cds.etl.theme.vrn.Message.ATTRIBUTE_CODE_CODESPACE_INVALID;
 import static nl.ipo.cds.etl.theme.vrn.Message.ATTRIBUTE_CODE_INVALID;
@@ -24,6 +24,9 @@ import java.util.Map;
 
 import nl.ipo.cds.domain.EtlJob;
 import nl.ipo.cds.etl.AbstractValidator;
+import nl.ipo.cds.etl.theme.vrn.Context;
+import nl.ipo.cds.etl.theme.vrn.Message;
+import nl.ipo.cds.etl.theme.vrn.domain.AbstractGebied;
 import nl.ipo.cds.validation.AttributeExpression;
 import nl.ipo.cds.validation.ValidationReporter;
 import nl.ipo.cds.validation.Validator;
@@ -35,7 +38,7 @@ import nl.ipo.cds.validation.gml.codelists.CodeListFactory;
 
 import org.deegree.geometry.Geometry;
 
-public class AbstractVrnValidator extends AbstractValidator<AbstractGebied, Message, Context> {
+public class AbstractVrnValidator<T extends AbstractGebied> extends AbstractValidator<T, Message, Context> {
 
 	private final AttributeExpression<Message, Context, String> inspireIdLocalId = stringAttr("inspireIdLocalId");
 	private final GeometryExpression<Message, Context, Geometry> geometry = geometry("geometry");
@@ -63,8 +66,8 @@ public class AbstractVrnValidator extends AbstractValidator<AbstractGebied, Mess
 	private final CodeExpression<Message, Context> statusBeheer = code("statusBeheer");
 	private final CodeExpression<Message, Context> beheerPakket = code("beheerPakket");
 
-	public AbstractVrnValidator(final Map<Object, Object> validatorMessages) throws CompilerException {
-		super(Context.class, AbstractGebied.class, validatorMessages);
+	public AbstractVrnValidator(final Map<Object, Object> validatorMessages, Class<T> clazz) throws CompilerException {
+		super(Context.class, clazz, validatorMessages);
 		compile();
 	}
 
