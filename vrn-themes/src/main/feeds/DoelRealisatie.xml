@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+
+	<id>DoelRealisatie</id>
+	<title>IMNa Codelijst Doel Realisatie</title>
+
+	<entry>
+		<id>1</id>
+		<title>Provinciaal Natuurnetwerk</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>2</id>
+		<title>NURG</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>3</id>
+		<title>Zuidwestelijke Delta</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>4</id>
+		<title>Maaswerken</title>
+		<category term="CodeListValue" />
+	</entry><entry>
+		<id>5</id>
+		<title>RODS</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>6</id>
+		<title>Overige natuur</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>7</id>
+		<title>Natura 2000</title>
+		<category term="CodeListValue" />
+	</entry>
+</feed>

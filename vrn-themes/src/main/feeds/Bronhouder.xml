@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+
+	<id>Bronhouder</id>
+	<title>IMNa Codelijst Bronhouder</title>
+
+	<entry>
+		<id>1</id>
+		<title>RVO.nl</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>2</id>
+		<title>Dienst Landelijk Gebied</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>3</id>
+		<title>Beheerder overheid</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>4</id>
+		<title>Provincie</title>
+		<category term="CodeListValue" />
+	</entry><entry>
+		<id>5</id>
+		<title>Beheerder particulier</title>
+		<category term="CodeListValue" />
+	</entry>
+</feed>

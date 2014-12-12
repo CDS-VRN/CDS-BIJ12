@@ -1,7 +1,10 @@
 package nl.ipo.cds.etl.theme.vrn.beheer;
 
+import org.deegree.commons.tom.ows.CodeType;
+
 import nl.ipo.cds.etl.db.annotation.Column;
 import nl.ipo.cds.etl.db.annotation.Table;
+import nl.ipo.cds.etl.theme.annotation.CodeSpace;
 import nl.ipo.cds.etl.theme.annotation.MappableAttribute;
 import nl.ipo.cds.etl.theme.vrn.AbstractGebied;
 
@@ -9,60 +12,68 @@ import nl.ipo.cds.etl.theme.vrn.AbstractGebied;
 public abstract class AbstractGebiedBeheer extends AbstractGebied {
 
     @Column(name = "status_beheer")
-    private String statusBeheer;
+    private CodeType statusBeheer;
 
     @Column(name = "beheerpakket")
-    private String beheerpakket;
+    private CodeType beheerpakket;
 
     @Column(name = "doel_beheer")
-    private String doelBeheer;
+    private CodeType doelBeheer;
 
     @Column(name = "type_beheerder")
-    private String typeBeheerder;
+    private CodeType typeBeheerder;
 
     @Column(name="eenheidnummer")
     private String eenheidnummer;
 
     @MappableAttribute
-	public String getStatusBeheer() {
+    @CodeSpace("StatusBeheer")
+	public CodeType getStatusBeheer() {
 		return statusBeheer;
 	}
 
     @MappableAttribute
-	public void setStatusBeheer(String statusBeheer) {
+    @CodeSpace("StatusBeheer")
+	public void setStatusBeheer(CodeType statusBeheer) {
 		this.statusBeheer = statusBeheer;
 	}
 
     @MappableAttribute
-	public String getBeheerpakket() {
+    @CodeSpace("BeheerPakket")
+	public CodeType getBeheerpakket() {
 		return beheerpakket;
 	}
 
     @MappableAttribute
-	public void setBeheerpakket(String beheerpakket) {
+    @CodeSpace("BeheerPakket")
+	public void setBeheerpakket(CodeType beheerpakket) {
 		this.beheerpakket = beheerpakket;
 	}
 
     @MappableAttribute
-	public String getDoelBeheer() {
+    @CodeSpace("DoelRealisatie")
+	public CodeType getDoelBeheer() {
 		return doelBeheer;
 	}
 
     @MappableAttribute
-	public void setDoelBeheer(String doelBeheer) {
+    @CodeSpace("DoelRealisatie")
+	public void setDoelBeheer(CodeType doelBeheer) {
 		this.doelBeheer = doelBeheer;
 	}
 
     @MappableAttribute
-	public String getTypeBeheerder() {
+    @CodeSpace("TypeBeheerderEnEigenaar")
+	public CodeType getTypeBeheerder() {
 		return typeBeheerder;
 	}
 
     @MappableAttribute
-	public void setTypeBeheerder(String typeBeheerder) {
+    @CodeSpace("TypeBeheerderEnEigenaar")
+	public void setTypeBeheerder(CodeType typeBeheerder) {
 		this.typeBeheerder = typeBeheerder;
 	}
-
+    
     @MappableAttribute
 	public String getEenheidnummer() {
 		return eenheidnummer;
