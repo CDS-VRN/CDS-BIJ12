@@ -64,14 +64,7 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends AbstractVali
 	private final CodeExpression<Message, Context> bronhouder = code("bronhouder");
 	private final CodeExpression<Message, Context> typeBeheerderEnEigenaar = code("typeBeheerderEnEigenaar");
 	
-	/**
-	 * specifiek per type
-	 */
-	private final CodeExpression<Message, Context> statusVerwerving = code("StatusVerwerving");
-	private final CodeExpression<Message, Context> statusIngericht = code("statusIngericht");
-	private final CodeExpression<Message, Context> statusBeheer = code("statusBeheer");
-	private final CodeExpression<Message, Context> beheerPakket = code("beheerPakket");
-
+	
 	public AbstractVrnValidator(final Map<Object, Object> validatorMessages, Class<T> clazz) throws CompilerException {
 		super(Context.class, clazz, validatorMessages);
 		compile();
