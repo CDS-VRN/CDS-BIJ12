@@ -13,7 +13,6 @@ import nl.ipo.cds.etl.theme.annotation.MappableAttribute;
  * Baseclass for IMNa theme Inrichting
  *
  */
-@Table(name = "hazard_area", schema = "bron")
 public abstract class AbstractGebiedInrichting extends AbstractGebied {
 
     @Column(name = "status_inrichting")
