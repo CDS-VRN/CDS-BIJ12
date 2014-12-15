@@ -27,7 +27,6 @@
             <groupId>nl.ipo.cds</groupId>
             <artifactId>admin</artifactId>
             <version>${cds.version}</version>
-            <classifier>prod</classifier>
             <type>pom</type>
         </dependency>
     </dependencies>
