@@ -13,6 +13,7 @@ import nl.ipo.cds.etl.theme.annotation.MappableAttribute;
  * Baseclass for IMNa theme Beheer
  *
  */
+@Table
 public abstract class AbstractGebiedBeheer extends AbstractGebied {
 
     @Column(name = "status_beheer")
