@@ -1,13 +1,21 @@
-package nl.ipo.cds.etl.theme.vrn;
+package nl.ipo.cds.etl.theme.vrn.domain;
 
 import java.sql.Timestamp;
 
 import nl.ipo.cds.etl.PersistableFeature;
 import nl.ipo.cds.etl.db.annotation.Column;
+import nl.ipo.cds.etl.db.annotation.Table;
 import nl.ipo.cds.etl.theme.annotation.MappableAttribute;
 
 import com.vividsolutions.jts.geom.Geometry;
 
+/**
+ * @author annes
+ *
+ *	Base class for all IMNa gebied classes and themes
+ *
+ */
+@Table
 public abstract class AbstractGebied extends PersistableFeature {
 
 	@Column(name = "begintijd")

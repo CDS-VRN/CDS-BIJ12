@@ -1,44 +1,50 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    
-    <modelVersion>4.0.0</modelVersion>	
-    <artifactId>ipo-themes</artifactId>	
-    <parent>
-        <groupId>nl.ipo.cds.ipo</groupId>
-        <artifactId>cds-ipo</artifactId>
-        <version>2.3-SNAPSHOT</version>
-    </parent>
-    <packaging>pom</packaging>
-    
-    <dependencies>        
-        <dependency>
-            <groupId>nl.ipo.cds.ipo</groupId>
-            <artifactId>theme-buisleidingen</artifactId>
-            <version>${cds.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>nl.ipo.cds.ipo</groupId>
-            <artifactId>theme-riscisor</artifactId>
-            <version>${cds.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>nl.ipo.cds.ipo</groupId>
-            <artifactId>theme-monsterpunt</artifactId>
-            <version>${cds.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>nl.ipo.cds.ipo</groupId>
-            <artifactId>theme-monster</artifactId>
-            <version>${cds.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>nl.ipo.cds.ipo</groupId>
-            <artifactId>theme-resultaat</artifactId>
-            <version>${cds.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>nl.ipo.cds.ipo</groupId>
-            <artifactId>theme-bvb</artifactId>
-            <version>${cds.version}</version>
-        </dependency>
-    </dependencies>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>ipo-themes</artifactId>
+	<parent>
+		<groupId>nl.ipo.cds.ipo</groupId>
+		<artifactId>cds-ipo</artifactId>
+		<version>2.3-SNAPSHOT</version>
+	</parent>
+	<packaging>pom</packaging>
+
+	<dependencies>
+		<dependency>
+			<groupId>nl.ipo.cds.ipo</groupId>
+			<artifactId>theme-buisleidingen</artifactId>
+			<version>${cds.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>nl.ipo.cds.ipo</groupId>
+			<artifactId>theme-riscisor</artifactId>
+			<version>${cds.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>nl.ipo.cds.ipo</groupId>
+			<artifactId>theme-monsterpunt</artifactId>
+			<version>${cds.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>nl.ipo.cds.ipo</groupId>
+			<artifactId>theme-monster</artifactId>
+			<version>${cds.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>nl.ipo.cds.ipo</groupId>
+			<artifactId>theme-resultaat</artifactId>
+			<version>${cds.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>nl.ipo.cds.ipo</groupId>
+			<artifactId>theme-bvb</artifactId>
+			<version>${cds.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>nl.ipo.cds.ipo</groupId>
+			<artifactId>vrn-themes</artifactId>
+			<version>${cds.version}</version>
+		</dependency>
+	</dependencies>
 </project>
