@@ -7,7 +7,8 @@ import nl.ipo.cds.etl.db.annotation.Column;
 import nl.ipo.cds.etl.db.annotation.Table;
 import nl.ipo.cds.etl.theme.annotation.MappableAttribute;
 
-import com.vividsolutions.jts.geom.Geometry;
+import org.deegree.geometry.Geometry;
+
 
 /**
  * @author annes

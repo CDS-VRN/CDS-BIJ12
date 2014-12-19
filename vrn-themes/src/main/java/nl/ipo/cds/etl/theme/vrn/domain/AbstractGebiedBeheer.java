@@ -22,8 +22,8 @@ public abstract class AbstractGebiedBeheer extends AbstractGebied {
     @Column(name = "beheerpakket")
     private CodeType beheerpakket;
 
-    @Column(name = "doel_beheer")
-    private CodeType doelBeheer;
+    @Column(name = "doelbeheer")
+    private CodeType doelRealisatie;
 
     @Column(name = "type_beheerder")
     private CodeType typeBeheerder;
@@ -57,14 +57,14 @@ public abstract class AbstractGebiedBeheer extends AbstractGebied {
 
     @MappableAttribute
     @CodeSpace("DoelRealisatie")
-	public CodeType getDoelBeheer() {
-		return doelBeheer;
+	public CodeType getDoelRealisatie() {
+		return doelRealisatie;
 	}
 
     @MappableAttribute
     @CodeSpace("DoelRealisatie")
-	public void setDoelBeheer(CodeType doelBeheer) {
-		this.doelBeheer = doelBeheer;
+	public void setDoelRealisatie(CodeType doelRealisatie) {
+		this.doelRealisatie = doelRealisatie;
 	}
 
     @MappableAttribute
