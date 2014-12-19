@@ -36,14 +36,9 @@ private DBWriterFactory<LandelijkGebiedInrichting> dbWriterFactory;
 		writeGebied(gebied);
 		StringWriter stringWriter = new StringWriter();
 		DBWriter<LandelijkGebiedInrichting> dbWriter = dbWriterFactory.getDBWriter(new PrintWriter(stringWriter));	
-		
 		dbWriter.writeObject(gebied);
-		System.out.println(stringWriter.getBuffer().toString());
-		String output = new String("\"0\",\"CodeStatusInrichting\",\"CodeDoelInrichting\",\"CodeTypeBeheerder\",\"2014-12-15 14:57:27.094\",\"2014-12-15 14:59:55.565\",\"TEST.ID.0\",\"imnaBronhouder\",\"2\",\"POLYGON ((111446.5 566602, 112035.5 566602, 112035.5 566886, 111446.5 566886, 111446.5 566602))\",\"23\",\"0\""); 
-		Assert.assertEquals(
-		
-		output,
-		stringWriter.getBuffer().toString());
+		String output = "\"0\",\"CodeStatusInrichting\",\"CodeDoelInrichting\",\"CodeTypeBeheerder\",\"2014-12-15 14:57:27.094\",\"2014-12-15 14:59:55.565\",\"TEST.ID.0\",\"imnaBronhouder\",\"2\",\"POLYGON ((111446.5 566602, 112035.5 566602, 112035.5 566886, 111446.5 566886, 111446.5 566602))\",\"23\",\"0\""+System.lineSeparator(); 
+		Assert.assertEquals(output, stringWriter.getBuffer().toString());
 	}
 	
 
