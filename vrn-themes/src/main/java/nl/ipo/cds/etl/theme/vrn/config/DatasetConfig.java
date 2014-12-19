@@ -31,38 +31,38 @@ public class DatasetConfig {
 
 	@Bean
 	@Inject
-	public VrnThemeConfig<LandelijkGebiedBeheer> VrnThemeConfig(final LandelijkGebiedBeheerValidator validator,
+	public VrnThemeConfig<LandelijkGebiedBeheer> landelijkGebiedBeheerThemeConfig(final LandelijkGebiedBeheerValidator validator,
 	final OperationDiscoverer operationDiscoverer) {
 		return new VrnThemeConfig<LandelijkGebiedBeheer>(validator, operationDiscoverer, LandelijkGebiedBeheer.class);
 	}
 
 	@Bean
 	@Inject
-	public VrnThemeConfig<ProvinciaalGebiedBeheer> VrnThemeConfig(final ProvinciaalGebiedBeheerValidator validator, final OperationDiscoverer operationDiscoverer) {
+	public VrnThemeConfig<ProvinciaalGebiedBeheer> provinciaalGebiedBeheerThemeConfig(final ProvinciaalGebiedBeheerValidator validator, final OperationDiscoverer operationDiscoverer) {
 		return new VrnThemeConfig<ProvinciaalGebiedBeheer>(validator, operationDiscoverer, ProvinciaalGebiedBeheer.class);
 	}
 
 	@Bean
 	@Inject
-	public VrnThemeConfig<ProvinciaalGebiedInrichting> VrnThemeConfig(final ProvinciaalGebiedInrichtingValidator validator, final OperationDiscoverer operationDiscoverer) {
+	public VrnThemeConfig<ProvinciaalGebiedInrichting> provinciaalGebiedInrichtingThemeConfig(final ProvinciaalGebiedInrichtingValidator validator, final OperationDiscoverer operationDiscoverer) {
 		return new VrnThemeConfig<ProvinciaalGebiedInrichting>(validator, operationDiscoverer, ProvinciaalGebiedInrichting.class);
 	}
 
 	@Bean
 	@Inject
-	public VrnThemeConfig<LandelijkGebiedInrichting> VrnThemeConfig(final LandelijkGebiedInrichtingValidator validator, final OperationDiscoverer operationDiscoverer) {
+	public VrnThemeConfig<LandelijkGebiedInrichting> landelijkGebiedInrichtingThemeConfig(final LandelijkGebiedInrichtingValidator validator, final OperationDiscoverer operationDiscoverer) {
 		return new VrnThemeConfig<LandelijkGebiedInrichting>(validator, operationDiscoverer, LandelijkGebiedInrichting.class);
 	}
 
 	@Bean
 	@Inject
-	public VrnThemeConfig<LandelijkGebiedVerwerving> VrnThemeConfig(final LandelijkGebiedVerwervingValidator validator, final OperationDiscoverer operationDiscoverer) {
+	public VrnThemeConfig<LandelijkGebiedVerwerving> landelijkGebiedVerwervingThemeConfig(final LandelijkGebiedVerwervingValidator validator, final OperationDiscoverer operationDiscoverer) {
 		return new VrnThemeConfig<LandelijkGebiedVerwerving>(validator, operationDiscoverer, LandelijkGebiedVerwerving.class);
 	}
 
 	@Bean
 	@Inject
-	public VrnThemeConfig<ProvinciaalGebiedVerwerving> VrnThemeConfig(final ProvinciaalGebiedVerwervingValidator validator, final OperationDiscoverer operationDiscoverer) {
+	public VrnThemeConfig<ProvinciaalGebiedVerwerving> provinciaalGebiedVerwervingThemeConfig(final ProvinciaalGebiedVerwervingValidator validator, final OperationDiscoverer operationDiscoverer) {
 		return new VrnThemeConfig<ProvinciaalGebiedVerwerving>(validator, operationDiscoverer, ProvinciaalGebiedVerwerving.class);
 	}
 
@@ -81,7 +81,34 @@ public class DatasetConfig {
 		throws CompilerException {
 			return new LandelijkGebiedBeheerValidator(validatorMessages);
 		}
+		
+		@Bean
+		@Inject
+		public ProvinciaalGebiedInrichtingValidator provinciaalGebiedInrichtingValidator(final @Named("VrnValidationMessages") Properties validatorMessages)
+		throws CompilerException {
+			return new ProvinciaalGebiedInrichtingValidator(validatorMessages);
+		}
 
+		@Bean
+		@Inject
+		public LandelijkGebiedInrichtingValidator landelijkGebiedInrichtingValidator(final @Named("VrnValidationMessages") Properties validatorMessages)
+		throws CompilerException {
+			return new LandelijkGebiedInrichtingValidator(validatorMessages);
+		}
+		
+		@Bean
+		@Inject
+		public LandelijkGebiedVerwervingValidator landelijkGebiedVerwervingValidator(final @Named("VrnValidationMessages") Properties validatorMessages)
+		throws CompilerException {
+			return new LandelijkGebiedVerwervingValidator(validatorMessages);
+		}
+		
+		@Bean
+		@Inject
+		public ProvinciaalGebiedVerwervingValidator provinciaalGebiedVerwervingValidator(final @Named("VrnValidationMessages") Properties validatorMessages)
+		throws CompilerException {
+			return new ProvinciaalGebiedVerwervingValidator(validatorMessages);
+		}
 	}
 
 	@Configuration(value = "vrn.Messages")

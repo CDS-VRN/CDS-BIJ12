@@ -13,13 +13,14 @@ import nl.ipo.cds.etl.theme.annotation.MappableAttribute;
  * Baseclass for IMNa theme Inrichting
  *
  */
+@Table
 public abstract class AbstractGebiedInrichting extends AbstractGebied {
 
     @Column(name = "status_inrichting")
     private CodeType statusInrichting;
 
-    @Column(name = "doel_inrichting")
-    private CodeType doelInrichting;
+    @Column(name = "doelinrichting")
+    private CodeType doelRealisatie;
 
     @Column(name = "type_beheerder")
     private CodeType typeBeheerder;
@@ -39,14 +40,14 @@ public abstract class AbstractGebiedInrichting extends AbstractGebied {
 
     @MappableAttribute
     @CodeSpace("DoelRealisatie")
-	public CodeType getDoelInrichting() {
-		return doelInrichting;
+	public CodeType getDoelRealisatie() {
+		return doelRealisatie;
 	}
 
     @MappableAttribute
     @CodeSpace("DoelRealisatie")
-	public void setDoelInrichting(CodeType doelInrichting) {
-		this.doelInrichting = doelInrichting;
+	public void setDoelRealisatie(CodeType doelRealisatie) {
+		this.doelRealisatie = doelRealisatie;
 	}
 
     @MappableAttribute
