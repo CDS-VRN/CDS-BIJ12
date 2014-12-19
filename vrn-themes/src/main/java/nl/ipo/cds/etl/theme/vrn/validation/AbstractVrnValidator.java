@@ -46,8 +46,7 @@ import org.deegree.geometry.Geometry;
  */
 public class AbstractVrnValidator<T extends AbstractGebied> extends AbstractValidator<T, Message, Context> {
 
-	private final AttributeExpression<Message, Context, String> inspireIdLocalId = stringAttr("inspireIdLocalId");
-	private final GeometryExpression<Message, Context, Geometry> geometry = geometry("geometry");
+	private final GeometryExpression<Message, Context, Geometry> geometrie = geometry("geometrie");
 
 	private final Constant<Message, Context, String> doelRealisatieCodeSpace = constant("http://codeList/");
 
@@ -92,10 +91,12 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends AbstractVali
 	 * Welke validaties moeten er gedaan?
 	 * 
 	 */
+	/*
 	public Validator<Message, Context> getInspireIdLocalIdValidator() {
 		return validate(and(validate(not(inspireIdLocalId.isNull())).message(Message.ATTRIBUTE_NULL, constant(inspireIdLocalId.name)),
 		validate(not(isBlank(inspireIdLocalId))).message(Message.ATTRIBUTE_EMPTY, constant(inspireIdLocalId.name))).shortCircuit());
 	}
+	*/
 
 	/**
 	 * Valideer aanwezigheid metadata gedaan door: VerifyDataSchema.processDataset or .run
@@ -106,7 +107,7 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends AbstractVali
 	 * Geometrische validatie: welke geometrische beperkingen?
 	 */
 	public Validator<Message, Context> getGeometryValidator() {
-		return getNotNullSurfaceGeometryValidator(geometry);
+		return getNotNullSurfaceGeometryValidator(geometrie);
 	}
 
 	
@@ -118,7 +119,7 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends AbstractVali
 	private Validator<Message, Context> getNotNullSurfaceGeometryValidator(GeometryExpression<Message, Context, Geometry> surfaceGeometry) {
 		return validate(and(
 		// The following validations short-circuit, there must be a non-empty, Surface geometry:
-		validate(not(geometry.isNull())).message(ATTRIBUTE_NULL, constant(surfaceGeometry.name)),
+		validate(not(geometrie.isNull())).message(ATTRIBUTE_NULL, constant(surfaceGeometry.name)),
 		validate(not(surfaceGeometry.isEmptyMultiGeometry())).message(GEOMETRY_EMPTY_MULTIGEOMETRY),
 		validate(surfaceGeometry.isSurfaceOrMultiSurface()).message(GEOMETRY_ONLY_SURFACE_OR_MULTISURFACE),
 		// Non short-circuited validations:

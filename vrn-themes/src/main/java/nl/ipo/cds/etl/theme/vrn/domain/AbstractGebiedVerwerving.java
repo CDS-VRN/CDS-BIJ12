@@ -12,6 +12,7 @@ import nl.ipo.cds.etl.theme.annotation.MappableAttribute;
  *
  * Baseclass for IMNa theme verwerving
  */
+@Table
 public abstract  class AbstractGebiedVerwerving extends AbstractGebied {
 
     @Column(name = "status_verwerving")
@@ -21,8 +22,8 @@ public abstract  class AbstractGebiedVerwerving extends AbstractGebied {
     private CodeType typeEigenaar;
 
 
-	@Column(name = "doel_verwerving")
-	 private CodeType doelVerwerving;
+	@Column(name = "doelverwerving")
+	 private CodeType doelRealisatie;
 
 	@MappableAttribute
 	@CodeSpace("StatusVerwerving")
@@ -50,14 +51,14 @@ public abstract  class AbstractGebiedVerwerving extends AbstractGebied {
 
 	@MappableAttribute
 	@CodeSpace("DoelRealisatie")
-	public CodeType getDoelVerwerving() {
-		return doelVerwerving;
+	public CodeType getDoelRealisatie() {
+		return doelRealisatie;
 	}
 
 	@MappableAttribute
 	@CodeSpace("DoelRealisatie")
-	public void setDoelVerwerving(CodeType doelVerwerving) {
-		this.doelVerwerving = doelVerwerving;
+	public void setDoelRealisatie(CodeType doelRealisatie) {
+		this.doelRealisatie = doelRealisatie;
 	}
 
 }

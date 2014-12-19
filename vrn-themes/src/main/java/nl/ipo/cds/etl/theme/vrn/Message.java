@@ -92,7 +92,7 @@ public enum Message implements ValidatorMessageKey<Message, Context> {
 		// why twice???
 		params.add (new AttributeExpression<Message, Context, String> ("id", String.class));
 		params.add (new AttributeExpression<Message, Context, String> ("id", String.class));
-		params.add (new AttributeExpression<Message, Context, String> ("idProperty", String.class));
+		params.add (new AttributeExpression<Message, Context, String> ("identificatie", String.class));
 		return params;
 	}
 

@@ -18,7 +18,7 @@ public class VrnThemeConfig<T extends AbstractGebied> extends ThemeConfig<T>{
 	
 
 	public VrnThemeConfig(final Validator<T> validator, final OperationDiscoverer operationDiscoverer, final Class<T> clazz) {
-		super (clazz.getName(),  clazz);
+		super (clazz.getSimpleName(),  clazz);
 		this.validator = validator;
 		this.operationDiscoverer = operationDiscoverer;
 	}

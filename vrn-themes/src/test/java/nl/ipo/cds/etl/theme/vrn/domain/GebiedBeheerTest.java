@@ -29,7 +29,7 @@ private DBWriterFactory<LandelijkGebiedBeheer> dbWriterFactory;
 		
 		LandelijkGebiedBeheer gebied = new LandelijkGebiedBeheer();
 		gebied.setId(TEST_DATASET_ID);
-		gebied.setDoelBeheer(new CodeType ("CodeDoelBeheer", "http://www.namespace.com"));
+		gebied.setDoelRealisatie(new CodeType ("CodeDoelBeheer", "http://www.namespace.com"));
 		gebied.setBeheerpakket(new CodeType ("CodeBeheerPakket", "http://www.namespace.com"));
 		gebied.setStatusBeheer(new CodeType ("CodeStatusBeheer", "http://www.namespace.com"));
 		gebied.setTypeBeheerder(new CodeType ("CodeTypeBeheerder", "http://www.namespace.com"));
