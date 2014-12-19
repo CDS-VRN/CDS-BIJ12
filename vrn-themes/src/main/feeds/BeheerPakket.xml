@@ -1,0 +1,696 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+
+	<id>BeheerPakket</id>
+	<title>IMNa Codelijst BeheerPakket</title>
+	<entry>
+		<id>N05.02</id>
+		<title>Gemaaid rietland</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N06.01</id>
+		<title>Veenmosrietland en moerasheide</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N06.02</id>
+		<title>Trilveen</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N06.03</id>
+		<title>Hoogveen</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N06.04</id>
+		<title>Vochtige heide</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N06.05</id>
+		<title>Zwakgebufferd ven</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N06.06</id>
+		<title>Zuur ven of hoogveenven</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N07.01</id>
+		<title>Droge heide</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N07.02</id>
+		<title>Zandverstuiving</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N08.01</id>
+		<title>Strand en embryonaal duin</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N08.02</id>
+		<title>Open duin</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N08.03</id>
+		<title>Vochtige duinvallei</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N08.04</id>
+		<title>Duinheide</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N09.01</id>
+		<title>Schor of kwelder</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N10.01</id>
+		<title>Nat schraalland</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N10.02</id>
+		<title>Vochtig schraalland</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N11.01</id>
+		<title>Droog schraalland</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N12.01</id>
+		<title>Bloemdijk</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N12.02</id>
+		<title>Kruiden- en faunarijk grasland</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N12.03</id>
+		<title>Glanshaverhooiland</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N12.04</id>
+		<title>Zilt- en overstromingsgrasland</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N12.05</id>
+		<title>Kruiden- en faunarijke akker</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N12.06</id>
+		<title>Ruigteveld</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N13.01</id>
+		<title>Vochtig weidevogelgrasland</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N13.02</id>
+		<title>Wintergastenweide</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N14.01</id>
+		<title>Rivier- en beekbegeleidend bos</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N14.02</id>
+		<title>Hoog- en laagveenbos</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N14.03</id>
+		<title>Haagbeuken- en essenbos</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N15.01</id>
+		<title>Duinbos</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N15.02</id>
+		<title>Dennen-, eiken-, en beukenbos</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N16.01</id>
+		<title>Droog bos met productie</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N16.02</id>
+		<title>Vochtig bos met productie</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N17.01</id>
+		<title>Vochtig hakhout en middenbos</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N17.02</id>
+		<title>Droog hakhout</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N17.03</id>
+		<title>Park- en stinzenbos</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>N17.04</id>
+		<title>Eendenkooi</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.01.01a</id>
+		<title>Rustperiode 1 april tot 1 juni</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.01.01b</id>
+		<title>Rustperiode 1 april tot 8 juni</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.01.01c</id>
+		<title>Rustperiode 1 april tot 15 juni</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.01.01d</id>
+		<title>Rustperiode 1 april tot 22 juni</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.01.01e</id>
+		<title>Rustperiode 1 april tot 1 juli</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.01.01f</id>
+		<title>Rustperiode 1 april tot 15 juli</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.01.01g</id>
+		<title>Rustperiode 1 april tot 1 augustus</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.01.02a</id>
+		<title>Voorweiden 1 mei 15 juni</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.01.02b</id>
+		<title>Voorweiden 8 mei 22 juni</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.01.03a</id>
+		<title>Inundatieperiode 15 februari tot 15 april</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.01.03b</id>
+		<title>Inundatieperiode 15 februari tot 15 mei</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.01.03c</id>
+		<title>Inundatieperiode 15 februari tot 15 juni</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.01.03d</id>
+		<title>Inundatieperiode 15 februari tot 1 aug</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.01.04a1</id>
+		<title>Legselbeheer op grasland 35 broedparen</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.01.04a2</id>
+		<title>Legselbeheer op grasland 50 broedparen</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.01.04a3</id>
+		<title>Legselbeheer op grasland 75 broedparen</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.01.04a4</id>
+		<title>Legselbeheer op grasland 100 broedparen</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.01.04b</id>
+		<title>Legselbeheer op bouw- of grasland</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.01.04c1.ut</id>
+		<title>Legselbeheer op grasland 150 broedparen plus maaitrappen</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.01.04c2.ut</id>
+		<title>Legselbeheer op grasland 200 broedparen plus maaitrappen</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.01.04c3.ut</id>
+		<title>Legselbeheer op grasland 300 broedparen plus maaitrappen</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.01.05a</id>
+		<title>Kruidenrijk weidevogelgrasland</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.01.05b</id>
+		<title>Kruidenrijk weidevogelgraslandrand</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.01.06</id>
+		<title>Extensief beweid weidevogelgrasland</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.02.01a1 (2010)</id>
+		<title>Bouwland met broedende akkervogels: Jaarlijks dient 20-50% van de beheereenheid opnieuw tussen 1 maart en 15 april worden geploegd en opnieuw
+			ingezaaid met een in het natuurbeheerplan voorgeschreven zaaimengsel op kleigrond</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.02.01a2</id>
+		<title>Bouwland met broedende akkervogels: Jaarlijks dient 20-50% van de beheereenheid opnieuw tussen 1 maart en 15 april worden geploegd en opnieuw
+			ingezaaid met een in het natuurbeheerplan voorgeschreven zaaimengsel. Op zandgrond</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.02.01b1</id>
+		<title>Bouwland met broedende akkervogels: Jaarlijks dient 20-50% van de beheereenheid opnieuw tussen 1 maart en 15 april te worden geploegd. Op
+			kleigrond</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.02.01b2</id>
+		<title>Bouwland met broedende akkervogels: Jaarlijks dient 20-50% van de beheereenheid opnieuw tussen 1 maart en 15 april te worden geploegd. Op
+			zandgrond</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.02.01c1</id>
+		<title>Bouwland met broedende akkervogels: In het derde of vierde dient de gehele beheereenheid tussen 1 maart en 15 april te worden geploegd en
+			opnieuw ingezaaid met een in het natuurbeheerplan voorgeschreven zaaimengsel. Op zandgrond</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.02.01c2</id>
+		<title>Bouwland met broedende akkervogels: In het derde of vierde dient de gehele beheereenheid tussen 1 maart en 15 april te worden geploegd en
+			opnieuw ingezaaid met een in het natuurbeheerplan voorgeschreven zaaimengsel. Op zandgrond</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.02.01a1</id>
+		<title>Bouwland met broedende akkervogels: Jaarlijks dient 20-50% van de beheereenheid opnieuw tussen 1 maart en 15 april worden geploegd en opnieuw
+			ingezaaid met een in het natuurbeheerplan voorgeschreven zaaimengsel. Op kleigrond.</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A 01.02.01a2</id>
+		<title>Bouwland met broedende akkervogels: Jaarlijks dient 20-50% van de beheereenheid opnieuw tussen 1 maart en 15 april worden geploegd en opnieuw
+			ingezaaid met een in het natuurbeheerplan voorgeschreven zaaimengsel. Op zandgrond.</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.02.01b1</id>
+		<title>Bouwland met broedende akkervogels: Jaarlijks dient 20-50% van de beheereenheid opnieuw tussen 1 sept en 15 april te worden geploegd. Op
+			kleigrond.</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.02.01b</id>
+		<title>Bouwland met broedende akkervogels: Jaarlijks dient 20-50% van de beheereenheid opnieuw tussen 1 sept en 15 april te worden geploegd. Op
+			zandgrond</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.02.01c1</id>
+		<title>Bouwland met broedende akkervogels: in 3e en 4e jaar dient de gehele beheereenheid opnieuw tussen 1 sept en 15 april te worden geploegd en
+			opnieuw ingezaaid met een in het natuurbeheerplan voorgeschreven zaaimengsel .Roulatie mogelijk op kleigrond</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.02.01c2</id>
+		<title>Bouwland met broedende akkervogels: in 3e en 4e jaar dient de gehele beheereenheid opnieuw tussen 1sept en 15 april te worden geploegd en
+			opnieuw ingezaaid met een in het natuurbeheerplan voorgeschreven zaaimengsel…. Roulatie mogelijk op zand.</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.02.01d1</id>
+		<title>De beheereenheid is minimaal 12 meter breed. Tussen 15 april en 31 aug mag max. 10% van de oppervlakte bedekt zijn met rijsporen….. Roulatie
+			mogelijk op klei</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.02.01d2</id>
+		<title>De beheereenheid is minimaal 12 meter breed. Tussen 15 april en 31 aug mag max. 10% van de oppervlakte bedekt zijn met rijsporen….. Roulatie
+			mogelijk op zand</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.02.02a</id>
+		<title>Bouwland met doortrekkende en overwinterende akkervogels klei</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.02.02b</id>
+		<title>Bouwland met doortrekkende en overwinterende akkervogels zand</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.02.03a</id>
+		<title>Bouwland voor hamsters (vollevelds)</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.02.03b</id>
+		<title>Opvangstrook voor hamsters</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.03.01a</id>
+		<title>Ganzen op grasland</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.03.01b</id>
+		<title>Ganzen op bouwland</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.03.01c</id>
+		<title>Ganzen op vroege groenbemester</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.03.01d</id>
+		<title>Ganzen op late groenbemester</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.03.02.Lb</id>
+		<title>Opvang overzomerende grauwe ganzen Maasplassen</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.04.01a.Lb</id>
+		<title>Insectenrijk graslandperceelsbeheer Roerdal:basis</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.04.01b.Lb</id>
+		<title>Insectenrijk graslandperceelsbeheer Roerdal:plus</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.04.02.Lb</id>
+		<title>Insectenrijke graslandranden Roerdal</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A01.05.01.Lb</id>
+		<title>Foerageerand Bever</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A02.01.01</id>
+		<title>Botanisch weiland</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A02.01.02</id>
+		<title>Botanisch hooiland</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A02.01.03</id>
+		<title>Botanische weide- of hooilandrand</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A02.01.03a</id>
+		<title>Botanische weiderand</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A02.01.03b</id>
+		<title>Botanische hooilandrand</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A02.01.04</id>
+		<title>Botanisch bronbeheer</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A02.02.01a</id>
+		<title>Akker met waardevolle flora: Drie van zes jaar graan</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A02.02.01b</id>
+		<title>Akker met waardevolle flora: Vier van zes jaar graan</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A02.02.01c</id>
+		<title>Akker met waardevolle flora: Vijf van zes jaar graan</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A02.02.02</id>
+		<title>Chemie en kunstmestvrij land</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A02.02.02a</id>
+		<title>Chemie en kunstmestvrij land: Drie van zes jaar graan</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A02.02.02b</id>
+		<title>Chemie en kunstmestvrij land: Vier van zes jaar graan</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A02.02.02c</id>
+		<title>Chemie en kunstmestvrij land: Vijf van zes jaar graan</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>A02.02.03</id>
+		<title>Akkerflora randen</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L01.01.00</id>
+		<title>Poel en klein historisch water</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L01.01.01a</id>
+		<title>Oppervlakte poel < 175 m2</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L01.01.01b</id>
+		<title>Oppervlakte poel > 175 m2</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L01.02.00</id>
+		<title>Houtwal en houtsingel - gemiddeld</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L01.02.01</id>
+		<title>Houtwal en houtsingel</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L01.02.02</id>
+		<title>Hoge houtwal</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L01.02.03</id>
+		<title>Holle weg en Graft</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L01.03.00</id>
+		<title>Elzensingel bedekking - gemiddeld</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L01.03.01a</id>
+		<title>Elzensingel bedekking 30-50%</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L01.03.01b</id>
+		<title>Elzensingel bedekking 50-75%</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L01.03.01c</id>
+		<title>Elzensingel bedekking > 75%</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L01.04.01</id>
+		<title>Bossingel en bosje</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L01.05.00</id>
+		<title>Knip- of scheerheg jaarlijkse - gemiddeld</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L01.05.01a</id>
+		<title>Knip- of scheerheg jaarlijkse cyclus</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L01.05.01b</id>
+		<title>Knip- of scheerheg 2-3 jaarlijkse cyclus</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L01.06.00</id>
+		<title>Struweelhaag cyclus- gemiddeld</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L01.06.01a</id>
+		<title>Struweelhaag cyclus 5-7 jaar</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L01.06.01b</id>
+		<title>Struweelhaag cyclus > 12 jaar</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L01.07.00</id>
+		<title>Laan – gemiddeld</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L01.07.01a</id>
+		<title>Laan gemiddelde stamdiameter < 20 cm</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L01.07.01b</id>
+		<title>Laan gemiddelde stamdiameter 20 cm-60 cm</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L01.07.01c</id>
+		<title>Laan gemiddelde stamdiameter > 60 cm</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L01.08.00</id>
+		<title>Knotboom - gemiddeld</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L01.08.01a</id>
+		<title>Knotboom gemiddelde stamdiameter < 20 cm</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L01.08.01b</id>
+		<title>Knotboom gemiddelde stamdiameter 20 cm-60 cm</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L01.08.01c</id>
+		<title>Knotboom gemiddelde stamdiameter > 60 cm</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L01.09.01</id>
+		<title>Hoogstamboomgaard</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L01.09.02.ZH</id>
+		<title>Halfstamboomgaard bij historische boerderijen</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L01.13.03.ZH</id>
+		<title>Leibomen bij historische boerderijen</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L02.01</id>
+		<title>Fortterrein</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L02.02</id>
+		<title>Historisch bouwwerk en erf</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L02.03</id>
+		<title>Historische tuin</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L03.01.00</id>
+		<title>Aardwerk en groeve</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>L03.01.02.ZH</id>
+		<title>Schurvelingen en zandwallen op Goeree</title>
+		<category term="CodeListValue" />
+	</entry>
+
+</feed>
