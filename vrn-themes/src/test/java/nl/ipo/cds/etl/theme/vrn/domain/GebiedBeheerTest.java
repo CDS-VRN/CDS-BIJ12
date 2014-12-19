@@ -23,7 +23,6 @@ private DBWriterFactory<LandelijkGebiedBeheer> dbWriterFactory;
 		dbWriterFactory = new DBWriterFactory<LandelijkGebiedBeheer>(LandelijkGebiedBeheer.class, "dataset_id", TEST_DATASET_ID);
 	}
 	
-	
 	@Test
 	public void test() throws ParseException {
 		
@@ -33,6 +32,7 @@ private DBWriterFactory<LandelijkGebiedBeheer> dbWriterFactory;
 		gebied.setBeheerpakket(new CodeType ("CodeBeheerPakket", "http://www.namespace.com"));
 		gebied.setStatusBeheer(new CodeType ("CodeStatusBeheer", "http://www.namespace.com"));
 		gebied.setTypeBeheerder(new CodeType ("CodeTypeBeheerder", "http://www.namespace.com"));
+		gebied.setEenheidnummer("eenheidNummer");
 		writeGebied(gebied);
 		StringWriter stringWriter = new StringWriter();
 		DBWriter<LandelijkGebiedBeheer> dbWriter = dbWriterFactory.getDBWriter(new PrintWriter(stringWriter));	
