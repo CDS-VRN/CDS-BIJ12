@@ -29,20 +29,23 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends AbstractVali
 	private final GeometryExpression<Message, Context, Geometry> geometrie = geometry("geometrie");
 
 	private final Constant<Message, Context, String> doelRealisatieCodeSpace = constant("http://codeList/");
+	private final Constant<Message, Context, String> bronhouderCodeSpace = constant("");
+	private final Constant<Message, Context, String> typeBeheerderEnEigenaarCodeSpace = constant("");
 
 	private final AttributeExpression<Message, Context, String> beginTijd = stringAttr("BeginTijd");
 	private final AttributeExpression<Message, Context, String> eindTijd = stringAttr("EindTijd");
 	private final AttributeExpression<Message, Context, String> identificatie = stringAttr("Identificatie");
 	private final AttributeExpression<Message, Context, String> relatieNummer = stringAttr("RelatieNummer");
 	private final AttributeExpression<Message, Context, String> contractNummer = stringAttr("ContractNummer");
-
 	/**
-	 * codelijst doel realisatie is voor zowel doelbeheer als verwerving als inrichting
+	 * codelijst doel realisatie is voor zowel doelbeheer als doelverwerving als doelinrichting
 	 */
 	private final CodeExpression<Message, Context> doelRealisatie = code("DoelRealisatie");
 	private final CodeExpression<Message, Context> bronhouder = code("bronhouder");
 	private final CodeExpression<Message, Context> typeBeheerderEnEigenaar = code("typeBeheerderEnEigenaar");
 
+	
+	
 	public AbstractVrnValidator(final Map<Object, Object> validatorMessages, Class<T> clazz) throws CompilerException {
 		super(Context.class, clazz, validatorMessages);
 		compile();
@@ -53,10 +56,38 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends AbstractVali
 		return new Context(codeListFactory, reporter);
 	}
 
-	/**
-	 * IMNa validatie op attribuut, type, kardinaliteit, codeList (xsd validatie)
+	/*
+	 * TODO: IMNa validatie op attribuut, type, kardinaliteit, codeList (xsd validatie)
 	 */
 
+	public Validator<Message, Context> getBeginTijdValidator(){
+		return validate(ifExp(beginTijd.isNull(), constant(true), 
+		validate(not(isBlank(beginTijd.value()))).message(Message.ATTRIBUTE_EMPTY)));
+	}
+	
+	public Validator<Message, Context> getEindTijdValidator(){
+		return validate(ifExp(eindTijd.isNull(), constant(true), 
+		validate(not(isBlank(eindTijd.value()))).message(Message.ATTRIBUTE_EMPTY)));
+	}
+	
+	public Validator<Message, Context> getIdentificatieValidator(){
+		return validate(ifExp(identificatie.isNull(), constant(true), 
+		validate(not(isBlank(identificatie.value()))).message(Message.ATTRIBUTE_EMPTY)));
+	}
+	
+	public Validator<Message, Context> getRelatieNummerValidator(){
+		return validate(ifExp(relatieNummer.isNull(), constant(true), 
+		validate(not(isBlank(relatieNummer.value()))).message(Message.ATTRIBUTE_EMPTY)));
+	}
+	
+	public Validator<Message, Context> getContractNummerValidator(){
+		return validate(ifExp(contractNummer.isNull(), constant(true), 
+		validate(not(isBlank(contractNummer.value()))).message(Message.ATTRIBUTE_EMPTY)));
+	}
+	
+	/*
+	 * codeLijst validaties
+	 */
 	public Validator<Message, Context> getDoelRealisatieValidator() {
 		return validate(ifExp(doelRealisatie.isNull(), constant(true), and(
 		validate(doelRealisatie.hasCodeSpace(doelRealisatieCodeSpace)).message(Message.ATTRIBUTE_CODE_CODESPACE_INVALID, doelRealisatie.codeSpace(),
@@ -66,6 +97,24 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends AbstractVali
 		doelRealisatieCodeSpace)).shortCircuit()));
 	}
 
+	public Validator<Message, Context> getBronhouderValidator() {
+		return validate(ifExp(bronhouder.isNull(), constant(true), and(
+		validate(bronhouder.hasCodeSpace(bronhouderCodeSpace)).message(Message.ATTRIBUTE_CODE_CODESPACE_INVALID, bronhouder.codeSpace(),
+		constant(bronhouder.name), bronhouderCodeSpace),
+		validate(not(isBlank(bronhouder.code()))).message(Message.ATTRIBUTE_EMPTY, constant(bronhouder.name)),
+		validate(bronhouder.isValid()).message(Message.ATTRIBUTE_CODE_INVALID, bronhouder.code(), constant(bronhouder.name),
+		bronhouderCodeSpace)).shortCircuit()));
+	}
+	
+	public Validator<Message, Context> getTypeBeheerderEnEigenaarValidator() {
+		return validate(ifExp(typeBeheerderEnEigenaar.isNull(), constant(true), and(
+		validate(typeBeheerderEnEigenaar.hasCodeSpace(typeBeheerderEnEigenaarCodeSpace)).message(Message.ATTRIBUTE_CODE_CODESPACE_INVALID, typeBeheerderEnEigenaar.codeSpace(),
+		constant(typeBeheerderEnEigenaar.name), typeBeheerderEnEigenaarCodeSpace),
+		validate(not(isBlank(typeBeheerderEnEigenaar.code()))).message(Message.ATTRIBUTE_EMPTY, constant(typeBeheerderEnEigenaar.name)),
+		validate(typeBeheerderEnEigenaar.isValid()).message(Message.ATTRIBUTE_CODE_INVALID, typeBeheerderEnEigenaar.code(), constant(typeBeheerderEnEigenaar.name),
+		typeBeheerderEnEigenaarCodeSpace)).shortCircuit()));
+	}
+	
 	/*
 	 * Valideer aanwezigheid metadata gedaan door: VerifyDataSchema.processDataset or .run
 	 * 
