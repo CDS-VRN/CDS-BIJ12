@@ -20,7 +20,7 @@ import nl.ipo.cds.validation.gml.CodeExpression;
 public class AbstractGebiedInrichtingValidator<T extends AbstractGebiedInrichting> extends AbstractVrnValidator<T> {
 
 	private final CodeExpression<Message, Context> statusIngericht = code("statusIngericht");
-	private final Constant<Message, Context, String> statusIngerichtCodeSpace = constant("http://codeList/");
+	private final Constant<Message, Context, String> statusIngerichtCodeSpace = constant("statusIngericht");
 	
 	/**
 	 * @param validatorMessages
@@ -29,7 +29,6 @@ public class AbstractGebiedInrichtingValidator<T extends AbstractGebiedInrichtin
 	 */
 	public AbstractGebiedInrichtingValidator(Map<Object, Object> validatorMessages, Class<T> clazz) throws CompilerException {
 		super(validatorMessages, clazz);
-		compile();
 	}
 
 	/*

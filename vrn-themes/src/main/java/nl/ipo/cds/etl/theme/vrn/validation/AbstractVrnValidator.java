@@ -28,9 +28,9 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends AbstractVali
 
 	private final GeometryExpression<Message, Context, Geometry> geometrie = geometry("geometrie");
 
-	private final Constant<Message, Context, String> doelRealisatieCodeSpace = constant("http://codeList/");
-	private final Constant<Message, Context, String> bronhouderCodeSpace = constant("");
-	private final Constant<Message, Context, String> typeBeheerderEnEigenaarCodeSpace = constant("");
+	private final Constant<Message, Context, String> doelRealisatieCodeSpace = constant("DoelRealisatie");
+	private final Constant<Message, Context, String> bronhouderCodeSpace = constant("Bronhouder");
+	private final Constant<Message, Context, String> typeBeheerderEnEigenaarCodeSpace = constant("TypeBeheerEnEigenaar");
 
 	private final AttributeExpression<Message, Context, String> beginTijd = stringAttr("BeginTijd");
 	private final AttributeExpression<Message, Context, String> eindTijd = stringAttr("EindTijd");
@@ -48,7 +48,6 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends AbstractVali
 	
 	public AbstractVrnValidator(final Map<Object, Object> validatorMessages, Class<T> clazz) throws CompilerException {
 		super(Context.class, clazz, validatorMessages);
-		compile();
 	}
 
 	@Override

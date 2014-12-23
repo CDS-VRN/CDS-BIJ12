@@ -19,6 +19,12 @@ import nl.ipo.cds.validation.gml.CodeExpression;
  */
 public class AbstractGebiedBeheerValidator<T extends AbstractGebiedBeheer> extends AbstractVrnValidator<T> {
 
+	private final Constant<Message, Context, String> statusBeheerCodeSpace = constant("StatusBeheer");
+	private final Constant<Message, Context, String> beheerPakketCodeSpace = constant("BeheerPakket");
+	
+	private final CodeExpression<Message, Context> statusBeheer = code("statusBeheer");
+	private final CodeExpression<Message, Context> beheerPakket = code("beheerPakket");
+	
 	/**
 	 * @param validatorMessages
 	 * @param clazz
@@ -26,14 +32,9 @@ public class AbstractGebiedBeheerValidator<T extends AbstractGebiedBeheer> exten
 	 */
 	public AbstractGebiedBeheerValidator(Map<Object, Object> validatorMessages, Class<T> clazz) throws CompilerException {
 		super(validatorMessages, clazz);
-		compile();
 	}
 
-	private final Constant<Message, Context, String> statusBeheerCodeSpace = constant("http://codeList/");
-	private final Constant<Message, Context, String> beheerPakketCodeSpace = constant("http://codeList/");
 	
-	private final CodeExpression<Message, Context> statusBeheer = code("statusBeheer");
-	private final CodeExpression<Message, Context> beheerPakket = code("beheerPakket");
 	
 	/*
 	 * codeLijst validaties

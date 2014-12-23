@@ -21,7 +21,7 @@ public class AbstractGebiedVerwervingValidator<T extends AbstractGebiedVerwervin
 
 	
 	private final CodeExpression<Message, Context> statusVerwerving = code("StatusVerwerving");
-	private final Constant<Message, Context, String> statusVerwervingCodeSpace = constant("http://codeList/");
+	private final Constant<Message, Context, String> statusVerwervingCodeSpace = constant("statusVerwerving");
 	
 	/**
 	 * @param validatorMessages
@@ -30,7 +30,6 @@ public class AbstractGebiedVerwervingValidator<T extends AbstractGebiedVerwervin
 	 */
 	public AbstractGebiedVerwervingValidator(Map<Object, Object> validatorMessages, Class<T> clazz) throws CompilerException {
 		super(validatorMessages, clazz);
-		compile();
 	}
 
 	/*
