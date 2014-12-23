@@ -1,41 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
 
-	<id>DoelRealisatie</id>
-	<title>IMNa Codelijst Doel Realisatie</title>
+	<id>statusVerwerving</id>
+	<title>IMNa Codelijst Status verwerving</title>
 
 	<entry>
 		<id>1</id>
-		<title>Provinciaal Natuurnetwerk</title>
+		<title>In eigendom</title>
 		<category term="CodeListValue" />
 	</entry>
 	<entry>
 		<id>2</id>
-		<title>NURG</title>
+		<title>In erfpacht</title>
 		<category term="CodeListValue" />
 	</entry>
 	<entry>
 		<id>3</id>
-		<title>Zuidwestelijke Delta</title>
+		<title>Functieverandering</title>
 		<category term="CodeListValue" />
 	</entry>
 	<entry>
 		<id>4</id>
-		<title>Maaswerken</title>
+		<title>Gebiedscontract blijvende natuur</title>
 		<category term="CodeListValue" />
 	</entry><entry>
 		<id>5</id>
-		<title>RODS</title>
+		<title>In gebruik bij TBO</title>
 		<category term="CodeListValue" />
 	</entry>
 	<entry>
 		<id>6</id>
-		<title>Overige natuur</title>
-		<category term="CodeListValue" />
-	</entry>
-	<entry>
-		<id>7</id>
-		<title>Natura 2000</title>
+		<title>In gebruik bij derden – eigenaar TBO</title>
 		<category term="CodeListValue" />
 	</entry>
 </feed>

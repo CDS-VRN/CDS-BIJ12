@@ -7,6 +7,7 @@ import nl.ipo.cds.etl.db.annotation.Column;
 import nl.ipo.cds.etl.db.annotation.Table;
 import nl.ipo.cds.etl.theme.annotation.MappableAttribute;
 
+import org.deegree.commons.tom.ows.CodeType;
 import org.deegree.geometry.Geometry;
 
 
@@ -29,7 +30,7 @@ public abstract class AbstractGebied extends PersistableFeature {
 	private String identificatie;
 
 	@Column(name = "imna_bronhouder")
-	private String imnaBronhouder;
+	private CodeType imnaBronhouder;
 
 	@Column(name = "contractnummer")
 	private Integer contractnummer;
@@ -72,12 +73,12 @@ public abstract class AbstractGebied extends PersistableFeature {
 	}
 
 	@MappableAttribute
-	public String getImnaBronhouder() {
+	public CodeType getImnaBronhouder() {
 		return imnaBronhouder;
 	}
 
 	@MappableAttribute
-	public void setImnaBronhouder(String imnaBronhouder) {
+	public void setImnaBronhouder(CodeType imnaBronhouder) {
 		this.imnaBronhouder = imnaBronhouder;
 	}
 

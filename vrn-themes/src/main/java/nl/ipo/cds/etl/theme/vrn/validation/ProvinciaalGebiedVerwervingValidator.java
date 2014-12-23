@@ -12,11 +12,15 @@ import nl.ipo.cds.validation.execute.CompilerException;
  * @author annes
  *
  */
-public class ProvinciaalGebiedVerwervingValidator extends AbstractVrnValidator<ProvinciaalGebiedVerwerving> {
+public class ProvinciaalGebiedVerwervingValidator extends AbstractGebiedVerwervingValidator<ProvinciaalGebiedVerwerving> {
 
+	/**
+	 * @param validatorMessages
+	 * @throws CompilerException
+	 */
 	public ProvinciaalGebiedVerwervingValidator(Map<Object, Object> validatorMessages) throws CompilerException {
 		super(validatorMessages, ProvinciaalGebiedVerwerving.class);
-		// TODO Auto-generated constructor stub
+		compile();
 	}
 
 }
