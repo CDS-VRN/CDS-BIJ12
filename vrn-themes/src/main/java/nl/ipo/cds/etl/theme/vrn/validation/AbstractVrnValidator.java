@@ -1,5 +1,6 @@
 package nl.ipo.cds.etl.theme.vrn.validation;
 
+import java.sql.Timestamp;
 import java.util.Map;
 
 import nl.ipo.cds.domain.EtlJob;
@@ -28,21 +29,21 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends AbstractVali
 
 	private final GeometryExpression<Message, Context, Geometry> geometrie = geometry("geometrie");
 
-	private final Constant<Message, Context, String> doelRealisatieCodeSpace = constant("DoelRealisatie");
-	private final Constant<Message, Context, String> bronhouderCodeSpace = constant("Bronhouder");
-	private final Constant<Message, Context, String> typeBeheerderEnEigenaarCodeSpace = constant("TypeBeheerEnEigenaar");
+	//private final Constant<Message, Context, String> doelRealisatieCodeSpace = constant("doelRealisatie");
+	private final Constant<Message, Context, String> imnaBronhouderCodeSpace = constant("imnaBronhouder");
+	//private final Constant<Message, Context, String> typeBeheerderCodeSpace = constant("typeBeheerder");
 
-	private final AttributeExpression<Message, Context, String> beginTijd = stringAttr("BeginTijd");
-	private final AttributeExpression<Message, Context, String> eindTijd = stringAttr("EindTijd");
-	private final AttributeExpression<Message, Context, String> identificatie = stringAttr("Identificatie");
-	private final AttributeExpression<Message, Context, String> relatieNummer = stringAttr("RelatieNummer");
-	private final AttributeExpression<Message, Context, String> contractNummer = stringAttr("ContractNummer");
+	private final AttributeExpression<Message, Context, Timestamp> begintijd = timestampAttr("begintijd");
+	private final AttributeExpression<Message, Context, Timestamp> eindtijd = timestampAttr("eindtijd");
+	private final AttributeExpression<Message, Context, String> identificatie = stringAttr("identificatie");
+	private final AttributeExpression<Message, Context, Integer> relatienummer = intAttr("relatienummer");
+	private final AttributeExpression<Message, Context, Integer> contractnummer = intAttr("contractnummer");
 	/**
 	 * codelijst doel realisatie is voor zowel doelbeheer als doelverwerving als doelinrichting
 	 */
-	private final CodeExpression<Message, Context> doelRealisatie = code("DoelRealisatie");
-	private final CodeExpression<Message, Context> bronhouder = code("bronhouder");
-	private final CodeExpression<Message, Context> typeBeheerderEnEigenaar = code("typeBeheerderEnEigenaar");
+	//private final CodeExpression<Message, Context> doelRealisatie = code("doelRealisatie");
+	private final CodeExpression<Message, Context> imnaBronhouder = code("imnaBronhouder");
+	//private final CodeExpression<Message, Context> typeBeheerder = code("typeBeheerder");
 
 	
 	
@@ -59,60 +60,56 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends AbstractVali
 	 * TODO: IMNa validatie op attribuut, type, kardinaliteit, codeList (xsd validatie)
 	 */
 
-	public Validator<Message, Context> getBeginTijdValidator(){
-		return validate(ifExp(beginTijd.isNull(), constant(true), 
-		validate(not(isBlank(beginTijd.value()))).message(Message.ATTRIBUTE_EMPTY)));
+	public Validator<Message, Context> getBegintijdValidator(){
+		return validate(not(begintijd.isNull())).message(Message.ATTRIBUTE_EMPTY);
 	}
 	
-	public Validator<Message, Context> getEindTijdValidator(){
-		return validate(ifExp(eindTijd.isNull(), constant(true), 
-		validate(not(isBlank(eindTijd.value()))).message(Message.ATTRIBUTE_EMPTY)));
+	public Validator<Message, Context> getEindtijdValidator(){
+		return validate(not(eindtijd.isNull())).message(Message.ATTRIBUTE_EMPTY);
 	}
 	
 	public Validator<Message, Context> getIdentificatieValidator(){
-		return validate(ifExp(identificatie.isNull(), constant(true), 
-		validate(not(isBlank(identificatie.value()))).message(Message.ATTRIBUTE_EMPTY)));
+		return validate(ifExp(identificatie.isNull(), constant(false), 
+		validate(not(isBlank(identificatie))).message(Message.ATTRIBUTE_EMPTY)));
 	}
 	
 	public Validator<Message, Context> getRelatieNummerValidator(){
-		return validate(ifExp(relatieNummer.isNull(), constant(true), 
-		validate(not(isBlank(relatieNummer.value()))).message(Message.ATTRIBUTE_EMPTY)));
+		return validate(not(relatienummer.isNull())).message(Message.ATTRIBUTE_EMPTY);
 	}
 	
 	public Validator<Message, Context> getContractNummerValidator(){
-		return validate(ifExp(contractNummer.isNull(), constant(true), 
-		validate(not(isBlank(contractNummer.value()))).message(Message.ATTRIBUTE_EMPTY)));
+		return validate(not(contractnummer.isNull())).message(Message.ATTRIBUTE_EMPTY);
 	}
 	
 	/*
 	 * codeLijst validaties
 	 */
-	public Validator<Message, Context> getDoelRealisatieValidator() {
-		return validate(ifExp(doelRealisatie.isNull(), constant(true), and(
+	/*public Validator<Message, Context> getDoelRealisatieValidator() {
+		return validate(ifExp(doelRealisatie.isNull(), constant(false), and(
 		validate(doelRealisatie.hasCodeSpace(doelRealisatieCodeSpace)).message(Message.ATTRIBUTE_CODE_CODESPACE_INVALID, doelRealisatie.codeSpace(),
 		constant(doelRealisatie.name), doelRealisatieCodeSpace),
 		validate(not(isBlank(doelRealisatie.code()))).message(Message.ATTRIBUTE_EMPTY, constant(doelRealisatie.name)),
 		validate(doelRealisatie.isValid()).message(Message.ATTRIBUTE_CODE_INVALID, doelRealisatie.code(), constant(doelRealisatie.name),
 		doelRealisatieCodeSpace)).shortCircuit()));
 	}
-
-	public Validator<Message, Context> getBronhouderValidator() {
-		return validate(ifExp(bronhouder.isNull(), constant(true), and(
-		validate(bronhouder.hasCodeSpace(bronhouderCodeSpace)).message(Message.ATTRIBUTE_CODE_CODESPACE_INVALID, bronhouder.codeSpace(),
-		constant(bronhouder.name), bronhouderCodeSpace),
-		validate(not(isBlank(bronhouder.code()))).message(Message.ATTRIBUTE_EMPTY, constant(bronhouder.name)),
-		validate(bronhouder.isValid()).message(Message.ATTRIBUTE_CODE_INVALID, bronhouder.code(), constant(bronhouder.name),
-		bronhouderCodeSpace)).shortCircuit()));
+*/
+	public Validator<Message, Context> getImnaBronhouderValidator() {
+		return validate(ifExp(imnaBronhouder.isNull(), constant(false), and(
+		validate(imnaBronhouder.hasCodeSpace(imnaBronhouderCodeSpace)).message(Message.ATTRIBUTE_CODE_CODESPACE_INVALID, imnaBronhouder.codeSpace(),
+		constant(imnaBronhouder.name), imnaBronhouderCodeSpace),
+		validate(not(isBlank(imnaBronhouder.code()))).message(Message.ATTRIBUTE_EMPTY, constant(imnaBronhouder.name)),
+		validate(imnaBronhouder.isValid()).message(Message.ATTRIBUTE_CODE_INVALID, imnaBronhouder.code(), constant(imnaBronhouder.name),
+		imnaBronhouderCodeSpace)).shortCircuit()));
 	}
 	
-	public Validator<Message, Context> getTypeBeheerderEnEigenaarValidator() {
-		return validate(ifExp(typeBeheerderEnEigenaar.isNull(), constant(true), and(
-		validate(typeBeheerderEnEigenaar.hasCodeSpace(typeBeheerderEnEigenaarCodeSpace)).message(Message.ATTRIBUTE_CODE_CODESPACE_INVALID, typeBeheerderEnEigenaar.codeSpace(),
-		constant(typeBeheerderEnEigenaar.name), typeBeheerderEnEigenaarCodeSpace),
-		validate(not(isBlank(typeBeheerderEnEigenaar.code()))).message(Message.ATTRIBUTE_EMPTY, constant(typeBeheerderEnEigenaar.name)),
-		validate(typeBeheerderEnEigenaar.isValid()).message(Message.ATTRIBUTE_CODE_INVALID, typeBeheerderEnEigenaar.code(), constant(typeBeheerderEnEigenaar.name),
-		typeBeheerderEnEigenaarCodeSpace)).shortCircuit()));
-	}
+	/*public Validator<Message, Context> getTypeBeheerderValidator() {
+		return validate(ifExp(typeBeheerder.isNull(), constant(false), and(
+		validate(typeBeheerder.hasCodeSpace(typeBeheerderCodeSpace)).message(Message.ATTRIBUTE_CODE_CODESPACE_INVALID, typeBeheerder.codeSpace(),
+		constant(typeBeheerder.name), typeBeheerderCodeSpace),
+		validate(not(isBlank(typeBeheerder.code()))).message(Message.ATTRIBUTE_EMPTY, constant(typeBeheerder.name)),
+		validate(typeBeheerder.isValid()).message(Message.ATTRIBUTE_CODE_INVALID, typeBeheerder.code(), constant(typeBeheerder.name),
+		typeBeheerderCodeSpace)).shortCircuit()));
+	}*/
 	
 	/*
 	 * Valideer aanwezigheid metadata gedaan door: VerifyDataSchema.processDataset or .run

@@ -19,8 +19,14 @@ import nl.ipo.cds.validation.gml.CodeExpression;
  */
 public class AbstractGebiedInrichtingValidator<T extends AbstractGebiedInrichting> extends AbstractVrnValidator<T> {
 
-	private final CodeExpression<Message, Context> statusIngericht = code("statusIngericht");
-	private final Constant<Message, Context, String> statusIngerichtCodeSpace = constant("statusIngericht");
+	private final CodeExpression<Message, Context> statusIngericht = code("statusInrichting");
+	private final Constant<Message, Context, String> statusInrichtingCodeSpace = constant("statusInrichting");
+	
+	private final CodeExpression<Message, Context> doelInrichting = code("doelInrichting");
+	private final Constant<Message, Context, String> doelInrichtingCodeSpace = constant("doelRealisatie");
+	
+	private final Constant<Message, Context, String> typeBeheerderCodeSpace = constant("typeBeheerder");
+	private final CodeExpression<Message, Context> typeBeheerder = code("typeBeheerder");
 	
 	/**
 	 * @param validatorMessages
@@ -36,11 +42,29 @@ public class AbstractGebiedInrichtingValidator<T extends AbstractGebiedInrichtin
 	 */
 	public Validator<Message, Context> getStatusIngerichtValidator() {
 		return validate(ifExp(statusIngericht.isNull(), constant(true), and(
-		validate(statusIngericht.hasCodeSpace(statusIngerichtCodeSpace)).message(Message.ATTRIBUTE_CODE_CODESPACE_INVALID,
-		statusIngericht.codeSpace(), constant(statusIngericht.name), statusIngerichtCodeSpace),
+		validate(statusIngericht.hasCodeSpace(statusInrichtingCodeSpace)).message(Message.ATTRIBUTE_CODE_CODESPACE_INVALID,
+		statusIngericht.codeSpace(), constant(statusIngericht.name), statusInrichtingCodeSpace),
 		validate(not(isBlank(statusIngericht.code()))).message(Message.ATTRIBUTE_EMPTY, constant(statusIngericht.name)),
 		validate(statusIngericht.isValid()).message(Message.ATTRIBUTE_CODE_INVALID, statusIngericht.code(), constant(statusIngericht.name),
-		statusIngerichtCodeSpace)).shortCircuit()));
+		statusInrichtingCodeSpace)).shortCircuit()));
+	}
+	
+	public Validator<Message, Context> getDoelInrichtingValidator() {
+		return validate(ifExp(doelInrichting.isNull(), constant(false), and(
+		validate(doelInrichting.hasCodeSpace(doelInrichtingCodeSpace)).message(Message.ATTRIBUTE_CODE_CODESPACE_INVALID, doelInrichting.codeSpace(),
+		constant(doelInrichting.name), doelInrichtingCodeSpace),
+		validate(not(isBlank(doelInrichting.code()))).message(Message.ATTRIBUTE_EMPTY, constant(doelInrichting.name)),
+		validate(doelInrichting.isValid()).message(Message.ATTRIBUTE_CODE_INVALID, doelInrichting.code(), constant(doelInrichting.name),
+		doelInrichtingCodeSpace)).shortCircuit()));
+	}
+
+	public Validator<Message, Context> getTypeBeheerderValidator() {
+		return validate(ifExp(typeBeheerder.isNull(), constant(false), and(
+		validate(typeBeheerder.hasCodeSpace(typeBeheerderCodeSpace)).message(Message.ATTRIBUTE_CODE_CODESPACE_INVALID, typeBeheerder.codeSpace(),
+		constant(typeBeheerder.name), typeBeheerderCodeSpace),
+		validate(not(isBlank(typeBeheerder.code()))).message(Message.ATTRIBUTE_EMPTY, constant(typeBeheerder.name)),
+		validate(typeBeheerder.isValid()).message(Message.ATTRIBUTE_CODE_INVALID, typeBeheerder.code(), constant(typeBeheerder.name),
+		typeBeheerderCodeSpace)).shortCircuit()));
 	}
 	
 }
