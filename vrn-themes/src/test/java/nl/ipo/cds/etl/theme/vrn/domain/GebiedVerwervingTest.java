@@ -30,7 +30,7 @@ private DBWriterFactory<LandelijkGebiedVerwerving> dbWriterFactory;
 		
 		LandelijkGebiedVerwerving gebied = new LandelijkGebiedVerwerving();
 		gebied.setId(TEST_DATASET_ID);
-		gebied.setDoelRealisatie(new CodeType ("CodeDoelVerwerving", "http://www.namespace.com"));
+		gebied.setDoelVerwerving(new CodeType ("CodeDoelVerwerving", "http://www.namespace.com"));
 		gebied.setStatusVerwerving(new CodeType ("CodeStatusVerwerving", "http://www.namespace.com"));
 		gebied.setTypeEigenaar(new CodeType ("CodeTypeEigenaar", "http://www.namespace.com"));
 		writeGebied(gebied);

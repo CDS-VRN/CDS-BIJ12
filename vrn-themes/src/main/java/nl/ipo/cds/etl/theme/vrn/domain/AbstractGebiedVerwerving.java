@@ -23,7 +23,7 @@ public abstract  class AbstractGebiedVerwerving extends AbstractGebied {
 
 
 	@Column(name = "doelverwerving")
-	 private CodeType doelRealisatie;
+	 private CodeType doelVerwerving;
 
 	@MappableAttribute
 	@CodeSpace("StatusVerwerving")
@@ -51,14 +51,14 @@ public abstract  class AbstractGebiedVerwerving extends AbstractGebied {
 
 	@MappableAttribute
 	@CodeSpace("DoelRealisatie")
-	public CodeType getDoelRealisatie() {
-		return doelRealisatie;
+	public CodeType getDoelVerwerving() {
+		return doelVerwerving;
 	}
 
 	@MappableAttribute
 	@CodeSpace("DoelRealisatie")
-	public void setDoelRealisatie(CodeType doelRealisatie) {
-		this.doelRealisatie = doelRealisatie;
+	public void setDoelVerwerving(CodeType doelRealisatie) {
+		this.doelVerwerving = doelRealisatie;
 	}
 
 }

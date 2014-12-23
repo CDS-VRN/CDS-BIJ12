@@ -20,7 +20,7 @@ public abstract class AbstractGebiedInrichting extends AbstractGebied {
     private CodeType statusInrichting;
 
     @Column(name = "doelinrichting")
-    private CodeType doelRealisatie;
+    private CodeType doelInrichting;
 
     @Column(name = "type_beheerder")
     private CodeType typeBeheerder;
@@ -40,14 +40,14 @@ public abstract class AbstractGebiedInrichting extends AbstractGebied {
 
     @MappableAttribute
     @CodeSpace("DoelRealisatie")
-	public CodeType getDoelRealisatie() {
-		return doelRealisatie;
+	public CodeType getDoelInrichting() {
+		return doelInrichting;
 	}
 
     @MappableAttribute
     @CodeSpace("DoelRealisatie")
-	public void setDoelRealisatie(CodeType doelRealisatie) {
-		this.doelRealisatie = doelRealisatie;
+	public void setDoelInrichting(CodeType doelInrichting) {
+		this.doelInrichting = doelInrichting;
 	}
 
     @MappableAttribute
