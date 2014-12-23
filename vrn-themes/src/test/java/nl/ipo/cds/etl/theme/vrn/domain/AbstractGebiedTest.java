@@ -2,6 +2,7 @@ package nl.ipo.cds.etl.theme.vrn.domain;
 
 import java.sql.Timestamp;
 
+import org.deegree.commons.tom.ows.CodeType;
 import org.deegree.geometry.io.WKTReader;
 import org.deegree.geometry.primitive.Polygon;
 
@@ -28,7 +29,7 @@ public class AbstractGebiedTest <T extends AbstractGebied> {
 		gebied.setGeometrie(polygon);
 		gebied.setId(TEST_DATASET_ID);
 		gebied.setIdentificatie(TEST_ID);
-		gebied.setImnaBronhouder("imnaBronhouder");
+		gebied.setImnaBronhouder((new CodeType ("imnaBronhouder", "http://www.namespace.com")));
 		gebied.setContractnummer(2);
 	}
 
