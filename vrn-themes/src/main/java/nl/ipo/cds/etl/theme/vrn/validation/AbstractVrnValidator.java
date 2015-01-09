@@ -24,7 +24,6 @@ import nl.ipo.cds.validation.gml.CodeExpression;
 import nl.ipo.cds.validation.gml.codelists.CodeListFactory;
 
 import org.deegree.geometry.Geometry;
-import org.springframework.orm.hibernate3.HibernateTemplate;
 
 /**
  * @author annes
@@ -38,9 +37,7 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends
 
 	private IGeometryStore<? extends PersistableFeature> geometryStore;
 	private IBulkValidator bulkValidator;
-	private String jdbcConnectionString;
-	private HibernateTemplate hibernateTemplate;
-	
+		
 	private final GeometryExpression<Message, Context, Geometry> geometrie = geometry("geometrie");
 
 	// private final Constant<Message, Context, String> doelRealisatieCodeSpace
@@ -251,7 +248,7 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends
 
 	/**
 	 * Multiparts validation (1 deel met uniek IMNa Id per polygon)
-	 * store h2 each feature and set context entry
+	 * Store each feature in database.
 	 */
 	public Validator<Message, Context> getGeometryIntersectionValidator() {
 		
@@ -288,20 +285,8 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends
 		bulkValidator.overlapValidation(context.getUuid());		 
 	}
 
-	public IBulkValidator getBulkValidator() {
-		return bulkValidator;
-	}
-
 	public void setBulkValidator(IBulkValidator bulkValidator) {
 		this.bulkValidator = bulkValidator;
-	}
-
-	public String getJdbcConnectionString() {
-		return jdbcConnectionString;
-	}
-
-	public void setJdbcConnectionString(String jdbcConnectionString) {
-		this.jdbcConnectionString = jdbcConnectionString;
 	}
 
 }
