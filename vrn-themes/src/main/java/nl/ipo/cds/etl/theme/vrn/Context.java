@@ -6,17 +6,17 @@ import nl.ipo.cds.validation.gml.codelists.CodeListFactory;
 
 public class Context extends DefaultValidatorContext<Message, Context> {
 	
-	private final String jdbcConnectionString;
+	private final String uuid;
 	
-	public String getJdbcConnectionString() {
-		return jdbcConnectionString;
+	public String getUuid() {
+		return uuid;
 	}
 
 	public Context(final CodeListFactory codeListFactory,
-			final ValidationReporter<Message, Context> reporter, String jdbcConnectionString) {
+			final ValidationReporter<Message, Context> reporter, String uuid) {
 		super(codeListFactory, reporter);
 		
-		this.jdbcConnectionString=jdbcConnectionString;
+		this.uuid=uuid;
 	}
 
 }
