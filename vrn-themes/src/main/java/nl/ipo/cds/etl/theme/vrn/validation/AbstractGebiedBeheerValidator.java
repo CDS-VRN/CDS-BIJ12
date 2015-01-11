@@ -4,7 +4,6 @@
 package nl.ipo.cds.etl.theme.vrn.validation;
 
 import java.util.Map;
-
 import nl.ipo.cds.etl.theme.vrn.Context;
 import nl.ipo.cds.etl.theme.vrn.Message;
 import nl.ipo.cds.etl.theme.vrn.domain.AbstractGebiedBeheer;
@@ -12,6 +11,7 @@ import nl.ipo.cds.validation.Validator;
 import nl.ipo.cds.validation.constants.Constant;
 import nl.ipo.cds.validation.execute.CompilerException;
 import nl.ipo.cds.validation.gml.CodeExpression;
+import static nl.ipo.cds.etl.theme.vrn.Constants.*;
 
 /**
  * @author annes
@@ -19,15 +19,14 @@ import nl.ipo.cds.validation.gml.CodeExpression;
  */
 public class AbstractGebiedBeheerValidator<T extends AbstractGebiedBeheer> extends AbstractVrnValidator<T> {
 
-	private final Constant<Message, Context, String> statusBeheerCodeSpace = constant("statusBeheer");
-	private final Constant<Message, Context, String> beheerpakketCodeSpace = constant("beheerpakket");
-	private final Constant<Message, Context, String> doelBeheerCodeSpace = constant("doelRealisatie");
+	private final Constant<Message, Context, String> statusBeheerCodeSpace = constant(CODESPACE_STATUS_BEHEER);
+	private final Constant<Message, Context, String> beheerpakketCodeSpace = constant(CODESPACE_BEHEER_PAKKET);
+	private final Constant<Message, Context, String> doelBeheerCodeSpace = constant(CODESPACE_DOEL_BEHEER);
+	private final Constant<Message, Context, String> typeBeheerderCodeSpace = constant(CODESPACE_TYPE_BEHEERDER);
 	
 	private final CodeExpression<Message, Context> statusBeheer = code("statusBeheer");
 	private final CodeExpression<Message, Context> beheerpakket = code("beheerpakket");
 	private final CodeExpression<Message, Context> doelBeheer = code("doelBeheer");
-	
-	private final Constant<Message, Context, String> typeBeheerderCodeSpace = constant("typeBeheerder");
 	private final CodeExpression<Message, Context> typeBeheerder = code("typeBeheerder");
 	
 	/**

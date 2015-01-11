@@ -1,5 +1,8 @@
 package nl.ipo.cds.etl.theme.vrn.validation;
 
+import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_BRONHOUDER;
+
+import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.Map;
 
@@ -27,17 +30,19 @@ import org.deegree.geometry.Geometry;
  */
 public class AbstractVrnValidator<T extends AbstractGebied> extends AbstractValidator<T, Message, Context> {
 
+
+
 	private final GeometryExpression<Message, Context, Geometry> geometrie = geometry("geometrie");
 
 	//private final Constant<Message, Context, String> doelRealisatieCodeSpace = constant("doelRealisatie");
-	private final Constant<Message, Context, String> imnaBronhouderCodeSpace = constant("imnaBronhouder");
+	private final Constant<Message, Context, String> imnaBronhouderCodeSpace = constant(CODESPACE_BRONHOUDER);
 	//private final Constant<Message, Context, String> typeBeheerderCodeSpace = constant("typeBeheerder");
 
 	private final AttributeExpression<Message, Context, Timestamp> begintijd = timestampAttr("begintijd");
 	private final AttributeExpression<Message, Context, Timestamp> eindtijd = timestampAttr("eindtijd");
 	private final AttributeExpression<Message, Context, String> identificatie = stringAttr("identificatie");
-	private final AttributeExpression<Message, Context, Integer> relatienummer = intAttr("relatienummer");
-	private final AttributeExpression<Message, Context, Integer> contractnummer = intAttr("contractnummer");
+	private final AttributeExpression<Message, Context, BigInteger> relatienummer = bigIntegerAttr("relatienummer");
+	private final AttributeExpression<Message, Context, BigInteger> contractnummer = bigIntegerAttr("contractnummer");
 	/**
 	 * codelijst doel realisatie is voor zowel doelbeheer als doelverwerving als doelinrichting
 	 */
