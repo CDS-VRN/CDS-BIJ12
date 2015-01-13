@@ -1,12 +1,20 @@
 package nl.ipo.cds.etl.theme.vrn.validation;
 
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+
+import javax.sql.DataSource;
 
 import nl.ipo.cds.domain.EtlJob;
 import nl.ipo.cds.etl.AbstractValidator;
+import nl.ipo.cds.etl.PersistableFeature;
 import nl.ipo.cds.etl.log.EventLogger;
 import nl.ipo.cds.etl.postvalidation.IBulkValidator;
+import nl.ipo.cds.etl.postvalidation.IGeometryStore;
 import nl.ipo.cds.etl.theme.vrn.Context;
 import nl.ipo.cds.etl.theme.vrn.Message;
 import nl.ipo.cds.etl.theme.vrn.domain.AbstractGebied;
@@ -15,6 +23,7 @@ import nl.ipo.cds.validation.ValidationReporter;
 import nl.ipo.cds.validation.Validator;
 import nl.ipo.cds.validation.callbacks.UnaryCallback;
 import nl.ipo.cds.validation.constants.Constant;
+import nl.ipo.cds.validation.domain.OverlapValidationPair;
 import nl.ipo.cds.validation.execute.CompilerException;
 import nl.ipo.cds.validation.geometry.GeometryExpression;
 import nl.ipo.cds.validation.gml.CodeExpression;
@@ -32,10 +41,9 @@ import org.deegree.geometry.Geometry;
 public class AbstractVrnValidator<T extends AbstractGebied> extends
 		AbstractValidator<T, Message, Context> {
 
-	
+	private IGeometryStore geometryStore;
 	private IBulkValidator bulkValidator;
-	private String jdbcConnectionString;
-	
+		
 	private final GeometryExpression<Message, Context, Geometry> geometrie = geometry("geometrie");
 
 	// private final Constant<Message, Context, String> doelRealisatieCodeSpace
@@ -69,9 +77,20 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends
 	public Context beforeJob(final EtlJob job,
 			final CodeListFactory codeListFactory,
 			final ValidationReporter<Message, Context> reporter) {
+		
 		// create h2 database
-		// add reference to context
-		return new Context(codeListFactory, reporter, jdbcConnectionString);
+		// add reference to context	
+		DataSource ds=null;
+		
+		try {			
+			ds = geometryStore.createStore(UUID.randomUUID().toString());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			//TODO: fail job
+			e.printStackTrace();
+		}
+		
+		return new Context(codeListFactory, reporter, ds);
 	}
 
 	/*
@@ -242,23 +261,32 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends
 
 	/**
 	 * Multiparts validation (1 deel met uniek IMNa Id per polygon)
+	 * Store each feature in database.
 	 */
-	// store h2 each feature and set context entry
 	public Validator<Message, Context> getGeometryIntersectionValidator() {
-
-		final UnaryCallback<Message, Context, Boolean, T> isUniqueCallback = new UnaryCallback<Message, Context, Boolean, T>() {
+		
+		final UnaryCallback<Message, Context, Boolean, Geometry> saveFeatureCallback = new UnaryCallback<Message, Context, Boolean, Geometry>() {
+			
+			/**
+			 * Wordt per feature uitgevoerd.
+			 */
 			@Override
-			public Boolean call(final T feature, final Context context)
+			public Boolean call(final Geometry geometry, final Context context)
 					throws Exception {
 				
-                 // contect.getBulkValidator.storeFeater();
+                // TODO: add feaure information, for now null.
+				geometryStore.addToStore(context.getDataSource(), geometry, null);
+				
 				return true;
 			}
 		};
 		
+		/**
+		 * Hier wordt nog niets uitgevoerd, maar de expressie wordt alleen opgebouwd.
+		 */
 		return validate (
-			//TODO: getFeature to store
-			callback (Boolean.class, null, isUniqueCallback)				
+			//TODO: get complete Feature to store, not only Geometry
+			callback (Boolean.class, geometrie, saveFeatureCallback)				
 			);		
 	}
 
@@ -267,23 +295,22 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends
 	 */
 	@Override
 	public void afterJob (final EtlJob job, final EventLogger<Message> logger, final Context context) {
-		bulkValidator.overlapValidation(context.getJdbcConnectionString());		 
-	}
-
-	public IBulkValidator getBulkValidator() {
-		return bulkValidator;
+		
+		try {
+			//TODO: change to PersistentFeature
+			List<OverlapValidationPair<Blob, Blob>> overlapList = bulkValidator.overlapValidation(context.getDataSource());
+		} catch (SQLException e) {
+			
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//logger.logEvent(job, messageKey, logLevel, messageValues)
+		
 	}
 
 	public void setBulkValidator(IBulkValidator bulkValidator) {
 		this.bulkValidator = bulkValidator;
-	}
-
-	public String getJdbcConnectionString() {
-		return jdbcConnectionString;
-	}
-
-	public void setJdbcConnectionString(String jdbcConnectionString) {
-		this.jdbcConnectionString = jdbcConnectionString;
 	}
 
 }
