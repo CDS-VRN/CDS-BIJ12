@@ -1,8 +1,13 @@
 package nl.ipo.cds.etl.theme.vrn.validation;
 
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
+import javax.sql.DataSource;
 
 import nl.ipo.cds.domain.EtlJob;
 import nl.ipo.cds.etl.AbstractValidator;
@@ -18,6 +23,7 @@ import nl.ipo.cds.validation.ValidationReporter;
 import nl.ipo.cds.validation.Validator;
 import nl.ipo.cds.validation.callbacks.UnaryCallback;
 import nl.ipo.cds.validation.constants.Constant;
+import nl.ipo.cds.validation.domain.OverlapValidationPair;
 import nl.ipo.cds.validation.execute.CompilerException;
 import nl.ipo.cds.validation.geometry.GeometryExpression;
 import nl.ipo.cds.validation.gml.CodeExpression;
@@ -35,7 +41,7 @@ import org.deegree.geometry.Geometry;
 public class AbstractVrnValidator<T extends AbstractGebied> extends
 		AbstractValidator<T, Message, Context> {
 
-	private IGeometryStore<? extends PersistableFeature> geometryStore;
+	private IGeometryStore geometryStore;
 	private IBulkValidator bulkValidator;
 		
 	private final GeometryExpression<Message, Context, Geometry> geometrie = geometry("geometrie");
@@ -73,11 +79,18 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends
 			final ValidationReporter<Message, Context> reporter) {
 		
 		// create h2 database
-		// add reference to context
-		String uuId = UUID.randomUUID().toString();
-		geometryStore.createStore(uuId);
+		// add reference to context	
+		DataSource ds=null;
 		
-		return new Context(codeListFactory, reporter, uuId);
+		try {			
+			ds = geometryStore.createStore(UUID.randomUUID().toString());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			//TODO: fail job
+			e.printStackTrace();
+		}
+		
+		return new Context(codeListFactory, reporter, ds);
 	}
 
 	/*
@@ -262,7 +275,7 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends
 					throws Exception {
 				
                 // TODO: add feaure information, for now null.
-				geometryStore.addToStore(context.getUuid(), geometry, null);
+				geometryStore.addToStore(context.getDataSource(), geometry, null);
 				
 				return true;
 			}
@@ -282,7 +295,18 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends
 	 */
 	@Override
 	public void afterJob (final EtlJob job, final EventLogger<Message> logger, final Context context) {
-		bulkValidator.overlapValidation(context.getUuid());		 
+		
+		try {
+			//TODO: change to PersistentFeature
+			List<OverlapValidationPair<Blob, Blob>> overlapList = bulkValidator.overlapValidation(context.getDataSource());
+		} catch (SQLException e) {
+			
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//logger.logEvent(job, messageKey, logLevel, messageValues)
+		
 	}
 
 	public void setBulkValidator(IBulkValidator bulkValidator) {
