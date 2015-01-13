@@ -7,6 +7,11 @@ import nl.ipo.cds.etl.db.annotation.Table;
 import nl.ipo.cds.etl.theme.annotation.CodeSpace;
 import nl.ipo.cds.etl.theme.annotation.MappableAttribute;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.text.ParseException;
+
 /**
  * @author annes
  * 
@@ -17,15 +22,56 @@ import nl.ipo.cds.etl.theme.annotation.MappableAttribute;
 public abstract class AbstractGebiedInrichting extends AbstractGebied {
 
     @Column(name = "status_inrichting")
-    private CodeType statusInrichting;
+    private transient CodeType statusInrichting;
 
     @Column(name = "doelinrichting")
-    private CodeType doelInrichting;
+    private transient CodeType doelInrichting;
 
     @Column(name = "type_beheerder")
-    private CodeType typeBeheerder;
+    private transient CodeType typeBeheerder;
 
-    
+
+    /**
+     * Custom deserialization because Geometry type is not serializable by default, nor is CodeType.
+     * @param ois The input stream.
+     */
+    private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
+        // Read default serializable properties.
+        ois.defaultReadObject();
+
+        statusInrichting = codeTypeReader(ois);
+        doelInrichting = codeTypeReader(ois);
+        typeBeheerder = codeTypeReader(ois);
+
+    }
+
+    /**
+     * Custom serialization because deegree types are not serializable.
+     * @param oos The output stream.
+     * @throws IOException
+     */
+    private void writeObject(ObjectOutputStream oos) throws IOException, ParseException {
+        // Write default serializable properties.
+        oos.defaultWriteObject();
+
+        codeTypeWriter(statusInrichting, oos);
+        codeTypeWriter(doelInrichting, oos);
+        codeTypeWriter(typeBeheerder, oos);
+    }
+
+
+    public boolean equals(Object o) {
+        if(!(o instanceof AbstractGebiedInrichting)) {
+            return false;
+        }
+
+        AbstractGebiedInrichting that = (AbstractGebiedInrichting)o;
+        return super.equals(that) &&
+                this.getDoelInrichting().equals(that.getDoelInrichting()) &&
+                this.getStatusInrichting().equals(that.getStatusInrichting()) &&
+                this.getTypeBeheerder().equals(that.getTypeBeheerder());
+    }
+
     @MappableAttribute
     @CodeSpace("StatusInrichting")
 	public CodeType getStatusInrichting() {
