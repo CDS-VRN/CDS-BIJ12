@@ -302,7 +302,7 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends
 		try {
 			// TODO: change to PersistentFeature
 			try {
-				List<OverlapValidationPair<AbstractGebied, AbstractGebied>> overlapList = bulkValidator
+				List<OverlapValidationPair<AbstractGebied>> overlapList = bulkValidator
 						.overlapValidation(context.getDataSource());
 			} catch (ClassNotFoundException | IOException e) {
 				// TODO Auto-generated catch block
