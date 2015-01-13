@@ -1,6 +1,6 @@
 package nl.ipo.cds.etl.theme.vrn.validation;
 
-import java.sql.Blob;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
@@ -11,7 +11,6 @@ import javax.sql.DataSource;
 
 import nl.ipo.cds.domain.EtlJob;
 import nl.ipo.cds.etl.AbstractValidator;
-import nl.ipo.cds.etl.PersistableFeature;
 import nl.ipo.cds.etl.log.EventLogger;
 import nl.ipo.cds.etl.postvalidation.IBulkValidator;
 import nl.ipo.cds.etl.postvalidation.IGeometryStore;
@@ -41,10 +40,12 @@ import org.deegree.geometry.Geometry;
 public class AbstractVrnValidator<T extends AbstractGebied> extends
 		AbstractValidator<T, Message, Context> {
 
-	private IGeometryStore geometryStore;
-	private IBulkValidator bulkValidator;
-		
+	private IGeometryStore<AbstractGebied> geometryStore;
+	private IBulkValidator<AbstractGebied> bulkValidator;
+
 	private final GeometryExpression<Message, Context, Geometry> geometrie = geometry("geometrie");
+	private final AbstractGebiedExpression<Message, Context, AbstractGebied> abstractGebied = new AbstractGebiedExpression<Message, Context, AbstractGebied>(
+			"abstractGebied", AbstractGebied.class);
 
 	// private final Constant<Message, Context, String> doelRealisatieCodeSpace
 	// = constant("doelRealisatie");
@@ -77,19 +78,19 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends
 	public Context beforeJob(final EtlJob job,
 			final CodeListFactory codeListFactory,
 			final ValidationReporter<Message, Context> reporter) {
-		
+
 		// create h2 database
-		// add reference to context	
-		DataSource ds=null;
-		
-		try {			
+		// add reference to context
+		DataSource ds = null;
+
+		try {
 			ds = geometryStore.createStore(UUID.randomUUID().toString());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			//TODO: fail job
+			// TODO: fail job
 			e.printStackTrace();
 		}
-		
+
 		return new Context(codeListFactory, reporter, ds);
 	}
 
@@ -260,53 +261,62 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends
 	}
 
 	/**
-	 * Multiparts validation (1 deel met uniek IMNa Id per polygon)
-	 * Store each feature in database.
+	 * Multiparts validation (1 deel met uniek IMNa Id per polygon) Store each
+	 * feature in database.
 	 */
 	public Validator<Message, Context> getGeometryIntersectionValidator() {
-		
-		final UnaryCallback<Message, Context, Boolean, Geometry> saveFeatureCallback = new UnaryCallback<Message, Context, Boolean, Geometry>() {
-			
+
+		final UnaryCallback<Message, Context, Boolean, AbstractGebied> saveFeatureCallback = new UnaryCallback<Message, Context, Boolean, AbstractGebied>() {
+
 			/**
 			 * Wordt per feature uitgevoerd.
 			 */
 			@Override
-			public Boolean call(final Geometry geometry, final Context context)
-					throws Exception {
-				
-                // TODO: add feaure information, for now null.
-				geometryStore.addToStore(context.getDataSource(), geometry, null);
-				
+			public Boolean call(final AbstractGebied abstractGebied,
+					final Context context) throws Exception {
+
+				// TODO: add feaure information, for now null.
+				geometryStore.addToStore(context.getDataSource(),
+						abstractGebied.getGeometrie(), null);
+
 				return true;
 			}
 		};
-		
+
 		/**
-		 * Hier wordt nog niets uitgevoerd, maar de expressie wordt alleen opgebouwd.
+		 * Hier wordt nog niets uitgevoerd, maar de expressie wordt alleen
+		 * opgebouwd.
 		 */
-		return validate (
-			//TODO: get complete Feature to store, not only Geometry
-			callback (Boolean.class, geometrie, saveFeatureCallback)				
-			);		
+		return validate(
+		// TODO: get complete Feature to store, not only Geometry
+		callback(Boolean.class, abstractGebied, saveFeatureCallback));
 	}
 
 	/**
-	 * Overlap percelen validatie 
+	 * Overlap percelen validatie
 	 */
 	@Override
-	public void afterJob (final EtlJob job, final EventLogger<Message> logger, final Context context) {
-		
+	public void afterJob(final EtlJob job, final EventLogger<Message> logger,
+			final Context context) {
+
 		try {
-			//TODO: change to PersistentFeature
-			List<OverlapValidationPair<Blob, Blob>> overlapList = bulkValidator.overlapValidation(context.getDataSource());
+			// TODO: change to PersistentFeature
+			try {
+				List<OverlapValidationPair<AbstractGebied, AbstractGebied>> overlapList = bulkValidator
+						.overlapValidation(context.getDataSource());
+			} catch (ClassNotFoundException | IOException e) {
+				// TODO Auto-generated catch block
+				// TODO: Job failed
+				e.printStackTrace();
+			}
 		} catch (SQLException e) {
-			
+
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		//logger.logEvent(job, messageKey, logLevel, messageValues)
-		
+
+		// logger.logEvent(job, messageKey, logLevel, messageValues)
+
 	}
 
 	public void setBulkValidator(IBulkValidator bulkValidator) {
