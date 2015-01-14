@@ -529,7 +529,7 @@
 	</entry>
 	<entry>
 		<id>L01.01.01a</id>
-		<title>Oppervlakte poel < 175 m2</title>
+		<title>Oppervlakte poel &lt; 175 m2</title>
 		<category term="CodeListValue" />
 	</entry>
 	<entry>
@@ -619,7 +619,7 @@
 	</entry>
 	<entry>
 		<id>L01.07.01a</id>
-		<title>Laan gemiddelde stamdiameter < 20 cm</title>
+		<title>Laan gemiddelde stamdiameter &lt; 20 cm</title>
 		<category term="CodeListValue" />
 	</entry>
 	<entry>
@@ -639,7 +639,7 @@
 	</entry>
 	<entry>
 		<id>L01.08.01a</id>
-		<title>Knotboom gemiddelde stamdiameter < 20 cm</title>
+		<title>Knotboom gemiddelde stamdiameter &lt; 20 cm</title>
 		<category term="CodeListValue" />
 	</entry>
 	<entry>
@@ -649,7 +649,7 @@
 	</entry>
 	<entry>
 		<id>L01.08.01c</id>
-		<title>Knotboom gemiddelde stamdiameter > 60 cm</title>
+		<title>Knotboom gemiddelde stamdiameter &gt; 60 cm</title>
 		<category term="CodeListValue" />
 	</entry>
 	<entry>
