@@ -1,7 +1,9 @@
 package nl.ipo.cds.etl.theme.vrn.domain;
 
-import org.deegree.commons.tom.ows.CodeType;
-
+import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_BEHEER_PAKKET;
+import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_DOEL_REALISATIE;
+import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_STATUS_BEHEER;
+import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_TYPE_BEHEERDER;
 import nl.ipo.cds.etl.db.annotation.Column;
 import nl.ipo.cds.etl.db.annotation.Table;
 import nl.ipo.cds.etl.theme.annotation.CodeSpace;
@@ -11,6 +13,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.text.ParseException;
+
+import org.deegree.commons.tom.ows.CodeType;
 
 /**
  * @author annes
@@ -85,49 +89,49 @@ public abstract class AbstractGebiedBeheer extends AbstractGebied {
 
 
     @MappableAttribute
-    @CodeSpace("StatusBeheer")
+    @CodeSpace(CODESPACE_STATUS_BEHEER)
 	public CodeType getStatusBeheer() {
 		return statusBeheer;
 	}
 
     @MappableAttribute
-    @CodeSpace("StatusBeheer")
+    @CodeSpace(CODESPACE_STATUS_BEHEER)
 	public void setStatusBeheer(CodeType statusBeheer) {
 		this.statusBeheer = statusBeheer;
 	}
 
     @MappableAttribute
-    @CodeSpace("BeheerPakket")
+    @CodeSpace(CODESPACE_BEHEER_PAKKET)
 	public CodeType getBeheerpakket() {
 		return beheerpakket;
 	}
 
     @MappableAttribute
-    @CodeSpace("BeheerPakket")
+    @CodeSpace(CODESPACE_BEHEER_PAKKET)
 	public void setBeheerpakket(CodeType beheerpakket) {
 		this.beheerpakket = beheerpakket;
 	}
 
     @MappableAttribute
-    @CodeSpace("DoelRealisatie")
+    @CodeSpace(CODESPACE_DOEL_REALISATIE)
 	public CodeType getDoelBeheer() {
 		return doelBeheer;
 	}
 
     @MappableAttribute
-    @CodeSpace("DoelRealisatie")
+    @CodeSpace(CODESPACE_DOEL_REALISATIE)
 	public void setDoelBeheer(CodeType doelBeheer) {
 		this.doelBeheer = doelBeheer;
 	}
 
     @MappableAttribute
-    @CodeSpace("typeBeheerder")
+    @CodeSpace(CODESPACE_TYPE_BEHEERDER)
 	public CodeType getTypeBeheerder() {
 		return typeBeheerder;
 	}
 
     @MappableAttribute
-    @CodeSpace("typeBeheerder")
+    @CodeSpace(CODESPACE_TYPE_BEHEERDER)
 	public void setTypeBeheerder(CodeType typeBeheerder) {
 		this.typeBeheerder = typeBeheerder;
 	}

@@ -1,5 +1,6 @@
 package nl.ipo.cds.etl.theme.vrn.domain;
 
+import java.math.BigInteger;
 import java.sql.Timestamp;
 
 import org.deegree.commons.tom.ows.CodeType;
@@ -23,7 +24,7 @@ public class AbstractGebiedTest <T extends AbstractGebied> {
 	public final TemporaryFolder testFolder = new TemporaryFolder();
 
 	public void writeGebied(T gebied) throws ParseException {
-		gebied.setRelatienummer(23);
+		gebied.setRelatienummer(BigInteger.valueOf(23));
 		gebied.setBegintijd(new Timestamp(1418651847094L));
 		gebied.setEindtijd(new Timestamp(1418651995565L));
 		WKTReader reader = new WKTReader(null);
@@ -32,7 +33,7 @@ public class AbstractGebiedTest <T extends AbstractGebied> {
 		gebied.setId(TEST_DATASET_ID);
 		gebied.setIdentificatie(TEST_ID);
 		gebied.setImnaBronhouder((new CodeType ("imnaBronhouder", "http://www.namespace.com")));
-		gebied.setContractnummer(2);
+		gebied.setContractnummer(BigInteger.valueOf(2));
 	}
 
 
