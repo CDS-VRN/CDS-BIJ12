@@ -24,6 +24,8 @@ public enum Message implements ValidatorMessageKey<Message, Context> {
 	GEOMETRY_SRS_NULL, 
 	GEOMETRY_SRS_NOT_RD,
 	GEOMETRY_OVERLAP,
+	OVERLAP_DETECTION_FAILED,
+	OVERLAP_DETECTED,
 	HAS_MORE_ERRORS(LogLevel.WARNING);
 
 	private final String[] params;

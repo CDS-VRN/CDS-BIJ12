@@ -10,6 +10,7 @@ import java.util.UUID;
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
+import nl.idgis.commons.jobexecutor.JobLogger;
 import nl.ipo.cds.domain.EtlJob;
 import nl.ipo.cds.etl.AbstractValidator;
 import nl.ipo.cds.etl.log.EventLogger;
@@ -49,7 +50,7 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends
 	private IBulkValidator<AbstractGebied> bulkValidator;
 
 	private final GeometryExpression<Message, Context, Geometry> geometrie = geometry("geometrie");
-	private final AbstractGebiedExpression<Message, Context, AbstractGebied> abstractGebied = new AbstractGebiedExpression<>("abstractGebied", AbstractGebied.class);
+	private final AbstractGebiedExpression<Message, Context, AbstractGebied> abstractGebiedExpression = new AbstractGebiedExpression<>("abstractGebied", AbstractGebied.class);
 
 	// private final Constant<Message, Context, String> doelRealisatieCodeSpace
 	// = constant("doelRealisatie");
@@ -83,14 +84,11 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends
 			final CodeListFactory codeListFactory,
 			final ValidationReporter<Message, Context> reporter) {
 
-		// create h2 database
-		// add reference to context
 		DataSource ds = null;
 
 		try {
 			ds = geometryStore.createStore(UUID.randomUUID().toString());
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			// TODO: fail job
 			e.printStackTrace();
 		}
@@ -273,27 +271,23 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends
 		final UnaryCallback<Message, Context, Boolean, AbstractGebied> saveFeatureCallback = new UnaryCallback<Message, Context, Boolean, AbstractGebied>() {
 
 			/**
-			 * Wordt per feature uitgevoerd.
+			 * Each feature will get inserted into the database.
 			 */
 			@Override
 			public Boolean call(final AbstractGebied abstractGebied,
 					final Context context) throws Exception {
 
-				// TODO: add feaure information, for now null.
 				geometryStore.addToStore(context.getDataSource(),
-						abstractGebied.getGeometrie(), null);
+						abstractGebied.getGeometrie(), abstractGebied);
 
 				return true;
 			}
 		};
 
 		/**
-		 * Hier wordt nog niets uitgevoerd, maar de expressie wordt alleen
-		 * opgebouwd.
+		 * Build expression which has the sole purpose of inserting the feature into the feature store.
 		 */
-		return validate(
-		// TODO: get complete Feature to store, not only Geometry
-		callback(Boolean.class, abstractGebied, saveFeatureCallback));
+		return validate(callback(Boolean.class, abstractGebiedExpression, saveFeatureCallback));
 	}
 
 	/**
@@ -303,24 +297,17 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends
 	public void afterJob(final EtlJob job, final EventLogger<Message> logger,
 			final Context context) {
 
-		try {
-			// TODO: change to PersistentFeature
-			try {
-				List<OverlapValidationPair<AbstractGebied>> overlapList = bulkValidator
-						.overlapValidation(context.getDataSource());
-			} catch (ClassNotFoundException | IOException e) {
-				// TODO Auto-generated catch block
-				// TODO: Job failed
-				e.printStackTrace();
+        try {
+            List<OverlapValidationPair<AbstractGebied>> overlapList = bulkValidator
+                    .overlapValidation(context.getDataSource());
+			if (!overlapList.isEmpty()) {
+				for (OverlapValidationPair<AbstractGebied> overlap : overlapList) {
+					logger.logEvent(job, Message.OVERLAP_DETECTED, JobLogger.LogLevel.ERROR, overlap.f1.getIdentificatie(), overlap.f2.getIdentificatie() );
+				}
 			}
-		} catch (SQLException e) {
-
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+        } catch (ClassNotFoundException | IOException | SQLException e) {
+			logger.logEvent(job, Message.OVERLAP_DETECTION_FAILED, JobLogger.LogLevel.ERROR, e.getMessage());
 		}
-
-		// logger.logEvent(job, messageKey, logLevel, messageValues)
-
 	}
 
 	public void setBulkValidator(IBulkValidator bulkValidator) {
