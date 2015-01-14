@@ -25,5 +25,10 @@ public class Constants {
 	public static final String CODESPACE_BRONHOUDER = "Bronhouder";
 	
 	public static final String CODESPACE_STATUS_INRICHTING = "StatusInrichting";
+
+	public static final String CODESPACE_STATUS_VERWERVING = "StatusVerwering";
+
+	// TODO: Is this separate, or simply a duplicate of CODESPACE_TYPE_BEHEERDER ?
+	public static final String CODESPACE_TYPE_BEHEERDER_EN_EIGENAAR = "TypeBeheerderEnEigenaar";
 	
 }
