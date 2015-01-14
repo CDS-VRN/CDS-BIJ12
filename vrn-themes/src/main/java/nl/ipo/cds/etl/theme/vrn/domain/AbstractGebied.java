@@ -18,6 +18,7 @@ import org.deegree.geometry.Geometry;
 import org.deegree.geometry.io.WKBReader;
 import org.deegree.geometry.io.WKBWriter;
 import org.deegree.geometry.io.WKTWriter;
+import org.deegree.portal.cataloguemanager.model.Abstract;
 
 import javax.persistence.Transient;
 
@@ -190,6 +191,15 @@ public abstract class AbstractGebied extends PersistableFeature implements Seria
 	@MappableAttribute
 	public void setRelatienummer(Integer relatienummer) {
 		this.relatienummer = relatienummer;
+	}
+
+	/**
+	 * This method is required for the AbstractGebiedExpression in the validation package to work correctly.
+	 * It is not the nicest solution, but the most pragmatic thing to do (more info in the respective expression class).
+	 * @return Itself.
+	 */
+	public AbstractGebied getAbstractGebied() {
+		return this;
 	}
 
 }

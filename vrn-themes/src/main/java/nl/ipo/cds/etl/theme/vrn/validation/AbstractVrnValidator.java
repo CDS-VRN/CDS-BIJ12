@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import nl.ipo.cds.domain.EtlJob;
@@ -17,6 +18,7 @@ import nl.ipo.cds.etl.postvalidation.IGeometryStore;
 import nl.ipo.cds.etl.theme.vrn.Context;
 import nl.ipo.cds.etl.theme.vrn.Message;
 import nl.ipo.cds.etl.theme.vrn.domain.AbstractGebied;
+import nl.ipo.cds.etl.theme.vrn.domain.LandelijkGebiedBeheer;
 import nl.ipo.cds.validation.AttributeExpression;
 import nl.ipo.cds.validation.ValidationReporter;
 import nl.ipo.cds.validation.Validator;
@@ -40,12 +42,14 @@ import org.deegree.geometry.Geometry;
 public class AbstractVrnValidator<T extends AbstractGebied> extends
 		AbstractValidator<T, Message, Context> {
 
+	//@Inject
 	private IGeometryStore<AbstractGebied> geometryStore;
+
+	//@Inject
 	private IBulkValidator<AbstractGebied> bulkValidator;
 
 	private final GeometryExpression<Message, Context, Geometry> geometrie = geometry("geometrie");
-	private final AbstractGebiedExpression<Message, Context, AbstractGebied> abstractGebied = new AbstractGebiedExpression<Message, Context, AbstractGebied>(
-			"abstractGebied", AbstractGebied.class);
+	private final AbstractGebiedExpression<Message, Context, AbstractGebied> abstractGebied = new AbstractGebiedExpression<>("abstractGebied", AbstractGebied.class);
 
 	// private final Constant<Message, Context, String> doelRealisatieCodeSpace
 	// = constant("doelRealisatie");
