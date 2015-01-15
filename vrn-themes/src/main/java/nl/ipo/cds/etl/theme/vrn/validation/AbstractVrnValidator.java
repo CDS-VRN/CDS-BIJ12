@@ -15,6 +15,7 @@ import javax.sql.DataSource;
 
 import nl.idgis.commons.jobexecutor.JobLogger;
 import nl.ipo.cds.domain.EtlJob;
+import nl.ipo.cds.domain.ValidateJob;
 import nl.ipo.cds.etl.AbstractValidator;
 import nl.ipo.cds.etl.log.EventLogger;
 import nl.ipo.cds.etl.postvalidation.IBulkValidator;
@@ -35,6 +36,7 @@ import nl.ipo.cds.validation.gml.CodeExpression;
 import nl.ipo.cds.validation.gml.codelists.CodeListFactory;
 
 import org.deegree.geometry.Geometry;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
  * @author annes
@@ -45,11 +47,12 @@ import org.deegree.geometry.Geometry;
 public class AbstractVrnValidator<T extends AbstractGebied> extends
 		AbstractValidator<T, Message, Context> {
 
-	//@Inject
+	@Inject
 	private IGeometryStore<AbstractGebied> geometryStore;
 
-	//@Inject
+	@Inject
 	private IBulkValidator<AbstractGebied> bulkValidator;
+
 
 	private final GeometryExpression<Message, Context, Geometry> geometrie = geometry("geometrie");
 	private final AbstractGebiedExpression<Message, Context, AbstractGebied> abstractGebiedExpression = new AbstractGebiedExpression<>("abstractGebied", AbstractGebied.class);
@@ -78,12 +81,13 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends
 
 		DataSource ds = null;
 
-		try {
-			ds = geometryStore.createStore(UUID.randomUUID().toString());
-		} catch (SQLException e) {
-			// TODO: fail job
-			e.printStackTrace();
-		}
+		// Both Import and Validate jobs do validation.
+        try {
+            ds = geometryStore.createStore(UUID.randomUUID().toString());
+        } catch (SQLException e) {
+            // TODO: fail job
+            e.printStackTrace();
+        }
 
 		return new Context(codeListFactory, reporter, ds);
 	}
@@ -221,14 +225,14 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends
         try {
             List<OverlapValidationPair<AbstractGebied>> overlapList = bulkValidator
                     .overlapValidation(context.getDataSource());
-			if (!overlapList.isEmpty()) {
-				for (OverlapValidationPair<AbstractGebied> overlap : overlapList) {
-					logger.logEvent(job, Message.OVERLAP_DETECTED, JobLogger.LogLevel.ERROR, overlap.f1.getIdentificatie(), overlap.f2.getIdentificatie() );
-				}
-			}
+            if (!overlapList.isEmpty()) {
+                for (OverlapValidationPair<AbstractGebied> overlap : overlapList) {
+                    logger.logEvent(job, Message.OVERLAP_DETECTED, JobLogger.LogLevel.ERROR, overlap.f1.getIdentificatie(), overlap.f2.getIdentificatie());
+                }
+            }
         } catch (ClassNotFoundException | IOException | SQLException e) {
-			logger.logEvent(job, Message.OVERLAP_DETECTION_FAILED, JobLogger.LogLevel.ERROR, e.getMessage());
-		}
+            logger.logEvent(job, Message.OVERLAP_DETECTION_FAILED, JobLogger.LogLevel.ERROR, e.getMessage());
+        }
 	}
 
 	public void setBulkValidator(IBulkValidator bulkValidator) {

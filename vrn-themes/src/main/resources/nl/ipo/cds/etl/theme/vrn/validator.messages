@@ -9,7 +9,7 @@ ATTRIBUTE_CODE_INVALID=De code "${2}" van het attribuut "${3}" is niet valide me
 ATTRIBUTE_VALUE_TOO_LOW=De waarde "${2}" van het attribuut "${3}" is te laag (limiet "${4}"), ${FEATURE}
 ATTRIBUTE_VALUE_TOO_HIGH=De waarde "${2}" van het attribuut "${3}" is te hoog (limiet "${4}"), ${FEATURE}
 ATTRIBUTE_VALUE_INVALID=De waarde "${2}" van het attribuut "${3}" is niet valide (verwacht: "${4}"), ${FEATURE}
-ATTRIBUTE_GROUP_INCONSISTENT=Het attribuut "${2}" kan niet worden weggelaten, als er één of meerdere andere attributen uit de groep (zoals "${3}") aanwezig zijn, ${FEATURE}
+ATTRIBUTE_GROUP_INCONSISTENT=Het attribuut "${2}" kan niet worden weggelaten, als er ï¿½ï¿½n of meerdere andere attributen uit de groep (zoals "${3}") aanwezig zijn, ${FEATURE}
 ATTRIBUTES_EXCLUSIVE=The attributes "${2}" and "${3}" are mutually exclusive. They cannot both be specified for one feature, ${FEATURE}  
 QUALITATIVE_OR_QUANTITATIVE_LIKELIKHOOD_REQUIRED=Attributes for likelihood ("likelihoodOfOccurrenceQualitativeLikelihood" or "likelihoodOfOccurrenceQuantitativeLikelihoodProbabilityOfOccurrence/likelihoodOfOccurrenceQuantitativeLikelihoodReturnPeriod") are missing, ${FEATURE}
 QUALITATIVE_OR_QUANTITATIVE_LIKELIKHOOD_EXCLUSIVE=Quantitative and qualitative likelihood ("likelihoodOfOccurrenceQualitativeLikelihood", "likelihoodOfOccurrenceQuantitativeLikelihoodProbabilityOfOccurrence/likelihoodOfOccurrenceQuantitativeLikelihoodReturnPeriod") cannot both be specified for one feature, ${FEATURE}
@@ -20,8 +20,8 @@ GEOMETRY_ONLY_POINT_OR_MULTIPOINT_BASE=geometrie has wrong type: must be a point
 GEOMETRY_ONLY_CURVE_OR_MULTICURVE_BASE=geometrie has wrong type: must be a linestring (or a multi linestring)
 GEOMETRY_ONLY_SURFACE_OR_MULTISURFACE_BASE=geometrie has wrong type: must be a polygon (or a multi polygon)
 GEOMETRY_POINT_DUPLICATION_BASE=geometrie bevat duplicaat punten, locatie: ${2}
-GEOMETRY_EXTERIOR_RING_CW_BASE=geometrie bevat een buitenring met CW oriëntatie
-GEOMETRY_INTERIOR_RING_CCW_BASE=geometrie bevat een binnenring met CCW oriëntatie
+GEOMETRY_EXTERIOR_RING_CW_BASE=geometrie bevat een buitenring met CW oriï¿½ntatie
+GEOMETRY_INTERIOR_RING_CCW_BASE=geometrie bevat een binnenring met CCW oriï¿½ntatie
 GEOMETRY_DISCONTINUITY_BASE=geometrie bevat lijnelementen die niet aansluiten
 GEOMETRY_SELF_INTERSECTION_BASE=geometrie bevat een lijn die zichzelf snijdt, locatie: ${2}
 GEOMETRY_RING_NOT_CLOSED_BASE=geometrie bevat een niet gesloten ring
@@ -59,3 +59,6 @@ GEOMETRY_SRS_NULL=${GEOMETRY_SRS_NULL_BASE}, ${FEATURE}
 GEOMETRY_SRS_NOT_RD=${GEOMETRY_SRS_NOT_RD_BASE} (gevonden waarde: ${1}), ${FEATURE}
 
 HAS_MORE_ERRORS=Er zijn meer meldingen die niet werden gerapporteerd
+
+OVERLAP_DETECTION_FAILED=Fout bij initialiseren overlapdetectie: ${0}
+OVERLAP_DETECTED=Overlappende gebieden gedetecteerd: ${0} ${1}
