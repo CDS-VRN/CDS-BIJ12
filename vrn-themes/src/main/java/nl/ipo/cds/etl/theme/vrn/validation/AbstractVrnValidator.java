@@ -82,8 +82,7 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends
         try {
             ds = geometryStore.createStore(UUID.randomUUID().toString());
         } catch (SQLException e) {
-            // TODO: fail job
-            e.printStackTrace();
+            throw new RuntimeException("Error creating geometryStore: " + e);
         }
 
 		return new Context(codeListFactory, reporter, ds);
