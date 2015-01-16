@@ -134,10 +134,15 @@
       "type" : "condition",
       "name" : "[condition]",
       "operationInputs" : [ {
-        "type" : "input",
-        "name" : "eindTijd",
-        "inputAttributeNamespace" : "http://www.cds.nl/imna/beheer",
-        "inputAttributeType" : "class java.sql.Timestamp"
+        "type" : "operation",
+        "name" : "toDateTimeTransform",
+        "operationInputs" : [ {
+          "type" : "input",
+          "name" : "eindTijd",
+          "inputAttributeNamespace" : "http://www.cds.nl/imna/beheer",
+          "inputAttributeType" : "class java.lang.String"
+        }],
+        "settings" : { }
       } ],
       "settings" : { }
     } ]
@@ -192,7 +197,7 @@
       "name" : "[condition]",
       "operationInputs" : [ {
         "type" : "input",
-        "name" : "geometrie",
+        "name" : "surfaceProperty",
         "inputAttributeNamespace" : "http://www.cds.nl/imna/beheer",
         "inputAttributeType" : "interface org.deegree.geometry.Geometry"
       } ],
@@ -233,10 +238,15 @@
       "type" : "condition",
       "name" : "[condition]",
       "operationInputs" : [ {
-        "type" : "input",
-        "name" : "beginTijd",
-        "inputAttributeNamespace" : "http://www.cds.nl/imna/beheer",
-        "inputAttributeType" : "class java.sql.Timestamp"
+        "type" : "operation",
+        "name" : "toDateTimeTransform",
+        "operationInputs" : [ {
+          "type" : "input",
+          "name" : "beginTijd",
+          "inputAttributeNamespace" : "http://www.cds.nl/imna/beheer",
+          "inputAttributeType" : "class java.lang.String"
+        }],
+        "settings" : { }
       } ],
       "settings" : { }
     } ]
