@@ -62,3 +62,12 @@ INSERT INTO manager.attributemapping (id, attributename, valid, dataset_id, root
 INSERT INTO manager.attributemapping (id, attributename, valid, dataset_id, rootoperation_id) VALUES (134, 'relatienummer', true, 100, 136);
 INSERT INTO manager.attributemapping (id, attributename, valid, dataset_id, rootoperation_id) VALUES (137, 'statusBeheer', true, 100, 141);
 INSERT INTO manager.attributemapping (id, attributename, valid, dataset_id, rootoperation_id) VALUES (142, 'typeBeheerder', true, 100, 146);
+
+-- Set start of Hibernate sequence 
+DROP SEQUENCE IF EXISTS manager.hibernate_sequence;
+CREATE SEQUENCE manager.hibernate_sequence START 200;
+ALTER TABLE manager.hibernate_sequence
+  OWNER TO cds_owner;
+GRANT ALL ON SEQUENCE manager.hibernate_sequence TO cds_owner;
+GRANT ALL ON SEQUENCE manager.hibernate_sequence TO inspire;
+
