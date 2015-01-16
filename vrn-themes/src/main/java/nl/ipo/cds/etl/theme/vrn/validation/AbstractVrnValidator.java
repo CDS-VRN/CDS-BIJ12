@@ -1,10 +1,10 @@
 package nl.ipo.cds.etl.theme.vrn.validation;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_BRONHOUDER;
 
+import java.io.IOException;
 import java.math.BigInteger;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +15,6 @@ import javax.sql.DataSource;
 
 import nl.idgis.commons.jobexecutor.JobLogger;
 import nl.ipo.cds.domain.EtlJob;
-import nl.ipo.cds.domain.ValidateJob;
 import nl.ipo.cds.etl.AbstractValidator;
 import nl.ipo.cds.etl.log.EventLogger;
 import nl.ipo.cds.etl.postvalidation.IBulkValidator;
@@ -23,7 +22,6 @@ import nl.ipo.cds.etl.postvalidation.IGeometryStore;
 import nl.ipo.cds.etl.theme.vrn.Context;
 import nl.ipo.cds.etl.theme.vrn.Message;
 import nl.ipo.cds.etl.theme.vrn.domain.AbstractGebied;
-import nl.ipo.cds.etl.theme.vrn.domain.LandelijkGebiedBeheer;
 import nl.ipo.cds.validation.AttributeExpression;
 import nl.ipo.cds.validation.ValidationReporter;
 import nl.ipo.cds.validation.Validator;
@@ -36,7 +34,6 @@ import nl.ipo.cds.validation.gml.CodeExpression;
 import nl.ipo.cds.validation.gml.codelists.CodeListFactory;
 
 import org.deegree.geometry.Geometry;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
  * @author annes
@@ -85,8 +82,7 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends
         try {
             ds = geometryStore.createStore(UUID.randomUUID().toString());
         } catch (SQLException e) {
-            // TODO: fail job
-            e.printStackTrace();
+            throw new RuntimeException("Error creating geometryStore: " + e);
         }
 
 		return new Context(codeListFactory, reporter, ds);
