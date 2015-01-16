@@ -24,8 +24,13 @@ import nl.ipo.cds.validation.execute.CompilerException;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.core.io.ClassPathResource;
 
+
+@ImportResource(value = {
+		"classpath:nl/ipo/cds/etl/theme/vrn/overlap-applicationContext.xml"
+})
 @Configuration(value = "vrn.DatasetConfig")
 public class DatasetConfig {
 

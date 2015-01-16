@@ -1,26 +1,42 @@
 package nl.ipo.cds.etl.theme.vrn.validation;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_BRONHOUDER;
 
 import java.math.BigInteger;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.inject.Inject;
+import javax.sql.DataSource;
+
+import nl.idgis.commons.jobexecutor.JobLogger;
 import nl.ipo.cds.domain.EtlJob;
+import nl.ipo.cds.domain.ValidateJob;
 import nl.ipo.cds.etl.AbstractValidator;
+import nl.ipo.cds.etl.log.EventLogger;
+import nl.ipo.cds.etl.postvalidation.IBulkValidator;
+import nl.ipo.cds.etl.postvalidation.IGeometryStore;
 import nl.ipo.cds.etl.theme.vrn.Context;
 import nl.ipo.cds.etl.theme.vrn.Message;
 import nl.ipo.cds.etl.theme.vrn.domain.AbstractGebied;
+import nl.ipo.cds.etl.theme.vrn.domain.LandelijkGebiedBeheer;
 import nl.ipo.cds.validation.AttributeExpression;
 import nl.ipo.cds.validation.ValidationReporter;
 import nl.ipo.cds.validation.Validator;
+import nl.ipo.cds.validation.callbacks.UnaryCallback;
 import nl.ipo.cds.validation.constants.Constant;
+import nl.ipo.cds.validation.domain.OverlapValidationPair;
 import nl.ipo.cds.validation.execute.CompilerException;
 import nl.ipo.cds.validation.geometry.GeometryExpression;
 import nl.ipo.cds.validation.gml.CodeExpression;
 import nl.ipo.cds.validation.gml.codelists.CodeListFactory;
 
 import org.deegree.geometry.Geometry;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
  * @author annes
@@ -28,9 +44,18 @@ import org.deegree.geometry.Geometry;
  *         Base class for IMNa validation. Specifies the validations that are required for all IMNa themes
  * @param <T>
  */
-public class AbstractVrnValidator<T extends AbstractGebied> extends AbstractValidator<T, Message, Context> {
+public class AbstractVrnValidator<T extends AbstractGebied> extends
+		AbstractValidator<T, Message, Context> {
+
+	@Inject
+	private IGeometryStore<AbstractGebied> geometryStore;
+
+	@Inject
+	private IBulkValidator<AbstractGebied> bulkValidator;
+
 
 	private final GeometryExpression<Message, Context, Geometry> geometrie = geometry("geometrie");
+	private final AbstractGebiedExpression<Message, Context, AbstractGebied> abstractGebiedExpression = new AbstractGebiedExpression<>("abstractGebied", AbstractGebied.class);
 
 	private final Constant<Message, Context, String> imnaBronhouderCodeSpace = constant(CODESPACE_BRONHOUDER);
 
@@ -42,6 +67,7 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends AbstractVali
 	/**
 	 * codelijst doel realisatie is voor zowel doelbeheer als doelverwerving als doelinrichting
 	 */
+	//private final CodeExpression<Message, Context> doelRealisatie = code("doelRealisatie");
 	private final CodeExpression<Message, Context> imnaBronhouder = code("imnaBronhouder");
 
 	public AbstractVrnValidator(final Map<Object, Object> validatorMessages, Class<T> clazz) throws CompilerException {
@@ -49,9 +75,21 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends AbstractVali
 	}
 
 	@Override
-	public Context beforeJob(final EtlJob job, final CodeListFactory codeListFactory,
+	public Context beforeJob(final EtlJob job,
+			final CodeListFactory codeListFactory,
 			final ValidationReporter<Message, Context> reporter) {
-		return new Context(codeListFactory, reporter);
+
+		DataSource ds = null;
+
+		// Both Import and Validate jobs do validation.
+        try {
+            ds = geometryStore.createStore(UUID.randomUUID().toString());
+        } catch (SQLException e) {
+            // TODO: fail job
+            e.printStackTrace();
+        }
+
+		return new Context(codeListFactory, reporter, ds);
 	}
 
 	public Validator<Message, Context> getBegintijdValidator() {
@@ -147,14 +185,59 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends AbstractVali
 						validate(surfaceGeometry.isSrs(constant("28992"))).message(Message.GEOMETRY_SRS_NOT_RD,
 								surfaceGeometry.srsName())).shortCircuit()));
 
+
 	}
 
 	/**
 	 * Multiparts validation (1 deel met uniek IMNa Id per polygon)
 	 */
+	public Validator<Message, Context> getGeometryIntersectionValidator() {
+
+		final UnaryCallback<Message, Context, Boolean, AbstractGebied> saveFeatureCallback = new UnaryCallback<Message, Context, Boolean, AbstractGebied>() {
+
+			/**
+			 * Each feature will get inserted into the database.
+			 */
+			@Override
+			public Boolean call(final AbstractGebied abstractGebied,
+					final Context context) throws Exception {
+
+				geometryStore.addToStore(context.getDataSource(),
+						abstractGebied.getGeometrie(), abstractGebied);
+
+				return true;
+			}
+		};
+
+		/**
+		 * Build expression which has the sole purpose of inserting the feature into the feature store.
+		 */
+		return validate(callback(Boolean.class, abstractGebiedExpression, saveFeatureCallback));
+	}
 
 	/**
 	 * Overlap percelen validatie met H2?
 	 */
+	@Override
+	public void afterJob(final EtlJob job, final EventLogger<Message> logger,
+			final Context context) {
+
+        try {
+            List<OverlapValidationPair<AbstractGebied>> overlapList = bulkValidator
+                    .overlapValidation(context.getDataSource());
+            if (!overlapList.isEmpty()) {
+                for (OverlapValidationPair<AbstractGebied> overlap : overlapList) {
+                    logger.logEvent(job, Message.OVERLAP_DETECTED, JobLogger.LogLevel.ERROR, overlap.f1.getIdentificatie(), overlap.f2.getIdentificatie());
+                }
+            }
+			geometryStore.destroyStore(context.getDataSource());
+        } catch (ClassNotFoundException | IOException | SQLException e) {
+            logger.logEvent(job, Message.OVERLAP_DETECTION_FAILED, JobLogger.LogLevel.ERROR, e.getMessage());
+        }
+	}
+
+	public void setBulkValidator(IBulkValidator bulkValidator) {
+		this.bulkValidator = bulkValidator;
+	}
 
 }

@@ -8,6 +8,7 @@ import org.deegree.geometry.io.WKTReader;
 import org.deegree.geometry.primitive.Polygon;
 
 import com.vividsolutions.jts.io.ParseException;
+import org.junit.rules.TemporaryFolder;
 
 
 /**
@@ -19,8 +20,9 @@ public class AbstractGebiedTest <T extends AbstractGebied> {
 	protected static final String TEST_DATASET_ID = "0";	
 	private static final String TEST_ID = "TEST.ID.0";
 	private Polygon polygon;
-	
-	
+
+	public final TemporaryFolder testFolder = new TemporaryFolder();
+
 	public void writeGebied(T gebied) throws ParseException {
 		gebied.setRelatienummer(BigInteger.valueOf(23));
 		gebied.setBegintijd(new Timestamp(1418651847094L));
