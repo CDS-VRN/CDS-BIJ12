@@ -230,6 +230,7 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends
                     logger.logEvent(job, Message.OVERLAP_DETECTED, JobLogger.LogLevel.ERROR, overlap.f1.getIdentificatie(), overlap.f2.getIdentificatie());
                 }
             }
+			geometryStore.destroyStore(context.getDataSource());
         } catch (ClassNotFoundException | IOException | SQLException e) {
             logger.logEvent(job, Message.OVERLAP_DETECTION_FAILED, JobLogger.LogLevel.ERROR, e.getMessage());
         }
