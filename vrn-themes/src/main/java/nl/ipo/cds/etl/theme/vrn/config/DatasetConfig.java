@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import nl.ipo.cds.attributemapping.operations.discover.OperationDiscoverer;
+import nl.ipo.cds.etl.theme.ThemeConfigException;
 import nl.ipo.cds.etl.theme.vrn.VrnThemeConfig;
 import nl.ipo.cds.etl.theme.vrn.domain.LandelijkGebiedBeheer;
 import nl.ipo.cds.etl.theme.vrn.domain.LandelijkGebiedInrichting;
@@ -27,91 +28,105 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.core.io.ClassPathResource;
 
-
-@ImportResource(value = {
-		"classpath:nl/ipo/cds/etl/theme/vrn/overlap-applicationContext.xml"
-})
+@ImportResource(value = { "classpath:nl/ipo/cds/etl/theme/vrn/overlap-applicationContext.xml" })
 @Configuration(value = "vrn.DatasetConfig")
 public class DatasetConfig {
 
 	@Bean
 	@Inject
-	public VrnThemeConfig<LandelijkGebiedBeheer> landelijkGebiedBeheerThemeConfig(final LandelijkGebiedBeheerValidator validator,
-	final OperationDiscoverer operationDiscoverer) {
-		return new VrnThemeConfig<LandelijkGebiedBeheer>(validator, operationDiscoverer, LandelijkGebiedBeheer.class);
+	public VrnThemeConfig<LandelijkGebiedBeheer> landelijkGebiedBeheerThemeConfig(
+			final LandelijkGebiedBeheerValidator validator, final OperationDiscoverer operationDiscoverer)
+			throws ThemeConfigException {
+		return new VrnThemeConfig<LandelijkGebiedBeheer>(validator, operationDiscoverer, LandelijkGebiedBeheer.class,
+				"GebiedBeheer-mapping.json");
 	}
 
 	@Bean
 	@Inject
-	public VrnThemeConfig<ProvinciaalGebiedBeheer> provinciaalGebiedBeheerThemeConfig(final ProvinciaalGebiedBeheerValidator validator, final OperationDiscoverer operationDiscoverer) {
-		return new VrnThemeConfig<ProvinciaalGebiedBeheer>(validator, operationDiscoverer, ProvinciaalGebiedBeheer.class);
+	public VrnThemeConfig<ProvinciaalGebiedBeheer> provinciaalGebiedBeheerThemeConfig(
+			final ProvinciaalGebiedBeheerValidator validator, final OperationDiscoverer operationDiscoverer)
+			throws ThemeConfigException {
+		return new VrnThemeConfig<ProvinciaalGebiedBeheer>(validator, operationDiscoverer,
+				ProvinciaalGebiedBeheer.class, "GebiedBeheer-mapping.json");
 	}
 
 	@Bean
 	@Inject
-	public VrnThemeConfig<ProvinciaalGebiedInrichting> provinciaalGebiedInrichtingThemeConfig(final ProvinciaalGebiedInrichtingValidator validator, final OperationDiscoverer operationDiscoverer) {
-		return new VrnThemeConfig<ProvinciaalGebiedInrichting>(validator, operationDiscoverer, ProvinciaalGebiedInrichting.class);
+	public VrnThemeConfig<ProvinciaalGebiedInrichting> provinciaalGebiedInrichtingThemeConfig(
+			final ProvinciaalGebiedInrichtingValidator validator, final OperationDiscoverer operationDiscoverer)
+			throws ThemeConfigException {
+		return new VrnThemeConfig<ProvinciaalGebiedInrichting>(validator, operationDiscoverer,
+				ProvinciaalGebiedInrichting.class, "GebiedInrichting-mapping.json");
 	}
 
 	@Bean
 	@Inject
-	public VrnThemeConfig<LandelijkGebiedInrichting> landelijkGebiedInrichtingThemeConfig(final LandelijkGebiedInrichtingValidator validator, final OperationDiscoverer operationDiscoverer) {
-		return new VrnThemeConfig<LandelijkGebiedInrichting>(validator, operationDiscoverer, LandelijkGebiedInrichting.class);
+	public VrnThemeConfig<LandelijkGebiedInrichting> landelijkGebiedInrichtingThemeConfig(
+			final LandelijkGebiedInrichtingValidator validator, final OperationDiscoverer operationDiscoverer)
+			throws ThemeConfigException {
+		return new VrnThemeConfig<LandelijkGebiedInrichting>(validator, operationDiscoverer,
+				LandelijkGebiedInrichting.class, "GebiedInrichting-mapping.json");
 	}
 
 	@Bean
 	@Inject
-	public VrnThemeConfig<LandelijkGebiedVerwerving> landelijkGebiedVerwervingThemeConfig(final LandelijkGebiedVerwervingValidator validator, final OperationDiscoverer operationDiscoverer) {
-		return new VrnThemeConfig<LandelijkGebiedVerwerving>(validator, operationDiscoverer, LandelijkGebiedVerwerving.class);
+	public VrnThemeConfig<LandelijkGebiedVerwerving> landelijkGebiedVerwervingThemeConfig(
+			final LandelijkGebiedVerwervingValidator validator, final OperationDiscoverer operationDiscoverer)
+			throws ThemeConfigException {
+		return new VrnThemeConfig<LandelijkGebiedVerwerving>(validator, operationDiscoverer,
+				LandelijkGebiedVerwerving.class, "GebiedVerwerving-mapping.json");
 	}
 
 	@Bean
 	@Inject
-	public VrnThemeConfig<ProvinciaalGebiedVerwerving> provinciaalGebiedVerwervingThemeConfig(final ProvinciaalGebiedVerwervingValidator validator, final OperationDiscoverer operationDiscoverer) {
-		return new VrnThemeConfig<ProvinciaalGebiedVerwerving>(validator, operationDiscoverer, ProvinciaalGebiedVerwerving.class);
+	public VrnThemeConfig<ProvinciaalGebiedVerwerving> provinciaalGebiedVerwervingThemeConfig(
+			final ProvinciaalGebiedVerwervingValidator validator, final OperationDiscoverer operationDiscoverer)
+			throws ThemeConfigException {
+		return new VrnThemeConfig<ProvinciaalGebiedVerwerving>(validator, operationDiscoverer,
+				ProvinciaalGebiedVerwerving.class, "GebiedVerwerving-mapping.json");
 	}
 
 	@Configuration(value = "vrn.Validators")
 	public static class Validators {
 		@Bean
 		@Inject
-		public ProvinciaalGebiedBeheerValidator provinciaalGebiedBeheerValidator(final @Named("VrnValidationMessages") Properties validatorMessages)
-		throws CompilerException {
+		public ProvinciaalGebiedBeheerValidator provinciaalGebiedBeheerValidator(
+				final @Named("VrnValidationMessages") Properties validatorMessages) throws CompilerException {
 			return new ProvinciaalGebiedBeheerValidator(validatorMessages);
 		}
 
 		@Bean
 		@Inject
-		public LandelijkGebiedBeheerValidator landelijkGebiedBeheerValidator(final @Named("VrnValidationMessages") Properties validatorMessages)
-		throws CompilerException {
+		public LandelijkGebiedBeheerValidator landelijkGebiedBeheerValidator(
+				final @Named("VrnValidationMessages") Properties validatorMessages) throws CompilerException {
 			return new LandelijkGebiedBeheerValidator(validatorMessages);
 		}
-		
+
 		@Bean
 		@Inject
-		public ProvinciaalGebiedInrichtingValidator provinciaalGebiedInrichtingValidator(final @Named("VrnValidationMessages") Properties validatorMessages)
-		throws CompilerException {
+		public ProvinciaalGebiedInrichtingValidator provinciaalGebiedInrichtingValidator(
+				final @Named("VrnValidationMessages") Properties validatorMessages) throws CompilerException {
 			return new ProvinciaalGebiedInrichtingValidator(validatorMessages);
 		}
 
 		@Bean
 		@Inject
-		public LandelijkGebiedInrichtingValidator landelijkGebiedInrichtingValidator(final @Named("VrnValidationMessages") Properties validatorMessages)
-		throws CompilerException {
+		public LandelijkGebiedInrichtingValidator landelijkGebiedInrichtingValidator(
+				final @Named("VrnValidationMessages") Properties validatorMessages) throws CompilerException {
 			return new LandelijkGebiedInrichtingValidator(validatorMessages);
 		}
-		
+
 		@Bean
 		@Inject
-		public LandelijkGebiedVerwervingValidator landelijkGebiedVerwervingValidator(final @Named("VrnValidationMessages") Properties validatorMessages)
-		throws CompilerException {
+		public LandelijkGebiedVerwervingValidator landelijkGebiedVerwervingValidator(
+				final @Named("VrnValidationMessages") Properties validatorMessages) throws CompilerException {
 			return new LandelijkGebiedVerwervingValidator(validatorMessages);
 		}
-		
+
 		@Bean
 		@Inject
-		public ProvinciaalGebiedVerwervingValidator provinciaalGebiedVerwervingValidator(final @Named("VrnValidationMessages") Properties validatorMessages)
-		throws CompilerException {
+		public ProvinciaalGebiedVerwervingValidator provinciaalGebiedVerwervingValidator(
+				final @Named("VrnValidationMessages") Properties validatorMessages) throws CompilerException {
 			return new ProvinciaalGebiedVerwervingValidator(validatorMessages);
 		}
 	}

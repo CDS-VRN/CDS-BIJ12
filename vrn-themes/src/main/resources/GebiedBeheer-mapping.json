@@ -1,0 +1,244 @@
+
+{
+  "mappings" : [ {
+    "featureTypeNamespace" : "http://www.cds.nl/imna/beheer",
+    "featureTypeName" : "GebiedBeheer",
+    "attributeName" : "beheerpakket",
+    "operations" : [ {
+      "type" : "condition",
+      "name" : "[condition]",
+      "operationInputs" : [ {
+        "type" : "operation",
+        "name" : "toCodeTypeTransform",
+        "operationInputs" : [ {
+          "type" : "input",
+          "name" : "beheerPakket",
+          "inputAttributeNamespace" : "http://www.cds.nl/imna/beheer",
+          "inputAttributeType" : "class java.lang.String"
+        }, {
+          "type" : "operation",
+          "name" : "stringConstantInput",
+          "operationInputs" : [ ],
+          "settings" : {
+            "value" : "BeheerPakket"
+          }
+        } ],
+        "settings" : { }
+      } ],
+      "settings" : { }
+    } ]
+  }, {
+    "featureTypeNamespace" : "http://www.cds.nl/imna/beheer",
+    "featureTypeName" : "GebiedBeheer",
+    "attributeName" : "identificatie",
+    "operations" : [ {
+      "type" : "condition",
+      "name" : "[condition]",
+      "operationInputs" : [ {
+        "type" : "input",
+        "name" : "identificatie",
+        "inputAttributeNamespace" : "http://www.cds.nl/imna/beheer",
+        "inputAttributeType" : "class java.lang.String"
+      } ],
+      "settings" : { }
+    } ]
+  }, {
+    "featureTypeNamespace" : "http://www.cds.nl/imna/beheer",
+    "featureTypeName" : "GebiedBeheer",
+    "attributeName" : "doelBeheer",
+    "operations" : [ {
+      "type" : "condition",
+      "name" : "[condition]",
+      "operationInputs" : [ {
+        "type" : "operation",
+        "name" : "toCodeTypeTransform",
+        "operationInputs" : [ {
+          "type" : "input",
+          "name" : "doelBeheer",
+          "inputAttributeNamespace" : "http://www.cds.nl/imna/beheer",
+          "inputAttributeType" : "class java.lang.String"
+        }, {
+          "type" : "operation",
+          "name" : "stringConstantInput",
+          "operationInputs" : [ ],
+          "settings" : {
+            "value" : "DoelRealisatie"
+          }
+        } ],
+        "settings" : { }
+      } ],
+      "settings" : { }
+    } ]
+  }, {
+    "featureTypeNamespace" : "http://www.cds.nl/imna/beheer",
+    "featureTypeName" : "GebiedBeheer",
+    "attributeName" : "eenheidnummer",
+    "operations" : [ {
+      "type" : "condition",
+      "name" : "[condition]",
+      "operationInputs" : [ {
+        "type" : "input",
+        "name" : "eenheidNummer",
+        "inputAttributeNamespace" : "http://www.cds.nl/imna/beheer",
+        "inputAttributeType" : "class java.lang.String"
+      } ],
+      "settings" : { }
+    } ]
+  }, {
+    "featureTypeNamespace" : "http://www.cds.nl/imna/beheer",
+    "featureTypeName" : "GebiedBeheer",
+    "attributeName" : "typeBeheerder",
+    "operations" : [ {
+      "type" : "condition",
+      "name" : "[condition]",
+      "operationInputs" : [ {
+        "type" : "operation",
+        "name" : "toCodeTypeTransform",
+        "operationInputs" : [ {
+          "type" : "input",
+          "name" : "typeBeheerder",
+          "inputAttributeNamespace" : "http://www.cds.nl/imna/beheer",
+          "inputAttributeType" : "class java.lang.String"
+        }, {
+          "type" : "operation",
+          "name" : "stringConstantInput",
+          "operationInputs" : [ ],
+          "settings" : {
+            "value" : "TypeBeheerder"
+          }
+        } ],
+        "settings" : { }
+      } ],
+      "settings" : { }
+    } ]
+  }, {
+    "featureTypeNamespace" : "http://www.cds.nl/imna/beheer",
+    "featureTypeName" : "GebiedBeheer",
+    "attributeName" : "contractnummer",
+    "operations" : [ {
+      "type" : "condition",
+      "name" : "[condition]",
+      "operationInputs" : [ {
+        "type" : "input",
+        "name" : "contractNummer",
+        "inputAttributeNamespace" : "http://www.cds.nl/imna/beheer",
+        "inputAttributeType" : "class java.math.BigInteger"
+      } ],
+      "settings" : { }
+    } ]
+  }, {
+    "featureTypeNamespace" : "http://www.cds.nl/imna/beheer",
+    "featureTypeName" : "GebiedBeheer",
+    "attributeName" : "eindtijd",
+    "operations" : [ {
+      "type" : "condition",
+      "name" : "[condition]",
+      "operationInputs" : [ {
+        "type" : "input",
+        "name" : "eindTijd",
+        "inputAttributeNamespace" : "http://www.cds.nl/imna/beheer",
+        "inputAttributeType" : "class java.sql.Timestamp"
+      } ],
+      "settings" : { }
+    } ]
+  }, {
+    "featureTypeNamespace" : "http://www.cds.nl/imna/beheer",
+    "featureTypeName" : "GebiedBeheer",
+    "attributeName" : "imnaBronhouder",
+    "operations" : [ {
+      "type" : "condition",
+      "name" : "[condition]",
+      "operationInputs" : [ {
+        "type" : "operation",
+        "name" : "toCodeTypeTransform",
+        "operationInputs" : [ {
+          "type" : "input",
+          "name" : "bronHouder",
+          "inputAttributeNamespace" : "http://www.cds.nl/imna/beheer",
+          "inputAttributeType" : "class java.lang.String"
+        }, {
+          "type" : "operation",
+          "name" : "stringConstantInput",
+          "operationInputs" : [ ],
+          "settings" : {
+            "value" : "Bronhouder"
+          }
+        } ],
+        "settings" : { }
+      } ],
+      "settings" : { }
+    } ]
+  }, {
+    "featureTypeNamespace" : "http://www.cds.nl/imna/beheer",
+    "featureTypeName" : "GebiedBeheer",
+    "attributeName" : "relatienummer",
+    "operations" : [ {
+      "type" : "condition",
+      "name" : "[condition]",
+      "operationInputs" : [ {
+        "type" : "input",
+        "name" : "relatieNummer",
+        "inputAttributeNamespace" : "http://www.cds.nl/imna/beheer",
+        "inputAttributeType" : "class java.math.BigInteger"
+      } ],
+      "settings" : { }
+    } ]
+  }, {
+    "featureTypeNamespace" : "http://www.cds.nl/imna/beheer",
+    "featureTypeName" : "GebiedBeheer",
+    "attributeName" : "geometrie",
+    "operations" : [ {
+      "type" : "condition",
+      "name" : "[condition]",
+      "operationInputs" : [ {
+        "type" : "input",
+        "name" : "geometrie",
+        "inputAttributeNamespace" : "http://www.cds.nl/imna/beheer",
+        "inputAttributeType" : "interface org.deegree.geometry.Geometry"
+      } ],
+      "settings" : { }
+    } ]
+  }, {
+    "featureTypeNamespace" : "http://www.cds.nl/imna/beheer",
+    "featureTypeName" : "GebiedBeheer",
+    "attributeName" : "statusBeheer",
+    "operations" : [ {
+      "type" : "condition",
+      "name" : "[condition]",
+      "operationInputs" : [ {
+        "type" : "operation",
+        "name" : "toCodeTypeTransform",
+        "operationInputs" : [ {
+          "type" : "input",
+          "name" : "statusBeheer",
+          "inputAttributeNamespace" : "http://www.cds.nl/imna/beheer",
+          "inputAttributeType" : "class java.lang.String"
+        }, {
+          "type" : "operation",
+          "name" : "stringConstantInput",
+          "operationInputs" : [ ],
+          "settings" : {
+            "value" : "StatusBeheer"
+          }
+        } ],
+        "settings" : { }
+      } ],
+      "settings" : { }
+    } ]
+  }, {
+    "featureTypeNamespace" : "http://www.cds.nl/imna/beheer",
+    "featureTypeName" : "GebiedBeheer",
+    "attributeName" : "begintijd",
+    "operations" : [ {
+      "type" : "condition",
+      "name" : "[condition]",
+      "operationInputs" : [ {
+        "type" : "input",
+        "name" : "beginTijd",
+        "inputAttributeNamespace" : "http://www.cds.nl/imna/beheer",
+        "inputAttributeType" : "class java.sql.Timestamp"
+      } ],
+      "settings" : { }
+    } ]
+  } ]
+}
