@@ -28,7 +28,4 @@ public class Constants {
 
 	public static final String CODESPACE_STATUS_VERWERVING = "StatusVerwerving";
 
-	// TODO: Is this separate, or simply a duplicate of CODESPACE_TYPE_BEHEERDER ?
-	public static final String CODESPACE_TYPE_BEHEERDER_EN_EIGENAAR = "TypeBeheerderEnEigenaar";
-	
 }
