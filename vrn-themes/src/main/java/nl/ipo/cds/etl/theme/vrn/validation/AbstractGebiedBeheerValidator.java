@@ -17,16 +17,16 @@ import static nl.ipo.cds.etl.theme.vrn.Constants.*;
  * @author annes
  * 
  */
-public class AbstractGebiedBeheerValidator<T extends AbstractGebiedBeheer> extends AbstractVrnValidator<T> {
+public abstract class AbstractGebiedBeheerValidator<T extends AbstractGebiedBeheer> extends AbstractVrnValidator<T> {
 
 	private final Constant<Message, Context, String> statusBeheerCodeSpace = constant(CODESPACE_STATUS_BEHEER);
 	private final Constant<Message, Context, String> beheerpakketCodeSpace = constant(CODESPACE_BEHEER_PAKKET);
-	private final Constant<Message, Context, String> doelBeheerCodeSpace = constant(CODESPACE_DOEL_REALISATIE);
+	protected final Constant<Message, Context, String> doelBeheerCodeSpace = constant(CODESPACE_DOEL_REALISATIE);
 	private final Constant<Message, Context, String> typeBeheerderCodeSpace = constant(CODESPACE_TYPE_BEHEERDER);
 
 	private final CodeExpression<Message, Context> statusBeheer = code("statusBeheer");
 	private final CodeExpression<Message, Context> beheerpakket = code("beheerpakket");
-	private final CodeExpression<Message, Context> doelBeheer = code("doelBeheer");
+	protected final CodeExpression<Message, Context> doelBeheer = code("doelBeheer");
 	private final CodeExpression<Message, Context> typeBeheerder = code("typeBeheerder");
 
 	/**
@@ -44,6 +44,7 @@ public class AbstractGebiedBeheerValidator<T extends AbstractGebiedBeheer> exten
 	 */
 	public Validator<Message, Context> getStatusBeheerValidator() {
 		return validate(and(
+				validate(not(statusBeheer.isNull())).message(Message.ATTRIBUTE_NULL, constant(statusBeheer.name)),
 				validate(not(isBlank(statusBeheer.code()))).message(Message.ATTRIBUTE_EMPTY,
 						constant(statusBeheer.name)),
 				validate(statusBeheer.hasCodeSpace(statusBeheerCodeSpace)).message(
@@ -56,6 +57,7 @@ public class AbstractGebiedBeheerValidator<T extends AbstractGebiedBeheer> exten
 
 	public Validator<Message, Context> getBeheerPakketValidator() {
 		return validate(and(
+				validate(not(beheerpakket.isNull())).message(Message.ATTRIBUTE_NULL, constant(beheerpakket.name)),
 				validate(not(isBlank(beheerpakket.code()))).message(Message.ATTRIBUTE_EMPTY,
 						constant(beheerpakket.name)),
 				validate(beheerpakket.hasCodeSpace(beheerpakketCodeSpace)).message(
@@ -66,19 +68,12 @@ public class AbstractGebiedBeheerValidator<T extends AbstractGebiedBeheer> exten
 						constant(beheerpakket.name), beheerpakketCodeSpace)).shortCircuit());
 	}
 
-	public Validator<Message, Context> getDoelBeheerValidator() {
-		return validate(and(
-				validate(not(doelBeheer.isNull())).message(Message.ATTRIBUTE_NULL, constant(doelBeheer.name)),
-				validate(doelBeheer.hasCodeSpace(doelBeheerCodeSpace)).message(
-						Message.ATTRIBUTE_CODE_CODESPACE_INVALID, doelBeheer.codeSpace(), constant(doelBeheer.name),
-						doelBeheerCodeSpace),
-				validate(not(isBlank(doelBeheer.code()))).message(Message.ATTRIBUTE_EMPTY, constant(doelBeheer.name)),
-				validate(doelBeheer.isValid()).message(Message.ATTRIBUTE_CODE_INVALID, doelBeheer.code(),
-						constant(doelBeheer.name), doelBeheerCodeSpace)).shortCircuit());
-	}
+
+	public abstract Validator<Message, Context> getDoelbeheerValidator();
 
 	public Validator<Message, Context> getTypeBeheerderValidator() {
 		return validate(and(
+				validate(not(typeBeheerder.isNull())).message(Message.ATTRIBUTE_NULL, constant(beheerpakket.name)),
 				validate(not(isBlank(typeBeheerder.code()))).message(Message.ATTRIBUTE_EMPTY,
 						constant(typeBeheerder.name)),
 				validate(typeBeheerder.hasCodeSpace(typeBeheerderCodeSpace)).message(

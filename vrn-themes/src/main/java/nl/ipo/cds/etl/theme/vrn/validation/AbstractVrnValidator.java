@@ -41,7 +41,7 @@ import org.deegree.geometry.Geometry;
  *         Base class for IMNa validation. Specifies the validations that are required for all IMNa themes
  * @param <T>
  */
-public class AbstractVrnValidator<T extends AbstractGebied> extends
+public abstract class AbstractVrnValidator<T extends AbstractGebied> extends
 		AbstractValidator<T, Message, Context> {
 
 	@Inject
@@ -57,10 +57,7 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends
 	private final Constant<Message, Context, String> imnaBronhouderCodeSpace = constant(CODESPACE_BRONHOUDER);
 
 	private final AttributeExpression<Message, Context, Timestamp> begintijd = timestampAttr("begintijd");
-	private final AttributeExpression<Message, Context, Timestamp> eindtijd = timestampAttr("eindtijd");
 	private final AttributeExpression<Message, Context, String> identificatie = stringAttr("identificatie");
-	private final AttributeExpression<Message, Context, BigInteger> relatienummer = bigIntegerAttr("relatienummer");
-	private final AttributeExpression<Message, Context, BigInteger> contractnummer = bigIntegerAttr("contractnummer");
 	/**
 	 * codelijst doel realisatie is voor zowel doelbeheer als doelverwerving als doelinrichting
 	 */
@@ -88,24 +85,29 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends
 		return new Context(codeListFactory, reporter, ds);
 	}
 
+	/**
+	 * Note: using the auto-mapping, it is expected to get a DATE string, which is converted to Timestamp.
+	 * If a Timestamp/Datetime string is provided, the automapping will convert the string to NULL instead.
+	 */
 	public Validator<Message, Context> getBegintijdValidator() {
-		return validate(not(begintijd.isNull())).message(Message.ATTRIBUTE_EMPTY);
+		return validate(not(begintijd.isNull())).message(Message.ATTRIBUTE_NULL, constant(begintijd.name));
 	}
 
+	/**
+	 * Note: using the auto-mapping, it is expected to get a DATE string, which is converted to Timestamp.
+	 * If a Timestamp/Datetime string is provided, the automapping will convert the string to NULL instead.
+	 */
 	public Validator<Message, Context> getEindtijdValidator() {
-		return validate(not(eindtijd.isNull())).message(Message.ATTRIBUTE_EMPTY);
+		// eindtijd may be null.
+		return validate(constant(true));
+		//return validate(not(eindtijd.isNull())).message(Message.ATTRIBUTE_NULL, constant(eindtijd.name));
 	}
 
 	public Validator<Message, Context> getIdentificatieValidator() {
-		return validate(not(isBlank(identificatie))).message(Message.ATTRIBUTE_EMPTY);
-	}
-
-	public Validator<Message, Context> getRelatieNummerValidator() {
-		return validate(not(relatienummer.isNull())).message(Message.ATTRIBUTE_EMPTY);
-	}
-
-	public Validator<Message, Context> getContractNummerValidator() {
-		return validate(not(contractnummer.isNull())).message(Message.ATTRIBUTE_EMPTY);
+		return validate(and(
+				validate(not(identificatie.isNull())).message(Message.ATTRIBUTE_NULL, constant(identificatie.name)),
+				validate(not(isBlank(identificatie))).message(Message.ATTRIBUTE_EMPTY, constant(identificatie.name))
+		).shortCircuit());
 	}
 
 	/*
@@ -114,6 +116,7 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends
 
 	public Validator<Message, Context> getImnaBronhouderValidator() {
 		return validate(and(
+				validate(not(imnaBronhouder.isNull())).message(Message.ATTRIBUTE_NULL, constant(imnaBronhouder.name)),
 				validate(not(isBlank(imnaBronhouder.code()))).message(Message.ATTRIBUTE_EMPTY,
 						constant(imnaBronhouder.name)),
 				validate(imnaBronhouder.hasCodeSpace(imnaBronhouderCodeSpace)).message(

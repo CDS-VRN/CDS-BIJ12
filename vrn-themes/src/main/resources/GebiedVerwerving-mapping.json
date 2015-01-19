@@ -2,7 +2,7 @@
   "mappings": [
     {
       "featureTypeNamespace": "http://www.safe.com/gml/fme",
-      "featureTypeName": "GebiedBeheer",
+      "featureTypeName": "GebiedVerwervingSBB",
       "attributeName": "geometrie",
       "operations": [
         {
@@ -22,166 +22,7 @@
     },
     {
       "featureTypeNamespace": "http://www.safe.com/gml/fme",
-      "featureTypeName": "GebiedBeheer",
-      "attributeName": "eenheidnummer",
-      "operations": [
-        {
-          "type": "condition",
-          "name": "[condition]",
-          "operationInputs": [
-            {
-              "type": "input",
-              "name": "eenheidNummer",
-              "inputAttributeNamespace": "http://www.safe.com/gml/fme",
-              "inputAttributeType": "class java.lang.String"
-            }
-          ],
-          "settings": {}
-        }
-      ]
-    },
-    {
-      "featureTypeNamespace": "http://www.safe.com/gml/fme",
-      "featureTypeName": "GebiedBeheer",
-      "attributeName": "doelBeheer",
-      "operations": [
-        {
-          "type": "condition",
-          "name": "[condition]",
-          "operationInputs": [
-            {
-              "type": "operation",
-              "name": "toCodeTypeTransform",
-              "operationInputs": [
-                {
-                  "type": "input",
-                  "name": "doelBeheer",
-                  "inputAttributeNamespace": "http://www.safe.com/gml/fme",
-                  "inputAttributeType": "class java.lang.String"
-                },
-                {
-                  "type": "operation",
-                  "name": "stringConstantInput",
-                  "operationInputs": [],
-                  "settings": {"value": "DoelRealisatie"}
-                }
-              ],
-              "settings": {}
-            }
-          ],
-          "settings": {}
-        }
-      ]
-    },
-    {
-      "featureTypeNamespace": "http://www.safe.com/gml/fme",
-      "featureTypeName": "GebiedBeheer",
-      "attributeName": "beheerpakket",
-      "operations": [
-        {
-          "type": "condition",
-          "name": "[condition]",
-          "operationInputs": [
-            {
-              "type": "operation",
-              "name": "toCodeTypeTransform",
-              "operationInputs": [
-                {
-                  "type": "input",
-                  "name": "beheerPakket",
-                  "inputAttributeNamespace": "http://www.safe.com/gml/fme",
-                  "inputAttributeType": "class java.lang.String"
-                },
-                {
-                  "type": "operation",
-                  "name": "stringConstantInput",
-                  "operationInputs": [],
-                  "settings": {"value": "BeheerPakket"}
-                }
-              ],
-              "settings": {}
-            }
-          ],
-          "settings": {}
-        }
-      ]
-    },
-    {
-      "featureTypeNamespace": "http://www.safe.com/gml/fme",
-      "featureTypeName": "GebiedBeheer",
-      "attributeName": "statusBeheer",
-      "operations": [
-        {
-          "type": "condition",
-          "name": "[condition]",
-          "operationInputs": [
-            {
-              "type": "operation",
-              "name": "toCodeTypeTransform",
-              "operationInputs": [
-                {
-                  "type": "input",
-                  "name": "statusBeheer",
-                  "inputAttributeNamespace": "http://www.safe.com/gml/fme",
-                  "inputAttributeType": "class java.lang.String"
-                },
-                {
-                  "type": "operation",
-                  "name": "stringConstantInput",
-                  "operationInputs": [],
-                  "settings": {"value": "StatusBeheer"}
-                }
-              ],
-              "settings": {}
-            }
-          ],
-          "settings": {}
-        }
-      ]
-    },
-    {
-      "featureTypeNamespace": "http://www.safe.com/gml/fme",
-      "featureTypeName": "GebiedBeheer",
-      "attributeName": "contractnummer",
-      "operations": [
-        {
-          "type": "condition",
-          "name": "[condition]",
-          "operationInputs": [
-            {
-              "type": "input",
-              "name": "contractNummer",
-              "inputAttributeNamespace": "http://www.safe.com/gml/fme",
-              "inputAttributeType": "class java.math.BigInteger"
-            }
-          ],
-          "settings": {}
-        }
-      ]
-    },
-    {
-      "featureTypeNamespace": "http://www.safe.com/gml/fme",
-      "featureTypeName": "GebiedBeheer",
-      "attributeName": "relatienummer",
-      "operations": [
-        {
-          "type": "condition",
-          "name": "[condition]",
-          "operationInputs": [
-            {
-              "type": "input",
-              "name": "relatieNummer",
-              "inputAttributeNamespace": "http://www.safe.com/gml/fme",
-              "inputAttributeType": "class java.math.BigInteger"
-            }
-          ],
-          "settings": {}
-        }
-      ]
-    },
-    {
-      "featureTypeNamespace": "http://www.safe.com/gml/fme",
-      "featureTypeName": "GebiedBeheer",
+      "featureTypeName": "GebiedVerwervingSBB",
       "attributeName": "eindtijd",
       "operations": [
         {
@@ -215,18 +56,31 @@
     },
     {
       "featureTypeNamespace": "http://www.safe.com/gml/fme",
-      "featureTypeName": "GebiedBeheer",
-      "attributeName": "identificatie",
+      "featureTypeName": "GebiedVerwervingSBB",
+      "attributeName": "statusVerwerving",
       "operations": [
         {
           "type": "condition",
           "name": "[condition]",
           "operationInputs": [
             {
-              "type": "input",
-              "name": "identificatie",
-              "inputAttributeNamespace": "http://www.safe.com/gml/fme",
-              "inputAttributeType": "class java.lang.String"
+              "type": "operation",
+              "name": "toCodeTypeTransform",
+              "operationInputs": [
+                {
+                  "type": "input",
+                  "name": "statusVerwerving",
+                  "inputAttributeNamespace": "http://www.safe.com/gml/fme",
+                  "inputAttributeType": "class java.lang.String"
+                },
+                {
+                  "type": "operation",
+                  "name": "stringConstantInput",
+                  "operationInputs": [],
+                  "settings": {"value": "StatusVerwerving"}
+                }
+              ],
+              "settings": {}
             }
           ],
           "settings": {}
@@ -235,7 +89,7 @@
     },
     {
       "featureTypeNamespace": "http://www.safe.com/gml/fme",
-      "featureTypeName": "GebiedBeheer",
+      "featureTypeName": "GebiedVerwervingSBB",
       "attributeName": "begintijd",
       "operations": [
         {
@@ -269,31 +123,18 @@
     },
     {
       "featureTypeNamespace": "http://www.safe.com/gml/fme",
-      "featureTypeName": "GebiedBeheer",
-      "attributeName": "typeBeheerder",
+      "featureTypeName": "GebiedVerwervingSBB",
+      "attributeName": "contractnummer",
       "operations": [
         {
           "type": "condition",
           "name": "[condition]",
           "operationInputs": [
             {
-              "type": "operation",
-              "name": "toCodeTypeTransform",
-              "operationInputs": [
-                {
-                  "type": "input",
-                  "name": "typeBeheerder",
-                  "inputAttributeNamespace": "http://www.safe.com/gml/fme",
-                  "inputAttributeType": "class java.lang.String"
-                },
-                {
-                  "type": "operation",
-                  "name": "stringConstantInput",
-                  "operationInputs": [],
-                  "settings": {"value": "TypeBeheerder"}
-                }
-              ],
-              "settings": {}
+              "type": "input",
+              "name": "contractNummer",
+              "inputAttributeNamespace": "http://www.safe.com/gml/fme",
+              "inputAttributeType": "class java.math.BigInteger"
             }
           ],
           "settings": {}
@@ -302,7 +143,7 @@
     },
     {
       "featureTypeNamespace": "http://www.safe.com/gml/fme",
-      "featureTypeName": "GebiedBeheer",
+      "featureTypeName": "GebiedVerwervingSBB",
       "attributeName": "imnaBronhouder",
       "operations": [
         {
@@ -324,6 +165,112 @@
                   "name": "stringConstantInput",
                   "operationInputs": [],
                   "settings": {"value": "Bronhouder"}
+                }
+              ],
+              "settings": {}
+            }
+          ],
+          "settings": {}
+        }
+      ]
+    },
+    {
+      "featureTypeNamespace": "http://www.safe.com/gml/fme",
+      "featureTypeName": "GebiedVerwervingSBB",
+      "attributeName": "typeEigenaar",
+      "operations": [
+        {
+          "type": "condition",
+          "name": "[condition]",
+          "operationInputs": [
+            {
+              "type": "operation",
+              "name": "toCodeTypeTransform",
+              "operationInputs": [
+                {
+                  "type": "input",
+                  "name": "typeEigenaar",
+                  "inputAttributeNamespace": "http://www.safe.com/gml/fme",
+                  "inputAttributeType": "class java.lang.String"
+                },
+                {
+                  "type": "operation",
+                  "name": "stringConstantInput",
+                  "operationInputs": [],
+                  "settings": {"value": "TypeBeheerder"}
+                }
+              ],
+              "settings": {}
+            }
+          ],
+          "settings": {}
+        }
+      ]
+    },
+    {
+      "featureTypeNamespace": "http://www.safe.com/gml/fme",
+      "featureTypeName": "GebiedVerwervingSBB",
+      "attributeName": "identificatie",
+      "operations": [
+        {
+          "type": "condition",
+          "name": "[condition]",
+          "operationInputs": [
+            {
+              "type": "input",
+              "name": "identificatie",
+              "inputAttributeNamespace": "http://www.safe.com/gml/fme",
+              "inputAttributeType": "class java.lang.String"
+            }
+          ],
+          "settings": {}
+        }
+      ]
+    },
+    {
+      "featureTypeNamespace": "http://www.safe.com/gml/fme",
+      "featureTypeName": "GebiedVerwervingSBB",
+      "attributeName": "relatienummer",
+      "operations": [
+        {
+          "type": "condition",
+          "name": "[condition]",
+          "operationInputs": [
+            {
+              "type": "input",
+              "name": "relatieNummer",
+              "inputAttributeNamespace": "http://www.safe.com/gml/fme",
+              "inputAttributeType": "class java.math.BigInteger"
+            }
+          ],
+          "settings": {}
+        }
+      ]
+    },
+    {
+      "featureTypeNamespace": "http://www.safe.com/gml/fme",
+      "featureTypeName": "GebiedVerwervingSBB",
+      "attributeName": "doelVerwerving",
+      "operations": [
+        {
+          "type": "condition",
+          "name": "[condition]",
+          "operationInputs": [
+            {
+              "type": "operation",
+              "name": "toCodeTypeTransform",
+              "operationInputs": [
+                {
+                  "type": "input",
+                  "name": "doelVerwerving",
+                  "inputAttributeNamespace": "http://www.safe.com/gml/fme",
+                  "inputAttributeType": "class java.lang.String"
+                },
+                {
+                  "type": "operation",
+                  "name": "stringConstantInput",
+                  "operationInputs": [],
+                  "settings": {"value": "DoelRealisatie"}
                 }
               ],
               "settings": {}
