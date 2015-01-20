@@ -28,17 +28,16 @@ public class LandelijkGebiedInrichtingValidator extends AbstractGebiedInrichting
 		compile();
 	}
 
-
 	/**
-	 * Doelinrichting is optional for "landelijk".
+	 * Doelinrichting is mandatory for "landelijk".
 	 * @return
 	 */
 	@Override
 	public Validator<Message, Context> getDoelInrichtingValidator() {
-		return validate(ifExp(
-				doelInrichting.isNull(),
-				constant(true),
+		return validate(
 				and(
+						validate(not(doelInrichting.isNull())).message(Message.ATTRIBUTE_NULL,
+								constant(doelInrichting.name)),
 						validate(not(isBlank(doelInrichting.code()))).message(Message.ATTRIBUTE_EMPTY,
 								constant(doelInrichting.name)),
 						validate(doelInrichting.hasCodeSpace(doelInrichtingCodeSpace)).message(
@@ -46,6 +45,13 @@ public class LandelijkGebiedInrichtingValidator extends AbstractGebiedInrichting
 								constant(doelInrichting.name), doelInrichtingCodeSpace),
 						validate(doelInrichting.isValid()).message(Message.ATTRIBUTE_CODE_INVALID,
 								doelInrichting.code(), constant(doelInrichting.name), doelInrichtingCodeSpace))
-						.shortCircuit()));
+						.shortCircuit());
+	}
+
+	/**
+	 * All data uploaded by provinces should be within their geometry bounds.
+	 */
+	public Validator<Message, Context> getGeometryWithinBronhouderGeometryValidator() {
+		return getGeometryWithinBronhouderGeometryHelper();
 	}
 }

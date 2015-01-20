@@ -26,16 +26,17 @@ public class ProvinciaalGebiedInrichtingValidator extends AbstractGebiedInrichti
 		compile();
 	}
 
+
 	/**
-	 * Doelinrichting is mandatory for "provinciaal".
+	 * Doelinrichting is optional for "provinciaal".
 	 * @return
 	 */
 	@Override
 	public Validator<Message, Context> getDoelInrichtingValidator() {
-		return validate(
+		return validate(ifExp(
+				doelInrichting.isNull(),
+				constant(true),
 				and(
-						validate(not(doelInrichting.isNull())).message(Message.ATTRIBUTE_NULL,
-								constant(doelInrichting.name)),
 						validate(not(isBlank(doelInrichting.code()))).message(Message.ATTRIBUTE_EMPTY,
 								constant(doelInrichting.name)),
 						validate(doelInrichting.hasCodeSpace(doelInrichtingCodeSpace)).message(
@@ -43,6 +44,6 @@ public class ProvinciaalGebiedInrichtingValidator extends AbstractGebiedInrichti
 								constant(doelInrichting.name), doelInrichtingCodeSpace),
 						validate(doelInrichting.isValid()).message(Message.ATTRIBUTE_CODE_INVALID,
 								doelInrichting.code(), constant(doelInrichting.name), doelInrichtingCodeSpace))
-						.shortCircuit());
+						.shortCircuit()));
 	}
 }
