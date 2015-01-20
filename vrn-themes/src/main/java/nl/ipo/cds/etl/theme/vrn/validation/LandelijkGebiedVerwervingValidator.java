@@ -30,16 +30,24 @@ public class LandelijkGebiedVerwervingValidator extends AbstractGebiedVerwerving
 
 
 	/**
-	 * doelVerwerving is optional for "landelijk".
+	 * doelVerwerving is mandatory for "landelijk".
 	 * @return
 	 */
 	@Override
 	public Validator<Message, Context> getDoelVerwervingValidator() {
-		return validate(ifExp(doelVerwerving.isNull(), constant(true), and(
+		return validate(and(
+				validate(not(doelVerwerving.isNull())).message(Message.ATTRIBUTE_NULL, constant(doelVerwerving.name)),
 				validate(not(isBlank(doelVerwerving.code()))).message(Message.ATTRIBUTE_EMPTY, constant(doelVerwerving.name)),
 				validate(doelVerwerving.hasCodeSpace(doelVerwervingCodeSpace)).message(Message.ATTRIBUTE_CODE_CODESPACE_INVALID, doelVerwerving.codeSpace(),
 						constant(doelVerwerving.name), doelVerwervingCodeSpace),
 				validate(doelVerwerving.isValid()).message(Message.ATTRIBUTE_CODE_INVALID, doelVerwerving.code(), constant(doelVerwerving.name),
-						doelVerwervingCodeSpace)).shortCircuit()));
+						doelVerwervingCodeSpace)).shortCircuit());
+	}
+
+	/**
+	 * All data uploaded by provinces should be within their geometry bounds.
+	 */
+	public Validator<Message, Context> getGeometryWithinBronhouderGeometryValidator() {
+		return getGeometryWithinBronhouderGeometryHelper();
 	}
 }

@@ -3,7 +3,6 @@ package nl.ipo.cds.etl.theme.vrn.validation;
 import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_BRONHOUDER;
 
 import java.io.IOException;
-import java.math.BigInteger;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
@@ -14,6 +13,7 @@ import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import nl.idgis.commons.jobexecutor.JobLogger;
+import nl.ipo.cds.dao.ManagerDao;
 import nl.ipo.cds.domain.EtlJob;
 import nl.ipo.cds.etl.AbstractValidator;
 import nl.ipo.cds.etl.log.EventLogger;
@@ -22,6 +22,7 @@ import nl.ipo.cds.etl.postvalidation.IGeometryStore;
 import nl.ipo.cds.etl.theme.vrn.Context;
 import nl.ipo.cds.etl.theme.vrn.Message;
 import nl.ipo.cds.etl.theme.vrn.domain.AbstractGebied;
+import nl.ipo.cds.validation.AbstractUnaryTestExpression;
 import nl.ipo.cds.validation.AttributeExpression;
 import nl.ipo.cds.validation.ValidationReporter;
 import nl.ipo.cds.validation.Validator;
@@ -33,7 +34,9 @@ import nl.ipo.cds.validation.geometry.GeometryExpression;
 import nl.ipo.cds.validation.gml.CodeExpression;
 import nl.ipo.cds.validation.gml.codelists.CodeListFactory;
 
+import org.deegree.commons.uom.Measure;
 import org.deegree.geometry.Geometry;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  * @author annes
@@ -44,11 +47,19 @@ import org.deegree.geometry.Geometry;
 public abstract class AbstractVrnValidator<T extends AbstractGebied> extends
 		AbstractValidator<T, Message, Context> {
 
+	private static final String METER = "urn:ogc:def:uom:EPSG:6.3:9001";
+
 	@Inject
 	private IGeometryStore<AbstractGebied> geometryStore;
 
 	@Inject
 	private IBulkValidator<AbstractGebied> bulkValidator;
+
+	@Inject
+	private ManagerDao managerDao;
+
+	@Value("${bronhouderAreaMargin}")
+	private String bronhouderAreaMargin;
 
 
 	private final GeometryExpression<Message, Context, Geometry> geometrie = geometry("geometrie");
@@ -82,7 +93,9 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends
             throw new RuntimeException("Error creating geometryStore: " + e);
         }
 
-		return new Context(codeListFactory, reporter, ds);
+		Geometry bronhouderGeometry = managerDao.getBronhouderGeometry(job.getBronhouder());
+
+		return new Context(codeListFactory, reporter, ds, bronhouderGeometry);
 	}
 
 	/**
@@ -186,6 +199,29 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends
 
 
 	}
+
+	/**
+	 * Check that the geometry of a feature is within the bounds of the bronhouder it is uploaded to/by.
+	 * The margin of the bronhouder area can be specified in the property file.
+	 * This is a helper method, because this check should only be done on LandelijkGebiedX, and not ProvinciaalGebiedX.
+	 */
+	protected Validator<Message, Context> getGeometryWithinBronhouderGeometryHelper() {
+
+		final AbstractUnaryTestExpression<Message, Context, Geometry> geometryInBronhouderTest = new AbstractUnaryTestExpression<Message, Context, Geometry>(geometrie, "geometrie") {
+
+			@Override
+			public boolean test(Geometry value, Context context) {
+
+				return value.isWithin(context.getBronhouderGeometry().getBuffer(new Measure(bronhouderAreaMargin, METER)));
+			}
+		};
+
+		/**
+		 * Build expression which has the sole purpose of inserting the feature into the feature store.
+		 */
+		return validate(geometryInBronhouderTest).message(Message.GEOMETRY_OUTSIDE_BRONHOUDER_AREA);
+	}
+
 
 	/**
 	 * Multiparts validation (1 deel met uniek IMNa Id per polygon)

@@ -27,20 +27,25 @@ public class LandelijkGebiedBeheerValidator extends AbstractGebiedBeheerValidato
 	}
 
 	/**
-	 * Iff doelbeheer is provided, it should be conform rules. For landelijk it is optional.
+	 * For landelijk, the doelbeheer attribute is mandatory.
 	 * @return
 	 */
 	@Override
 	public Validator<Message, Context> getDoelbeheerValidator() {
-		return validate(ifExp(doelBeheer.isNull(),
-					constant(true),
-		and(
-				validate(not(isBlank(doelBeheer.code()))).message(Message.ATTRIBUTE_EMPTY, constant(doelBeheer.name)),
+		return validate(and(
+				validate(not(doelBeheer.isNull())).message(Message.ATTRIBUTE_NULL, constant(doelBeheer.name)),
 				validate(doelBeheer.hasCodeSpace(doelBeheerCodeSpace)).message(
 						Message.ATTRIBUTE_CODE_CODESPACE_INVALID, doelBeheer.codeSpace(), constant(doelBeheer.name),
 						doelBeheerCodeSpace),
 				validate(not(isBlank(doelBeheer.code()))).message(Message.ATTRIBUTE_EMPTY, constant(doelBeheer.name)),
 				validate(doelBeheer.isValid()).message(Message.ATTRIBUTE_CODE_INVALID, doelBeheer.code(),
-						constant(doelBeheer.name), doelBeheerCodeSpace)).shortCircuit()));
+						constant(doelBeheer.name), doelBeheerCodeSpace)).shortCircuit());
+	}
+
+	/**
+	 * All data uploaded by provinces should be within their geometry bounds.
+	 */
+	public Validator<Message, Context> getGeometryWithinBronhouderGeometryValidator() {
+		return getGeometryWithinBronhouderGeometryHelper();
 	}
 }
