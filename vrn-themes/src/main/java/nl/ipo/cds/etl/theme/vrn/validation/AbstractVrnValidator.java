@@ -186,16 +186,16 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends
 						validate(not(surfaceGeometry.hasUnclosedRing())).message(Message.GEOMETRY_RING_NOT_CLOSED),
 						validate(not(surfaceGeometry.hasCurveDiscontinuity())).message(Message.GEOMETRY_DISCONTINUITY))
 						.shortCircuit(),
-				// Invalid coordinate
-				/*
-				 * TODO: create validation!
-				 */
-
+				
 				// SRS validations:
 				and(
 						validate(surfaceGeometry.hasSrs()).message(Message.GEOMETRY_SRS_NULL),
 						validate(surfaceGeometry.isSrs(constant("28992"))).message(Message.GEOMETRY_SRS_NOT_RD,
-								surfaceGeometry.srsName())).shortCircuit()));
+								surfaceGeometry.srsName()),
+						// check invalid coordinates		
+						validate(surfaceGeometry.hasValidCoordinateRD())
+				 //TODO!: check duplicate coordinates
+				).shortCircuit()));
 
 
 	}
@@ -271,7 +271,7 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends
         }
 	}
 
-	public void setBulkValidator(IBulkValidator bulkValidator) {
+	public void setBulkValidator(IBulkValidator<AbstractGebied> bulkValidator) {
 		this.bulkValidator = bulkValidator;
 	}
 
