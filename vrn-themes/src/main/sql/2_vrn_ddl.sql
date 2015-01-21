@@ -1,4 +1,4 @@
-
+CREATE TABLE vrn.gebiedbeheer_landelijk ( 
 	id serial NOT NULL,
 	identificatie text NOT NULL,
 	job_id bigint,
