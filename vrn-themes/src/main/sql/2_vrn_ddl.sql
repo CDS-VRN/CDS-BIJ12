@@ -42,10 +42,10 @@ COMMENT ON TABLE vrn.gebiedbeheer_provinciaal
     IS 'natuurbeheerder/RVO aan provincie'
 ;
 
-CREATE TABLE vrn.gebiedbeheer_vastgesteld ( 
+CREATE TABLE vrn.gebiedbeheer_tagged ( 
 	id serial NOT NULL,
 	identificatie text NOT NULL,
-	vaststel_label text NOT NULL,
+	tag text NOT NULL,
 	job_id bigint,
 	gfid text,
 	beheerpakket text,
@@ -61,7 +61,7 @@ CREATE TABLE vrn.gebiedbeheer_vastgesteld (
 	eindtijd timestamp
 )
 ;
-COMMENT ON TABLE vrn.gebiedbeheer_vastgesteld
+COMMENT ON TABLE vrn.gebiedbeheer_tagged
     IS 'provincie aan BIJ12'
 ;
 
@@ -99,10 +99,10 @@ CREATE TABLE vrn.gebiedinrichting_provinciaal (
 )
 ;
 
-CREATE TABLE vrn.gebiedinrichting_vastgesteld ( 
+CREATE TABLE vrn.gebiedinrichting_tagged ( 
 	id serial NOT NULL,
 	identificatie text NOT NULL,
-	vaststel_label text NOT NULL,
+	tag text NOT NULL,
 	job_id bigint,
 	gfid text,
 	imna_bronhouder text NOT NULL,
@@ -151,10 +151,10 @@ CREATE TABLE vrn.gebiedverwerving_provinciaal (
 )
 ;
 
-CREATE TABLE vrn.gebiedverwerving_vastgesteld ( 
+CREATE TABLE vrn.gebiedverwerving_tagged ( 
 	id serial NOT NULL,
 	identificatie text NOT NULL,
-	vaststel_label text NOT NULL,
+	tag text NOT NULL,
 	job_id bigint,
 	gfid text,
 	imna_bronhouder text NOT NULL,
@@ -180,7 +180,7 @@ ALTER TABLE vrn.gebiedbeheer_provinciaal ADD CONSTRAINT PK_gebiedbeheer_provinci
 ;
 
 
-ALTER TABLE vrn.gebiedbeheer_vastgesteld ADD CONSTRAINT PK_gebiedbeheer_vastgesteld 
+ALTER TABLE vrn.gebiedbeheer_tagged ADD CONSTRAINT PK_gebiedbeheer_tagged 
 	PRIMARY KEY (id)
 ;
 
@@ -195,7 +195,7 @@ ALTER TABLE vrn.gebiedinrichting_provinciaal ADD CONSTRAINT PK_gebiedinrichting_
 ;
 
 
-ALTER TABLE vrn.gebiedinrichting_vastgesteld ADD CONSTRAINT PK_gebiedinrichting_vastgesteld 
+ALTER TABLE vrn.gebiedinrichting_tagged ADD CONSTRAINT PK_gebiedinrichting_tagged 
 	PRIMARY KEY (id)
 ;
 
@@ -210,7 +210,7 @@ ALTER TABLE vrn.gebiedverwerving_provinciaal ADD CONSTRAINT PK_gebiedverwerving_
 ;
 
 
-ALTER TABLE vrn.gebiedverwerving_vastgesteld ADD CONSTRAINT PK_gebiedverwerving_vastgesteld 
+ALTER TABLE vrn.gebiedverwerving_tagged ADD CONSTRAINT PK_gebiedverwerving_tagged 
 	PRIMARY KEY (id)
 ;
 
@@ -222,8 +222,8 @@ ALTER TABLE vrn.gebiedbeheer_landelijk
 ALTER TABLE vrn.gebiedbeheer_provinciaal
 	ADD CONSTRAINT UQ_gebiedbeheer_provinciaal_identificatie UNIQUE (identificatie)
 ;
-ALTER TABLE vrn.gebiedbeheer_vastgesteld
-	ADD CONSTRAINT UQ_gebiedbeheer_vastgesteld UNIQUE (identificatie, vaststel_label)
+ALTER TABLE vrn.gebiedbeheer_tagged
+	ADD CONSTRAINT UQ_gebiedbeheer_tagged UNIQUE (identificatie, tag)
 ;
 ALTER TABLE vrn.gebiedinrichting_landelijk
 	ADD CONSTRAINT UQ_gebiedinrichting_landelijk_identificatie UNIQUE (identificatie)
@@ -231,8 +231,8 @@ ALTER TABLE vrn.gebiedinrichting_landelijk
 ALTER TABLE vrn.gebiedinrichting_provinciaal
 	ADD CONSTRAINT UQ_gebiedinrichting_provinciaal_identificatie UNIQUE (identificatie)
 ;
-ALTER TABLE vrn.gebiedinrichting_vastgesteld
-	ADD CONSTRAINT UQ_gebiedinrichting_vastgesteld UNIQUE (identificatie, vaststel_label)
+ALTER TABLE vrn.gebiedinrichting_tagged
+	ADD CONSTRAINT UQ_gebiedinrichting_tagged UNIQUE (identificatie, tag)
 ;
 ALTER TABLE vrn.gebiedverwerving_landelijk
 	ADD CONSTRAINT UQ_gebiedverwerving_landelijk_identificatie UNIQUE (identificatie)
@@ -240,6 +240,6 @@ ALTER TABLE vrn.gebiedverwerving_landelijk
 ALTER TABLE vrn.gebiedverwerving_provinciaal
 	ADD CONSTRAINT UQ_gebiedverwerving_provinciaal_identificatie UNIQUE (identificatie)
 ;
-ALTER TABLE vrn.gebiedverwerving_vastgesteld
-	ADD CONSTRAINT UQ_gebiedverwerving_landelijk UNIQUE (identificatie, vaststel_label)
+ALTER TABLE vrn.gebiedverwerving_tagged
+	ADD CONSTRAINT UQ_gebiedverwerving_tagged UNIQUE (identificatie, tag)
 ;
