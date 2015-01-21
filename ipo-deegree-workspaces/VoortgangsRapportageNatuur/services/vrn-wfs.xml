@@ -1,5 +1,6 @@
 <deegreeWFS xmlns="http://www.deegree.org/services/wfs" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-configVersion="3.2.0" xsi:schemaLocation="http://www.deegree.org/services/wfs http://schemas.deegree.org/services/wfs/3.2.0/wfs_configuration.xsd">
+ xmlns:imna="http://www.cds.nl/imna/beheer"
+ configVersion="3.2.0" xsi:schemaLocation="http://www.deegree.org/services/wfs http://schemas.deegree.org/services/wfs/3.2.0/wfs_configuration.xsd">
 
   <!-- SupportedVersions [0...1]: Activated OGC protocol versions, default: activate all implemented versions -->
   <SupportedVersions>
@@ -9,13 +10,14 @@ configVersion="3.2.0" xsi:schemaLocation="http://www.deegree.org/services/wfs ht
 
 
   <!-- omit for all -->
+<!--
 <FeatureStoreId>gebiedbeheer_landelijk</FeatureStoreId>
 <FeatureStoreId>gebiedbeheer_provinciaal</FeatureStoreId>
 <FeatureStoreId>gebiedinrichting_landelijk</FeatureStoreId>
 <FeatureStoreId>gebiedinrichting_provinciaal</FeatureStoreId>
 <FeatureStoreId>gebiedverwerving_landelijk</FeatureStoreId>
 <FeatureStoreId>gebiedverwerving_provinciaal</FeatureStoreId>
-
+-->
   <!-- EnableTransactions [0...1]: Enable transactions (WFS-T operations), default: disabled -->
   <EnableTransactions>true</EnableTransactions>
 

@@ -11,24 +11,18 @@
     </Description>
     <LineSymbolizer>
       <Stroke>
-        <SvgParameter name="stroke">
-#00ffff
-        </SvgParameter>
+        <SvgParameter name="stroke">#00ffff</SvgParameter>
         <SvgParameter name="stroke-width">2</SvgParameter>
       </Stroke>
     </LineSymbolizer>
     <PolygonSymbolizer>
       <Fill>
-        <SvgParameter name="fill">
-#ffffee
-</SvgParameter>
+        <SvgParameter name="fill">#ffffee</SvgParameter>
       </Fill>
       <Stroke>
-	<SvgParameter name="stroke">
-#00ffff
-</SvgParameter>
+	<SvgParameter name="stroke">#00ffff</SvgParameter>
         <SvgParameter name="stroke-width">2</SvgParameter>
       </Stroke>
     </PolygonSymbolizer>
   </Rule>
-</FeatureTypeStyle> 
+</FeatureTypeStyle>

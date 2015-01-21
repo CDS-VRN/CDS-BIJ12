@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema 
+	xmlns:beheer="http://www.cds.nl/imna/beheer"
+	xmlns:verwerving="http://www.cds.nl/imna/verwerving"
+	xmlns:inrichting="http://www.cds.nl/imna/inrichting"
+	xmlns:imna="http://www.cds.nl/imna" targetNamespace="http://www.cds.nl/imna"
+	xmlns:gml="http://www.opengis.net/gml" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified"  version="0.1">
+	
+	
+	<xsd:import namespace="http://www.cds.nl/imna/beheer" schemaLocation="imna_vrn_beheer.xsd" />
+	<xsd:import namespace="http://www.cds.nl/imna/inrichting" schemaLocation="imna_vrn_inrichting.xsd" />
+	<xsd:import namespace="http://www.cds.nl/imna/verwerving" schemaLocation="imna_vrn_verwerving.xsd" />
+	<xsd:import namespace="http://www.opengis.net/gml" schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd" />
+
+
+	<xsd:element name="GebiedBeheerP" type="imna:GebiedBeheerPType" />
+	<xsd:complexType name="GebiedBeheerPType">
+		<xsd:complexContent>
+			<xsd:extension base="beheer:GebiedBeheerType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="GebiedBeheerL" type="imna:GebiedBeheerLType" />
+	<xsd:complexType name="GebiedBeheerLType">
+		<xsd:complexContent>
+			<xsd:extension base="beheer:GebiedBeheerType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+<!--
+	<xsd:complexType name="GebiedInrichtingPType" extends="inrichting:GebiedInrichtingType">
+	</xsd:complexType>
+	<xsd:element name="GebiedInrichtingL" type="inrichting:GebiedInrichtingLType" />
+	<xsd:complexType name="GebiedInrichtingLType" extends="inrichting:GebiedInrichtingType">
+	</xsd:complexType>
+	<xsd:element name="GebiedVerwervingP" type="verwerving:GebiedVerwervingPType" />
+	<xsd:complexType name="GebiedVerwervingPType" extends="verwerving:GebiedVerwervingType">
+	</xsd:complexType>
+	<xsd:element name="GebiedVerwervingL" type="verwerving:GebiedVerwervingLType" />
+	<xsd:complexType name="GebiedVerwervingLType" extends="verwerving:GebiedVerwervingType">
+	</xsd:complexType>
+-->	
+</xsd:schema>
