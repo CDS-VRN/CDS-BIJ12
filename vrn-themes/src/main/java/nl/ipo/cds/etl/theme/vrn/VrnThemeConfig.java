@@ -71,5 +71,15 @@ public class VrnThemeConfig<T extends AbstractGebied> extends ThemeConfig<T>{
 		}
 		return null;
 	}
+
+	@Override
+	public boolean isTaggable() {
+		return true;
+	}
+
+	@Override
+	public String getSchemaName() {
+		return "vrn";
+	}
 	
 }
