@@ -1,10 +1,9 @@
 package nl.ipo.cds.etl.theme.vrn.validation;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_BRONHOUDER;
 
-import java.math.BigInteger;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
@@ -14,8 +13,8 @@ import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import nl.idgis.commons.jobexecutor.JobLogger;
+import nl.ipo.cds.dao.ManagerDao;
 import nl.ipo.cds.domain.EtlJob;
-import nl.ipo.cds.domain.ValidateJob;
 import nl.ipo.cds.etl.AbstractValidator;
 import nl.ipo.cds.etl.log.EventLogger;
 import nl.ipo.cds.etl.postvalidation.IBulkValidator;
@@ -23,7 +22,7 @@ import nl.ipo.cds.etl.postvalidation.IGeometryStore;
 import nl.ipo.cds.etl.theme.vrn.Context;
 import nl.ipo.cds.etl.theme.vrn.Message;
 import nl.ipo.cds.etl.theme.vrn.domain.AbstractGebied;
-import nl.ipo.cds.etl.theme.vrn.domain.LandelijkGebiedBeheer;
+import nl.ipo.cds.validation.AbstractUnaryTestExpression;
 import nl.ipo.cds.validation.AttributeExpression;
 import nl.ipo.cds.validation.ValidationReporter;
 import nl.ipo.cds.validation.Validator;
@@ -35,8 +34,9 @@ import nl.ipo.cds.validation.geometry.GeometryExpression;
 import nl.ipo.cds.validation.gml.CodeExpression;
 import nl.ipo.cds.validation.gml.codelists.CodeListFactory;
 
+import org.deegree.commons.uom.Measure;
 import org.deegree.geometry.Geometry;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  * @author annes
@@ -44,14 +44,22 @@ import org.springframework.beans.factory.annotation.Qualifier;
  *         Base class for IMNa validation. Specifies the validations that are required for all IMNa themes
  * @param <T>
  */
-public class AbstractVrnValidator<T extends AbstractGebied> extends
+public abstract class AbstractVrnValidator<T extends AbstractGebied> extends
 		AbstractValidator<T, Message, Context> {
+
+	private static final String METER = "urn:ogc:def:uom:EPSG:6.3:9001";
 
 	@Inject
 	private IGeometryStore<AbstractGebied> geometryStore;
 
 	@Inject
 	private IBulkValidator<AbstractGebied> bulkValidator;
+
+	@Inject
+	private ManagerDao managerDao;
+
+	@Value("${bronhouderAreaMargin}")
+	private String bronhouderAreaMargin;
 
 
 	private final GeometryExpression<Message, Context, Geometry> geometrie = geometry("geometrie");
@@ -60,10 +68,7 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends
 	private final Constant<Message, Context, String> imnaBronhouderCodeSpace = constant(CODESPACE_BRONHOUDER);
 
 	private final AttributeExpression<Message, Context, Timestamp> begintijd = timestampAttr("begintijd");
-	private final AttributeExpression<Message, Context, Timestamp> eindtijd = timestampAttr("eindtijd");
 	private final AttributeExpression<Message, Context, String> identificatie = stringAttr("identificatie");
-	private final AttributeExpression<Message, Context, BigInteger> relatienummer = bigIntegerAttr("relatienummer");
-	private final AttributeExpression<Message, Context, BigInteger> contractnummer = bigIntegerAttr("contractnummer");
 	/**
 	 * codelijst doel realisatie is voor zowel doelbeheer als doelverwerving als doelinrichting
 	 */
@@ -85,31 +90,37 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends
         try {
             ds = geometryStore.createStore(UUID.randomUUID().toString());
         } catch (SQLException e) {
-            // TODO: fail job
-            e.printStackTrace();
+            throw new RuntimeException("Error creating geometryStore: " + e);
         }
 
-		return new Context(codeListFactory, reporter, ds);
+		Geometry bronhouderGeometry = managerDao.getBronhouderGeometry(job.getBronhouder());
+
+		return new Context(codeListFactory, reporter, ds, bronhouderGeometry);
 	}
 
+	/**
+	 * Note: using the auto-mapping, it is expected to get a DATE string, which is converted to Timestamp.
+	 * If a Timestamp/Datetime string is provided, the automapping will convert the string to NULL instead.
+	 */
 	public Validator<Message, Context> getBegintijdValidator() {
-		return validate(not(begintijd.isNull())).message(Message.ATTRIBUTE_EMPTY);
+		return validate(not(begintijd.isNull())).message(Message.ATTRIBUTE_NULL, constant(begintijd.name));
 	}
 
+	/**
+	 * Note: using the auto-mapping, it is expected to get a DATE string, which is converted to Timestamp.
+	 * If a Timestamp/Datetime string is provided, the automapping will convert the string to NULL instead.
+	 */
 	public Validator<Message, Context> getEindtijdValidator() {
-		return validate(not(eindtijd.isNull())).message(Message.ATTRIBUTE_EMPTY);
+		// eindtijd may be null.
+		return validate(constant(true));
+		//return validate(not(eindtijd.isNull())).message(Message.ATTRIBUTE_NULL, constant(eindtijd.name));
 	}
 
 	public Validator<Message, Context> getIdentificatieValidator() {
-		return validate(not(isBlank(identificatie))).message(Message.ATTRIBUTE_EMPTY);
-	}
-
-	public Validator<Message, Context> getRelatieNummerValidator() {
-		return validate(not(relatienummer.isNull())).message(Message.ATTRIBUTE_EMPTY);
-	}
-
-	public Validator<Message, Context> getContractNummerValidator() {
-		return validate(not(contractnummer.isNull())).message(Message.ATTRIBUTE_EMPTY);
+		return validate(and(
+				validate(not(identificatie.isNull())).message(Message.ATTRIBUTE_NULL, constant(identificatie.name)),
+				validate(not(isBlank(identificatie))).message(Message.ATTRIBUTE_EMPTY, constant(identificatie.name))
+		).shortCircuit());
 	}
 
 	/*
@@ -118,6 +129,7 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends
 
 	public Validator<Message, Context> getImnaBronhouderValidator() {
 		return validate(and(
+				validate(not(imnaBronhouder.isNull())).message(Message.ATTRIBUTE_NULL, constant(imnaBronhouder.name)),
 				validate(not(isBlank(imnaBronhouder.code()))).message(Message.ATTRIBUTE_EMPTY,
 						constant(imnaBronhouder.name)),
 				validate(imnaBronhouder.hasCodeSpace(imnaBronhouderCodeSpace)).message(
@@ -174,19 +186,42 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends
 						validate(not(surfaceGeometry.hasUnclosedRing())).message(Message.GEOMETRY_RING_NOT_CLOSED),
 						validate(not(surfaceGeometry.hasCurveDiscontinuity())).message(Message.GEOMETRY_DISCONTINUITY))
 						.shortCircuit(),
-				// Invalid coordinate
-				/*
-				 * TODO: create validation!
-				 */
-
+				
 				// SRS validations:
 				and(
 						validate(surfaceGeometry.hasSrs()).message(Message.GEOMETRY_SRS_NULL),
 						validate(surfaceGeometry.isSrs(constant("28992"))).message(Message.GEOMETRY_SRS_NOT_RD,
-								surfaceGeometry.srsName())).shortCircuit()));
+								surfaceGeometry.srsName()),
+						// check invalid coordinates		
+						validate(surfaceGeometry.hasValidCoordinateRD())
+				 //TODO!: check duplicate coordinates
+				).shortCircuit()));
 
 
 	}
+
+	/**
+	 * Check that the geometry of a feature is within the bounds of the bronhouder it is uploaded to/by.
+	 * The margin of the bronhouder area can be specified in the property file.
+	 * This is a helper method, because this check should only be done on LandelijkGebiedX, and not ProvinciaalGebiedX.
+	 */
+	protected Validator<Message, Context> getGeometryWithinBronhouderGeometryHelper() {
+
+		final AbstractUnaryTestExpression<Message, Context, Geometry> geometryInBronhouderTest = new AbstractUnaryTestExpression<Message, Context, Geometry>(geometrie, "geometrie") {
+
+			@Override
+			public boolean test(Geometry value, Context context) {
+
+				return value.isWithin(context.getBronhouderGeometry().getBuffer(new Measure(bronhouderAreaMargin, METER)));
+			}
+		};
+
+		/**
+		 * Build expression which has the sole purpose of inserting the feature into the feature store.
+		 */
+		return validate(geometryInBronhouderTest).message(Message.GEOMETRY_OUTSIDE_BRONHOUDER_AREA);
+	}
+
 
 	/**
 	 * Multiparts validation (1 deel met uniek IMNa Id per polygon)
@@ -236,7 +271,7 @@ public class AbstractVrnValidator<T extends AbstractGebied> extends
         }
 	}
 
-	public void setBulkValidator(IBulkValidator bulkValidator) {
+	public void setBulkValidator(IBulkValidator<AbstractGebied> bulkValidator) {
 		this.bulkValidator = bulkValidator;
 	}
 

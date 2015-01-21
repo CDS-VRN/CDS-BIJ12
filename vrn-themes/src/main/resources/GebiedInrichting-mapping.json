@@ -1,0 +1,284 @@
+{
+  "mappings": [
+    {
+      "featureTypeNamespace": "http://www.safe.com/gml/fme",
+      "featureTypeName": "GebiedInrichtingSBB",
+      "attributeName": "begintijd",
+      "operations": [
+        {
+          "type": "condition",
+          "name": "[condition]",
+          "operationInputs": [
+            {
+              "type": "operation",
+              "name": "dateToTimestampTransform",
+              "operationInputs": [
+                {
+                  "type": "operation",
+                  "name": "toDateTransform",
+                  "operationInputs": [
+                    {
+                      "type": "input",
+                      "name": "beginTijd",
+                      "inputAttributeNamespace": "http://www.safe.com/gml/fme",
+                      "inputAttributeType": "class java.lang.String"
+                    }
+                  ],
+                  "settings": {}
+                }
+              ],
+              "settings": {}
+            }
+          ],
+          "settings": {}
+        }
+      ]
+    },
+    {
+      "featureTypeNamespace": "http://www.safe.com/gml/fme",
+      "featureTypeName": "GebiedInrichtingSBB",
+      "attributeName": "imnaBronhouder",
+      "operations": [
+        {
+          "type": "condition",
+          "name": "[condition]",
+          "operationInputs": [
+            {
+              "type": "operation",
+              "name": "toCodeTypeTransform",
+              "operationInputs": [
+                {
+                  "type": "input",
+                  "name": "bronHouder",
+                  "inputAttributeNamespace": "http://www.safe.com/gml/fme",
+                  "inputAttributeType": "class java.lang.String"
+                },
+                {
+                  "type": "operation",
+                  "name": "stringConstantInput",
+                  "operationInputs": [],
+                  "settings": {"value": "Bronhouder"}
+                }
+              ],
+              "settings": {}
+            }
+          ],
+          "settings": {}
+        }
+      ]
+    },
+    {
+      "featureTypeNamespace": "http://www.safe.com/gml/fme",
+      "featureTypeName": "GebiedInrichtingSBB",
+      "attributeName": "identificatie",
+      "operations": [
+        {
+          "type": "condition",
+          "name": "[condition]",
+          "operationInputs": [
+            {
+              "type": "input",
+              "name": "identificatie",
+              "inputAttributeNamespace": "http://www.safe.com/gml/fme",
+              "inputAttributeType": "class java.lang.String"
+            }
+          ],
+          "settings": {}
+        }
+      ]
+    },
+    {
+      "featureTypeNamespace": "http://www.safe.com/gml/fme",
+      "featureTypeName": "GebiedInrichtingSBB",
+      "attributeName": "statusInrichting",
+      "operations": [
+        {
+          "type": "condition",
+          "name": "[condition]",
+          "operationInputs": [
+            {
+              "type": "operation",
+              "name": "toCodeTypeTransform",
+              "operationInputs": [
+                {
+                  "type": "input",
+                  "name": "statusInrichting",
+                  "inputAttributeNamespace": "http://www.safe.com/gml/fme",
+                  "inputAttributeType": "class java.lang.String"
+                },
+                {
+                  "type": "operation",
+                  "name": "stringConstantInput",
+                  "operationInputs": [],
+                  "settings": {"value": "StatusInrichting"}
+                }
+              ],
+              "settings": {}
+            }
+          ],
+          "settings": {}
+        }
+      ]
+    },
+    {
+      "featureTypeNamespace": "http://www.safe.com/gml/fme",
+      "featureTypeName": "GebiedInrichtingSBB",
+      "attributeName": "doelInrichting",
+      "operations": [
+        {
+          "type": "condition",
+          "name": "[condition]",
+          "operationInputs": [
+            {
+              "type": "operation",
+              "name": "toCodeTypeTransform",
+              "operationInputs": [
+                {
+                  "type": "input",
+                  "name": "doelInrichting",
+                  "inputAttributeNamespace": "http://www.safe.com/gml/fme",
+                  "inputAttributeType": "class java.lang.String"
+                },
+                {
+                  "type": "operation",
+                  "name": "stringConstantInput",
+                  "operationInputs": [],
+                  "settings": {"value": "DoelRealisatie"}
+                }
+              ],
+              "settings": {}
+            }
+          ],
+          "settings": {}
+        }
+      ]
+    },
+    {
+      "featureTypeNamespace": "http://www.safe.com/gml/fme",
+      "featureTypeName": "GebiedInrichtingSBB",
+      "attributeName": "eindtijd",
+      "operations": [
+        {
+          "type": "condition",
+          "name": "[condition]",
+          "operationInputs": [
+            {
+              "type": "operation",
+              "name": "dateToTimestampTransform",
+              "operationInputs": [
+                {
+                  "type": "operation",
+                  "name": "toDateTransform",
+                  "operationInputs": [
+                    {
+                      "type": "input",
+                      "name": "eindTijd",
+                      "inputAttributeNamespace": "http://www.safe.com/gml/fme",
+                      "inputAttributeType": "class java.lang.String"
+                    }
+                  ],
+                  "settings": {}
+                }
+              ],
+              "settings": {}
+            }
+          ],
+          "settings": {}
+        }
+      ]
+    },
+    {
+      "featureTypeNamespace": "http://www.safe.com/gml/fme",
+      "featureTypeName": "GebiedInrichtingSBB",
+      "attributeName": "geometrie",
+      "operations": [
+        {
+          "type": "condition",
+          "name": "[condition]",
+          "operationInputs": [
+            {
+              "type": "input",
+              "name": "surfaceProperty",
+              "inputAttributeNamespace": "http://www.safe.com/gml/fme",
+              "inputAttributeType": "interface org.deegree.geometry.Geometry"
+            }
+          ],
+          "settings": {}
+        }
+      ]
+    },
+    {
+      "featureTypeNamespace": "http://www.safe.com/gml/fme",
+      "featureTypeName": "GebiedInrichtingSBB",
+      "attributeName": "contractnummer",
+      "operations": [
+        {
+          "type": "condition",
+          "name": "[condition]",
+          "operationInputs": [
+            {
+              "type": "input",
+              "name": "contractNummer",
+              "inputAttributeNamespace": "http://www.safe.com/gml/fme",
+              "inputAttributeType": "class java.math.BigInteger"
+            }
+          ],
+          "settings": {}
+        }
+      ]
+    },
+    {
+      "featureTypeNamespace": "http://www.safe.com/gml/fme",
+      "featureTypeName": "GebiedInrichtingSBB",
+      "attributeName": "typeBeheerder",
+      "operations": [
+        {
+          "type": "condition",
+          "name": "[condition]",
+          "operationInputs": [
+            {
+              "type": "operation",
+              "name": "toCodeTypeTransform",
+              "operationInputs": [
+                {
+                  "type": "input",
+                  "name": "typeBeheerder",
+                  "inputAttributeNamespace": "http://www.safe.com/gml/fme",
+                  "inputAttributeType": "class java.lang.String"
+                },
+                {
+                  "type": "operation",
+                  "name": "stringConstantInput",
+                  "operationInputs": [],
+                  "settings": {"value": "TypeBeheerder"}
+                }
+              ],
+              "settings": {}
+            }
+          ],
+          "settings": {}
+        }
+      ]
+    },
+    {
+      "featureTypeNamespace": "http://www.safe.com/gml/fme",
+      "featureTypeName": "GebiedInrichtingSBB",
+      "attributeName": "relatienummer",
+      "operations": [
+        {
+          "type": "condition",
+          "name": "[condition]",
+          "operationInputs": [
+            {
+              "type": "input",
+              "name": "relatieNummer",
+              "inputAttributeNamespace": "http://www.safe.com/gml/fme",
+              "inputAttributeType": "class java.math.BigInteger"
+            }
+          ],
+          "settings": {}
+        }
+      ]
+    }
+  ]
+}

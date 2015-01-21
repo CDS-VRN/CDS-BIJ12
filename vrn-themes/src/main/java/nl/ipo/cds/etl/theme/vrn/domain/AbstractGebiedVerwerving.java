@@ -2,10 +2,6 @@ package nl.ipo.cds.etl.theme.vrn.domain;
 
 import org.deegree.commons.tom.ows.CodeType;
 
-import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_DOEL_REALISATIE;
-import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_STATUS_VERWERVING;
-import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_TYPE_BEHEERDER_EN_EIGENAAR;
-
 import nl.ipo.cds.etl.db.annotation.Column;
 import nl.ipo.cds.etl.db.annotation.Table;
 import nl.ipo.cds.etl.theme.annotation.CodeSpace;
@@ -15,6 +11,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.text.ParseException;
+
+import static nl.ipo.cds.etl.theme.vrn.Constants.*;
 
 /**
  * @author annes
@@ -88,13 +86,13 @@ public abstract  class AbstractGebiedVerwerving extends AbstractGebied {
 	}
 
 	@MappableAttribute
-	@CodeSpace(CODESPACE_TYPE_BEHEERDER_EN_EIGENAAR)
+	@CodeSpace(CODESPACE_TYPE_BEHEERDER)
 	public CodeType getTypeEigenaar() {
 		return typeEigenaar;
 	}
 
 	@MappableAttribute
-	@CodeSpace(CODESPACE_TYPE_BEHEERDER_EN_EIGENAAR)
+	@CodeSpace(CODESPACE_TYPE_BEHEERDER)
 	public void setTypeEigenaar(CodeType typeEigenaar) {
 		this.typeEigenaar = typeEigenaar;
 	}

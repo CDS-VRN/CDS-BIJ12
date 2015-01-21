@@ -1,16 +1,9 @@
 package nl.ipo.cds.etl.theme.vrn.validation;
 
 import nl.ipo.cds.etl.theme.vrn.domain.AbstractGebied;
-import nl.ipo.cds.validation.AbstractExpression;
 import nl.ipo.cds.validation.AttributeExpression;
 import nl.ipo.cds.validation.ValidationMessage;
 import nl.ipo.cds.validation.ValidatorContext;
-import nl.ipo.cds.validation.execute.*;
-import nl.ipo.cds.validation.execute.Compiler;
-
-import java.lang.invoke.MethodHandle;
-import java.lang.invoke.MethodHandles;
-import java.util.Collections;
 
 /**
  * This expression is an attribute expression calling getAbstractGebied on the AbstractGebied object (which should return itself).
