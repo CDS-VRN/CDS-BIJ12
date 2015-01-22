@@ -38,7 +38,7 @@ public class DatasetConfig {
 			final LandelijkGebiedBeheerValidator validator, final OperationDiscoverer operationDiscoverer)
 			throws ThemeConfigException {
 		return new VrnThemeConfig<LandelijkGebiedBeheer>(validator, operationDiscoverer, LandelijkGebiedBeheer.class,
-				"GebiedBeheer-mapping.json");
+				"GebiedBeheer-mapping.json", true);
 	}
 
 	@Bean
@@ -47,7 +47,7 @@ public class DatasetConfig {
 			final ProvinciaalGebiedBeheerValidator validator, final OperationDiscoverer operationDiscoverer)
 			throws ThemeConfigException {
 		return new VrnThemeConfig<ProvinciaalGebiedBeheer>(validator, operationDiscoverer,
-				ProvinciaalGebiedBeheer.class, "GebiedBeheer-mapping.json");
+				ProvinciaalGebiedBeheer.class, "GebiedBeheer-mapping.json", false);
 	}
 
 	@Bean
@@ -56,7 +56,7 @@ public class DatasetConfig {
 			final ProvinciaalGebiedInrichtingValidator validator, final OperationDiscoverer operationDiscoverer)
 			throws ThemeConfigException {
 		return new VrnThemeConfig<ProvinciaalGebiedInrichting>(validator, operationDiscoverer,
-				ProvinciaalGebiedInrichting.class, "GebiedInrichting-mapping.json");
+				ProvinciaalGebiedInrichting.class, "GebiedInrichting-mapping.json", false);
 	}
 
 	@Bean
@@ -65,7 +65,7 @@ public class DatasetConfig {
 			final LandelijkGebiedInrichtingValidator validator, final OperationDiscoverer operationDiscoverer)
 			throws ThemeConfigException {
 		return new VrnThemeConfig<LandelijkGebiedInrichting>(validator, operationDiscoverer,
-				LandelijkGebiedInrichting.class, "GebiedInrichting-mapping.json");
+				LandelijkGebiedInrichting.class, "GebiedInrichting-mapping.json", true);
 	}
 
 	@Bean
@@ -74,7 +74,7 @@ public class DatasetConfig {
 			final LandelijkGebiedVerwervingValidator validator, final OperationDiscoverer operationDiscoverer)
 			throws ThemeConfigException {
 		return new VrnThemeConfig<LandelijkGebiedVerwerving>(validator, operationDiscoverer,
-				LandelijkGebiedVerwerving.class, "GebiedVerwerving-mapping.json");
+				LandelijkGebiedVerwerving.class, "GebiedVerwerving-mapping.json", true);
 	}
 
 	@Bean
@@ -83,7 +83,7 @@ public class DatasetConfig {
 			final ProvinciaalGebiedVerwervingValidator validator, final OperationDiscoverer operationDiscoverer)
 			throws ThemeConfigException {
 		return new VrnThemeConfig<ProvinciaalGebiedVerwerving>(validator, operationDiscoverer,
-				ProvinciaalGebiedVerwerving.class, "GebiedVerwerving-mapping.json");
+				ProvinciaalGebiedVerwerving.class, "GebiedVerwerving-mapping.json", false);
 	}
 
 	@Configuration(value = "vrn.Validators")
