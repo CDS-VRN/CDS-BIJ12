@@ -193,7 +193,7 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends
 						validate(surfaceGeometry.isSrs(constant("28992"))).message(Message.GEOMETRY_SRS_NOT_RD,
 								surfaceGeometry.srsName()),
 						// check invalid coordinates		
-						validate(surfaceGeometry.hasValidCoordinateRD())
+						validate(surfaceGeometry.hasValidCoordinateRD()).message(Message.GEOMETRY_INVALID_COORDINATES)
 				 //TODO!: check duplicate coordinates
 				).shortCircuit()));
 
