@@ -3,7 +3,7 @@
   <StorageCRS srid="-1" dim="2D">EPSG:28992</StorageCRS>
   <GMLSchema>../../appschemas/tagged/imna_vrn_beheer.xsd</GMLSchema>
 
-  <FeatureTypeMapping xmlns:imna="http://www.cds.nl/imna/beheer" name="imna:GebiedBeheerVastgesteld" table="vrn.gebiedbeheer_tagged">
+  <FeatureTypeMapping xmlns:imna="http://www.cds.nl/imna/beheer" name="imna:GebiedBeheerVastgesteld" table="vrn.gebiedbeheer_landelijk_tagged">
       <FIDMapping>
         <Column name="id"/>
     </FIDMapping>
