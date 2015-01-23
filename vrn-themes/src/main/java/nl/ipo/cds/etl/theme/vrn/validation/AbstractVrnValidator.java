@@ -182,6 +182,9 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends
 						// Ring Self Intersection
 						validate(not(surfaceGeometry.hasRingSelfIntersection())).message(
 								Message.GEOMETRY_RING_SELF_INTERSECTION),
+						// Curve Duplicate Point
+						validate(not(surfaceGeometry.hasCurveDuplicatePoint())).message(
+										Message.GEOMETRY_POINT_DUPLICATION),		
 						// Ring Not Closed
 						validate(not(surfaceGeometry.hasUnclosedRing())).message(Message.GEOMETRY_RING_NOT_CLOSED),
 						validate(not(surfaceGeometry.hasCurveDiscontinuity())).message(Message.GEOMETRY_DISCONTINUITY))
