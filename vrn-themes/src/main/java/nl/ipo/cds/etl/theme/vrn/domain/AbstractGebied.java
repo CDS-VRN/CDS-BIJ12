@@ -17,7 +17,10 @@ import nl.ipo.cds.etl.theme.annotation.CodeSpace;
 import nl.ipo.cds.etl.theme.annotation.MappableAttribute;
 
 import org.deegree.commons.tom.ows.CodeType;
+import org.deegree.cs.coordinatesystems.CRS;
+import org.deegree.cs.coordinatesystems.CompoundCRS;
 import org.deegree.cs.coordinatesystems.ICRS;
+import org.deegree.cs.refs.coordinatesystem.CRSRef;
 import org.deegree.geometry.Geometry;
 import org.deegree.geometry.io.WKBReader;
 import org.deegree.geometry.io.WKBWriter;
@@ -68,8 +71,10 @@ public abstract class AbstractGebied extends PersistableFeature implements Seria
 		imnaBronhouder = codeTypeReader(ois);
 
 		// Read the Geometry with corresponding coordinate system.
-		ICRS icrs = (ICRS)ois.readObject();
-		geometrie = WKBReader.read(ois, icrs);
+		//ICRS icrs = (ICRS)ois.readObject();
+		// coordinate system not correctly deserializable (thanks to bug in deegree).
+		// ignore it for now.
+		geometrie = WKBReader.read(ois, null);
 	}
 
 	/**
@@ -87,7 +92,9 @@ public abstract class AbstractGebied extends PersistableFeature implements Seria
 		codeTypeWriter(imnaBronhouder, oos);
 
 		// Write Geometry and its coordinate system.
-		oos.writeObject(geometrie.getCoordinateSystem());
+		// coordinate system not correctly deserializable (thanks to bug in deegree).
+		// ignore it for now.
+		//oos.writeObject(geometrie.getCoordinateSystem());
 		WKBWriter.write(geometrie, oos);
 	}
 
