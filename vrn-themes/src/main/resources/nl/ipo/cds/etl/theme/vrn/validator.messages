@@ -1,4 +1,5 @@
 FEATURE=feature: ${0}, inspireIdLocalId: ${1}
+FEATURE2=overlappend feature: ${2}, inspireIdLocalId: ${3}
 
 ATTRIBUTE_NULL=Het attribuut "${2}" ontbreekt, ${FEATURE}
 ATTRIBUTE_EMPTY=Het attribuut "${2}" is leeg, ${FEATURE}
@@ -58,8 +59,9 @@ GEOMETRY_INTERIOR_DISCONNECTED=${GEOMETRY_INTERIOR_DISCONNECTED_BASE}, ${FEATURE
 GEOMETRY_SRS_NULL=${GEOMETRY_SRS_NULL_BASE}, ${FEATURE}
 GEOMETRY_SRS_NOT_RD=${GEOMETRY_SRS_NOT_RD_BASE} (gevonden waarde: ${1}), ${FEATURE}
 GEOMETRY_OUTSIDE_BRONHOUDER_AREA=De meegegeven geometrie valt niet geheel binnen het gebied van de bronhouder, ${FEATURE}
+GEOMETRY_INVALID_COORDINATES=De meegegeven geometrie valt niet geheel binnen de bounding box van het coordinaatstelsel, ${FEATURE}
 
 HAS_MORE_ERRORS=Er zijn meer meldingen die niet werden gerapporteerd
 
 OVERLAP_DETECTION_FAILED=Fout bij initialiseren overlapdetectie: ${0}
-OVERLAP_DETECTED=Overlappende gebieden gedetecteerd: ${0} ${1}
+OVERLAP_DETECTED=Overlappende gebieden gedetecteerd in de volgende twee features: ${FEATURE} en ${FEATURE2}
