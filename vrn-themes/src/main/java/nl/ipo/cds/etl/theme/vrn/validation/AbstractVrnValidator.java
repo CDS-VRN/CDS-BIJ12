@@ -15,6 +15,8 @@ import javax.sql.DataSource;
 import nl.idgis.commons.jobexecutor.JobLogger;
 import nl.ipo.cds.dao.ManagerDao;
 import nl.ipo.cds.domain.EtlJob;
+import nl.ipo.cds.domain.ImportJob;
+import nl.ipo.cds.domain.ValidateJob;
 import nl.ipo.cds.etl.AbstractValidator;
 import nl.ipo.cds.etl.log.EventLogger;
 import nl.ipo.cds.etl.postvalidation.IBulkValidator;
@@ -86,12 +88,15 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends
 
 		DataSource ds = null;
 
-		// Both Import and Validate jobs do validation.
-        try {
-            ds = geometryStore.createStore(UUID.randomUUID().toString());
-        } catch (SQLException e) {
-            throw new RuntimeException("Error creating geometryStore: " + e);
-        }
+		// This check is redundant because other types of jobs do not run through this code. But it is safer to be on the defense.
+		if (job instanceof ImportJob || job instanceof ValidateJob) {
+			// Both Import and Validate jobs do validation.
+			try {
+				ds = geometryStore.createStore(UUID.randomUUID().toString());
+			} catch (SQLException e) {
+				throw new RuntimeException("Error creating geometryStore: " + e);
+			}
+		}
 
 		Geometry bronhouderGeometry = managerDao.getBronhouderGeometry(job.getBronhouder());
 
@@ -226,23 +231,29 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends
 	}
 
 
+
+
 	/**
-	 * Multiparts validation (1 deel met uniek IMNa Id per polygon)
+	 * Instead of validating, insert feature and its geometry into a temporary GeoDB (H2) database.
+	 * @return
 	 */
 	public Validator<Message, Context> getGeometryIntersectionValidator() {
 
 		final UnaryCallback<Message, Context, Boolean, AbstractGebied> saveFeatureCallback = new UnaryCallback<Message, Context, Boolean, AbstractGebied>() {
 
 			/**
-			 * Each feature will get inserted into the database.
+			 * Each feature will get inserted into the GeoDB (H2) database.
 			 */
 			@Override
 			public Boolean call(final AbstractGebied abstractGebied,
 					final Context context) throws Exception {
 
-				geometryStore.addToStore(context.getDataSource(),
-						abstractGebied.getGeometrie(), abstractGebied);
-
+				// Only import and validate jobs have a geometrystore allocated when reaching this code.
+				// Other job types have a NULL data source.
+				if (context.getDataSource() != null) {
+					geometryStore.addToStore(context.getDataSource(),
+							abstractGebied.getGeometrie(), abstractGebied);
+				}
 				return true;
 			}
 		};
@@ -254,24 +265,38 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends
 	}
 
 	/**
-	 * Overlap percelen validatie met H2?
+	 * Overlap validation hook after job.
 	 */
 	@Override
 	public void afterJob(final EtlJob job, final EventLogger<Message> logger,
 			final Context context) {
 
+		// Only Import and Validate jobs do overlap validation (and have a geometry store saved on disk when reaching this code).
+		// This check is redundant because other types of jobs do not run through this code. But it is safer to be on the defense.
+		if (!(job instanceof ImportJob || job instanceof ValidateJob)) {
+			return;
+		}
+
+		boolean error = false;
         try {
             List<OverlapValidationPair<AbstractGebied>> overlapList = bulkValidator
                     .overlapValidation(context.getDataSource());
             if (!overlapList.isEmpty()) {
+				error = true;
                 for (OverlapValidationPair<AbstractGebied> overlap : overlapList) {
-                    logger.logEvent(job, Message.OVERLAP_DETECTED, JobLogger.LogLevel.ERROR, overlap.f1.getIdentificatie(), overlap.f2.getIdentificatie());
+                    logger.logEvent(job, Message.OVERLAP_DETECTED, JobLogger.LogLevel.ERROR, overlap.f1.getId(), overlap.f1.getIdentificatie(), overlap.f2.getId(), overlap.f2.getIdentificatie());
                 }
             }
-			geometryStore.destroyStore(context.getDataSource());
         } catch (ClassNotFoundException | IOException | SQLException e) {
+			error = true;
             logger.logEvent(job, Message.OVERLAP_DETECTION_FAILED, JobLogger.LogLevel.ERROR, e.getMessage());
-        }
+        } finally {
+            geometryStore.destroyStore(context.getDataSource());
+		}
+
+		if (error) {
+			// No way of cancelling the transaction here, because the features have already been committed to the database at this point.
+		}
 	}
 
 	public void setBulkValidator(IBulkValidator<AbstractGebied> bulkValidator) {
