@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:imna="http://www.cds.nl/imna/beheer" xmlns:gml="http://www.opengis.net/gml" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified" targetNamespace="http://www.cds.nl/imna/beheer/provinciaal" version="0.1">
+	<xsd:import namespace="http://www.opengis.net/gml" schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd" />
+	<xsd:import namespace="http://www.cds.nl/imna/beheer" schemaLocation="./imna_vrn_beheer.xsd" />
+	<xsd:element name="GebiedBeheerProvinciaal" substitutionGroup="gml:_Feature" type="imna:GebiedBeheerType" />
+</xsd:schema>

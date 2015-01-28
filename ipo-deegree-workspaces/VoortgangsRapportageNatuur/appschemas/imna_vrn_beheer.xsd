@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:imna="http://www.cds.nl/imna/beheer" targetNamespace="http://www.cds.nl/imna/beheer"
+	xmlns:gml="http://www.opengis.net/gml" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified"  version="0.1">
+	<xsd:import namespace="http://www.opengis.net/gml" schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd" />
+	<!-- Implementatie van Informatiemodel Natuur (IMNa) -->
+	<!-- Zie rapport (concept) -->
+	<!-- Informatiemodel Natuur (IMNa) -->
+	<!-- Hoofdstuk 5.5 IMNa Productmodel – Natuurontwikkeling -->
+	<!-- Datum 7 augustus 2014 -->
+	<!-- Versie 3.0 -->
+	<!-- Status CONCEPT -->
+
+	<!-- top level element -->
+
+	<xsd:complexType name="GebiedBeheerType">
+		<xsd:complexContent>
+			<xsd:extension base="gml:AbstractFeatureType">
+				<xsd:sequence>
+					<xsd:element maxOccurs="1" minOccurs="1" name="geometrie" type="gml:GeometryPropertyType" />
+					<xsd:element maxOccurs="1" minOccurs="1" name="beginTijd" type="xsd:dateTime">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="nl">
+								MaterieleLevensduur
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element maxOccurs="1" minOccurs="0" name="eindTijd" type="xsd:dateTime">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="nl">
+								MaterieleLevensduur
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element maxOccurs="1" minOccurs="1" name="identificatie" type="xsd:string" />
+					<xsd:element maxOccurs="1" minOccurs="0" name="eenheidNummer" type="xsd:string">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="nl">
+								Beheereenheidnummer beschikkingen RVO.nl
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element maxOccurs="1" minOccurs="1" name="statusBeheer" type="xsd:string">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="nl"><![CDATA[Codelijst Status beheer
+1. In beheer met contract
+2. In beheer zonder contract]]></xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element maxOccurs="1" minOccurs="0" name="beheerPakket" type="xsd:string">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="nl">
+								Niet in te vullen voor niet SNL regelingen (bijv. PSN)
+							</xsd:documentation>
+							<xsd:documentation xml:lang="nl"><![CDATA[Codelijst Beheerpakket]]></xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element maxOccurs="1" minOccurs="0" name="relatieNummer" type="xsd:int">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="nl">
+								BRS nummer RVO.nl
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element maxOccurs="1" minOccurs="0" name="contractNummer" type="xsd:int">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="nl">
+								Aanvraag nummer RVO.nl
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element maxOccurs="1" minOccurs="1" name="bronHouder" type="xsd:string">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="nl"><![CDATA[ Codelijst Bronhouder
+1. RVO.nl
+2. Dienst Landelijk Gebied
+3. Beheerder overheid
+4. Provincie
+5. Beheerder particulier]]></xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element maxOccurs="1" minOccurs="1" name="typeBeheerder" type="xsd:string">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="nl"><![CDATA[Codelijst Type beheerder en eigenaar
+1. Rijk
+2. Provincie
+3. Gemeente
+4. Waterschap
+5. Recreatieschap
+6. Staatsbosbeheer
+7. Natuurmonumenten
+8. Provinciaal landschap
+9. Waterleidingmaatschappij]]></xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element maxOccurs="1" minOccurs="0" name="doelBeheer" type="xsd:string">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="nl">
+								Verplicht voor PROV
+							</xsd:documentation>
+							<xsd:documentation xml:lang="nl"><![CDATA[Codelijst Doel realisatie
+1. Provinciaal Natuurnetwerk
+2. NURG
+3. Zuidwestelijke Delta
+4. Maaswerken
+5. RODS
+6. Overige natuur
+7. Natura 2000]]></xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>

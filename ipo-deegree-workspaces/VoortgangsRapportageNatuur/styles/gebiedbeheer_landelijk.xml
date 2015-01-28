@@ -1,34 +1,28 @@
-<FeatureTypeStyle xmlns="http://www.opengis.net/se" xmlns:app="http://www.deegree.org/app" xmlns:ogc="http://www.opengis.net/ogc" xmlns:deegreeogc="http://www.deegree.org/ogc" xmlns:sed="http://www.deegree.org/se" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/se http://schemas.opengis.net/se/1.1.0/FeatureStyle.xsd http://www.deegree.org/se http://schemas.deegree.org/se/1.1.0/Symbolizer-deegree.xsd">
+<FeatureTypeStyle xmlns="http://www.opengis.net/se" xmlns:deegreeogc="http://www.deegree.org/ogc" xmlns:ogc="http://www.opengis.net/ogc" xmlns:imna="http://www.cds.nl/imna/beheer" xmlns:sed="http://www.deegree.org/se" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/se http://schemas.opengis.net/se/1.1.0/FeatureStyle.xsd http://www.deegree.org/se http://schemas.deegree.org/se/1.1.0/Symbolizer-deegree.xsd">
   <Name>gebiedbeheer_landelijk</Name>
   <Description>
     <Title>gebiedbeheer_landelijk</Title>
   </Description>
-  <FeatureTypeName>gebiedbeheer_landelijk</FeatureTypeName>
+  <FeatureTypeName>imna:gebiedbeheer_landelijk</FeatureTypeName>
   <Rule>
-    <Name>gebiedbeheer_landelijk</Name>
+    <Name>GebiedBeheer</Name>
     <Description>
-      <Title>gebiedbeheer_landelijk</Title>
+      <Title>GebiedBeheer</Title>
     </Description>
     <LineSymbolizer>
       <Stroke>
-        <SvgParameter name="stroke">
-#00ffff
-        </SvgParameter>
+        <SvgParameter name="stroke">#00ffff</SvgParameter>
         <SvgParameter name="stroke-width">2</SvgParameter>
       </Stroke>
     </LineSymbolizer>
     <PolygonSymbolizer>
       <Fill>
-        <SvgParameter name="fill">
-#ffffee
-</SvgParameter>
+        <SvgParameter name="fill">#ff0000</SvgParameter>
       </Fill>
       <Stroke>
-	<SvgParameter name="stroke">
-#00ffff
-</SvgParameter>
+	<SvgParameter name="stroke">#00ffff</SvgParameter>
         <SvgParameter name="stroke-width">2</SvgParameter>
       </Stroke>
     </PolygonSymbolizer>
   </Rule>
-</FeatureTypeStyle> 
+</FeatureTypeStyle>

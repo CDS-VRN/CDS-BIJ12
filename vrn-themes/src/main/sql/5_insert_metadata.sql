@@ -20,7 +20,7 @@ insert into manager.datasettype (id, naam, thema_id) values ((select nextval('ma
 insert into manager.datasettype (id, naam, thema_id) values ((select nextval('manager.hibernate_sequence')), 'LandelijkGebiedVerwerving', (select id from manager.thema t where t.naam = 'LandelijkGebiedVerwerving'));
 insert into manager.datasettype (id, naam, thema_id) values ((select nextval('manager.hibernate_sequence')), 'ProvinciaalGebiedVerwerving', (select id from manager.thema t where t.naam = 'ProvinciaalGebiedVerwerving'));
 	
-insert into manager.themabronhouderauthorization (thema_id, bronhouder_id) values
+insert into manager.bronhouderthema (thema_id, bronhouder_id) values
 	( (select id from manager.thema where naam = 'ProvinciaalGebiedBeheer'), (select id from manager.bronhouder where code = '9920') ),
 	( (select id from manager.thema where naam = 'ProvinciaalGebiedBeheer'), (select id from manager.bronhouder where code = '9921') ),
 	( (select id from manager.thema where naam = 'ProvinciaalGebiedBeheer'), (select id from manager.bronhouder where code = '9922') ),
@@ -35,7 +35,7 @@ insert into manager.themabronhouderauthorization (thema_id, bronhouder_id) value
 	( (select id from manager.thema where naam = 'ProvinciaalGebiedBeheer'), (select id from manager.bronhouder where code = '9931') )	
 	;
 	
-insert into manager.themabronhouderauthorization (thema_id, bronhouder_id) values
+insert into manager.bronhouderthema (thema_id, bronhouder_id) values
 	( (select id from manager.thema where naam = 'ProvinciaalGebiedInrichting'), (select id from manager.bronhouder where code = '9920') ),
 	( (select id from manager.thema where naam = 'ProvinciaalGebiedInrichting'), (select id from manager.bronhouder where code = '9921') ),
 	( (select id from manager.thema where naam = 'ProvinciaalGebiedInrichting'), (select id from manager.bronhouder where code = '9922') ),
@@ -50,7 +50,7 @@ insert into manager.themabronhouderauthorization (thema_id, bronhouder_id) value
 	( (select id from manager.thema where naam = 'ProvinciaalGebiedInrichting'), (select id from manager.bronhouder where code = '9931') )	
 	;
 	
-insert into manager.themabronhouderauthorization (thema_id, bronhouder_id) values
+insert into manager.bronhouderthema (thema_id, bronhouder_id) values
 	( (select id from manager.thema where naam = 'ProvinciaalGebiedVerwerving'), (select id from manager.bronhouder where code = '9920') ),
 	( (select id from manager.thema where naam = 'ProvinciaalGebiedVerwerving'), (select id from manager.bronhouder where code = '9921') ),
 	( (select id from manager.thema where naam = 'ProvinciaalGebiedVerwerving'), (select id from manager.bronhouder where code = '9922') ),
@@ -65,7 +65,7 @@ insert into manager.themabronhouderauthorization (thema_id, bronhouder_id) value
 	( (select id from manager.thema where naam = 'ProvinciaalGebiedVerwerving'), (select id from manager.bronhouder where code = '9931') )	
 	;
 	
-insert into manager.themabronhouderauthorization (thema_id, bronhouder_id) values
+insert into manager.bronhouderthema (thema_id, bronhouder_id) values
 	( (select id from manager.thema where naam = 'LandelijkGebiedBeheer'), (select id from manager.bronhouder where code = '9920') ),
 	( (select id from manager.thema where naam = 'LandelijkGebiedBeheer'), (select id from manager.bronhouder where code = '9921') ),
 	( (select id from manager.thema where naam = 'LandelijkGebiedBeheer'), (select id from manager.bronhouder where code = '9922') ),
@@ -80,7 +80,7 @@ insert into manager.themabronhouderauthorization (thema_id, bronhouder_id) value
 	( (select id from manager.thema where naam = 'LandelijkGebiedBeheer'), (select id from manager.bronhouder where code = '9931') )	
 	;
 	
-insert into manager.themabronhouderauthorization (thema_id, bronhouder_id) values
+insert into manager.bronhouderthema (thema_id, bronhouder_id) values
 	( (select id from manager.thema where naam = 'LandelijkGebiedInrichting'), (select id from manager.bronhouder where code = '9920') ),
 	( (select id from manager.thema where naam = 'LandelijkGebiedInrichting'), (select id from manager.bronhouder where code = '9921') ),
 	( (select id from manager.thema where naam = 'LandelijkGebiedInrichting'), (select id from manager.bronhouder where code = '9922') ),
@@ -95,7 +95,7 @@ insert into manager.themabronhouderauthorization (thema_id, bronhouder_id) value
 	( (select id from manager.thema where naam = 'LandelijkGebiedInrichting'), (select id from manager.bronhouder where code = '9931') )	
 	;
 	
-insert into manager.themabronhouderauthorization (thema_id, bronhouder_id) values
+insert into manager.bronhouderthema (thema_id, bronhouder_id) values
 	( (select id from manager.thema where naam = 'LandelijkGebiedVerwerving'), (select id from manager.bronhouder where code = '9920') ),
 	( (select id from manager.thema where naam = 'LandelijkGebiedVerwerving'), (select id from manager.bronhouder where code = '9921') ),
 	( (select id from manager.thema where naam = 'LandelijkGebiedVerwerving'), (select id from manager.bronhouder where code = '9922') ),

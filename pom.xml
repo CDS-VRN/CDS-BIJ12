@@ -15,6 +15,18 @@
         <developerConnection>scm:svn:svn+ssh://repos.idgis.eu/cds-inspire/cds-ipo/tags/cds-ipo-2.2</developerConnection>
     </scm>
     
+	<repositories>
+		<repository>
+			<id>geotools-repo</id>
+			<url>http://download.osgeo.org/webdav/geotools/</url>
+			<releases>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>	
+	</repositories>
 
     <dependencyManagement>
         <dependencies>
