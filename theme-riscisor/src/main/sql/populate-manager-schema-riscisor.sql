@@ -5,6 +5,6 @@ insert into manager.datasettype (id, naam, thema_id) values ((select nextval('ma
 
 insert into manager.bronhouder (id, code, naam, contact_naam, contact_emailadres, common_name) values ((select nextval('manager.hibernate_sequence')), 'risc', 'Risc', 'Risc', 'inspire@gbo-provincies.nl', 'risc');
 	
-insert into manager.themabronhouderauthorization (thema_id, bronhouder_id) values
+insert into manager.bronhouderthema (thema_id, bronhouder_id) values
 	( (select id from manager.thema where naam = 'RISC-ISOR - Kwetsbaar object'), (select id from manager.bronhouder where code = 'risc') );
 	

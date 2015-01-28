@@ -16,10 +16,10 @@ insert into manager.datasettype (id, naam, thema_id) values
 insert into manager.bronhouder (id, code, naam, contact_naam, contact_emailadres, common_name) select nextval('manager.hibernate_sequence'), 'gasunie', 'Gasunie', 'Gasunie', 'inspire@idgis.nl', 'gasunie' where not exists (select * from manager.bronhouder where code = 'gasunie');
 insert into manager.bronhouder (id, code, naam, contact_naam, contact_emailadres, common_name) select nextval('manager.hibernate_sequence'), 'nam', 'NAM', 'NAM', 'inspire@idgis.nl', 'nam' where not exists (select * from manager.bronhouder where code = 'nam');
 	
-insert into manager.themabronhouderauthorization (thema_id, bronhouder_id) values
+insert into manager.bronhouderthema (thema_id, bronhouder_id) values
 	( (select id from manager.thema where naam = 'Buisleidingen - Transportroutedelen'), (select id from manager.bronhouder where code = 'gasunie') ),
 	( (select id from manager.thema where naam = 'Buisleidingen - Transportrouterisico'), (select id from manager.bronhouder where code = 'gasunie') );
-insert into manager.themabronhouderauthorization (thema_id, bronhouder_id) values
+insert into manager.bronhouderthema (thema_id, bronhouder_id) values
 	( (select id from manager.thema where naam = 'Buisleidingen - Transportroutedelen'), (select id from manager.bronhouder where code = 'nam') ),
 	( (select id from manager.thema where naam = 'Buisleidingen - Transportrouterisico'), (select id from manager.bronhouder where code = 'nam') );
 	
