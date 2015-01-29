@@ -277,25 +277,20 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends
 			return;
 		}
 
-		boolean error = false;
         try {
             List<OverlapValidationPair<AbstractGebied>> overlapList = bulkValidator
                     .overlapValidation(context.getDataSource());
             if (!overlapList.isEmpty()) {
-				error = true;
                 for (OverlapValidationPair<AbstractGebied> overlap : overlapList) {
                     logger.logEvent(job, Message.OVERLAP_DETECTED, JobLogger.LogLevel.ERROR, overlap.f1.getId(), overlap.f1.getIdentificatie(), overlap.f2.getId(), overlap.f2.getIdentificatie());
                 }
+				throw new RuntimeException("Overlap detected");
             }
         } catch (ClassNotFoundException | IOException | SQLException e) {
-			error = true;
             logger.logEvent(job, Message.OVERLAP_DETECTION_FAILED, JobLogger.LogLevel.ERROR, e.getMessage());
+			throw new RuntimeException(e);
         } finally {
             geometryStore.destroyStore(context.getDataSource());
-		}
-
-		if (error) {
-			// No way of cancelling the transaction here, because the features have already been committed to the database at this point.
 		}
 	}
 
