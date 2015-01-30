@@ -13,7 +13,7 @@
         <dependency>
             <groupId>nl.ipo.cds.ipo</groupId>
             <artifactId>ipo-themes</artifactId>
-            <version>${cds.version}</version>
+            <version>${project.version}</version>
             <type>pom</type>
         </dependency>
         <dependency>

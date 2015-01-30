@@ -7,13 +7,15 @@
     <packaging>pom</packaging>
         
     <properties>
-        <cds.version>2.3-SNAPSHOT</cds.version>
+    	<!-- by default, cds and ipo have the same versions -->
+        <cds.version>${project.version}</cds.version>
     </properties>
     
-    <scm>
-        <connection>scm:svn:svn+ssh://repos.idgis.eu/cds-inspire/cds-ipo/tags/cds-ipo-2.2</connection>
-        <developerConnection>scm:svn:svn+ssh://repos.idgis.eu/cds-inspire/cds-ipo/tags/cds-ipo-2.2</developerConnection>
-    </scm>
+   <scm>
+    	<connection>scm:git:git@github.com:CDS-VRN/CDS-BIJ12.git</connection>
+    	<developerConnection>scm:git:git@github.com:CDS-VRN/CDS-BIJ12.git</developerConnection>
+    	<url>https://github.com/CDS-VRN/CDS-BIJ12</url>
+  </scm>
     
 	<repositories>
 		<repository>
