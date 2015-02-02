@@ -25,12 +25,15 @@ public class VrnThemeConfig<T extends AbstractGebied> extends ThemeConfig<T>{
 	private final OperationDiscoverer operationDiscoverer;
 	
 	private final Mappings mappings;
+
+	private final boolean taggable;
 	
 
 	public VrnThemeConfig(final Validator<T> validator, final OperationDiscoverer operationDiscoverer,
-			final Class<T> clazz, final String mappingsClassPathResource) throws ThemeConfigException {
+			final Class<T> clazz, final String mappingsClassPathResource, final boolean taggable) throws ThemeConfigException {
 		super(clazz.getSimpleName(), clazz);
 		this.validator = validator;
+		this.taggable = taggable;
 		this.operationDiscoverer = operationDiscoverer;
 		// unmarshall default mappings
 		final ClassPathResource resource = new ClassPathResource(mappingsClassPathResource);
@@ -70,6 +73,11 @@ public class VrnThemeConfig<T extends AbstractGebied> extends ThemeConfig<T>{
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public boolean isTaggable() {
+		return taggable;
 	}
 	
 }
