@@ -31,7 +31,7 @@ public class LandelijkGebiedBeheerValidator extends AbstractGebiedBeheerValidato
 	 * @return
 	 */
 	@Override
-	public Validator<Message, Context> getDoelbeheerValidator() {
+	public Validator<Message, Context> getDoelBeheerValidator() {
 		return validate(and(
 				validate(not(doelBeheer.isNull())).message(Message.ATTRIBUTE_NULL, constant(doelBeheer.name)),
 				validate(doelBeheer.hasCodeSpace(doelBeheerCodeSpace)).message(

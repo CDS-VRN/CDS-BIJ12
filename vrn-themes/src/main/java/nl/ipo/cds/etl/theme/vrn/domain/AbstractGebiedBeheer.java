@@ -117,6 +117,11 @@ public abstract class AbstractGebiedBeheer extends AbstractGebied {
 	public CodeType getDoelBeheer() {
 		return doelBeheer;
 	}
+    
+  
+	public String getDoelBeheerValue() {
+		return doelBeheer==null?null:doelBeheer.getCode();
+	}
 
     @MappableAttribute
     @CodeSpace(CODESPACE_DOEL_REALISATIE)

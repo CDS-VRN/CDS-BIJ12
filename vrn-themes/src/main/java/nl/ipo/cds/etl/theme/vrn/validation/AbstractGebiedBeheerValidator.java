@@ -20,7 +20,7 @@ import static nl.ipo.cds.etl.theme.vrn.Constants.*;
 public abstract class AbstractGebiedBeheerValidator<T extends AbstractGebiedBeheer> extends AbstractVrnValidator<T> {
 
 	private final Constant<Message, Context, String> statusBeheerCodeSpace = constant(CODESPACE_STATUS_BEHEER);
-	private final Constant<Message, Context, String> beheerpakketCodeSpace = constant(CODESPACE_BEHEER_PAKKET);
+	protected final Constant<Message, Context, String> beheerpakketCodeSpace = constant(CODESPACE_BEHEER_PAKKET);
 	protected final Constant<Message, Context, String> doelBeheerCodeSpace = constant(CODESPACE_DOEL_REALISATIE);
 	private final Constant<Message, Context, String> typeBeheerderCodeSpace = constant(CODESPACE_TYPE_BEHEERDER);
 
@@ -69,7 +69,7 @@ public abstract class AbstractGebiedBeheerValidator<T extends AbstractGebiedBehe
 	}
 
 
-	public abstract Validator<Message, Context> getDoelbeheerValidator();
+	public abstract Validator<Message, Context> getDoelBeheerValidator();
 
 	public Validator<Message, Context> getTypeBeheerderValidator() {
 		return validate(and(
