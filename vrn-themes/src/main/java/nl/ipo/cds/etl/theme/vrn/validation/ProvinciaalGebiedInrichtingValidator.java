@@ -13,9 +13,10 @@ import nl.ipo.cds.validation.execute.CompilerException;
 
 /**
  * @author annes
- *
+ * 
  */
-public class ProvinciaalGebiedInrichtingValidator extends AbstractGebiedInrichtingValidator<ProvinciaalGebiedInrichting> {
+public class ProvinciaalGebiedInrichtingValidator extends
+		AbstractGebiedInrichtingValidator<ProvinciaalGebiedInrichting> {
 
 	/**
 	 * @param validatorMessages
@@ -26,24 +27,17 @@ public class ProvinciaalGebiedInrichtingValidator extends AbstractGebiedInrichti
 		compile();
 	}
 
-
 	/**
-	 * Doelinrichting is optional for "provinciaal".
+	 * If doelInrichting is provided, it should be conform rules. For provinciaal it is optional. Note that doelbeheer
+	 * can contain multiple values, seperated by ';' characters
+	 * 
 	 * @return
 	 */
-	@Override
 	public Validator<Message, Context> getDoelInrichtingValidator() {
+
 		return validate(ifExp(
-				doelInrichting.isNull(),
-				constant(true),
-				and(
-						validate(not(isBlank(doelInrichting.code()))).message(Message.ATTRIBUTE_EMPTY,
-								constant(doelInrichting.name)),
-						validate(doelInrichting.hasCodeSpace(doelInrichtingCodeSpace)).message(
-								Message.ATTRIBUTE_CODE_CODESPACE_INVALID, doelInrichting.codeSpace(),
-								constant(doelInrichting.name), doelInrichtingCodeSpace),
-						validate(doelInrichting.isValid()).message(Message.ATTRIBUTE_CODE_INVALID,
-								doelInrichting.code(), constant(doelInrichting.name), doelInrichtingCodeSpace))
-						.shortCircuit()));
+		// can be null
+				doelInrichting.isNull(), constant(true), validateDoelRealisatie(constantDoelInrichting, doelInrichting)));
 	}
+
 }

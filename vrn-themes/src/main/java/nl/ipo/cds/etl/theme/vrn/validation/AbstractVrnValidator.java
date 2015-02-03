@@ -1,6 +1,7 @@
 package nl.ipo.cds.etl.theme.vrn.validation;
 
 import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_BRONHOUDER;
+import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_DOEL_REALISATIE;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -21,6 +22,7 @@ import nl.ipo.cds.etl.AbstractValidator;
 import nl.ipo.cds.etl.log.EventLogger;
 import nl.ipo.cds.etl.postvalidation.IBulkValidator;
 import nl.ipo.cds.etl.postvalidation.IGeometryStore;
+import nl.ipo.cds.etl.theme.vrn.Constants;
 import nl.ipo.cds.etl.theme.vrn.Context;
 import nl.ipo.cds.etl.theme.vrn.Message;
 import nl.ipo.cds.etl.theme.vrn.domain.AbstractGebied;
@@ -34,7 +36,10 @@ import nl.ipo.cds.validation.domain.OverlapValidationPair;
 import nl.ipo.cds.validation.execute.CompilerException;
 import nl.ipo.cds.validation.geometry.GeometryExpression;
 import nl.ipo.cds.validation.gml.CodeExpression;
+import nl.ipo.cds.validation.gml.codelists.CodeList;
+import nl.ipo.cds.validation.gml.codelists.CodeListException;
 import nl.ipo.cds.validation.gml.codelists.CodeListFactory;
+import nl.ipo.cds.validation.logical.AndExpression;
 
 import org.deegree.commons.uom.Measure;
 import org.deegree.geometry.Geometry;
@@ -47,6 +52,8 @@ import org.springframework.beans.factory.annotation.Value;
  * @param <T>
  */
 public abstract class AbstractVrnValidator<T extends AbstractGebied> extends AbstractValidator<T, Message, Context> {
+	
+	protected final Constant<Message, Context, String> doelRealisatieCodeSpace = constant(CODESPACE_DOEL_REALISATIE);
 
 	private static final String METER = "urn:ogc:def:uom:EPSG:6.3:9001";
 
@@ -302,6 +309,56 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 	@Inject
 	public void setBulkValidator(IBulkValidator<AbstractGebied> bulkValidator) {
 		this.bulkValidator = bulkValidator;
+	}
+
+	/**
+	 * Check validity of doelRealisatie attribute. Note that the 'doel' attributes can contain multiple codes, seperated
+	 * by ';' characters.
+	 * 
+	 * @param constantDoelBeheer
+	 * @param doelBeheer 
+	 * @return
+	 */
+	protected AndExpression<Message, Context> validateDoelRealisatie(
+			final Constant<Message, Context, String> constantDoelBeheer, CodeExpression<Message, Context> doelBeheer) {
+		// we need a dedicated callback to validate whether the code is valid for codetype DoelRealisatie; this cannot
+		// be done by ordinary CodeType validation because we have multiple codes combined in a single string.
+		final UnaryCallback<Message, Context, Boolean, String> validateDoelRealisatieCode = new UnaryCallback<Message, Context, Boolean, String>() {
+			@Override
+			public Boolean call(final String input, final Context context) throws Exception {
+				try {
+
+					final CodeList codeList = context.getCodeListFactory().getCodeList(
+							Constants.CODESPACE_DOEL_REALISATIE);
+					if (codeList == null) {
+						return false;
+					}
+
+					return codeList.hasCode(input);
+				} catch (CodeListException e) {
+					return false;
+				}
+			}
+		};
+		return and(
+		// when not null, needs to have the correct codespace
+				validate(doelBeheer.hasCodeSpace(doelRealisatieCodeSpace)).message(
+						Message.ATTRIBUTE_CODE_CODESPACE_INVALID, doelBeheer.codeSpace(), constant(doelBeheer.name),
+						doelRealisatieCodeSpace),
+				// split the code into values seperated by ';'
+				validate(split(stringAttr("doelRealisatieValue"),
+						constant(";"),
+						// each value must not be null and have a valid code
+						validate(forEach(
+								"i",
+								attr("values", String[].class),
+								validate(and(
+										validate(not(isBlank(stringAttr("i")))).message(Message.ATTRIBUTE_EMPTY,
+												constantDoelBeheer),
+										validate(callback(Boolean.class, stringAttr("i"), validateDoelRealisatieCode))
+												.message(Message.ATTRIBUTE_CODE_INVALID, stringAttr("i"),
+														constantDoelBeheer, doelRealisatieCodeSpace)).shortCircuit()))))))
+				.shortCircuit();
 	}
 
 }

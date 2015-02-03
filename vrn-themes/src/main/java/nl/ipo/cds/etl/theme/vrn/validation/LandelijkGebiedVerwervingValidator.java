@@ -13,11 +13,9 @@ import nl.ipo.cds.validation.execute.CompilerException;
 
 /**
  * @author annes
- *
+ * 
  */
 public class LandelijkGebiedVerwervingValidator extends AbstractGebiedVerwervingValidator<LandelijkGebiedVerwerving> {
-
-	
 
 	/**
 	 * @param validatorMessages
@@ -28,20 +26,17 @@ public class LandelijkGebiedVerwervingValidator extends AbstractGebiedVerwerving
 		compile();
 	}
 
-
 	/**
-	 * doelVerwerving is mandatory for "landelijk".
+	 * If doelVerwerving is provided, it should be conform rules. For provinciaal it is optional. Note that
+	 * doelVerwerving can contain multiple values, seperated by ';' characters
+	 * 
 	 * @return
 	 */
-	@Override
 	public Validator<Message, Context> getDoelVerwervingValidator() {
+		// for landelijk thema, doel attribute is required.
 		return validate(and(
 				validate(not(doelVerwerving.isNull())).message(Message.ATTRIBUTE_NULL, constant(doelVerwerving.name)),
-				validate(not(isBlank(doelVerwerving.code()))).message(Message.ATTRIBUTE_EMPTY, constant(doelVerwerving.name)),
-				validate(doelVerwerving.hasCodeSpace(doelVerwervingCodeSpace)).message(Message.ATTRIBUTE_CODE_CODESPACE_INVALID, doelVerwerving.codeSpace(),
-						constant(doelVerwerving.name), doelVerwervingCodeSpace),
-				validate(doelVerwerving.isValid()).message(Message.ATTRIBUTE_CODE_INVALID, doelVerwerving.code(), constant(doelVerwerving.name),
-						doelVerwervingCodeSpace)).shortCircuit());
+				validateDoelRealisatie(constantDoelVerwerving, doelVerwerving)).shortCircuit());
 	}
 
 	/**

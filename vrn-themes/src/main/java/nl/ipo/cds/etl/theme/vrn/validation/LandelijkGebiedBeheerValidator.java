@@ -13,7 +13,7 @@ import nl.ipo.cds.validation.execute.CompilerException;
 
 /**
  * @author annes
- *
+ * 
  */
 public class LandelijkGebiedBeheerValidator extends AbstractGebiedBeheerValidator<LandelijkGebiedBeheer> {
 
@@ -27,19 +27,16 @@ public class LandelijkGebiedBeheerValidator extends AbstractGebiedBeheerValidato
 	}
 
 	/**
-	 * For landelijk, the doelbeheer attribute is mandatory.
+	 * If doelbeheer is provided, it should be conform rules. For provinciaal it is optional. Note that doelbeheer can
+	 * contain multiple values, seperated by ';' characters
+	 * 
 	 * @return
 	 */
-	@Override
 	public Validator<Message, Context> getDoelBeheerValidator() {
+		// for landelijk thema, doel attribute is required.
 		return validate(and(
 				validate(not(doelBeheer.isNull())).message(Message.ATTRIBUTE_NULL, constant(doelBeheer.name)),
-				validate(doelBeheer.hasCodeSpace(doelBeheerCodeSpace)).message(
-						Message.ATTRIBUTE_CODE_CODESPACE_INVALID, doelBeheer.codeSpace(), constant(doelBeheer.name),
-						doelBeheerCodeSpace),
-				validate(not(isBlank(doelBeheer.code()))).message(Message.ATTRIBUTE_EMPTY, constant(doelBeheer.name)),
-				validate(doelBeheer.isValid()).message(Message.ATTRIBUTE_CODE_INVALID, doelBeheer.code(),
-						constant(doelBeheer.name), doelBeheerCodeSpace)).shortCircuit());
+				validateDoelRealisatie(constantDoelBeheer, doelBeheer)).shortCircuit());
 	}
 
 	/**

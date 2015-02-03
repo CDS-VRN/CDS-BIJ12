@@ -2,14 +2,13 @@ package nl.ipo.cds.etl.theme.vrn.domain;
 
 import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_BRONHOUDER;
 
-import java.math.BigInteger;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.sql.Timestamp;
 
-import com.vividsolutions.jts.io.ParseException;
 import nl.ipo.cds.etl.PersistableFeature;
 import nl.ipo.cds.etl.db.annotation.Column;
 import nl.ipo.cds.etl.db.annotation.Table;
@@ -17,16 +16,11 @@ import nl.ipo.cds.etl.theme.annotation.CodeSpace;
 import nl.ipo.cds.etl.theme.annotation.MappableAttribute;
 
 import org.deegree.commons.tom.ows.CodeType;
-import org.deegree.cs.coordinatesystems.CRS;
-import org.deegree.cs.coordinatesystems.CompoundCRS;
-import org.deegree.cs.coordinatesystems.ICRS;
-import org.deegree.cs.refs.coordinatesystem.CRSRef;
 import org.deegree.geometry.Geometry;
 import org.deegree.geometry.io.WKBReader;
 import org.deegree.geometry.io.WKBWriter;
-import org.deegree.geometry.io.WKTWriter;
-import org.deegree.portal.cataloguemanager.model.Abstract;
 
+import com.vividsolutions.jts.io.ParseException;
 
 /**
  * @author annes
@@ -36,6 +30,11 @@ import org.deegree.portal.cataloguemanager.model.Abstract;
  */
 @Table
 public abstract class AbstractGebied extends PersistableFeature implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Column(name = "begintijd")
 	private Timestamp begintijd;
@@ -52,15 +51,17 @@ public abstract class AbstractGebied extends PersistableFeature implements Seria
 	@Column(name = "contractnummer")
 	private BigInteger contractnummer;
 
-    @Column(name = "geometrie")
-    private transient Geometry geometrie;
-	
+	@Column(name = "geometrie")
+	private transient Geometry geometrie;
+
 	@Column(name = "relatienummer")
 	private BigInteger relatienummer;
 
 	/**
 	 * Custom deserialization because Geometry type is not serializable by default, nor is CodeType.
-	 * @param ois The input stream.
+	 * 
+	 * @param ois
+	 *            The input stream.
 	 */
 	private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException, ParseException {
 		// Read default serializable properties.
@@ -71,7 +72,7 @@ public abstract class AbstractGebied extends PersistableFeature implements Seria
 		imnaBronhouder = codeTypeReader(ois);
 
 		// Read the Geometry with corresponding coordinate system.
-		//ICRS icrs = (ICRS)ois.readObject();
+		// ICRS icrs = (ICRS)ois.readObject();
 		// coordinate system not correctly deserializable (thanks to bug in deegree).
 		// ignore it for now.
 		geometrie = WKBReader.read(ois, null);
@@ -79,7 +80,9 @@ public abstract class AbstractGebied extends PersistableFeature implements Seria
 
 	/**
 	 * Custom serialization because deegree types are not serializable.
-	 * @param oos The output stream.
+	 * 
+	 * @param oos
+	 *            The output stream.
 	 * @throws IOException
 	 * @throws ParseException
 	 */
@@ -87,14 +90,13 @@ public abstract class AbstractGebied extends PersistableFeature implements Seria
 		// Write default serializable properties.
 		oos.defaultWriteObject();
 
-
 		oos.writeUTF(getId());
 		codeTypeWriter(imnaBronhouder, oos);
 
 		// Write Geometry and its coordinate system.
 		// coordinate system not correctly deserializable (thanks to bug in deegree).
 		// ignore it for now.
-		//oos.writeObject(geometrie.getCoordinateSystem());
+		// oos.writeObject(geometrie.getCoordinateSystem());
 		WKBWriter.write(geometrie, oos);
 	}
 
@@ -115,21 +117,19 @@ public abstract class AbstractGebied extends PersistableFeature implements Seria
 		return new CodeType(imnaCode, imnaCodeSpace);
 	}
 
-
 	public boolean equals(Object o) {
-		if(!(o instanceof AbstractGebied)) {
+		if (!(o instanceof AbstractGebied)) {
 			return false;
 		}
 
-        AbstractGebied that = (AbstractGebied)o;
-        return this.getId().equals(that.getId()) &&
-                this.getBegintijd().equals(that.getBegintijd()) &&
-                this.getContractnummer().equals(that.getContractnummer()) &&
-                this.getEindtijd().equals(that.getEindtijd()) &&
-                this.getGeometrie().toString().equals(that.getGeometrie().toString()) &&
-                this.getIdentificatie().equals(that.getIdentificatie()) &&
-                this.getImnaBronhouder().equals(that.getImnaBronhouder()) &&
-                this.getRelatienummer().equals(that.getRelatienummer());
+		AbstractGebied that = (AbstractGebied) o;
+		return this.getId().equals(that.getId()) && this.getBegintijd().equals(that.getBegintijd())
+				&& this.getContractnummer().equals(that.getContractnummer())
+				&& this.getEindtijd().equals(that.getEindtijd())
+				&& this.getGeometrie().toString().equals(that.getGeometrie().toString())
+				&& this.getIdentificatie().equals(that.getIdentificatie())
+				&& this.getImnaBronhouder().equals(that.getImnaBronhouder())
+				&& this.getRelatienummer().equals(that.getRelatienummer());
 	}
 
 	@MappableAttribute
@@ -205,12 +205,21 @@ public abstract class AbstractGebied extends PersistableFeature implements Seria
 	}
 
 	/**
-	 * This method is required for the AbstractGebiedExpression in the validation package to work correctly.
-	 * It is not the nicest solution, but the most pragmatic thing to do (more info in the respective expression class).
+	 * This method is required for the AbstractGebiedExpression in the validation package to work correctly. It is not
+	 * the nicest solution, but the most pragmatic thing to do (more info in the respective expression class).
+	 * 
 	 * @return Itself.
 	 */
 	public AbstractGebied getAbstractGebied() {
 		return this;
 	}
+
+	/**
+	 * This method is needed for the validation of DoelRealisatie codes. Because the doel attribute consists of multiple
+	 * codes, seperated by ';', we need access to the raw string value.
+	 * 
+	 * @return
+	 */
+	public abstract String getDoelRealisatieValue();
 
 }

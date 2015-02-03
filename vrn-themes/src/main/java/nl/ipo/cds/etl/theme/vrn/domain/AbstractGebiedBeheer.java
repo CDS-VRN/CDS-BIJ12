@@ -4,15 +4,16 @@ import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_BEHEER_PAKKET;
 import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_DOEL_REALISATIE;
 import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_STATUS_BEHEER;
 import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_TYPE_BEHEERDER;
-import nl.ipo.cds.etl.db.annotation.Column;
-import nl.ipo.cds.etl.db.annotation.Table;
-import nl.ipo.cds.etl.theme.annotation.CodeSpace;
-import nl.ipo.cds.etl.theme.annotation.MappableAttribute;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.text.ParseException;
+
+import nl.ipo.cds.etl.db.annotation.Column;
+import nl.ipo.cds.etl.db.annotation.Table;
+import nl.ipo.cds.etl.theme.annotation.CodeSpace;
+import nl.ipo.cds.etl.theme.annotation.MappableAttribute;
 
 import org.deegree.commons.tom.ows.CodeType;
 
@@ -25,7 +26,12 @@ import org.deegree.commons.tom.ows.CodeType;
 @Table
 public abstract class AbstractGebiedBeheer extends AbstractGebied {
 
-    @Column(name = "status_beheer")
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Column(name = "status_beheer")
     private transient CodeType statusBeheer;
 
     @Column(name = "beheerpakket")
@@ -119,7 +125,11 @@ public abstract class AbstractGebiedBeheer extends AbstractGebied {
 	}
     
   
-	public String getDoelBeheerValue() {
+	/**
+	 * Returns 
+	 * @return
+	 */
+	public String getDoelRealisatieValue() {
 		return doelBeheer==null?null:doelBeheer.getCode();
 	}
 

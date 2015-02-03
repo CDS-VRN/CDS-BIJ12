@@ -1,18 +1,20 @@
 package nl.ipo.cds.etl.theme.vrn.domain;
 
-import org.deegree.commons.tom.ows.CodeType;
-
-import nl.ipo.cds.etl.db.annotation.Column;
-import nl.ipo.cds.etl.db.annotation.Table;
-import nl.ipo.cds.etl.theme.annotation.CodeSpace;
-import nl.ipo.cds.etl.theme.annotation.MappableAttribute;
+import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_DOEL_REALISATIE;
+import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_STATUS_INRICHTING;
+import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_TYPE_BEHEERDER;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.text.ParseException;
 
-import static nl.ipo.cds.etl.theme.vrn.Constants.*;
+import nl.ipo.cds.etl.db.annotation.Column;
+import nl.ipo.cds.etl.db.annotation.Table;
+import nl.ipo.cds.etl.theme.annotation.CodeSpace;
+import nl.ipo.cds.etl.theme.annotation.MappableAttribute;
+
+import org.deegree.commons.tom.ows.CodeType;
 
 /**
  * @author annes
@@ -23,7 +25,12 @@ import static nl.ipo.cds.etl.theme.vrn.Constants.*;
 @Table
 public abstract class AbstractGebiedInrichting extends AbstractGebied {
 
-    @Column(name = "status_inrichting")
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Column(name = "status_inrichting")
     private transient CodeType statusInrichting;
 
     @Column(name = "doelinrichting")
@@ -90,6 +97,15 @@ public abstract class AbstractGebiedInrichting extends AbstractGebied {
     @CodeSpace(CODESPACE_DOEL_REALISATIE)
 	public CodeType getDoelInrichting() {
 		return doelInrichting;
+	}
+    
+    
+    /**
+	 * Returns 
+	 * @return
+	 */
+	public String getDoelRealisatieValue() {
+		return doelInrichting==null?null:doelInrichting.getCode();
 	}
 
     @MappableAttribute

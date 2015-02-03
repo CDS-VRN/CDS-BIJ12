@@ -13,9 +13,10 @@ import nl.ipo.cds.validation.execute.CompilerException;
 
 /**
  * @author annes
- *
+ * 
  */
-public class ProvinciaalGebiedVerwervingValidator extends AbstractGebiedVerwervingValidator<ProvinciaalGebiedVerwerving> {
+public class ProvinciaalGebiedVerwervingValidator extends
+		AbstractGebiedVerwervingValidator<ProvinciaalGebiedVerwerving> {
 
 	/**
 	 * @param validatorMessages
@@ -25,17 +26,17 @@ public class ProvinciaalGebiedVerwervingValidator extends AbstractGebiedVerwervi
 		super(validatorMessages, ProvinciaalGebiedVerwerving.class);
 		compile();
 	}
+
 	/**
-	 * doelVerwerving is optional for "provinciaal".
+	 * If doelVerwerving is provided, it should be conform rules. For provinciaal it is optional. Note that
+	 * doelVerwerving can contain multiple values, seperated by ';' characters
+	 * 
 	 * @return
 	 */
-	@Override
 	public Validator<Message, Context> getDoelVerwervingValidator() {
-		return validate(ifExp(doelVerwerving.isNull(), constant(true), and(
-				validate(not(isBlank(doelVerwerving.code()))).message(Message.ATTRIBUTE_EMPTY, constant(doelVerwerving.name)),
-				validate(doelVerwerving.hasCodeSpace(doelVerwervingCodeSpace)).message(Message.ATTRIBUTE_CODE_CODESPACE_INVALID, doelVerwerving.codeSpace(),
-						constant(doelVerwerving.name), doelVerwervingCodeSpace),
-				validate(doelVerwerving.isValid()).message(Message.ATTRIBUTE_CODE_INVALID, doelVerwerving.code(), constant(doelVerwerving.name),
-						doelVerwervingCodeSpace)).shortCircuit()));
+
+		return validate(ifExp(
+		// can be null
+				doelVerwerving.isNull(), constant(true), validateDoelRealisatie(constantDoelVerwerving, doelVerwerving)));
 	}
 }

@@ -7,4 +7,9 @@ import nl.ipo.cds.etl.db.annotation.Table;
  */
 @Table(name = "gebiedbeheer_provinciaal", schema = "vrn")
 public class ProvinciaalGebiedBeheer extends AbstractGebiedBeheer {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 }
