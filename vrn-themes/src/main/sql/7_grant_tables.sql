@@ -1,0 +1,9 @@
+GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedbeheer_landelijk TO inspire;
+GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedbeheer_landelijk_tagged TO inspire;
+GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedbeheer_provinciaal TO inspire;
+GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedinrichting_landelijk TO inspire;
+GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedinrichting_landelijk_tagged TO inspire;
+GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedinrichting_provinciaal TO inspire;
+GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedverwerving_landelijk TO inspire;
+GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedverwerving_landelijk_tagged TO inspire;
+GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedverwerving_provinciaal TO inspire;
