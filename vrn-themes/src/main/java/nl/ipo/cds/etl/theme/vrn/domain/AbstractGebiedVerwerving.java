@@ -1,18 +1,20 @@
 package nl.ipo.cds.etl.theme.vrn.domain;
 
-import org.deegree.commons.tom.ows.CodeType;
-
-import nl.ipo.cds.etl.db.annotation.Column;
-import nl.ipo.cds.etl.db.annotation.Table;
-import nl.ipo.cds.etl.theme.annotation.CodeSpace;
-import nl.ipo.cds.etl.theme.annotation.MappableAttribute;
+import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_DOEL_REALISATIE;
+import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_STATUS_VERWERVING;
+import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_TYPE_BEHEERDER;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.text.ParseException;
 
-import static nl.ipo.cds.etl.theme.vrn.Constants.*;
+import nl.ipo.cds.etl.db.annotation.Column;
+import nl.ipo.cds.etl.db.annotation.Table;
+import nl.ipo.cds.etl.theme.annotation.CodeSpace;
+import nl.ipo.cds.etl.theme.annotation.MappableAttribute;
+
+import org.deegree.commons.tom.ows.CodeType;
 
 /**
  * @author annes
@@ -22,7 +24,12 @@ import static nl.ipo.cds.etl.theme.vrn.Constants.*;
 @Table
 public abstract  class AbstractGebiedVerwerving extends AbstractGebied {
 
-    @Column(name = "status_verwerving")
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Column(name = "status_verwerving")
     private transient CodeType statusVerwerving;
 
     @Column(name = "type_eigenaar")
@@ -102,6 +109,14 @@ public abstract  class AbstractGebiedVerwerving extends AbstractGebied {
 	public CodeType getDoelVerwerving() {
 		return doelVerwerving;
 	}
+	
+	 /**
+		 * Returns 
+		 * @return
+		 */
+	public String getDoelRealisatieValue() {
+			return doelVerwerving==null?null:doelVerwerving.getCode();
+		}
 
 	@MappableAttribute
 	@CodeSpace(CODESPACE_DOEL_REALISATIE)

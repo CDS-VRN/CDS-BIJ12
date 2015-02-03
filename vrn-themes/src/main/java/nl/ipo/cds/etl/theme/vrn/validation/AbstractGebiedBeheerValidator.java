@@ -4,6 +4,7 @@
 package nl.ipo.cds.etl.theme.vrn.validation;
 
 import java.util.Map;
+
 import nl.ipo.cds.etl.theme.vrn.Context;
 import nl.ipo.cds.etl.theme.vrn.Message;
 import nl.ipo.cds.etl.theme.vrn.domain.AbstractGebiedBeheer;
@@ -20,9 +21,9 @@ import static nl.ipo.cds.etl.theme.vrn.Constants.*;
 public abstract class AbstractGebiedBeheerValidator<T extends AbstractGebiedBeheer> extends AbstractVrnValidator<T> {
 
 	private final Constant<Message, Context, String> statusBeheerCodeSpace = constant(CODESPACE_STATUS_BEHEER);
-	private final Constant<Message, Context, String> beheerpakketCodeSpace = constant(CODESPACE_BEHEER_PAKKET);
-	protected final Constant<Message, Context, String> doelBeheerCodeSpace = constant(CODESPACE_DOEL_REALISATIE);
+	protected final Constant<Message, Context, String> beheerpakketCodeSpace = constant(CODESPACE_BEHEER_PAKKET);
 	private final Constant<Message, Context, String> typeBeheerderCodeSpace = constant(CODESPACE_TYPE_BEHEERDER);
+	protected final Constant<Message, Context, String> constantDoelBeheer = constant("doelBeheer");
 
 	private final CodeExpression<Message, Context> statusBeheer = code("statusBeheer");
 	private final CodeExpression<Message, Context> beheerpakket = code("beheerpakket");
@@ -68,8 +69,7 @@ public abstract class AbstractGebiedBeheerValidator<T extends AbstractGebiedBehe
 						constant(beheerpakket.name), beheerpakketCodeSpace)).shortCircuit());
 	}
 
-
-	public abstract Validator<Message, Context> getDoelbeheerValidator();
+	public abstract Validator<Message, Context> getDoelBeheerValidator();
 
 	public Validator<Message, Context> getTypeBeheerderValidator() {
 		return validate(and(

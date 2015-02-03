@@ -13,7 +13,7 @@ import nl.ipo.cds.validation.execute.CompilerException;
 
 /**
  * @author annes
- *
+ * 
  */
 public class ProvinciaalGebiedBeheerValidator extends AbstractGebiedBeheerValidator<ProvinciaalGebiedBeheer> {
 
@@ -26,22 +26,17 @@ public class ProvinciaalGebiedBeheerValidator extends AbstractGebiedBeheerValida
 		compile();
 	}
 
-
 	/**
-	 * Iff doelbeheer is provided, it should be conform rules. For provinciaal it is optional.
+	 * If doelbeheer is provided, it should be conform rules. For provinciaal it is optional. Note that doelbeheer can
+	 * contain multiple values, seperated by ';' characters
+	 * 
 	 * @return
 	 */
-	@Override
-	public Validator<Message, Context> getDoelbeheerValidator() {
-		return validate(ifExp(doelBeheer.isNull(),
-				constant(true),
-				and(
-						validate(not(isBlank(doelBeheer.code()))).message(Message.ATTRIBUTE_EMPTY, constant(doelBeheer.name)),
-						validate(doelBeheer.hasCodeSpace(doelBeheerCodeSpace)).message(
-								Message.ATTRIBUTE_CODE_CODESPACE_INVALID, doelBeheer.codeSpace(), constant(doelBeheer.name),
-								doelBeheerCodeSpace),
-						validate(not(isBlank(doelBeheer.code()))).message(Message.ATTRIBUTE_EMPTY, constant(doelBeheer.name)),
-						validate(doelBeheer.isValid()).message(Message.ATTRIBUTE_CODE_INVALID, doelBeheer.code(),
-								constant(doelBeheer.name), doelBeheerCodeSpace)).shortCircuit()));
+	public Validator<Message, Context> getDoelBeheerValidator() {
+
+		return validate(ifExp(
+		// can be null
+				doelBeheer.isNull(), constant(true), validateDoelRealisatie(constantDoelBeheer, doelBeheer)));
 	}
+
 }

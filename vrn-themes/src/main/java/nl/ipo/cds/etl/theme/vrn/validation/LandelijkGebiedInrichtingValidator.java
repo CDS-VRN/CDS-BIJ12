@@ -29,23 +29,16 @@ public class LandelijkGebiedInrichtingValidator extends AbstractGebiedInrichting
 	}
 
 	/**
-	 * Doelinrichting is mandatory for "landelijk".
+	 * If doelInrichting is provided, it should be conform rules. For provinciaal it is optional. Note that doelInrichting can
+	 * contain multiple values, seperated by ';' characters
+	 * 
 	 * @return
 	 */
-	@Override
 	public Validator<Message, Context> getDoelInrichtingValidator() {
-		return validate(
-				and(
-						validate(not(doelInrichting.isNull())).message(Message.ATTRIBUTE_NULL,
-								constant(doelInrichting.name)),
-						validate(not(isBlank(doelInrichting.code()))).message(Message.ATTRIBUTE_EMPTY,
-								constant(doelInrichting.name)),
-						validate(doelInrichting.hasCodeSpace(doelInrichtingCodeSpace)).message(
-								Message.ATTRIBUTE_CODE_CODESPACE_INVALID, doelInrichting.codeSpace(),
-								constant(doelInrichting.name), doelInrichtingCodeSpace),
-						validate(doelInrichting.isValid()).message(Message.ATTRIBUTE_CODE_INVALID,
-								doelInrichting.code(), constant(doelInrichting.name), doelInrichtingCodeSpace))
-						.shortCircuit());
+		// for landelijk thema, doel attribute is required.
+		return validate(and(
+				validate(not(doelInrichting.isNull())).message(Message.ATTRIBUTE_NULL, constant(doelInrichting.name)),
+				validateDoelRealisatie(constantDoelInrichting, doelInrichting)).shortCircuit());
 	}
 
 	/**
