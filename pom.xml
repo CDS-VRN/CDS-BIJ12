@@ -92,6 +92,8 @@
         <module>theme-monster</module>
         <module>theme-resultaat</module>
         <module>theme-bvb</module>
+        <!-- VRN webservices based on Deegree 3.4 -->
+        <module>deegree-webservices-vrn</module>
         <!-- VRN themes -->
         <module>vrn-themes</module>
     </modules>
