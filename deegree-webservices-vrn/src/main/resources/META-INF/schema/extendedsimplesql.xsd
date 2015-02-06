@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:cds-vrn:deegree-extension:filter"
+	elementFormDefault="qualified" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.1">
+	<annotation>
+		<appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:package name="nl.ipo.cds.deegree.persistence.jaxb" />
+			</jaxb:schemaBindings>
+		</appinfo>
+	</annotation>
+	<element name="VRNFilterSQLFeatureStore">
+		<annotation>
+			<documentation>SQL FeatureStore that is configured by an SQL statement/connection.</documentation>
+			<appinfo>
+				<jaxb:class name="VRNFilterSQLFeatureStoreConfig" />
+			</appinfo>
+		</annotation>
+		<complexType>
+			<sequence>
+			</sequence>
+		</complexType>
+	</element>
+
+</schema>

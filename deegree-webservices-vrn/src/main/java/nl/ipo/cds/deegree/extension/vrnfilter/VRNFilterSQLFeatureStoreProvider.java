@@ -14,10 +14,10 @@ import org.deegree.workspace.Workspace;
  */
 public class VRNFilterSQLFeatureStoreProvider extends FeatureStoreProvider {
 
-	private static final String CONFIG_NS = "urn:cds-inspire:deegree-extension:persistence";
+	private static final String CONFIG_NS = "urn:cds-vrn:deegree-extension:filter";
 
 	//TODO: dit is een kopie. Het wordt niet gebruikt, maar als boilerplate opvulling
-    static final URL CONFIG_SCHEMA = VRNFilterSQLFeatureStoreProvider.class.getResource( "/META-INF/schemas/datasource/feature/vrnfiltersql/extendedsimplesql.xsd" );
+    static final URL CONFIG_SCHEMA = VRNFilterSQLFeatureStoreProvider.class.getResource( "/META-INF/schema/extendedsimplesql.xsd" );
 
 	
 
