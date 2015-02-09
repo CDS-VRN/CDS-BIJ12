@@ -1,4 +1,3 @@
-begin;
 -- CREATE VRN SCHEMA
 create schema vrn;
 -- GRANT VRN SCHEMA
@@ -414,4 +413,3 @@ INSERT INTO manager.codelistmapping VALUES ('StatusInrichting', 'https://raw.git
 INSERT INTO manager.codelistmapping VALUES ('StatusVerwerving', 'https://raw.githubusercontent.com/CDS-VRN/CDS-BIJ12/master/vrn-themes/src/main/feeds/statusVerwerving.xml');
 INSERT INTO manager.codelistmapping VALUES ('TypeBeheerderEnEigenaar', 'https://raw.githubusercontent.com/CDS-VRN/CDS-BIJ12/master/vrn-themes/src/main/feeds/typeBeheerder.xml');
 
-commit;
