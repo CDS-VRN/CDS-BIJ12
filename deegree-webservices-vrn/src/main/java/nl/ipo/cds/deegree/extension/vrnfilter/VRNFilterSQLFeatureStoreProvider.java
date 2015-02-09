@@ -16,10 +16,7 @@ public class VRNFilterSQLFeatureStoreProvider extends FeatureStoreProvider {
 
 	private static final String CONFIG_NS = "urn:cds-vrn:deegree-extension:filter";
 
-	//TODO: dit is een kopie. Het wordt niet gebruikt, maar als boilerplate opvulling
-    static final URL CONFIG_SCHEMA = VRNFilterSQLFeatureStoreProvider.class.getResource( "/META-INF/schema/extendedsimplesql.xsd" );
-
-	
+    static final URL CONFIG_SCHEMA = VRNFilterSQLFeatureStoreProvider.class.getResource( "/META-INF/schema/vrnfiltersqlfeaturestore.xsd" );
 
 	@Override
 	public String getNamespace() {
