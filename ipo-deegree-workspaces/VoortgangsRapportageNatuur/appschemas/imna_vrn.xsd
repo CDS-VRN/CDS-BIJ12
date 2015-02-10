@@ -14,32 +14,50 @@
 	<xsd:import namespace="http://www.opengis.net/gml" schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd" />
 
 
-	<xsd:element name="GebiedBeheerP" type="imna:GebiedBeheerPType" />
-	<xsd:complexType name="GebiedBeheerPType">
+	<xsd:element name="GebiedBeheerProvinciaal" type="imna:GebiedBeheerProvinciaalType" />
+	<xsd:complexType name="GebiedBeheerProvinciaalType">
 		<xsd:complexContent>
 			<xsd:extension base="beheer:GebiedBeheerType"/>
 		</xsd:complexContent>
 	</xsd:complexType>
 
-	<xsd:element name="GebiedBeheerL" type="imna:GebiedBeheerLType" />
-	<xsd:complexType name="GebiedBeheerLType">
+	<xsd:element name="GebiedBeheerLandelijk" type="imna:GebiedBeheerLandelijkType" />
+	<xsd:complexType name="GebiedBeheerLandelijkType">
 		<xsd:complexContent>
 			<xsd:extension base="beheer:GebiedBeheerType"/>
 		</xsd:complexContent>
 	</xsd:complexType>
 
 
-<!--
-	<xsd:complexType name="GebiedInrichtingPType" extends="inrichting:GebiedInrichtingType">
+    <xsd:element name="GebiedInrichtingProvinciaal" type="imna:GebiedInrichtingProvinciaalType" />
+	<xsd:complexType name="GebiedInrichtingProvinciaalType">
+        <xsd:complexContent>
+            <xsd:extension base="inrichting:GebiedInrichtingType"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+	<xsd:element name="GebiedInrichtingLandelijk" type="imna:GebiedInrichtingLandelijkType" />
+	<xsd:complexType name="GebiedInrichtingLandelijkType">
+        <xsd:complexContent>
+            <xsd:extension base="inrichting:GebiedInrichtingType"/>
+        </xsd:complexContent>
 	</xsd:complexType>
-	<xsd:element name="GebiedInrichtingL" type="inrichting:GebiedInrichtingLType" />
-	<xsd:complexType name="GebiedInrichtingLType" extends="inrichting:GebiedInrichtingType">
-	</xsd:complexType>
-	<xsd:element name="GebiedVerwervingP" type="verwerving:GebiedVerwervingPType" />
-	<xsd:complexType name="GebiedVerwervingPType" extends="verwerving:GebiedVerwervingType">
-	</xsd:complexType>
-	<xsd:element name="GebiedVerwervingL" type="verwerving:GebiedVerwervingLType" />
-	<xsd:complexType name="GebiedVerwervingLType" extends="verwerving:GebiedVerwervingType">
-	</xsd:complexType>
--->	
+
+	<xsd:element name="GebiedVerwervingProvinciaal" type="imna:GebiedVerwervingProvinciaalType" />
+	<xsd:complexType name="GebiedVerwervingProvinciaalType">
+        <xsd:complexType name="GebiedInrichtingLandelijkType">
+            <xsd:complexContent>
+                <xsd:extension base="verwerving:GebiedVerwervingType"/>
+            </xsd:complexContent>
+        </xsd:complexType>
+
+    </xsd:complexType>
+
+	<xsd:element name="GebiedVerwervingL" type="imna:GebiedVerwervingLandelijkType" />
+	<xsd:complexType name="GebiedVerwervingLandelijkType">
+            <xsd:complexContent>
+                <xsd:extension base="verwerving:GebiedVerwervingType"/>
+            </xsd:complexContent>
+        </xsd:complexType>
+
 </xsd:schema>

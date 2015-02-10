@@ -1,28 +1,29 @@
 <Themes xmlns="http://www.deegree.org/themes/standard" xmlns:d="http://www.deegree.org/metadata/description" xmlns:s="http://www.deegree.org/metadata/spatial" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" configVersion="3.2.0" xsi:schemaLocation="http://www.deegree.org/themes/standard http://schemas.deegree.org/themes/3.2.0/themes.xsd">
-<LayerStoreId>gebiedbeheer_landelijk</LayerStoreId>
-<LayerStoreId>gebiedbeheer_provinciaal</LayerStoreId>
+    <LayerStoreId>gebiedbeheer_provinciaal</LayerStoreId><!--
+    <LayerStoreId>gebiedbeheer_landelijk</LayerStoreId>
 <LayerStoreId>gebiedbeheer_vastgesteld</LayerStoreId>
 <LayerStoreId>gebiedinrichting_landelijk</LayerStoreId>
 <LayerStoreId>gebiedinrichting_provinciaal</LayerStoreId>
 <LayerStoreId>gebiedinrichting_vastgesteld</LayerStoreId>
 <LayerStoreId>gebiedverwerving_landelijk</LayerStoreId>
 <LayerStoreId>gebiedverwerving_provinciaal</LayerStoreId>
-<LayerStoreId>gebiedverwerving_vastgesteld</LayerStoreId>
+<LayerStoreId>gebiedverwerving_vastgesteld</LayerStoreId>-->
 	<Theme>
 	     <d:Title>vrn</d:Title>
-	     <s:CRS>EPSG:28992 EPSG:26912 EPSG:4326 EPSG:4258 CRS:84</s:CRS>
-		<Theme>
-			<Identifier>gebiedbeheer_landelijk</Identifier>
-			<d:Title>gebiedbeheer_landelijk</d:Title>
-			<s:CRS>EPSG:28992</s:CRS>
-			<Layer>gebiedbeheer_landelijk</Layer>
-		</Theme>
-		<Theme>
-			<Identifier>gebiedbeheer_provinciaal</Identifier>
-			<d:Title>gebiedbeheer_provinciaal</d:Title>
-			<s:CRS>EPSG:28992</s:CRS>
-			<Layer>gebiedbeheer_provinciaal</Layer>
-		</Theme>
+        <s:CRS>EPSG:28992 EPSG:26912 EPSG:4326 EPSG:4258 CRS:84</s:CRS>
+        <Theme>
+            <Identifier>gebiedbeheer_provinciaal</Identifier>
+            <d:Title>gebiedbeheer_provinciaal</d:Title>
+            <s:CRS>EPSG:28992</s:CRS>
+            <Layer>gebiedbeheer_provinciaal</Layer>
+        </Theme>
+<!--
+        <Theme>
+            <Identifier>gebiedbeheer_landelijk</Identifier>
+            <d:Title>gebiedbeheer_landelijk</d:Title>
+            <s:CRS>EPSG:28992</s:CRS>
+            <Layer>gebiedbeheer_landelijk</Layer>
+        </Theme>
 		<Theme>
 			<Identifier>gebiedbeheer_vastgesteld</Identifier>
 			<d:Title>gebiedbeheer_vastgesteld</d:Title>
@@ -65,5 +66,6 @@
 			<s:CRS>EPSG:28992</s:CRS>
 			<Layer>gebiedverwerving_vastgesteld</Layer>
 		</Theme>
+-->
 	</Theme>
 </Themes>

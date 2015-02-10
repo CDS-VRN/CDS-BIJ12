@@ -23,7 +23,7 @@ public class FilteredSQLFeatureStoreProvider extends SqlFeatureStoreProvider {
 	// return CONFIG_NS;
 	// }
 
-	static final URL CONFIG_SCHEMA = FilteredSQLFeatureStoreProvider.class.getResource("/META-INF/schemas/datasource/feature/sql/3.2.0/sql.xsd");
+	static final URL CONFIG_SCHEMA = FilteredSQLFeatureStoreProvider.class.getResource("/META-INF/schema/fsql.xsd");
 
 	@Override
 	public ResourceMetadata<FeatureStore> createFromLocation(Workspace workspace, ResourceLocation<FeatureStore> location) {
