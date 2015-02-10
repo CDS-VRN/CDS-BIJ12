@@ -30,6 +30,7 @@ public enum Message implements ValidatorMessageKey<Message, Context> {
 	OVERLAP_DETECTED,
 	HAS_MORE_ERRORS(LogLevel.WARNING);
 
+	@SuppressWarnings("unused")
 	private final String[] params;
 
 	private final LogLevel logLevel;

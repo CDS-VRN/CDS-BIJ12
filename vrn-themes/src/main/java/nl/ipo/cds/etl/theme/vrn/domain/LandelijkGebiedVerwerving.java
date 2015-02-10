@@ -8,4 +8,9 @@ import nl.ipo.cds.etl.db.annotation.Table;
  */
 @Table(name = "gebiedverwerving_landelijk", schema = "vrn")
 public class LandelijkGebiedVerwerving extends AbstractGebiedVerwerving{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 }

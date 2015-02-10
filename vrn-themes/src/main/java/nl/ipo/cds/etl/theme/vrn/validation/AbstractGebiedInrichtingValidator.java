@@ -6,7 +6,6 @@ package nl.ipo.cds.etl.theme.vrn.validation;
 import java.util.Map;
 
 import static nl.ipo.cds.etl.theme.vrn.Constants.*;
-
 import nl.ipo.cds.etl.theme.vrn.Context;
 import nl.ipo.cds.etl.theme.vrn.Message;
 import nl.ipo.cds.etl.theme.vrn.domain.AbstractGebiedInrichting;
@@ -25,7 +24,7 @@ public abstract class AbstractGebiedInrichtingValidator<T extends AbstractGebied
 	private final Constant<Message, Context, String> statusInrichtingCodeSpace = constant(CODESPACE_STATUS_INRICHTING);
 
 	protected final CodeExpression<Message, Context> doelInrichting = code("doelInrichting");
-	protected final Constant<Message, Context, String> doelInrichtingCodeSpace = constant(CODESPACE_DOEL_REALISATIE);
+	protected final Constant<Message, Context, String> constantDoelInrichting = constant("doelInrichting");
 
 	private final CodeExpression<Message, Context> typeBeheerder = code("typeBeheerder");
 	private final Constant<Message, Context, String> typeBeheerderCodeSpace = constant(CODESPACE_TYPE_BEHEERDER);

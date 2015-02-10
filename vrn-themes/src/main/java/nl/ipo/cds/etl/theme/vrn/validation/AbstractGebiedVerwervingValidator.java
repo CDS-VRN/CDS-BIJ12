@@ -25,7 +25,7 @@ public abstract class AbstractGebiedVerwervingValidator<T extends AbstractGebied
 	private final Constant<Message, Context, String> statusVerwervingCodeSpace = constant(CODESPACE_STATUS_VERWERVING);
 	
 	protected final CodeExpression<Message, Context> doelVerwerving = code("doelVerwerving");
-	protected final Constant<Message, Context, String> doelVerwervingCodeSpace = constant(CODESPACE_DOEL_REALISATIE);
+	protected final Constant<Message, Context, String> constantDoelVerwerving = constant("doelVerwerving");
 	
 	private final Constant<Message, Context, String> typeEigenaarCodeSpace = constant(CODESPACE_TYPE_BEHEERDER);
 	private final CodeExpression<Message, Context> typeEigenaar = code("typeEigenaar");

@@ -3,17 +3,20 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>nl.ipo.cds.ipo</groupId>
     <artifactId>cds-ipo</artifactId>
-    <version>2.3-SNAPSHOT</version>
+    <version>2.2-vrn-1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
         
     <properties>
-        <cds.version>2.3-SNAPSHOT</cds.version>
+    	<!-- by default, cds and ipo have the same versions -->
+        <cds.version>${project.version}</cds.version>
     </properties>
     
-    <scm>
-        <connection>scm:svn:svn+ssh://repos.idgis.eu/cds-inspire/cds-ipo/tags/cds-ipo-2.2</connection>
-        <developerConnection>scm:svn:svn+ssh://repos.idgis.eu/cds-inspire/cds-ipo/tags/cds-ipo-2.2</developerConnection>
-    </scm>
+   <scm>
+    	<connection>scm:git:git@github.com:CDS-VRN/CDS-BIJ12.git</connection>
+    	<developerConnection>scm:git:git@github.com:CDS-VRN/CDS-BIJ12.git</developerConnection>
+    	<url>https://github.com/CDS-VRN/CDS-BIJ12</url>
+    <tag>HEAD</tag>
+  </scm>
     
 	<repositories>
 		<repository>
@@ -28,20 +31,25 @@
 		</repository>	
 	</repositories>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>xml-apis</groupId>
-                <artifactId>xml-apis</artifactId>
-                <version>1.4.01</version>
-                <type>jar</type>
-                <scope>compile</scope>
-            </dependency>
-            <dependency>
-            	<groupId>org.springframework</groupId>
-            	<artifactId>spring-tx</artifactId>
-            	<version>3.2.2.RELEASE</version>
-            </dependency>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>xml-apis</groupId>
+				<artifactId>xml-apis</artifactId>
+				<version>1.4.01</version>
+				<type>jar</type>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-tx</artifactId>
+				<version>3.2.2.RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-core</artifactId>
+				<version>1.10.19</version>
+			</dependency>
         </dependencies>
     </dependencyManagement>
     
