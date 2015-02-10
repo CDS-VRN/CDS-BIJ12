@@ -413,3 +413,21 @@ INSERT INTO manager.codelistmapping VALUES ('StatusInrichting', 'https://raw.git
 INSERT INTO manager.codelistmapping VALUES ('StatusVerwerving', 'https://raw.githubusercontent.com/CDS-VRN/CDS-BIJ12/master/vrn-themes/src/main/feeds/statusVerwerving.xml');
 INSERT INTO manager.codelistmapping VALUES ('TypeBeheerderEnEigenaar', 'https://raw.githubusercontent.com/CDS-VRN/CDS-BIJ12/master/vrn-themes/src/main/feeds/typeBeheerder.xml');
 
+-- Stop the permission denied errors please!
+GRANT ALL ON ALL TABLES IN SCHEMA vrn TO inspire;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA vrn TO inspire;
+
+GRANT ALL ON ALL TABLES IN SCHEMA bron TO inspire;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA bron TO inspire;
+
+GRANT ALL ON ALL TABLES IN SCHEMA metadata TO inspire;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA metadata TO inspire;
+
+GRANT ALL ON ALL TABLES IN SCHEMA public TO inspire;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO inspire;
+
+GRANT ALL ON ALL TABLES IN SCHEMA manager TO inspire;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA manager TO inspire;
+
+GRANT ALL ON ALL TABLES IN SCHEMA inspire TO inspire;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA inspire TO inspire;
