@@ -12,6 +12,8 @@
 	<!-- Status CONCEPT -->
 
 	<!-- top level element -->
+    <xsd:element name="GebiedBeheerProvinciaal" type="imna:GebiedBeheerType" />
+    <xsd:element name="GebiedBeheerLandelijk" type="imna:GebiedBeheerType" />
 
 	<xsd:complexType name="GebiedBeheerType">
 		<xsd:complexContent>

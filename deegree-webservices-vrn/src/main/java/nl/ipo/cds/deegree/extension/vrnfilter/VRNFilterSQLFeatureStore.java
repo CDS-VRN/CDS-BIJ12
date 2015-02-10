@@ -28,6 +28,7 @@ import org.slf4j.Logger;
  * @author annes
  * 
  */
+
 @LoggingNotes(info = "logs problems when connecting to the DB/getting data from the DB", debug = "logs the SQL statements sent to the SQL server", trace = "logs stack traces")
 public class VRNFilterSQLFeatureStore implements FeatureStore {
 
@@ -85,7 +86,7 @@ public class VRNFilterSQLFeatureStore implements FeatureStore {
 	}
 
 	public boolean isAvailable() {
-		return available;
+		return true;
 	}
 
 	public boolean isMapped(QName ftName) {
