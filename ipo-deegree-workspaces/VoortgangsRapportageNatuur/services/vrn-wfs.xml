@@ -11,6 +11,7 @@
 
   <!-- omit for all -->
 
+<<<<<<< HEAD
 <FeatureStoreId>gebiedbeheer_provinciaal_filtered</FeatureStoreId>
     <!--
     <FeatureStoreId>gebiedbeheer_landelijk</FeatureStoreId>
@@ -19,6 +20,15 @@
     <FeatureStoreId>gebiedinrichting_provinciaal</FeatureStoreId>
     <FeatureStoreId>gebiedverwerving_provinciaal</FeatureStoreId>
     -->
+=======
+<FeatureStoreId>gebiedbeheer_landelijk</FeatureStoreId>
+<FeatureStoreId>gebiedbeheer_provinciaal_filtered</FeatureStoreId>
+<FeatureStoreId>gebiedinrichting_landelijk</FeatureStoreId>
+<FeatureStoreId>gebiedinrichting_provinciaal</FeatureStoreId>
+<FeatureStoreId>gebiedverwerving_landelijk</FeatureStoreId>
+<FeatureStoreId>gebiedverwerving_provinciaal</FeatureStoreId>
+
+>>>>>>> 3926869a3bfbb4644d6cd6d6784becb4ce1d7bf2
   <!-- EnableTransactions [0...1]: Enable transactions (WFS-T operations), default: disabled -->
   <EnableTransactions>true</EnableTransactions>
 

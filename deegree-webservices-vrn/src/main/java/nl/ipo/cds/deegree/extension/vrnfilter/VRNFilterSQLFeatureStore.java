@@ -2,8 +2,6 @@ package nl.ipo.cds.deegree.extension.vrnfilter;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
-import java.net.URL;
-
 import javax.xml.namespace.QName;
 
 import nl.ipo.cds.deegree.persistence.jaxb.VRNFilterSQLFeatureStoreConfig;
@@ -17,8 +15,6 @@ import org.deegree.feature.persistence.lock.LockManager;
 import org.deegree.feature.persistence.query.Query;
 import org.deegree.feature.stream.FeatureInputStream;
 import org.deegree.feature.types.AppSchema;
-import org.deegree.feature.types.FeatureType;
-import org.deegree.feature.types.GenericAppSchema;
 import org.deegree.feature.types.GenericFeatureType;
 import org.deegree.filter.Filter;
 import org.deegree.filter.FilterEvaluationException;
@@ -30,7 +26,7 @@ import org.slf4j.Logger;
 
 /**
  * @author annes
- *
+ * 
  */
 
 @LoggingNotes(info = "logs problems when connecting to the DB/getting data from the DB", debug = "logs the SQL statements sent to the SQL server", trace = "logs stack traces")
@@ -42,31 +38,14 @@ public class VRNFilterSQLFeatureStore implements FeatureStore {
 
 	private final VRNFilterSQLFeatureStoreMetadata metadata;
 
-	private AppSchema schema;
-
-	private VRNFilterSQLFeatureStoreConfig config;
-
-	private Workspace workspace;
-
-	private URL configURL;
-
 	GenericFeatureType featureType;
 
 	private boolean available;
 
-	private final QName ftName;
-
-	public VRNFilterSQLFeatureStore(FeatureStore featureStore, VRNFilterSQLFeatureStoreMetadata metadata, VRNFilterSQLFeatureStoreConfig config,
-	Workspace workspace, String ftLocalName, String ftNamespace, String ftPrefix) {
+	public VRNFilterSQLFeatureStore(FeatureStore featureStore, VRNFilterSQLFeatureStoreMetadata metadata,
+			VRNFilterSQLFeatureStoreConfig config, Workspace workspace) {
 		this.featureStore = featureStore;
 		this.metadata = metadata;
-		this.config = config;
-		this.workspace = workspace;
-
-		ftLocalName = (ftLocalName != null && !ftLocalName.isEmpty()) ? ftLocalName : "Feature";
-		ftNamespace = (ftNamespace != null && !ftNamespace.isEmpty()) ? ftNamespace : "http://www.deegree.org/app";
-		ftPrefix = (ftPrefix != null && !ftPrefix.isEmpty()) ? ftPrefix : "app";
-		this.ftName = new QName(ftNamespace, ftLocalName, ftPrefix);
 
 	}
 
@@ -99,27 +78,11 @@ public class VRNFilterSQLFeatureStore implements FeatureStore {
 	}
 
 	public AppSchema getSchema() {
-		AppSchema ds = featureStore.getSchema();
-//		FeatureType[] delegateFeatureTypes = ds.getFeatureTypes();
-//		FeatureType[] fts = new FeatureType[delegateFeatureTypes.length];
-//		for (int i = 0; i < fts.length; i++) {
-//			FeatureType ft = delegateFeatureTypes[i];
-//		}
-//		
-//
-//		// create a copy
-//		GenericAppSchema appSchema = new GenericAppSchema(fts, ds.getFtToSuperFt(), ds.getNamespaceBindings(), ds.getGMLSchema(), ds
-//		.getGmlObjectTypes(), ds.getGeometryToSuperType());
-		return ds;
+		return featureStore.getSchema();
 	}
 
 	public void init() {
-        int i=0,test=i++;
-		/*
-		 * featureType = DbFeatureUtils.determineFeatureType(ftName, null, null); if (featureType == null) { available = false; } else { schema = new
-		 * GenericAppSchema(new FeatureType[] { featureType }, null, null, null, null, null); available = true; }
-		 */
-		//
+		// nothing to init
 	}
 
 	public boolean isAvailable() {
@@ -139,6 +102,8 @@ public class VRNFilterSQLFeatureStore implements FeatureStore {
 	}
 
 	public FeatureInputStream query(Query[] arg0) throws FeatureStoreException, FilterEvaluationException {
+		// TODO alter query to add filter on provincie grens
+
 		return featureStore.query(arg0);
 	}
 
