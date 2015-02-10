@@ -45,6 +45,17 @@ import org.deegree.commons.uom.Measure;
 import org.deegree.geometry.Geometry;
 import org.springframework.beans.factory.annotation.Value;
 
+import javax.inject.Inject;
+import javax.sql.DataSource;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_BRONHOUDER;
+
 /**
  * @author annes
  * 
@@ -278,7 +289,8 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 	 * Overlap validation hook after job.
 	 */
 	@Override
-	public void afterJob(final EtlJob job, final EventLogger<Message> logger, final Context context) {
+	public void afterJob(final EtlJob job, final Reporter reporter,
+			final Context context) {
 
 		// Only Import and Validate jobs do overlap validation (and have a geometry store saved on disk when reaching
 		// this code).
@@ -288,21 +300,18 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 			return;
 		}
 
-		try {
-			List<OverlapValidationPair<AbstractGebied>> overlapList = bulkValidator.overlapValidation(context
-					.getDataSource());
-			if (!overlapList.isEmpty()) {
-				for (OverlapValidationPair<AbstractGebied> overlap : overlapList) {
-					logger.logEvent(job, Message.OVERLAP_DETECTED, JobLogger.LogLevel.ERROR, overlap.f1.getId(),
-							overlap.f1.getIdentificatie(), overlap.f2.getId(), overlap.f2.getIdentificatie());
-				}
-				throw new RuntimeException("Overlap detected");
-			}
-		} catch (ClassNotFoundException | IOException | SQLException e) {
-			logger.logEvent(job, Message.OVERLAP_DETECTION_FAILED, JobLogger.LogLevel.ERROR, e.getMessage());
-			throw new RuntimeException(e);
-		} finally {
-			geometryStore.destroyStore(context.getDataSource());
+        try {
+            List<OverlapValidationPair<AbstractGebied>> overlapList = bulkValidator
+                    .overlapValidation(context.getDataSource());
+            if (!overlapList.isEmpty()) {
+                for (OverlapValidationPair<AbstractGebied> overlap : overlapList) {
+                    reporter.logEvent(context, Message.OVERLAP_DETECTED, overlap.f1.getId(), overlap.f1.getIdentificatie(), overlap.f2.getId(), overlap.f2.getIdentificatie());
+                }
+            }
+        } catch (ClassNotFoundException | IOException | SQLException e) {
+            reporter.logEvent(context, Message.OVERLAP_DETECTION_FAILED, e.getMessage());
+        } finally {
+            geometryStore.destroyStore(context.getDataSource());
 		}
 	}
 
