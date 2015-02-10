@@ -1,9 +1,18 @@
-GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedbeheer_landelijk TO inspire;
-GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedbeheer_landelijk_tagged TO inspire;
-GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedbeheer_provinciaal TO inspire;
-GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedinrichting_landelijk TO inspire;
-GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedinrichting_landelijk_tagged TO inspire;
-GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedinrichting_provinciaal TO inspire;
-GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedverwerving_landelijk TO inspire;
-GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedverwerving_landelijk_tagged TO inspire;
-GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedverwerving_provinciaal TO inspire;
+-- Stop the permission denied errors please!
+GRANT ALL ON ALL TABLES IN SCHEMA vrn TO inspire;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA vrn TO inspire;
+
+GRANT ALL ON ALL TABLES IN SCHEMA bron TO inspire;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA bron TO inspire;
+
+GRANT ALL ON ALL TABLES IN SCHEMA metadata TO inspire;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA metadata TO inspire;
+
+GRANT ALL ON ALL TABLES IN SCHEMA public TO inspire;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO inspire;
+
+GRANT ALL ON ALL TABLES IN SCHEMA manager TO inspire;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA manager TO inspire;
+
+GRANT ALL ON ALL TABLES IN SCHEMA inspire TO inspire;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA inspire TO inspire;

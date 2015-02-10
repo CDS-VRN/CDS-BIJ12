@@ -281,15 +281,7 @@ create index gebiedverwerving_landelijk_geom_sdx on vrn.gebiedverwerving_landeli
 
 drop index if exists vrn.gebiedverwerving_provinciaal_geom_sdx;
 create index gebiedverwerving_provinciaal_geom_sdx on vrn.gebiedverwerving_provinciaal using gist ( geometrie );
-GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedbeheer_landelijk TO inspire;
-GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedbeheer_landelijk_tagged TO inspire;
-GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedbeheer_provinciaal TO inspire;
-GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedinrichting_landelijk TO inspire;
-GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedinrichting_landelijk_tagged TO inspire;
-GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedinrichting_provinciaal TO inspire;
-GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedverwerving_landelijk TO inspire;
-GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedverwerving_landelijk_tagged TO inspire;
-GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedverwerving_provinciaal TO inspire;
+
 -- LandelijkGebiedBeheer
 -- ProvinciaalGebiedBeheer
 -- ProvinciaalGebiedInrichting
