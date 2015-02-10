@@ -9,7 +9,7 @@ import org.deegree.workspace.Workspace;
 
 /**
  * @author annes
- *
+ * 
  */
 public class VRNFilterSQLFeatureStoreBuilder implements ResourceBuilder<FeatureStore> {
 
@@ -17,22 +17,19 @@ public class VRNFilterSQLFeatureStoreBuilder implements ResourceBuilder<FeatureS
 	private VRNFilterSQLFeatureStoreMetadata metadata;
 	private VRNFilterSQLFeatureStoreConfig config;
 
-	public VRNFilterSQLFeatureStoreBuilder(Workspace workspace, VRNFilterSQLFeatureStoreMetadata metadata, VRNFilterSQLFeatureStoreConfig config) {
+	public VRNFilterSQLFeatureStoreBuilder(Workspace workspace, VRNFilterSQLFeatureStoreMetadata metadata,
+			VRNFilterSQLFeatureStoreConfig config) {
 		this.workspace = workspace;
 		this.metadata = metadata;
 		this.config = config;
 	}
 
-
-	
 	@Override
 	public FeatureStore build() {
-		FeatureStore sqlFeatureStoreProvider =  workspace.getResource(FeatureStoreProvider.class, "gebiedbeheer_provinciaal");
+		FeatureStore sqlFeatureStoreProvider = workspace.getResource(FeatureStoreProvider.class,
+				"gebiedbeheer_provinciaal");
 
-//		String name = config.getFeatureTypeName();
-//        String ns = config.getFeatureTypeNamespace();
-//        String prefix = config.getFeatureTypePrefix();
-		return new VRNFilterSQLFeatureStore(sqlFeatureStoreProvider, metadata, config, workspace,null,null,null);//, name, ns, prefix);
+		return new VRNFilterSQLFeatureStore(sqlFeatureStoreProvider, metadata, config, workspace);
 	}
 
 }
