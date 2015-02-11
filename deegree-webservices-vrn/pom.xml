@@ -9,6 +9,7 @@
 
 	<properties>
 		<deegree.version>3.4-pre16</deegree.version>
+		<cds.version>2.3-SNAPSHOT</cds.version><!-- 2.2-vrn-1.0-SNAPSHOT -->
 	</properties>
 
 
@@ -27,8 +28,28 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>nl.ipo.cds</groupId>
+			<artifactId>managerDB</artifactId>
+			<version>${cds.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.deegree</groupId>
 			<artifactId>deegree-services-wmts</artifactId>
+			<version>${deegree.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.deegree</groupId>
+			<artifactId>deegree-core-cs</artifactId>
+			<version>${deegree.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.deegree</groupId>
+			<artifactId>deegree-core-base</artifactId>
+			<version>${deegree.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.deegree</groupId>
+			<artifactId>deegree-core-commons</artifactId>
 			<version>${deegree.version}</version>
 		</dependency>
 		<dependency>

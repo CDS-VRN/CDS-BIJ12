@@ -8,6 +8,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
+import nl.ipo.cds.deegree.RootConfig;
 import nl.ipo.cds.deegree.security.DeegreeVrnWebSecurityConfigurerAdapter;
 
 import org.deegree.services.controller.OGCFrontController;
@@ -29,7 +30,7 @@ public class DeegreeVrnWebApplicationInitializer implements WebApplicationInitia
 
 		// Create the 'root' Spring application context
 		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-		rootContext.register(DeegreeVrnWebSecurityConfigurerAdapter.class);
+		rootContext.register(RootConfig.class);
 
 		// Manage the lifecycle of the root application context
 		container.addListener(new ContextLoaderListener(rootContext));
