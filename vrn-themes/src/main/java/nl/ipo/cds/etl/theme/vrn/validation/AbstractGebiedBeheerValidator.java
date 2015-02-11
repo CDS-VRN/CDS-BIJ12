@@ -57,16 +57,13 @@ public abstract class AbstractGebiedBeheerValidator<T extends AbstractGebiedBehe
 	}
 
 	public Validator<Message, Context> getBeheerPakketValidator() {
-		return validate(and(
-				validate(not(beheerpakket.isNull())).message(Message.ATTRIBUTE_NULL, constant(beheerpakket.name)),
-				validate(not(isBlank(beheerpakket.code()))).message(Message.ATTRIBUTE_EMPTY,
-						constant(beheerpakket.name)),
-				validate(beheerpakket.hasCodeSpace(beheerpakketCodeSpace)).message(
+		return validate(ifExp(// can be null
+				beheerpakket.isNull(), constant(true), 
+				(and(validate(beheerpakket.hasCodeSpace(beheerpakketCodeSpace)).message(
 						Message.ATTRIBUTE_CODE_CODESPACE_INVALID, beheerpakket.codeSpace(),
 						constant(beheerpakket.name), beheerpakketCodeSpace),
-
 				validate(beheerpakket.isValid()).message(Message.ATTRIBUTE_CODE_INVALID, beheerpakket.code(),
-						constant(beheerpakket.name), beheerpakketCodeSpace)).shortCircuit());
+						constant(beheerpakket.name), beheerpakketCodeSpace)))));
 	}
 
 	public abstract Validator<Message, Context> getDoelBeheerValidator();

@@ -211,7 +211,6 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 								surfaceGeometry.srsName()),
 						// check invalid coordinates
 						validate(surfaceGeometry.hasValidCoordinateRD()).message(Message.GEOMETRY_INVALID_COORDINATES)
-				// TODO!: check duplicate coordinates
 				).shortCircuit()));
 
 	}
