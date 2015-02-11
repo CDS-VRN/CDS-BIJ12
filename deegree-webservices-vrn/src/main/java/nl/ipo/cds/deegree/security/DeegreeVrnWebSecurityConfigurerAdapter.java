@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.core.support.BaseLdapPathContextSource;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -32,12 +34,11 @@ import org.springframework.security.ldap.DefaultSpringSecurityContextSource;
  */
 @Configuration
 @EnableWebSecurity
-@ImportResource(value = {
-		"classpath:nl/ipo/cds/dao/initDB.xml",
+@ImportResource(value = { "classpath:nl/ipo/cds/dao/initDB.xml",
 // "classpath:nl/ipo/cds/admin/admin-applicationContext.xml",
 // "classpath:nl/ipo/cds/admin/admin-securityContext.xml",
 // "classpath:nl/ipo/cds/dao/dataSource-applicationContext.xml",
-"classpath:nl/ipo/cds/dao/dao-applicationContext.xml",
+		"classpath:nl/ipo/cds/dao/dao-applicationContext.xml",
 // "classpath:nl/ipo/cds/dao/metadata/dao-applicationContext.xml",
 // "classpath:nl/ipo/cds/nagios/nagios-status-client.xml",
 // "classpath:nl/ipo/cds/etl/reporting/geom/geometry-applicationContext.xml"
@@ -47,65 +48,7 @@ public class DeegreeVrnWebSecurityConfigurerAdapter extends WebSecurityConfigure
 	@Autowired
 	private AuthenticationProvider authenticationProvider;
 
-	/**
-	 * <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> <property
-	 * name="driverClassName" value="${jdbc.driverClassName}" /> <property name="url" value="${jdbc.dburl}" /> <property
-	 * name="username" value="${jdbc.username}" /> <property name="password" value="${jdbc.password}" /> <property
-	 * name="defaultAutoCommit" value="false" /> <property name="maxWait" value="3000" /> <property name="maxIdle"
-	 * value="-1" /> <property name="maxActive" value="-1" /> </bean>
-	 * 
-	 * @return
-	 */
-	@Bean
-	public DataSource dataSource(@Value("${jdbc.driverClassName}") String driverClassName) {
-		final BasicDataSource ds = new BasicDataSource();
-		ds.setDriverClassName(driverClassName);
-		return ds;
-	}
-
-	@Value("${ldap.ldapurl}")
-	private String ldapUrl;
-
-	@Value("${ldap.managerdn}")
-	private String managerDN;
-
-	@Value("${ldap.managerpw}")
-	private String managerPassword;
-
-	/**
-	 * <!-- LDAP datasource: --> <s:ldap-server id="ldapServer" url="${ldap.ldapurl}" manager-dn="${ldap.managerdn}"
-	 * manager-password="${ldap.managerpw}" />
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	@Bean
-	public BaseLdapPathContextSource ldapServer() throws Exception {
-		DefaultSpringSecurityContextSource contextSource = new DefaultSpringSecurityContextSource(ldapUrl);
-
-		contextSource.setUserDn(managerDN);
-		contextSource.setPassword(managerPassword);
-		contextSource.setReferral("ignore");
-		contextSource.afterPropertiesSet();
-		return contextSource;
-	}
-
-	@Bean
-	public LdapTemplate ldapTemplate() throws Exception {
-		return new LdapTemplate(ldapServer());
-	}
-
-//	/**
-//	 * <bean id="propertyPlaceholderConfigurer" class="nl.ipo.cds.properties.ConfigDirPropertyPlaceholderConfigurer"/>
-//	 * 
-//	 * @return
-//	 */
-//	@Bean
-//	public static ConfigDirPropertyPlaceholderConfigurer propertyPlaceholderConfigurer() {
-//		final ConfigDirPropertyPlaceholderConfigurer propertyPlaceholderConfigurer = new ConfigDirPropertyPlaceholderConfigurer();
-////		propertyPlaceholderConfigurer.setIgnoreUnresolvablePlaceholders(true);
-//		return propertyPlaceholderConfigurer;
-//	}
+	
 
 	@Bean
 	public ManagerDaoAuthenticationProvider createAuthenticationProvider(ManagerDao managerDao) {
@@ -114,8 +57,8 @@ public class DeegreeVrnWebSecurityConfigurerAdapter extends WebSecurityConfigure
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		// auth.inMemoryAuthentication().withUser("user").password("password").roles("USER");
-		auth.authenticationProvider(authenticationProvider);
+		 auth.inMemoryAuthentication().withUser("user").password("password").roles("USER");
+//		FIXME auth.authenticationProvider(authenticationProvider);
 	}
 
 	/**
