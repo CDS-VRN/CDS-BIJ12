@@ -1,0 +1,25 @@
+<SQLFeatureStore xmlns="http://www.deegree.org/datasource/feature/sql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" configVersion="3.2.0"
+xsi:schemaLocation="http://www.deegree.org/datasource/feature/sql http://schemas.deegree.org/datasource/feature/sql/3.2.0/sql.xsd">
+  <JDBCConnId>vrn</JDBCConnId>
+   <StorageCRS srid="-1" dim="2D">EPSG:28992</StorageCRS>
+   <!--<StorageCRS srid="28992" dim="2D">urn:ogc:def:crs:EPSG::28992</StorageCRS>-->
+  <GMLSchema>../../appschemas/landelijk/imna_vrn_inrichting.xsd</GMLSchema>
+<FeatureTypeMapping xmlns:imna="http://www.cds.nl/imna/inrichting" table="vrn.gebiedinrichting_landelijk" name="imna:GebiedInrichtingLandelijk">
+      <FIDMapping>
+        <Column name="id"/>
+    </FIDMapping>
+    <Geometry path="imna:geometrie" mapping="geometrie">
+  		<StorageCRS srid="28992">EPSG:28992</StorageCRS>
+	</Geometry>
+    <Primitive path="imna:eindTijd" mapping="eindtijd"/>
+    <Primitive path="imna:beginTijd" mapping="begintijd"/>
+    <Primitive path="imna:identificatie" mapping="identificatie"/>
+    <Primitive path="imna:statusInrichting" mapping="status_inrichting"/>
+    <Primitive path="imna:relatieNummer" mapping="relatienummer"/>
+    <Primitive path="imna:contractNummer" mapping="contractnummer"/>
+    <Primitive path="imna:bronHouder" mapping="imna_bronhouder"/>
+    <Primitive path="imna:typeBeheerder" mapping="type_beheerder"/>
+    <Primitive path="imna:doelInrichting" mapping="doelinrichting"/>
+
+  </FeatureTypeMapping>
+</SQLFeatureStore>

@@ -1,0 +1,27 @@
+<SQLFeatureStore xmlns="http://www.deegree.org/datasource/feature/sql" xmlns:imna="http://www.cds.nl/imna/beheer" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" configVersion="3.2.0" xsi:schemaLocation="http://www.deegree.org/datasource/feature/sql http://schemas.deegree.org/datasource/feature/sql/3.2.0/sql.xsd">
+  <JDBCConnId>vrn</JDBCConnId>
+  <StorageCRS srid="-1" dim="2D">EPSG:28992</StorageCRS>
+  <GMLSchema>../../appschemas/tagged/imna_vrn_beheer.xsd</GMLSchema>
+
+  <FeatureTypeMapping xmlns:imna="http://www.cds.nl/imna/beheer" name="imna:GebiedBeheerVastgesteld" table="vrn.gebiedbeheer_landelijk_tagged">
+      <FIDMapping>
+        <Column name="id"/>
+    </FIDMapping>
+    <Primitive path="imna:tag" mapping="tag"/>
+    <Geometry path="imna:geometrie" mapping="geometrie">
+  		<StorageCRS srid="28992">EPSG:28992</StorageCRS>
+	</Geometry>
+    <Primitive path="imna:eindTijd" mapping="eindtijd"/>
+    <Primitive path="imna:beginTijd" mapping="begintijd"/>
+    <Primitive path="imna:identificatie" mapping="identificatie"/>
+    <Primitive path="imna:eenheidNummer" mapping="eenheidnummer"/>
+    <Primitive path="imna:bronHouder" mapping="imna_bronhouder"/>
+    <Primitive path="imna:statusBeheer" mapping="status_beheer"/>
+    <Primitive path="imna:beheerPakket" mapping="beheerpakket"/>
+    <Primitive path="imna:relatieNummer" mapping="relatienummer"/>
+    <Primitive path="imna:contractNummer" mapping="contractnummer"/>
+    <Primitive path="imna:typeBeheerder" mapping="type_beheerder"/>
+    <Primitive path="imna:doelBeheer" mapping="doelbeheer"/>
+
+  </FeatureTypeMapping>
+</SQLFeatureStore>
