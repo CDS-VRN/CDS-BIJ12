@@ -256,7 +256,7 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 
 				// Only import and validate jobs have a geometrystore allocated when reaching this code.
 				// Other job types have a NULL data source.
-				if (context.getDataSource() != null) {
+				if ((context.getDataSource() != null) && (abstractGebied.getGeometrie()!=null) ) {
 					geometryStore.addToStore(context.getDataSource(), abstractGebied.getGeometrie(), abstractGebied);
 				}
 				return true;
