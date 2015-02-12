@@ -1,7 +1,14 @@
 package nl.ipo.cds.deegree.extension.vrnfilter;
 
+import java.util.List;
+
 import com.vividsolutions.jts.io.ParseException;
+
+import nl.ipo.cds.dao.ManagerDao;
 import nl.ipo.cds.deegree.persistence.jaxb.VRNFilterSQLFeatureStoreConfig;
+import nl.ipo.cds.domain.Gebruiker;
+import nl.ipo.cds.domain.GebruikerThemaAutorisatie;
+
 import org.deegree.commons.annotations.LoggingNotes;
 import org.deegree.commons.tom.gml.GMLObject;
 import org.deegree.cs.CRSCodeType;
@@ -29,6 +36,7 @@ import org.deegree.workspace.Resource;
 import org.deegree.workspace.ResourceMetadata;
 import org.deegree.workspace.Workspace;
 import org.slf4j.Logger;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.xml.namespace.QName;
 
@@ -109,6 +117,13 @@ public class VRNFilterSQLFeatureStore implements FeatureStore {
 	}
 
 	public FeatureInputStream query(Query[] arg0) throws FeatureStoreException, FilterEvaluationException {
+		final String principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+		System.out.println(principal);
+		System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
+//		ManagerDao managerDao;
+//		final Gebruiker gebruiker = managerDao.getGebruiker(principal);
+//		final List<GebruikerThemaAutorisatie> themaAutorisaties = managerDao.getGebruikerThemaAutorisatie(gebruiker);
+		
         try {
            /*
             Ellipsoid e28992 = new Ellipsoid(6378137.0D, Unit.METRE, 298.257223563D, new CRSCodeType("28992", "EPSG"), "WGS84_Ellipsoid");

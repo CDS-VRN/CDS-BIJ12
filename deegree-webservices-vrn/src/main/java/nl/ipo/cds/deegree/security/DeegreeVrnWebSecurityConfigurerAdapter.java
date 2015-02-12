@@ -3,28 +3,19 @@
  */
 package nl.ipo.cds.deegree.security;
 
-import javax.sql.DataSource;
-
 import nl.ipo.cds.dao.ManagerDao;
 import nl.ipo.cds.dao.ManagerDaoAuthenticationProvider;
-import nl.ipo.cds.properties.ConfigDirPropertyPlaceholderConfigurer;
 
-import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.ldap.core.LdapTemplate;
-import org.springframework.ldap.core.support.BaseLdapPathContextSource;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.ldap.DefaultSpringSecurityContextSource;
+import org.springframework.security.config.http.SessionCreationPolicy;
 
 /**
  * Configures security for VRN workspaces
@@ -48,8 +39,6 @@ public class DeegreeVrnWebSecurityConfigurerAdapter extends WebSecurityConfigure
 	@Autowired
 	private AuthenticationProvider authenticationProvider;
 
-	
-
 	@Bean
 	public ManagerDaoAuthenticationProvider createAuthenticationProvider(ManagerDao managerDao) {
 		return new ManagerDaoAuthenticationProvider(managerDao);
@@ -57,8 +46,8 @@ public class DeegreeVrnWebSecurityConfigurerAdapter extends WebSecurityConfigure
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		 auth.inMemoryAuthentication().withUser("user").password("password").roles("USER");
-//		FIXME auth.authenticationProvider(authenticationProvider);
+		// auth.inMemoryAuthentication().withUser("user").password("password").roles("USER");
+		auth.authenticationProvider(authenticationProvider);
 	}
 
 	/**
@@ -67,5 +56,8 @@ public class DeegreeVrnWebSecurityConfigurerAdapter extends WebSecurityConfigure
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().anyRequest().authenticated().and().httpBasic();
+		http.logout();
+		// do not create session
+		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
 }

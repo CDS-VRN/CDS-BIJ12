@@ -1,4 +1,4 @@
-<GeoFilteredSQLFeatureStore xmlns="http://www.deegree.org/datasource/feature/sql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" configVersion="3.2.0" xsi:schemaLocation="http://www.deegree.org/datasource/feature/sql http://schemas.deegree.org/datasource/feature/sql/3.2.0/sql.xsd">
+<SQLFeatureStore xmlns="http://www.deegree.org/datasource/feature/sql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" configVersion="3.2.0" xsi:schemaLocation="http://www.deegree.org/datasource/feature/sql http://schemas.deegree.org/datasource/feature/sql/3.2.0/sql.xsd">
 
   <JDBCConnId>vrn</JDBCConnId>
    <StorageCRS srid="-1" dim="2D">EPSG:28992</StorageCRS>
@@ -25,4 +25,4 @@
     <Primitive path="imna:doelBeheer" mapping="doelbeheer"/>
 
   </FeatureTypeMapping>
-</GeoFilteredSQLFeatureStore >
+</SQLFeatureStore >
