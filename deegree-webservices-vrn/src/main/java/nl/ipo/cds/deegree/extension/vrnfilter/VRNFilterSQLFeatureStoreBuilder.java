@@ -27,7 +27,7 @@ public class VRNFilterSQLFeatureStoreBuilder implements ResourceBuilder<FeatureS
 	@Override
 	public FeatureStore build() {
 		FeatureStore sqlFeatureStoreProvider = workspace.getResource(FeatureStoreProvider.class,
-				"gebiedbeheer_provinciaal");
+				config.getDelegateFeatureStoreId());
 
 		return new VRNFilterSQLFeatureStore(sqlFeatureStoreProvider, metadata, config, workspace);
 	}

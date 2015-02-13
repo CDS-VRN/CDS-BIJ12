@@ -60,10 +60,13 @@ public class VRNFilterSQLFeatureStore implements FeatureStore {
 
 	private boolean available;
 
+	private final VRNFilterSQLFeatureStoreConfig config;
+
 	public VRNFilterSQLFeatureStore(FeatureStore featureStore, VRNFilterSQLFeatureStoreMetadata metadata,
 			VRNFilterSQLFeatureStoreConfig config, Workspace workspace) {
 		this.featureStore = featureStore;
 		this.metadata = metadata;
+		this.config = config;
 
 	}
 
@@ -120,6 +123,9 @@ public class VRNFilterSQLFeatureStore implements FeatureStore {
 		final String principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
 		System.out.println(principal);
 		System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
+		if(config.isFilterBronHouderGeometry()) {
+			// ...
+		}
 //		ManagerDao managerDao;
 //		final Gebruiker gebruiker = managerDao.getGebruiker(principal);
 //		final List<GebruikerThemaAutorisatie> themaAutorisaties = managerDao.getGebruikerThemaAutorisatie(gebruiker);

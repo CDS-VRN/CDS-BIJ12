@@ -55,7 +55,8 @@ public class DeegreeVrnWebSecurityConfigurerAdapter extends WebSecurityConfigure
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().anyRequest().authenticated().and().httpBasic();
+		http.authorizeRequests().anyRequest().hasAuthority("ROLE_RAADPLEGER");
+		http.httpBasic();
 		http.logout();
 		// do not create session
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
