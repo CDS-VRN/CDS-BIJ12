@@ -14,11 +14,16 @@ import nl.ipo.cds.etl.db.annotation.Column;
 import nl.ipo.cds.etl.db.annotation.Table;
 import nl.ipo.cds.etl.theme.annotation.CodeSpace;
 import nl.ipo.cds.etl.theme.annotation.MappableAttribute;
+import nl.ipo.cds.etl.theme.vrn.VrnThemeConfig;
 
 import org.deegree.commons.tom.ows.CodeType;
+import org.deegree.cs.persistence.CRSManager;
+import org.deegree.cs.refs.coordinatesystem.CRSRef;
 import org.deegree.geometry.Geometry;
 import org.deegree.geometry.io.WKBReader;
 import org.deegree.geometry.io.WKBWriter;
+import org.deegree.geometry.multi.MultiSurface;
+import org.deegree.geometry.primitive.Surface;
 
 import com.vividsolutions.jts.io.ParseException;
 
@@ -30,6 +35,8 @@ import com.vividsolutions.jts.io.ParseException;
  */
 @Table
 public abstract class AbstractGebied extends PersistableFeature implements Serializable {
+
+	private static CRSRef rdCrsRef = CRSManager.getCRSRef("EPSG:28992");
 
 	/**
 	 * 
@@ -104,8 +111,11 @@ public abstract class AbstractGebied extends PersistableFeature implements Seria
 	 * Helper method to serialize code type.
 	 */
 	protected void codeTypeWriter(CodeType codeType, ObjectOutputStream oos) throws IOException {
-		oos.writeUTF(codeType.getCode());
-		oos.writeUTF(codeType.getCodeSpace());
+		// check for null, for example beheerpakket can be null.
+		if (codeType != null) {
+			oos.writeUTF(codeType.getCode());
+			oos.writeUTF(codeType.getCodeSpace());
+		}
 	}
 
 	/**
@@ -124,12 +134,9 @@ public abstract class AbstractGebied extends PersistableFeature implements Seria
 
 		AbstractGebied that = (AbstractGebied) o;
 		return this.getId().equals(that.getId()) && this.getBegintijd().equals(that.getBegintijd())
-				&& this.getContractnummer().equals(that.getContractnummer())
-				&& this.getEindtijd().equals(that.getEindtijd())
-				&& this.getGeometrie().toString().equals(that.getGeometrie().toString())
-				&& this.getIdentificatie().equals(that.getIdentificatie())
-				&& this.getImnaBronhouder().equals(that.getImnaBronhouder())
-				&& this.getRelatienummer().equals(that.getRelatienummer());
+		&& this.getContractnummer().equals(that.getContractnummer()) && this.getEindtijd().equals(that.getEindtijd())
+		&& this.getGeometrie().toString().equals(that.getGeometrie().toString()) && this.getIdentificatie().equals(that.getIdentificatie())
+		&& this.getImnaBronhouder().equals(that.getImnaBronhouder()) && this.getRelatienummer().equals(that.getRelatienummer());
 	}
 
 	@MappableAttribute
@@ -191,7 +198,51 @@ public abstract class AbstractGebied extends PersistableFeature implements Seria
 
 	@MappableAttribute
 	public void setGeometrie(Geometry geometrie) {
-		this.geometrie = geometrie;
+		// prevent null replacement of multisurface
+		if (geometrie == null) {
+			return;
+		}
+		// replace contained surface if needed
+		// validator TODO now allows multisurfaces with single surface? 
+		geometrie = extractSurface(geometrie);
+		// hack #1 override ESRI SRID style RD
+		for (String rdReplacement : VrnThemeConfig.getRdReplacements()) {
+			if (geometrie != null && geometrie.getCoordinateSystem().toString().contains(rdReplacement)) {
+				geometrie.setCoordinateSystem(rdCrsRef);
+			}
+			this.geometrie = geometrie;
+		}
+	}
+
+	/** Extra geometry mapping for multisurfaces, maybe getter not needed */
+	@MappableAttribute
+	public Geometry getGeometrieMultiSurface() {
+		return geometrie;
+	}
+
+	/** Extra geometry mapping for multisurfaces */
+	@MappableAttribute
+	public void setGeometrieMultiSurface(Geometry geometrie) {
+		this.setGeometrie(geometrie);
+	}
+
+	/**
+	 * If geometrie is a MultiSurface containing a single Surface, return the extracted Surface; otherwise return the geometrie 'as is'.
+	 * 
+	 * @param geometrie
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	private Geometry extractSurface(Geometry geometrie) {
+		// hack #2 convert multisurface
+		if (geometrie instanceof MultiSurface) {
+			MultiSurface<Surface> multiSurface = (MultiSurface<Surface>) geometrie;
+			if (multiSurface.size() == 1) {
+				return multiSurface.get(0);
+
+			}
+		}
+		return geometrie;
 	}
 
 	@MappableAttribute
@@ -205,8 +256,8 @@ public abstract class AbstractGebied extends PersistableFeature implements Seria
 	}
 
 	/**
-	 * This method is required for the AbstractGebiedExpression in the validation package to work correctly. It is not
-	 * the nicest solution, but the most pragmatic thing to do (more info in the respective expression class).
+	 * This method is required for the AbstractGebiedExpression in the validation package to work correctly. It is not the nicest solution, but the
+	 * most pragmatic thing to do (more info in the respective expression class).
 	 * 
 	 * @return Itself.
 	 */
@@ -215,8 +266,8 @@ public abstract class AbstractGebied extends PersistableFeature implements Seria
 	}
 
 	/**
-	 * This method is needed for the validation of DoelRealisatie codes. Because the doel attribute consists of multiple
-	 * codes, seperated by ';', we need access to the raw string value.
+	 * This method is needed for the validation of DoelRealisatie codes. Because the doel attribute consists of multiple codes, seperated by ';', we
+	 * need access to the raw string value.
 	 * 
 	 * @return
 	 */

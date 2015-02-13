@@ -35,7 +35,7 @@ GEOMETRY_INTERIOR_RING_INTERSECTS_EXTERIOR_BASE=geometrie bevat een binnenring d
 GEOMETRY_INTERIOR_RING_OUTSIDE_EXTERIOR_BASE=geometrie bevat een binnenring die niet binnen een buitenring ligt
 GEOMETRY_INTERIOR_DISCONNECTED_BASE=geometrie bevat een verbroken polygoon
 GEOMETRY_SRS_NULL_BASE=Het attribuut "srsName" ontbreekt bij het geometrie-element
-GEOMETRY_SRS_NOT_RD_BASE=Het attribuut "srsName" bij element "geometry" heeft een andere waarde dan "EPSG:28992" (RD_New)
+GEOMETRY_SRS_NOT_RD_BASE=Het attribuut "srsName" (waarde ${2}) bij element "geometry" heeft een andere waarde dan ${2} "EPSG:28992" (RD_New) of een van de waarden aangegeven in de configuratie
 
 GEOMETRY_NULL=${GEOMETRY_NULL_BASE}, ${FEATURE}
 GEOMETRY_EMPTY_MULTIGEOMETRY=${GEOMETRY_EMPTY_MULTIGEOMETRY_BASE}, ${FEATURE}
@@ -57,7 +57,7 @@ GEOMETRY_INTERIOR_RING_INTERSECTS_EXTERIOR=${GEOMETRY_INTERIOR_RING_INTERSECTS_E
 GEOMETRY_INTERIOR_RING_OUTSIDE_EXTERIOR=${GEOMETRY_INTERIOR_RING_OUTSIDE_EXTERIOR_BASE}, ${FEATURE}
 GEOMETRY_INTERIOR_DISCONNECTED=${GEOMETRY_INTERIOR_DISCONNECTED_BASE}, ${FEATURE}
 GEOMETRY_SRS_NULL=${GEOMETRY_SRS_NULL_BASE}, ${FEATURE}
-GEOMETRY_SRS_NOT_RD=${GEOMETRY_SRS_NOT_RD_BASE} (gevonden waarde: ${1}), ${FEATURE}
+GEOMETRY_SRS_NOT_RD=${GEOMETRY_SRS_NOT_RD_BASE}, ${FEATURE}
 GEOMETRY_OUTSIDE_BRONHOUDER_AREA=De meegegeven geometrie valt niet geheel binnen het gebied van de bronhouder, ${FEATURE}
 GEOMETRY_INVALID_COORDINATES=De meegegeven geometrie valt niet geheel binnen de bounding box van het coordinaatstelsel, ${FEATURE}
 

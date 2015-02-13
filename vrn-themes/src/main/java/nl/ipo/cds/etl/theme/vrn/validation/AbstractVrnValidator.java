@@ -13,13 +13,11 @@ import java.util.UUID;
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
-import nl.idgis.commons.jobexecutor.JobLogger;
 import nl.ipo.cds.dao.ManagerDao;
 import nl.ipo.cds.domain.EtlJob;
 import nl.ipo.cds.domain.ImportJob;
 import nl.ipo.cds.domain.ValidateJob;
 import nl.ipo.cds.etl.AbstractValidator;
-import nl.ipo.cds.etl.log.EventLogger;
 import nl.ipo.cds.etl.postvalidation.IBulkValidator;
 import nl.ipo.cds.etl.postvalidation.IGeometryStore;
 import nl.ipo.cds.etl.theme.vrn.Constants;
@@ -180,7 +178,7 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 		// The following validations short-circuit, there must be a non-empty, Surface geometry:
 		validate(not(geometrie.isNull())).message(Message.ATTRIBUTE_NULL, constant(surfaceGeometry.name),
 		// Single polygon
-				validate(not(geometrie.isPolygon())).message(Message.GEOMETRY_ONLY_SURFACE)),
+				validate((geometrie.isSurface())).message(Message.GEOMETRY_ONLY_SURFACE)),
 
 		// Short circuit to prevent the interiorDisconnected validation if
 		// any of the other validations fail:
@@ -215,7 +213,6 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 								surfaceGeometry.srsName()),
 						// check invalid coordinates
 						validate(surfaceGeometry.hasValidCoordinateRD()).message(Message.GEOMETRY_INVALID_COORDINATES)
-				// TODO!: check duplicate coordinates
 				).shortCircuit()));
 
 	}
@@ -261,7 +258,7 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 
 				// Only import and validate jobs have a geometrystore allocated when reaching this code.
 				// Other job types have a NULL data source.
-				if (context.getDataSource() != null) {
+				if ((context.getDataSource() != null) && (abstractGebied.getGeometrie()!=null) ) {
 					geometryStore.addToStore(context.getDataSource(), abstractGebied.getGeometrie(), abstractGebied);
 				}
 				return true;
@@ -278,7 +275,8 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 	 * Overlap validation hook after job.
 	 */
 	@Override
-	public void afterJob(final EtlJob job, final EventLogger<Message> logger, final Context context) {
+	public void afterJob(final EtlJob job, final Reporter reporter,
+			final Context context) {
 
 		// Only Import and Validate jobs do overlap validation (and have a geometry store saved on disk when reaching
 		// this code).
@@ -288,21 +286,18 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 			return;
 		}
 
-		try {
-			List<OverlapValidationPair<AbstractGebied>> overlapList = bulkValidator.overlapValidation(context
-					.getDataSource());
-			if (!overlapList.isEmpty()) {
-				for (OverlapValidationPair<AbstractGebied> overlap : overlapList) {
-					logger.logEvent(job, Message.OVERLAP_DETECTED, JobLogger.LogLevel.ERROR, overlap.f1.getId(),
-							overlap.f1.getIdentificatie(), overlap.f2.getId(), overlap.f2.getIdentificatie());
-				}
-				throw new RuntimeException("Overlap detected");
-			}
-		} catch (ClassNotFoundException | IOException | SQLException e) {
-			logger.logEvent(job, Message.OVERLAP_DETECTION_FAILED, JobLogger.LogLevel.ERROR, e.getMessage());
-			throw new RuntimeException(e);
-		} finally {
-			geometryStore.destroyStore(context.getDataSource());
+        try {
+            List<OverlapValidationPair<AbstractGebied>> overlapList = bulkValidator
+                    .overlapValidation(context.getDataSource());
+            if (!overlapList.isEmpty()) {
+                for (OverlapValidationPair<AbstractGebied> overlap : overlapList) {
+                    reporter.logEvent(context, Message.OVERLAP_DETECTED, overlap.f1.getId(), overlap.f1.getIdentificatie(), overlap.f2.getId(), overlap.f2.getIdentificatie());
+                }
+            }
+        } catch (ClassNotFoundException | IOException | SQLException e) {
+            reporter.logEvent(context, Message.OVERLAP_DETECTION_FAILED, e.getMessage());
+        } finally {
+            geometryStore.destroyStore(context.getDataSource());
 		}
 	}
 

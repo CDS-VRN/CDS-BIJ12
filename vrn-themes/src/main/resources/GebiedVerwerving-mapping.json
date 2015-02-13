@@ -22,6 +22,26 @@
     },
     {
       "featureTypeNamespace": "http://www.safe.com/gml/fme",
+      "featureTypeName": "GebiedBeheer",
+      "attributeName": "geometrie",
+      "operations": [
+        {
+          "type": "condition",
+          "name": "[condition]",
+          "operationInputs": [
+            {
+              "type": "input",
+              "name": "multiSurfaceProperty",
+              "inputAttributeNamespace": "http://www.safe.com/gml/fme",
+              "inputAttributeType": "interface org.deegree.geometry.Geometry"
+            }
+          ],
+          "settings": {}
+        }
+      ]
+    },
+    {
+      "featureTypeNamespace": "http://www.safe.com/gml/fme",
       "featureTypeName": "GebiedVerwervingSBB",
       "attributeName": "eindtijd",
       "operations": [

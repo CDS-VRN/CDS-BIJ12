@@ -1,4 +1,3 @@
-begin;
 -- CREATE VRN SCHEMA
 create schema vrn;
 -- GRANT VRN SCHEMA
@@ -282,15 +281,7 @@ create index gebiedverwerving_landelijk_geom_sdx on vrn.gebiedverwerving_landeli
 
 drop index if exists vrn.gebiedverwerving_provinciaal_geom_sdx;
 create index gebiedverwerving_provinciaal_geom_sdx on vrn.gebiedverwerving_provinciaal using gist ( geometrie );
-GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedbeheer_landelijk TO inspire;
-GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedbeheer_landelijk_tagged TO inspire;
-GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedbeheer_provinciaal TO inspire;
-GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedinrichting_landelijk TO inspire;
-GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedinrichting_landelijk_tagged TO inspire;
-GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedinrichting_provinciaal TO inspire;
-GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedverwerving_landelijk TO inspire;
-GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedverwerving_landelijk_tagged TO inspire;
-GRANT SELECT, INSERT, UPDATE, DELETE, TRIGGER ON vrn.gebiedverwerving_provinciaal TO inspire;
+
 -- LandelijkGebiedBeheer
 -- ProvinciaalGebiedBeheer
 -- ProvinciaalGebiedInrichting
@@ -414,4 +405,21 @@ INSERT INTO manager.codelistmapping VALUES ('StatusInrichting', 'https://raw.git
 INSERT INTO manager.codelistmapping VALUES ('StatusVerwerving', 'https://raw.githubusercontent.com/CDS-VRN/CDS-BIJ12/master/vrn-themes/src/main/feeds/statusVerwerving.xml');
 INSERT INTO manager.codelistmapping VALUES ('TypeBeheerderEnEigenaar', 'https://raw.githubusercontent.com/CDS-VRN/CDS-BIJ12/master/vrn-themes/src/main/feeds/typeBeheerder.xml');
 
-commit;
+-- Stop the permission denied errors please!
+GRANT ALL ON ALL TABLES IN SCHEMA vrn TO inspire;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA vrn TO inspire;
+
+GRANT ALL ON ALL TABLES IN SCHEMA bron TO inspire;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA bron TO inspire;
+
+GRANT ALL ON ALL TABLES IN SCHEMA metadata TO inspire;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA metadata TO inspire;
+
+GRANT ALL ON ALL TABLES IN SCHEMA public TO inspire;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO inspire;
+
+GRANT ALL ON ALL TABLES IN SCHEMA manager TO inspire;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA manager TO inspire;
+
+GRANT ALL ON ALL TABLES IN SCHEMA inspire TO inspire;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA inspire TO inspire;
