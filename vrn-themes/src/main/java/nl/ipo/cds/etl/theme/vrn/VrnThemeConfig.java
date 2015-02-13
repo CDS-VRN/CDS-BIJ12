@@ -1,6 +1,7 @@
 package nl.ipo.cds.etl.theme.vrn;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import nl.ipo.cds.admin.ba.controller.beans.mapping.Mapping;
@@ -33,7 +34,7 @@ public class VrnThemeConfig<T extends AbstractGebied> extends ThemeConfig<T>{
 	/**
 	 * List of strings that are srsName in gml and should be transformed to EPSG:28992 RD_new 
 	 */
-	private static List<String> rdReplacements;
+	private static List<String> rdReplacements = new ArrayList<>();
 
 	
 	
