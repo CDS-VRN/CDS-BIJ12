@@ -210,7 +210,7 @@
     {
       "featureTypeNamespace": "http://www.safe.com/gml/fme",
       "featureTypeName": "GebiedBeheer",
-      "attributeName": "geometrie",
+      "attributeName": "geometrieMultiSurface",
       "operations": [
         {
           "type": "condition",
