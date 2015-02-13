@@ -1,6 +1,7 @@
 package nl.ipo.cds.etl.theme.vrn;
 
 import java.io.IOException;
+import java.util.List;
 
 import nl.ipo.cds.admin.ba.controller.beans.mapping.Mapping;
 import nl.ipo.cds.admin.ba.controller.beans.mapping.Mappings;
@@ -16,6 +17,7 @@ import nl.ipo.cds.etl.theme.ThemeConfigException;
 import nl.ipo.cds.etl.theme.vrn.domain.AbstractGebied;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 
 public class VrnThemeConfig<T extends AbstractGebied> extends ThemeConfig<T>{
@@ -28,7 +30,13 @@ public class VrnThemeConfig<T extends AbstractGebied> extends ThemeConfig<T>{
 
 	private final boolean taggable;
 	
+	/**
+	 * List of strings that are srsName in gml and should be transformed to EPSG:28992 RD_new 
+	 */
+	private static List<String> rdReplacements;
 
+	
+	
 	public VrnThemeConfig(final Validator<T> validator, final OperationDiscoverer operationDiscoverer,
 			final Class<T> clazz, final String mappingsClassPathResource, final boolean taggable) throws ThemeConfigException {
 		super(clazz.getSimpleName(), clazz);
@@ -78,6 +86,16 @@ public class VrnThemeConfig<T extends AbstractGebied> extends ThemeConfig<T>{
 	@Override
 	public boolean isTaggable() {
 		return taggable;
+	}
+
+
+	public static List<String> getRdReplacements() {
+		return rdReplacements;
+	}
+
+	@Value("#{'${vrn.rd_replacement_crs_list:_Netherlands-RD-New_0}'.split(',')}")
+	public void setRdReplacements(List<String> rdReplacements) {
+		VrnThemeConfig.rdReplacements = rdReplacements;
 	}
 	
 }

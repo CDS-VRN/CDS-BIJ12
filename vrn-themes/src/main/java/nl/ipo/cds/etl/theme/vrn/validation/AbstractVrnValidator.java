@@ -1,5 +1,18 @@
 package nl.ipo.cds.etl.theme.vrn.validation;
 
+import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_BRONHOUDER;
+import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_DOEL_REALISATIE;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import javax.inject.Inject;
+import javax.sql.DataSource;
+
 import nl.ipo.cds.dao.ManagerDao;
 import nl.ipo.cds.domain.EtlJob;
 import nl.ipo.cds.domain.ImportJob;
@@ -25,21 +38,10 @@ import nl.ipo.cds.validation.gml.codelists.CodeList;
 import nl.ipo.cds.validation.gml.codelists.CodeListException;
 import nl.ipo.cds.validation.gml.codelists.CodeListFactory;
 import nl.ipo.cds.validation.logical.AndExpression;
+
 import org.deegree.commons.uom.Measure;
 import org.deegree.geometry.Geometry;
 import org.springframework.beans.factory.annotation.Value;
-
-import javax.inject.Inject;
-import javax.sql.DataSource;
-import java.io.IOException;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_BRONHOUDER;
-import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_DOEL_REALISATIE;
 
 /**
  * @author annes
@@ -176,7 +178,7 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 		// The following validations short-circuit, there must be a non-empty, Surface geometry:
 		validate(not(geometrie.isNull())).message(Message.ATTRIBUTE_NULL, constant(surfaceGeometry.name),
 		// Single polygon
-				validate(not(geometrie.isPolygon())).message(Message.GEOMETRY_ONLY_SURFACE)),
+				validate((geometrie.isSurface())).message(Message.GEOMETRY_ONLY_SURFACE)),
 
 		// Short circuit to prevent the interiorDisconnected validation if
 		// any of the other validations fail:
