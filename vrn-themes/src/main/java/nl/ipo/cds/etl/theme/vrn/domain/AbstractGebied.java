@@ -209,9 +209,10 @@ public abstract class AbstractGebied extends PersistableFeature implements Seria
 		for (String rdReplacement : VrnThemeConfig.getRdReplacements()) {
 			if (geometrie != null && geometrie.getCoordinateSystem().toString().contains(rdReplacement)) {
 				geometrie.setCoordinateSystem(rdCrsRef);
+				continue;
 			}
-			this.geometrie = geometrie;
 		}
+		this.geometrie = geometrie;
 	}
 
 	/** Extra geometry mapping for multisurfaces, maybe getter not needed */
