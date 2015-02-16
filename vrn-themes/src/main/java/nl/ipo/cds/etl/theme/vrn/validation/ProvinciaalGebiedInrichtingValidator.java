@@ -36,8 +36,8 @@ public class ProvinciaalGebiedInrichtingValidator extends
 	public Validator<Message, Context> getDoelInrichtingValidator() {
 
 		return validate(ifExp(
-		// can be null
-				doelInrichting.isNull(), constant(true), validateDoelRealisatie(constantDoelInrichting, doelInrichting)));
+		// can be null or blank
+		or(doelInrichting.isNull(), isBlank(doelInrichting.code())), constant(true), validateDoelRealisatie(constantDoelInrichting, doelInrichting)));
 	}
 
 }

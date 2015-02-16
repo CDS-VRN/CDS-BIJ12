@@ -35,8 +35,8 @@ public class ProvinciaalGebiedBeheerValidator extends AbstractGebiedBeheerValida
 	public Validator<Message, Context> getDoelBeheerValidator() {
 
 		return validate(ifExp(
-		// can be null
-				doelBeheer.isNull(), constant(true), validateDoelRealisatie(constantDoelBeheer, doelBeheer)));
+		// can be null or blank
+		or(doelBeheer.isNull(), isBlank(doelBeheer.code())), constant(true), validateDoelRealisatie(constantDoelBeheer, doelBeheer)));
 	}
 
 }

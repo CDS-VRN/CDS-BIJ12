@@ -36,7 +36,7 @@ public class ProvinciaalGebiedVerwervingValidator extends
 	public Validator<Message, Context> getDoelVerwervingValidator() {
 
 		return validate(ifExp(
-		// can be null
-				doelVerwerving.isNull(), constant(true), validateDoelRealisatie(constantDoelVerwerving, doelVerwerving)));
+		// can be null or blank
+		or(doelVerwerving.isNull(), isBlank(doelVerwerving.code())), constant(true), validateDoelRealisatie(constantDoelVerwerving, doelVerwerving)));
 	}
 }
