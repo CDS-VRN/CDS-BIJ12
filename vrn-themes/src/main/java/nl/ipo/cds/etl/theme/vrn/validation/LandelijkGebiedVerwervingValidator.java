@@ -27,8 +27,8 @@ public class LandelijkGebiedVerwervingValidator extends AbstractGebiedVerwerving
 	}
 
 	/**
-	 * If doelVerwerving is provided, it should be conform rules. For provinciaal it is optional. Note that
-	 * doelVerwerving can contain multiple values, seperated by ';' characters
+	 * If doelVerwerving is provided, it should be conform rules. For landelijk it is required. Note that
+	 * doelVerwerving can contain multiple values, separated by ';' characters
 	 * 
 	 * @return
 	 */

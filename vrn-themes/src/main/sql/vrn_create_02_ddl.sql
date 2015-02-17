@@ -50,7 +50,7 @@ CREATE TABLE vrn.gebiedbeheer_provinciaal (
 	gfid text,
 	beheerpakket text,
 	status_beheer text NOT NULL,
-	doelbeheer text NOT NULL,
+	doelbeheer text,
 	imna_bronhouder text NOT NULL,
 	contractnummer integer,
 	eenheidnummer text,
@@ -75,7 +75,7 @@ CREATE TABLE vrn.gebiedinrichting_landelijk (
 	geometrie geometry NOT NULL,
 	relatienummer integer,
 	status_inrichting text NOT NULL,
-	doelinrichting text,
+	doelinrichting text NOT NULL,
 	type_beheerder text NOT NULL,
 	begintijd timestamp NOT NULL,
 	eindtijd timestamp
@@ -93,7 +93,7 @@ CREATE TABLE vrn.gebiedinrichting_landelijk_tagged (
 	geometrie geometry NOT NULL,
 	relatienummer integer,
 	status_inrichting text NOT NULL,
-	doelinrichting text,
+	doelinrichting text NOT NULL,
 	type_beheerder text NOT NULL,
 	begintijd timestamp NOT NULL,
 	eindtijd timestamp
@@ -110,7 +110,7 @@ CREATE TABLE vrn.gebiedinrichting_provinciaal (
 	geometrie geometry NOT NULL,
 	relatienummer integer,
 	status_inrichting text NOT NULL,
-	doelinrichting text NOT NULL,
+	doelinrichting text,
 	type_beheerder text NOT NULL,
 	begintijd timestamp NOT NULL,
 	eindtijd timestamp
@@ -127,7 +127,7 @@ CREATE TABLE vrn.gebiedverwerving_landelijk (
 	geometrie geometry NOT NULL,
 	relatienummer integer,
 	status_verwerving text NOT NULL,
-	doelverwerving text,
+	doelverwerving text NOT NULL,
 	type_eigenaar text NOT NULL,
 	begintijd timestamp NOT NULL,
 	eindtijd timestamp
@@ -145,7 +145,7 @@ CREATE TABLE vrn.gebiedverwerving_landelijk_tagged (
 	geometrie geometry NOT NULL,
 	relatienummer integer,
 	status_verwerving text NOT NULL,
-	doelverwerving text,
+	doelverwerving text NOT NULL,
 	type_eigenaar text NOT NULL,
 	begintijd timestamp NOT NULL,
 	eindtijd timestamp

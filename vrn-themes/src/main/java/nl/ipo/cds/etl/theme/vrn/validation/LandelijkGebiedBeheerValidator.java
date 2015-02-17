@@ -27,8 +27,8 @@ public class LandelijkGebiedBeheerValidator extends AbstractGebiedBeheerValidato
 	}
 
 	/**
-	 * If doelbeheer is provided, it should be conform rules. For provinciaal it is optional. Note that doelbeheer can
-	 * contain multiple values, seperated by ';' characters
+	 * If doelbeheer is provided, it should be conform rules. For landelijk it is required. Note that doelbeheer can
+	 * contain multiple values, separated by ';' characters
 	 * 
 	 * @return
 	 */
