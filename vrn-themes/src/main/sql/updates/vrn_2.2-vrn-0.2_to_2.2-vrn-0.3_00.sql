@@ -1,7 +1,3 @@
-ALTER TABLE vrn.gebiedbeheer_landelijk ALTER COLUMN beheerpakket DROP NOT NULL;
-ALTER TABLE vrn.gebiedbeheer_provinciaal ALTER COLUMN beheerpakket DROP NOT NULL;
-ALTER TABLE vrn.gebiedbeheer_landelijk_tagged ALTER COLUMN beheerpakket DROP NOT NULL;
-
 
 -- Add constraints for tagged tables.
 alter table vrn.gebiedbeheer_landelijk_tagged add constraint enforce_dims_geometrie check (st_ndims(geometrie) = 2);
