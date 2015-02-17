@@ -29,7 +29,7 @@ public class ProvinciaalGebiedVerwervingValidator extends
 
 	/**
 	 * If doelVerwerving is provided, it should be conform rules. For provinciaal it is optional. Note that
-	 * doelVerwerving can contain multiple values, seperated by ';' characters
+	 * doelVerwerving can contain multiple values, separated by ';' characters
 	 * 
 	 * @return
 	 */

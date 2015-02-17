@@ -29,7 +29,7 @@ public class ProvinciaalGebiedInrichtingValidator extends
 
 	/**
 	 * If doelInrichting is provided, it should be conform rules. For provinciaal it is optional. Note that doelbeheer
-	 * can contain multiple values, seperated by ';' characters
+	 * can contain multiple values, separated by ';' characters
 	 * 
 	 * @return
 	 */

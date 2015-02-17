@@ -28,7 +28,7 @@ public class ProvinciaalGebiedBeheerValidator extends AbstractGebiedBeheerValida
 
 	/**
 	 * If doelbeheer is provided, it should be conform rules. For provinciaal it is optional. Note that doelbeheer can
-	 * contain multiple values, seperated by ';' characters
+	 * contain multiple values, separated by ';' characters
 	 * 
 	 * @return
 	 */
