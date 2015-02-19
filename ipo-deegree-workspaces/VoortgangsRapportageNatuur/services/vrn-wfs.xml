@@ -12,7 +12,7 @@
   <!-- omit for all -->
 
 
-	<FeatureStoreId>gebiedbeheer_landelijk</FeatureStoreId>
+	<FeatureStoreId>gebiedbeheer_landelijk_filtered</FeatureStoreId>
 	<FeatureStoreId>gebiedbeheer_provinciaal_filtered</FeatureStoreId>
 	<FeatureStoreId>gebiedbeheer_vastgesteld</FeatureStoreId>
 	<FeatureStoreId>gebiedinrichting_landelijk</FeatureStoreId>
