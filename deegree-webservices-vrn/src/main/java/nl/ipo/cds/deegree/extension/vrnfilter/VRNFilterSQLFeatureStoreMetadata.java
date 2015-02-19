@@ -1,5 +1,6 @@
 package nl.ipo.cds.deegree.extension.vrnfilter;
 
+import nl.ipo.cds.dao.ManagerDao;
 import nl.ipo.cds.deegree.persistence.jaxb.VRNFilterSQLFeatureStoreConfig;
 
 import org.deegree.commons.xml.jaxb.JAXBUtils;
@@ -25,8 +26,10 @@ public class VRNFilterSQLFeatureStoreMetadata extends AbstractResourceMetadata<F
 	public VRNFilterSQLFeatureStoreMetadata(Workspace workspace, ResourceLocation<FeatureStore> location,
 	AbstractResourceProvider<FeatureStore> provider) {
 		super(workspace, location, provider);
+        this.managerDao  =((VRNFilterSQLFeatureStoreProvider)provider).managerDao;
 	}
 
+    ManagerDao managerDao;
 	@Override
 	public ResourceBuilder<FeatureStore> prepare() {
 		VRNFilterSQLFeatureStoreConfig config;
@@ -35,10 +38,10 @@ public class VRNFilterSQLFeatureStoreMetadata extends AbstractResourceMetadata<F
 			location.getAsStream(), workspace);
 
 			ResourceIdentifier<FeatureStore> resourceIdentifier = new DefaultResourceIdentifier<FeatureStore>(FeatureStoreProvider.class,
-			"gebiedbeheer_provinciaal");
+                    config.getDelegateFeatureStoreId());
 
 			dependencies.add(resourceIdentifier);
-			return new VRNFilterSQLFeatureStoreBuilder(workspace, this, config);
+			return new VRNFilterSQLFeatureStoreBuilder(workspace, this, config, managerDao);
 		} catch (Exception e) {
 			LOG.trace("Stack trace:", e);
 			throw new ResourceInitException(e.getLocalizedMessage(), e);
