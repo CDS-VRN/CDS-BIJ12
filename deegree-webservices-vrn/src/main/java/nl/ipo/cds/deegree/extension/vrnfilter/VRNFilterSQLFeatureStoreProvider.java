@@ -3,12 +3,12 @@ package nl.ipo.cds.deegree.extension.vrnfilter;
 import java.net.URL;
 
 import nl.ipo.cds.dao.ManagerDao;
+
 import org.deegree.feature.persistence.FeatureStore;
 import org.deegree.feature.persistence.FeatureStoreProvider;
 import org.deegree.workspace.ResourceLocation;
 import org.deegree.workspace.ResourceMetadata;
 import org.deegree.workspace.Workspace;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 
