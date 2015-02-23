@@ -2,7 +2,7 @@
   <JDBCConnId>vrn</JDBCConnId>
   <StorageCRS srid="28992" dim="2D">EPSG:28992</StorageCRS>
   <GMLSchema>../../appschemas/landelijk/imna_vrn_verwerving.xsd</GMLSchema>
-<FeatureTypeMapping xmlns:imna="http://www.cds.nl/imna/verwerving" table="vrn.gebiedverwerving_landelijk" name="imna:LandelijkGebiedVerwerving">
+<FeatureTypeMapping xmlns:imna="http://www.cds.nl/imna/verwerving/landelijk" table="vrn.gebiedverwerving_landelijk" name="imna:LandelijkGebiedVerwerving">
       <FIDMapping>
         <Column name="id"/>
     </FIDMapping>

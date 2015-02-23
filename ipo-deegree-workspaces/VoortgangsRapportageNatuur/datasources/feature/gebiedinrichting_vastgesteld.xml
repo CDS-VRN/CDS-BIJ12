@@ -3,8 +3,8 @@ xsi:schemaLocation="http://www.deegree.org/datasource/feature/sql http://schemas
   <JDBCConnId>vrn</JDBCConnId>
    <StorageCRS srid="28992" dim="2D">EPSG:28992</StorageCRS>
 
-  <GMLSchema>../../appschemas/tagged/imna_vrn_inrichting.xsd</GMLSchema>
-<FeatureTypeMapping xmlns:imna="http://www.cds.nl/imna/inrichting" table="vrn.gebiedinrichting_landelijk_tagged" name="imna:VastgesteldGebiedInrichting">
+  <GMLSchema>../../appschemas/vastgesteld/imna_vrn_inrichting.xsd</GMLSchema>
+<FeatureTypeMapping xmlns:imna="http://www.cds.nl/imna/inrichting/vastgesteld" table="vrn.gebiedinrichting_landelijk_tagged" name="imna:VastgesteldGebiedInrichting">
       <FIDMapping>
         <Column name="id"/>
     </FIDMapping>

@@ -4,7 +4,7 @@
    <StorageCRS srid="28992" dim="2D">EPSG:28992</StorageCRS>
   <GMLSchema>../../appschemas/provinciaal/imna_vrn_beheer.xsd</GMLSchema>
 
-  <FeatureTypeMapping xmlns:imna="http://www.cds.nl/imna/beheer" name="imna:ProvinciaalGebiedBeheer" table="vrn.gebiedbeheer_provinciaal">
+  <FeatureTypeMapping xmlns:imna="http://www.cds.nl/imna/beheer/provinciaal" name="imna:ProvinciaalGebiedBeheer" table="vrn.gebiedbeheer_provinciaal">
       <FIDMapping>
         <Column name="id"/>
     </FIDMapping>

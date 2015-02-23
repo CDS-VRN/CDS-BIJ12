@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema xmlns:imna="http://www.cds.nl/imna/inrichting" xmlns:gml="http://www.opengis.net/gml" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-	elementFormDefault="qualified" targetNamespace="http://www.cds.nl/imna/inrichting" version="0.1">
+<xsd:schema xmlns:imna="http://www.cds.nl/imna/inrichting/landelijk" xmlns:gml="http://www.opengis.net/gml" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified" targetNamespace="http://www.cds.nl/imna/inrichting/landelijk" version="0.1">
 	<xsd:import namespace="http://www.opengis.net/gml" schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd" />
 	<!-- Implementatie van Informatiemodel Natuur (IMNa) -->
 	<!-- Zie rapport (concept) -->
@@ -11,7 +11,7 @@
 	<!-- Status CONCEPT -->
 
 	<!-- top level element -->
-	<xsd:element name="GebiedInrichtingLandelijk" substitutionGroup="gml:_Feature" type="imna:GebiedInrichtingLandelijkType" />
+	<xsd:element name="LandelijkGebiedInrichting" substitutionGroup="gml:_Feature" type="imna:GebiedInrichtingLandelijkType" />
 	<xsd:complexType name="GebiedInrichtingLandelijkType">
 		<xsd:complexContent>
 			<xsd:extension base="imna:GebiedInrichtingType"/>

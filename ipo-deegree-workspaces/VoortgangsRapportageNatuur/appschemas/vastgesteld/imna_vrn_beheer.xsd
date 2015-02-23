@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema xmlns:imna="http://www.cds.nl/imna/verwerving" xmlns:gml="http://www.opengis.net/gml" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-	elementFormDefault="qualified" targetNamespace="http://www.cds.nl/imna/verwerving" version="0.1">
+<xsd:schema xmlns:imna="http://www.cds.nl/imna/beheer/vastgesteld" xmlns:gml="http://www.opengis.net/gml" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified" targetNamespace="http://www.cds.nl/imna/beheer/vastgesteld" version="0.1">
 	<xsd:import namespace="http://www.opengis.net/gml" schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd" />
 	<!-- Implementatie van Informatiemodel Natuur (IMNa) -->
 	<!-- Zie rapport (concept) -->
@@ -11,11 +11,19 @@
 	<!-- Status CONCEPT -->
 
 	<!-- top level element -->
+	<xsd:element name="VastgesteldGebiedBeheer" substitutionGroup="gml:_Feature" type="imna:GebiedBeheerVastgesteldType" />
+	<xsd:complexType name="GebiedBeheerVastgesteldType">
+		<xsd:complexContent>
+			<xsd:extension base="imna:GebiedBeheerType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
 
-	<xsd:complexType name="GebiedVerwervingType">
+	<xsd:complexType name="GebiedBeheerType">
 		<xsd:complexContent>
 			<xsd:extension base="gml:AbstractFeatureType">
 				<xsd:sequence>
+					<xsd:element maxOccurs="1" minOccurs="1" name="tag" type="xsd:string"/>
 					<xsd:element maxOccurs="1" minOccurs="1" name="geometrie" type="gml:GeometryPropertyType" />
 					<xsd:element maxOccurs="1" minOccurs="1" name="beginTijd" type="xsd:dateTime">
 						<xsd:annotation>
@@ -32,16 +40,26 @@
 						</xsd:annotation>
 					</xsd:element>
 					<xsd:element maxOccurs="1" minOccurs="1" name="identificatie" type="xsd:string" />
-					<xsd:element maxOccurs="1" minOccurs="1" name="statusVerwerving" type="xsd:string">
+					<xsd:element maxOccurs="1" minOccurs="0" name="eenheidNummer" type="xsd:string">
 						<xsd:annotation>
-							<xsd:documentation xml:lang="nl"><![CDATA[Codelijst Status verwerving
-1. In eigendom
-2. In erfpacht
-3. Functieverandering
-4. Gebiedscontract blijvende natuur
-5. In gebruik bij TBO
-6. In gebruik bij derden – eigenaar
-TBO]]></xsd:documentation>
+							<xsd:documentation xml:lang="nl">
+								Beheereenheidnummer beschikkingen RVO.nl
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element maxOccurs="1" minOccurs="1" name="statusBeheer" type="xsd:string">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="nl"><![CDATA[Codelijst Status beheer
+1. In beheer met contract
+2. In beheer zonder contract]]></xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element maxOccurs="1" minOccurs="0" name="beheerPakket" type="xsd:string">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="nl">
+								Niet in te vullen voor niet SNL regelingen (bijv. PSN)
+							</xsd:documentation>
+							<xsd:documentation xml:lang="nl"><![CDATA[Codelijst Beheerpakket]]></xsd:documentation>
 						</xsd:annotation>
 					</xsd:element>
 					<xsd:element maxOccurs="1" minOccurs="0" name="relatieNummer" type="xsd:int">
@@ -62,19 +80,14 @@ TBO]]></xsd:documentation>
 						<xsd:annotation>
 							<xsd:documentation xml:lang="nl"><![CDATA[ Codelijst Bronhouder
 1. RVO.nl
-2. Dienst Landelijk Gebied
+2. Dienst Vastgesteld Gebied
 3. Beheerder overheid
 4. Provincie
 5. Beheerder particulier]]></xsd:documentation>
 						</xsd:annotation>
 					</xsd:element>
-					<xsd:element maxOccurs="1" minOccurs="1" name="typeEigenaar" type="xsd:string">
+					<xsd:element maxOccurs="1" minOccurs="1" name="typeBeheerder" type="xsd:string">
 						<xsd:annotation>
-							<xsd:documentation xml:lang="nl">
-								StatusVerwerving ‘Blijvend beschikbaar’: Eigenaar.
-								StatusVerwerving ‘Functie verandering:
-								Persoon van functieverandering
-							</xsd:documentation>
 							<xsd:documentation xml:lang="nl"><![CDATA[Codelijst Type beheerder en eigenaar
 1. Rijk
 2. Provincie
@@ -87,10 +100,10 @@ TBO]]></xsd:documentation>
 9. Waterleidingmaatschappij]]></xsd:documentation>
 						</xsd:annotation>
 					</xsd:element>
-					<xsd:element maxOccurs="1" minOccurs="0" name="doelVerwerving" type="xsd:string">
+					<xsd:element maxOccurs="1" minOccurs="0" name="doelBeheer" type="xsd:string">
 						<xsd:annotation>
 							<xsd:documentation xml:lang="nl">
-								Alleen verplicht voor PROV
+								Verplicht voor PROV
 							</xsd:documentation>
 							<xsd:documentation xml:lang="nl"><![CDATA[Codelijst Doel realisatie
 1. Provinciaal Natuurnetwerk
