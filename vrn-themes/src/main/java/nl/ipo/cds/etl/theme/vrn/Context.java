@@ -16,6 +16,10 @@ public class Context extends DefaultValidatorContext<Message, Context> {
 		return dataSource;
 	}
 
+	/**
+	 * Return bronhouder geometry if any.
+	 * @return The geometry IFF any. Otherwise null.
+	 */
 	public Geometry getBronhouderGeometry() {
 		return bronhouderGeometry;
 	}
