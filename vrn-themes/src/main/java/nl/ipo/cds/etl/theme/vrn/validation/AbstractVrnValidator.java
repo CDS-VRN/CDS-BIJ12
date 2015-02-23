@@ -109,6 +109,7 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 			}
 		}
 
+		// Can be null for "Landelijke Bronhouders".
 		Geometry bronhouderGeometry = managerDao.getBronhouderGeometry(job.getBronhouder());
 
 		return new Context(codeListFactory, reporter, ds, bronhouderGeometry);
@@ -194,10 +195,10 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 								Message.GEOMETRY_INTERIOR_DISCONNECTED),
 						// self-intersection
 						validate(not(surfaceGeometry.hasCurveSelfIntersection())).message(
-								Message.GEOMETRY_SELF_INTERSECTION),
+								Message.GEOMETRY_SELF_INTERSECTION, lastLocation()),
 						// Ring Self Intersection
 						validate(not(surfaceGeometry.hasRingSelfIntersection())).message(
-								Message.GEOMETRY_RING_SELF_INTERSECTION),
+								Message.GEOMETRY_RING_SELF_INTERSECTION, lastLocation()),
 						// Curve Duplicate Point
 						validate(not(surfaceGeometry.hasCurveDuplicatePoint())).message(
 								Message.GEOMETRY_POINT_DUPLICATION),
@@ -230,8 +231,8 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 			@Override
 			public boolean test(Geometry value, Context context) {
 
-				return value.isWithin(context.getBronhouderGeometry().getBuffer(
-						new Measure(bronhouderAreaMargin, METER)));
+				return context.getBronhouderGeometry() == null ||
+						value.isWithin(context.getBronhouderGeometry().getBuffer(new Measure(bronhouderAreaMargin, METER)));
 			}
 		};
 
