@@ -3,7 +3,7 @@
 		xmlns:d="http://www.deegree.org/metadata/description" xmlns:ogc="http://www.opengis.net/ogc"
 		xmlns:l="http://www.deegree.org/layers/base" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://www.deegree.org/layers/feature http://schemas.deegree.org/layers/feature/3.2.0/feature.xsd" configVersion="3.2.0">
-	  <FeatureStoreId>gebiedverwerving_provinciaal</FeatureStoreId>
+	  <FeatureStoreId>gebiedverwerving_provinciaal_filtered</FeatureStoreId>
 	  <FeatureLayer>
 	    <FeatureType>imna:ProvinciaalGebiedVerwerving</FeatureType>
 	    <l:Name>gebiedverwerving_provinciaal</l:Name>

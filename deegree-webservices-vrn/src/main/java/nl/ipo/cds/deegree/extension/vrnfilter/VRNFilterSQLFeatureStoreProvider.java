@@ -16,9 +16,6 @@ import org.springframework.context.annotation.ImportResource;
  * @author annes
  *
  */
-@Configuration
-@ImportResource(value = {"classpath:nl/ipo/cds/dao/dao-applicationContext.xml"})
-
 public class VRNFilterSQLFeatureStoreProvider extends FeatureStoreProvider {
 
 	private static final String CONFIG_NS = "urn:cds-vrn:deegree-extension:filter";

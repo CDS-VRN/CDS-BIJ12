@@ -29,18 +29,18 @@ import org.deegree.filter.FilterEvaluationException;
 import org.deegree.filter.OperatorFilter;
 import org.deegree.filter.expression.ValueReference;
 import org.deegree.filter.logical.And;
+import org.deegree.filter.spatial.Intersects;
 import org.deegree.filter.spatial.Overlaps;
 import org.deegree.geometry.Envelope;
 import org.deegree.geometry.Geometry;
 import org.deegree.protocol.wfs.getfeature.TypeName;
-import org.deegree.services.authentication.SecurityException;
 import org.deegree.workspace.Resource;
 import org.deegree.workspace.ResourceMetadata;
 import org.deegree.workspace.Workspace;
 import org.slf4j.Logger;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.context.SecurityContextHolder;
-
-import com.vividsolutions.jts.util.Assert;
+import org.springframework.util.Assert;
 
 /**
  * @author annes
@@ -139,6 +139,12 @@ public class VRNFilterSQLFeatureStore implements FeatureStore {
 			// we need the current bronhouderthema autorisaties for current 'gebruiker'
 			final String principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
 			final Gebruiker gebruiker = managerDao.getGebruiker(principal);
+			if (gebruiker.isSuperuser()) {
+				LOG.info("WFS request by superuser " + principal + " not applying any access restrictions");
+				// no access restrictions
+				return query;
+			}
+			Assert.notNull(gebruiker, "Failed to lookup user: " + principal);
 			final List<GebruikerThemaAutorisatie> themaAutorisaties = managerDao
 					.getGebruikerThemaAutorisatie(gebruiker);
 
@@ -170,7 +176,8 @@ public class VRNFilterSQLFeatureStore implements FeatureStore {
 			// no matching autorisation was found. Return an empty iterator
 			LOG.warn("Gebruiker {} is not autorized for featureType {}. Throwing Security Exception", new Object[] {
 					principal, featureTypeName });
-			throw new SecurityException();
+			throw new AccessDeniedException("Gebruiker " + principal + " heeft geen raadpleger rechten voor thema "
+					+ localPart + ".");
 		}
 	}
 
@@ -179,17 +186,21 @@ public class VRNFilterSQLFeatureStore implements FeatureStore {
 		Filter filter = query.getFilter();
 		// need extra geo filtering
 		Geometry g = managerDao.getBronhouderGeometry(bronhouder);
+		if (g == null) {
+			LOG.warn("Bronhouder geometry is null for bronhouder{}. Throwing Security Exception",
+					new Object[] { bronhouder });
+			throw new AccessDeniedException("Bronhouder " + bronhouder.getNaam() + " heeft geen geldige geometrie.");
+		}
 		Expression exp = new ValueReference(new QName(namespaceURI, "geometrie", "imna"));
-		Overlaps overlapsOperator = new Overlaps(exp, g);
+		Intersects intersectsOperator = new Intersects(exp, g);
 		if (filter == null) {
-			filter = new OperatorFilter(overlapsOperator);
+			filter = new OperatorFilter(intersectsOperator);
 		} else {
-			And andOperator = new And(overlapsOperator, ((OperatorFilter) filter).getOperator());
+			And andOperator = new And(intersectsOperator, ((OperatorFilter) filter).getOperator());
 			filter = new OperatorFilter(andOperator);
 		}
-		
-		// FIXME propagate other filter properties (sort order, maxFeatrues, etc.)
-		return new Query(query.getTypeNames(), filter, null, null, null);
+
+		return new Query(query.getTypeNames(), filter, null, null, query.getSortProperties());
 
 	}
 

@@ -26,16 +26,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
  */
 @Configuration
 @EnableWebSecurity
-@ImportResource(value = { "classpath:nl/ipo/cds/dao/initDB.xml",
-// "classpath:nl/ipo/cds/admin/admin-applicationContext.xml",
-// "classpath:nl/ipo/cds/admin/admin-securityContext.xml",
-// "classpath:nl/ipo/cds/dao/dataSource-applicationContext.xml",
-		"classpath:nl/ipo/cds/dao/dao-applicationContext.xml",
-        "classpath:META-INF/nl/ipo/cds/deegree/extension/vrnfilter/applicationContext.xml",
-// "classpath:nl/ipo/cds/dao/metadata/dao-applicationContext.xml",
-// "classpath:nl/ipo/cds/nagios/nagios-status-client.xml",
-// "classpath:nl/ipo/cds/etl/reporting/geom/geometry-applicationContext.xml"
-})
 public class DeegreeVrnWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
 
 	@Autowired

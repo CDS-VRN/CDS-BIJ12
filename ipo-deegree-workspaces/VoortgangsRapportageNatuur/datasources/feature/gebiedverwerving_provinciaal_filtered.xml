@@ -1,5 +1,5 @@
 <VRNFilterSQLFeatureStore xmlns="urn:cds-vrn:deegree-extension:filter">
-	<DelegateFeatureStoreId>gebiedbeheer_landelijk</DelegateFeatureStoreId>
-	<FilterBronHouderGeometry>false</FilterBronHouderGeometry>
+	<DelegateFeatureStoreId>gebiedverwerving_provinciaal</DelegateFeatureStoreId>
+	<FilterBronHouderGeometry>true</FilterBronHouderGeometry>
 	<FilterGebruikerThemaAutorisatie>true</FilterGebruikerThemaAutorisatie>
 </VRNFilterSQLFeatureStore>

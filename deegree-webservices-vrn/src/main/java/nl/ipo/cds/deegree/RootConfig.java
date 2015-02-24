@@ -20,36 +20,31 @@ import org.springframework.ldap.core.support.BaseLdapPathContextSource;
  * @author reinoldp
  */
 @Configuration
-@Import({DeegreeVrnWebSecurityConfigurerAdapter.class, DataSourceConfig.class, VRNFilterSQLFeatureStoreProvider.class})
-@ImportResource(value = {"classpath:nl/ipo/cds/dao/dao-applicationContext.xml", "classpath:META-INF/nl/ipo/cds/deegree/extension/vrnfilter/applicationContext.xml"})
+@Import({ DeegreeVrnWebSecurityConfigurerAdapter.class, DataSourceConfig.class })
+@ImportResource(value = { "classpath:nl/ipo/cds/dao/dao-applicationContext.xml" })
 public class RootConfig {
 
-    /**
-     * <bean id="propertyPlaceholderConfigurer" class="nl.ipo.cds.properties.ConfigDirPropertyPlaceholderConfigurer"/>
-     *
-     * @return
-     */
-    @Bean
-    public static ConfigDirPropertyPlaceholderConfigurer propertyPlaceholderConfigurer() {
-        final ConfigDirPropertyPlaceholderConfigurer propertyPlaceholderConfigurer = new ConfigDirPropertyPlaceholderConfigurer();
-        return propertyPlaceholderConfigurer;
-    }
+	/**
+	 * <bean id="propertyPlaceholderConfigurer" class="nl.ipo.cds.properties.ConfigDirPropertyPlaceholderConfigurer"/>
+	 * 
+	 * @return
+	 */
+	@Bean
+	public static ConfigDirPropertyPlaceholderConfigurer propertyPlaceholderConfigurer() {
+		final ConfigDirPropertyPlaceholderConfigurer propertyPlaceholderConfigurer = new ConfigDirPropertyPlaceholderConfigurer();
+		return propertyPlaceholderConfigurer;
+	}
 
-//    @Autowired
-//    private VRNFilterSQLFeatureStoreProvider vrnFilterSQLFeatureStoreProvider;
+	@Autowired
+	private BaseLdapPathContextSource ldapServer;
 
-    @Autowired
-    private BaseLdapPathContextSource ldapServer;
+	@Autowired
+	public void setManagerDao(ManagerDao managerDao) {
+		VRNFilterSQLFeatureStoreProvider.setManagerDao(managerDao);
+	}
 
-    private ManagerDao managerDao;
-
-    @Autowired
-    public void setManagerDao(ManagerDao managerDao) {
-        VRNFilterSQLFeatureStoreProvider.setManagerDao ( managerDao);
-    }
-
-    @Bean
-    public LdapTemplate ldapTemplate() throws Exception {
-        return new LdapTemplate(ldapServer);
-    }
+	@Bean
+	public LdapTemplate ldapTemplate() throws Exception {
+		return new LdapTemplate(ldapServer);
+	}
 }
