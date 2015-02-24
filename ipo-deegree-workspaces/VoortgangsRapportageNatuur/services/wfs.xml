@@ -11,7 +11,8 @@
 	</SupportedVersions>
 
 
-	<!-- do NOT service 'vastgesteld' features; they are configured in wfs-vastgesteld.xml because they require no authentication -->
+	<!-- do NOT service 'vastgesteld' features; they are configured in wfs-vastgesteld.xml 
+		because they require no authentication -->
 	<FeatureStoreId>gebiedbeheer_landelijk_filtered</FeatureStoreId>
 	<FeatureStoreId>gebiedbeheer_provinciaal_filtered</FeatureStoreId>
 	<FeatureStoreId>gebiedinrichting_landelijk_filtered</FeatureStoreId>
@@ -32,7 +33,19 @@
 	<QueryCRS>EPSG:28992</QueryCRS>
 	<QueryCRS>EPSG:4326</QueryCRS>
 	<QueryCRS>EPSG:4258</QueryCRS>
-	<QueryCRS>EPSG:900913</QueryCRS>
+	<QueryCRS>EPSG:3035</QueryCRS>
+	<QueryCRS>EPSG:3034</QueryCRS>
+	<QueryCRS>EPSG:2583</QueryCRS>
+	<QueryCRS>EPSG:25831</QueryCRS>
+	<QueryCRS>EPSG:25832</QueryCRS>
+	<QueryCRS>urn:ogc:def:crs:EPSG::28992</QueryCRS>
+	<QueryCRS>urn:ogc:def:crs:EPSG::4326</QueryCRS>
+	<QueryCRS>urn:ogc:def:crs:EPSG::4258</QueryCRS>
+	<QueryCRS>urn:ogc:def:crs:EPSG::3035</QueryCRS>
+	<QueryCRS>urn:ogc:def:crs:EPSG::3034</QueryCRS>
+	<QueryCRS>urn:ogc:def:crs:EPSG::25830</QueryCRS>
+	<QueryCRS>urn:ogc:def:crs:EPSG::25831</QueryCRS>
+	<QueryCRS>urn:ogc:def:crs:EPSG::25832</QueryCRS>
 
 	<!-- [0...n] Output / input format configuration, if omitted GML 2.1, 3.0, 
 		3.1, 3.2 are available -->

@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 import nl.idgis.commons.deegree.CrsFilter;
+import nl.idgis.commons.deegree.QuirksFilter;
 import nl.ipo.cds.deegree.RootConfig;
 
 import org.deegree.services.controller.OGCFrontController;
@@ -42,7 +43,7 @@ public class DeegreeVrnWebApplicationInitializer implements WebApplicationInitia
 		FilterRegistration crsFilter = container.addFilter("CrsFilter", CrsFilter.class);
 		crsFilter.addMappingForUrlPatterns(null, true, "/services/*");
 
-		FilterRegistration quirksFilter = container.addFilter("CrsFilter", CrsFilter.class);
+		FilterRegistration quirksFilter = container.addFilter("QuirksFilter", QuirksFilter.class);
 		quirksFilter.addMappingForUrlPatterns(null, true, "/services/*");
 
 		ServletRegistration.Dynamic resourcesServlet = container.addServlet("resources", ResourcesServlet.class);
