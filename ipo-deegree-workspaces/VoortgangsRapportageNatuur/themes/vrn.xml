@@ -1,71 +1,31 @@
-<Themes xmlns="http://www.deegree.org/themes/standard" xmlns:d="http://www.deegree.org/metadata/description" xmlns:s="http://www.deegree.org/metadata/spatial" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" configVersion="3.2.0" xsi:schemaLocation="http://www.deegree.org/themes/standard http://schemas.deegree.org/themes/3.2.0/themes.xsd">
-    <LayerStoreId>gebiedbeheer_provinciaal</LayerStoreId><!--
-    <LayerStoreId>gebiedbeheer_landelijk</LayerStoreId>
-<LayerStoreId>gebiedbeheer_vastgesteld</LayerStoreId>
-<LayerStoreId>gebiedinrichting_landelijk</LayerStoreId>
-<LayerStoreId>gebiedinrichting_provinciaal</LayerStoreId>
-<LayerStoreId>gebiedinrichting_vastgesteld</LayerStoreId>
-<LayerStoreId>gebiedverwerving_landelijk</LayerStoreId>
-<LayerStoreId>gebiedverwerving_provinciaal</LayerStoreId>
-<LayerStoreId>gebiedverwerving_vastgesteld</LayerStoreId>-->
+<Themes xmlns="http://www.deegree.org/themes/standard" xmlns:d="http://www.deegree.org/metadata/description"
+	xmlns:s="http://www.deegree.org/metadata/spatial" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	configVersion="3.2.0"
+	xsi:schemaLocation="http://www.deegree.org/themes/standard http://schemas.deegree.org/themes/3.2.0/themes.xsd">
+	<LayerStoreId>gebiedbeheer_vastgesteld</LayerStoreId>
+	<LayerStoreId>gebiedinrichting_vastgesteld</LayerStoreId>
+	<LayerStoreId>gebiedverwerving_vastgesteld</LayerStoreId>
+	
 	<Theme>
-	     <d:Title>vrn</d:Title>
-        <s:CRS>EPSG:28992 EPSG:26912 EPSG:4326 EPSG:4258 CRS:84</s:CRS>
-        <Theme>
-            <Identifier>gebiedbeheer_provinciaal</Identifier>
-            <d:Title>gebiedbeheer_provinciaal</d:Title>
-            <s:CRS>EPSG:28992</s:CRS>
-            <Layer>gebiedbeheer_provinciaal</Layer>
-        </Theme>
-<!--
-        <Theme>
-            <Identifier>gebiedbeheer_landelijk</Identifier>
-            <d:Title>gebiedbeheer_landelijk</d:Title>
-            <s:CRS>EPSG:28992</s:CRS>
-            <Layer>gebiedbeheer_landelijk</Layer>
-        </Theme>
+		<d:Title>Voortgangsrapportage Natuur</d:Title>
+		<s:CRS>EPSG:28992</s:CRS>
 		<Theme>
-			<Identifier>gebiedbeheer_vastgesteld</Identifier>
-			<d:Title>gebiedbeheer_vastgesteld</d:Title>
+			<Identifier>imna:gebiedbeheer_vastgesteld</Identifier>
+			<d:Title>IMNA gebiedbeheer</d:Title>
 			<s:CRS>EPSG:28992</s:CRS>
 			<Layer>gebiedbeheer_vastgesteld</Layer>
 		</Theme>
 		<Theme>
-			<Identifier>gebiedinrichting_landelijk</Identifier>
-			<d:Title>gebiedinrichting_landelijk</d:Title>
-			<s:CRS>EPSG:28992</s:CRS>
-			<Layer>gebiedinrichting_landelijk</Layer>
-		</Theme>
-		<Theme>
-			<Identifier>gebiedinrichting_provinciaal</Identifier>
-			<d:Title>gebiedinrichting_provinciaal</d:Title>
-			<s:CRS>EPSG:28992</s:CRS>
-			<Layer>gebiedinrichting_provinciaal</Layer>
-		</Theme>
-		<Theme>
-			<Identifier>gebiedinrichting_vastgesteld</Identifier>
-			<d:Title>gebiedinrichting_vastgesteld</d:Title>
+			<Identifier>imna:gebiedinrichting_vastgesteld</Identifier>
+			<d:Title>IMNA gebiedinrichting</d:Title>
 			<s:CRS>EPSG:28992</s:CRS>
 			<Layer>gebiedinrichting_vastgesteld</Layer>
 		</Theme>
 		<Theme>
-			<Identifier>gebiedverwerving_landelijk</Identifier>
-			<d:Title>gebiedverwerving_landelijk</d:Title>
-			<s:CRS>EPSG:28992</s:CRS>
-			<Layer>gebiedverwerving_landelijk</Layer>
-		</Theme>
-		<Theme>
-			<Identifier>gebiedverwerving_provinciaal</Identifier>
-			<d:Title>gebiedverwerving_provinciaal</d:Title>
-			<s:CRS>EPSG:28992</s:CRS>
-			<Layer>gebiedverwerving_provinciaal</Layer>
-		</Theme>
-		<Theme>
-			<Identifier>gebiedverwerving_vastgesteld</Identifier>
-			<d:Title>gebiedverwerving_vastgesteld</d:Title>
+			<Identifier>imna:gebiedverwerving_vastgesteld</Identifier>
+			<d:Title>IMNA gebiedverwerving</d:Title>
 			<s:CRS>EPSG:28992</s:CRS>
 			<Layer>gebiedverwerving_vastgesteld</Layer>
 		</Theme>
--->
 	</Theme>
 </Themes>

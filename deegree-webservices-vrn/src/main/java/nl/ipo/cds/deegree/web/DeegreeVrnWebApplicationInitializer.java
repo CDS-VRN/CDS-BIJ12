@@ -8,8 +8,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
+import nl.idgis.commons.deegree.CrsFilter;
 import nl.ipo.cds.deegree.RootConfig;
-import nl.ipo.cds.deegree.security.DeegreeVrnWebSecurityConfigurerAdapter;
 
 import org.deegree.services.controller.OGCFrontController;
 import org.deegree.services.resources.ResourcesServlet;
@@ -38,8 +38,13 @@ public class DeegreeVrnWebApplicationInitializer implements WebApplicationInitia
 		ServletRegistration.Dynamic ogcFrontController = container.addServlet("services", OGCFrontController.class);
 		ogcFrontController.addMapping("/services", "/services/*");
 		ogcFrontController.setLoadOnStartup(1);
-		
-		
+
+		FilterRegistration crsFilter = container.addFilter("CrsFilter", CrsFilter.class);
+		crsFilter.addMappingForUrlPatterns(null, true, "/services/*");
+
+		FilterRegistration quirksFilter = container.addFilter("CrsFilter", CrsFilter.class);
+		quirksFilter.addMappingForUrlPatterns(null, true, "/services/*");
+
 		ServletRegistration.Dynamic resourcesServlet = container.addServlet("resources", ResourcesServlet.class);
 		resourcesServlet.addMapping("/resources", "/resources/*");
 		resourcesServlet.setLoadOnStartup(1);

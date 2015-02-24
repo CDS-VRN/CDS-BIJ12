@@ -9,14 +9,12 @@ import nl.ipo.cds.dao.ManagerDaoAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  * Configures security for VRN workspaces
@@ -47,7 +45,12 @@ public class DeegreeVrnWebSecurityConfigurerAdapter extends WebSecurityConfigure
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().anyRequest().hasAuthority("ROLE_RAADPLEGER");
+		http.authorizeRequests()
+			.anyRequest().hasAuthority("ROLE_RAADPLEGER")
+			// no access restrictions on 'vastgesteld' services
+			.antMatchers("/services/vfs-vastgesteld").permitAll()
+			.antMatchers("/services/wms-vastgesteld").permitAll();
+		
 		http.httpBasic();
 		http.logout();
 		// do not create session
