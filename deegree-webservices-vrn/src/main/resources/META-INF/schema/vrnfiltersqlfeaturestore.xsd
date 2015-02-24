@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:cds-vrn:deegree-extension:filter"
+	elementFormDefault="qualified" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.1">
+	<annotation>
+		<appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:package name="nl.ipo.cds.deegree.persistence.jaxb" />
+			</jaxb:schemaBindings>
+		</appinfo>
+	</annotation>
+	<element name="VRNFilterSQLFeatureStore">
+		<annotation>
+			<documentation>SQL FeatureStore that is configured by an SQL statement/connection.</documentation>
+			<appinfo>
+				<jaxb:class name="VRNFilterSQLFeatureStoreConfig" />
+			</appinfo>
+		</annotation>
+		<complexType>
+			<sequence>
+					<!-- The id of the feature store that queries are delegated to -->
+					<element name="DelegateFeatureStoreId" minOccurs="1" type="string"/>
+					<!-- Whether to filter on bronhouder geometry or not -->
+					<element name="FilterBronHouderGeometry" minOccurs="1" type="boolean"/>
+					<!-- Whether to check if user is autorised (role ROLE_RAADPLEGER) to view the feature type -->
+					<!-- NOTE: in order for this work, the FeatureType name must exactly equal Thema name -->
+					<element name="FilterGebruikerThemaAutorisatie" minOccurs="1" type="boolean"/>
+			</sequence>
+		</complexType>
+	</element>
+</schema>

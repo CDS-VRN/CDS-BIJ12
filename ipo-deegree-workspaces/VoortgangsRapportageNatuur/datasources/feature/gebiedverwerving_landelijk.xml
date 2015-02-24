@@ -1,8 +1,8 @@
 <SQLFeatureStore xmlns="http://www.deegree.org/datasource/feature/sql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" configVersion="3.2.0" xsi:schemaLocation="http://www.deegree.org/datasource/feature/sql http://schemas.deegree.org/datasource/feature/sql/3.2.0/sql.xsd">
   <JDBCConnId>vrn</JDBCConnId>
-  <StorageCRS srid="-1" dim="2D">EPSG:28992</StorageCRS>
+  <StorageCRS srid="28992" dim="2D">EPSG:28992</StorageCRS>
   <GMLSchema>../../appschemas/landelijk/imna_vrn_verwerving.xsd</GMLSchema>
-<FeatureTypeMapping xmlns:imna="http://www.cds.nl/imna/verwerving" table="vrn.gebiedverwerving_landelijk" name="imna:GebiedVerwervingLandelijk">
+<FeatureTypeMapping xmlns:imna="http://www.cds.nl/imna/verwerving/landelijk" table="vrn.gebiedverwerving_landelijk" name="imna:LandelijkGebiedVerwerving">
       <FIDMapping>
         <Column name="id"/>
     </FIDMapping>

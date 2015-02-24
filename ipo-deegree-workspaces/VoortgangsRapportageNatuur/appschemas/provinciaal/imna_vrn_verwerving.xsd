@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema xmlns:imna="http://www.cds.nl/imna/verwerving" xmlns:gml="http://www.opengis.net/gml" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-	elementFormDefault="qualified" targetNamespace="http://www.cds.nl/imna/verwerving" version="0.1">
+<xsd:schema xmlns:imna="http://www.cds.nl/imna/verwerving/provinciaal" xmlns:gml="http://www.opengis.net/gml" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified" targetNamespace="http://www.cds.nl/imna/verwerving/provinciaal" version="0.1">
 	<xsd:import namespace="http://www.opengis.net/gml" schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd" />
 	<!-- Implementatie van Informatiemodel Natuur (IMNa) -->
 	<!-- Zie rapport (concept) -->
@@ -11,7 +11,7 @@
 	<!-- Status CONCEPT -->
 
 	<!-- top level element -->
-	<xsd:element name="GebiedVerwervingProvinciaal" substitutionGroup="gml:_Feature" type="imna:GebiedVerwervingProvinciaalType" />
+	<xsd:element name="ProvinciaalGebiedVerwerving" substitutionGroup="gml:_Feature" type="imna:GebiedVerwervingProvinciaalType" />
 	<xsd:complexType name="GebiedVerwervingProvinciaalType">
 		<xsd:complexContent>
 			<xsd:extension base="imna:GebiedVerwervingType"/>
