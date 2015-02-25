@@ -3,20 +3,17 @@ package nl.ipo.cds.etl.theme.vrn.validation;
 import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_BRONHOUDER;
 import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_DOEL_REALISATIE;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.inject.Inject;
-import javax.sql.DataSource;
 
+import com.vividsolutions.jts.geom.Envelope;
+import com.vividsolutions.jts.index.SpatialIndex;
+import com.vividsolutions.jts.index.quadtree.Quadtree;
 import nl.ipo.cds.dao.ManagerDao;
 import nl.ipo.cds.domain.EtlJob;
-import nl.ipo.cds.domain.ImportJob;
-import nl.ipo.cds.domain.ValidateJob;
 import nl.ipo.cds.etl.AbstractValidator;
 import nl.ipo.cds.etl.postvalidation.IBulkValidator;
 import nl.ipo.cds.etl.postvalidation.IGeometryStore;
@@ -30,7 +27,6 @@ import nl.ipo.cds.validation.ValidationReporter;
 import nl.ipo.cds.validation.Validator;
 import nl.ipo.cds.validation.callbacks.UnaryCallback;
 import nl.ipo.cds.validation.constants.Constant;
-import nl.ipo.cds.validation.domain.OverlapValidationPair;
 import nl.ipo.cds.validation.execute.CompilerException;
 import nl.ipo.cds.validation.geometry.GeometryExpression;
 import nl.ipo.cds.validation.gml.CodeExpression;
@@ -42,6 +38,7 @@ import nl.ipo.cds.validation.logical.AndExpression;
 import org.deegree.commons.uom.Measure;
 import org.deegree.geometry.Geometry;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.Assert;
 
 /**
  * @author annes
@@ -96,23 +93,11 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 	public Context beforeJob(final EtlJob job, final CodeListFactory codeListFactory,
 			final ValidationReporter<Message, Context> reporter) {
 
-		DataSource ds = null;
-
-		// This check is redundant because other types of jobs do not run through this code. But it is safer to be on
-		// the defense.
-		if (job instanceof ImportJob || job instanceof ValidateJob) {
-			// Both Import and Validate jobs do validation.
-			try {
-				ds = geometryStore.createStore(UUID.randomUUID().toString());
-			} catch (SQLException e) {
-				throw new RuntimeException("Error creating geometryStore: " + e);
-			}
-		}
 
 		// Can be null for "Landelijke Bronhouders".
 		Geometry bronhouderGeometry = managerDao.getBronhouderGeometry(job.getBronhouder());
 
-		return new Context(codeListFactory, reporter, ds, bronhouderGeometry);
+		return new Context(codeListFactory, reporter, new Quadtree(), bronhouderGeometry);
 	}
 
 	/**
@@ -243,63 +228,43 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 	}
 
 	/**
-	 * Instead of validating, insert feature and its geometry into a temporary GeoDB (H2) database.
-	 * 
-	 * @return
+	 * Perform overlap validation using a SpatialIndex.
 	 */
-	public Validator<Message, Context> getGeometryIntersectionValidator() {
+	protected Validator<Message, Context> getOverlapValidator() {
 
-		final UnaryCallback<Message, Context, Boolean, AbstractGebied> saveFeatureCallback = new UnaryCallback<Message, Context, Boolean, AbstractGebied>() {
+		final AbstractUnaryTestExpression<Message, Context, Geometry> overlapValidationTest = new
+				AbstractUnaryTestExpression<Message, Context, Geometry>(
+				geometrie, "geometrie") {
 
-			/**
-			 * Each feature will get inserted into the GeoDB (H2) database.
-			 */
 			@Override
-			public Boolean call(final AbstractGebied abstractGebied, final Context context) throws Exception {
+			public boolean test(Geometry geometry, Context context) {
+				// Add envelope to
+				org.deegree.geometry.Envelope de = geometry.getEnvelope();
+				org.deegree.geometry.primitive.Point p1 = de.getMin();
+				org.deegree.geometry.primitive.Point p2 = de.getMax();
+				Envelope envelope = new Envelope(p1.get0(), p2.get0(), p1.get1(), p2.get1());
 
-				// Only import and validate jobs have a geometrystore allocated when reaching this code.
-				// Other job types have a NULL data source.
-				if ((context.getDataSource() != null) && (abstractGebied.getGeometrie()!=null) ) {
-					geometryStore.addToStore(context.getDataSource(), abstractGebied.getGeometrie(), abstractGebied);
+				SpatialIndex index = context.getSpatialIndex();
+
+				List possibleMatches = index.query(envelope);
+				boolean hasOverlap = false;
+				for ( Object o : possibleMatches) {
+					Assert.isInstanceOf(Geometry.class, o);
+					Geometry possibleMatch = (Geometry)o;
+					hasOverlap |= geometry.intersects(possibleMatch) && !geometry.touches(possibleMatch);
 				}
-				return true;
+
+				index.insert(envelope, geometry);
+
+				return hasOverlap;
+
 			}
 		};
 
 		/**
 		 * Build expression which has the sole purpose of inserting the feature into the feature store.
 		 */
-		return validate(callback(Boolean.class, abstractGebiedExpression, saveFeatureCallback));
-	}
-
-	/**
-	 * Overlap validation hook after job.
-	 */
-	@Override
-	public void afterJob(final EtlJob job, final Reporter reporter,
-			final Context context) {
-
-		// Only Import and Validate jobs do overlap validation (and have a geometry store saved on disk when reaching
-		// this code).
-		// This check is redundant because other types of jobs do not run through this code. But it is safer to be on
-		// the defense.
-		if (!(job instanceof ImportJob || job instanceof ValidateJob)) {
-			return;
-		}
-
-        try {
-            List<OverlapValidationPair<AbstractGebied>> overlapList = bulkValidator
-                    .overlapValidation(context.getDataSource());
-            if (!overlapList.isEmpty()) {
-                for (OverlapValidationPair<AbstractGebied> overlap : overlapList) {
-                    reporter.logEvent(context, Message.OVERLAP_DETECTED, overlap.f1.getId(), overlap.f1.getIdentificatie(), overlap.f2.getId(), overlap.f2.getIdentificatie());
-                }
-            }
-        } catch (ClassNotFoundException | IOException | SQLException e) {
-            reporter.logEvent(context, Message.OVERLAP_DETECTION_FAILED, e.getMessage());
-        } finally {
-            geometryStore.destroyStore(context.getDataSource());
-		}
+		return validate(overlapValidationTest).message(Message.OVERLAP_DETECTED);
 	}
 
 	@Inject
