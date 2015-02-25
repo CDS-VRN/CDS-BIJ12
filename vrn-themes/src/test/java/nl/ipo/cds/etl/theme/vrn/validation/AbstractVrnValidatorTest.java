@@ -3,20 +3,13 @@
  */
 package nl.ipo.cds.etl.theme.vrn.validation;
 
-import java.util.Collections;
-
 import nl.ipo.cds.dao.ManagerDao;
-import nl.ipo.cds.etl.AbstractValidator;
-import nl.ipo.cds.etl.postvalidation.BulkValidator;
-import nl.ipo.cds.etl.postvalidation.IGeometryStore;
 import nl.ipo.cds.etl.test.ValidationRunner;
 import nl.ipo.cds.etl.theme.vrn.Constants;
 import nl.ipo.cds.etl.theme.vrn.Context;
 import nl.ipo.cds.etl.theme.vrn.Message;
 import nl.ipo.cds.etl.theme.vrn.domain.AbstractGebied;
-import nl.ipo.cds.etl.theme.vrn.domain.ProvinciaalGebiedBeheer;
 import nl.ipo.cds.validation.execute.CompilerException;
-
 import org.deegree.commons.tom.ows.CodeType;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,9 +27,7 @@ public abstract class AbstractVrnValidatorTest<G extends AbstractGebied, V exten
 	@Before
 	public void beforeTest() throws Exception {
 		validator = createValidator();
-		validator.setGeometryStore(Mockito.mock(IGeometryStore.class));
 		validator.setManagerDao(Mockito.mock(ManagerDao.class));
-		validator.setBulkValidator(Mockito.mock(BulkValidator.class));
 		runner = new ValidationRunner<>(validator, getDomainClass());
 	}
 

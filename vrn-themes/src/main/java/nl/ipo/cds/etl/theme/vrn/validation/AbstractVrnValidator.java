@@ -1,22 +1,11 @@
 package nl.ipo.cds.etl.theme.vrn.validation;
 
-import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_BRONHOUDER;
-import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_DOEL_REALISATIE;
-
-import java.sql.Timestamp;
-import java.util.List;
-import java.util.Map;
-
-import javax.inject.Inject;
-
 import com.vividsolutions.jts.geom.Envelope;
 import com.vividsolutions.jts.index.SpatialIndex;
 import com.vividsolutions.jts.index.quadtree.Quadtree;
 import nl.ipo.cds.dao.ManagerDao;
 import nl.ipo.cds.domain.EtlJob;
 import nl.ipo.cds.etl.AbstractValidator;
-import nl.ipo.cds.etl.postvalidation.IBulkValidator;
-import nl.ipo.cds.etl.postvalidation.IGeometryStore;
 import nl.ipo.cds.etl.theme.vrn.Constants;
 import nl.ipo.cds.etl.theme.vrn.Context;
 import nl.ipo.cds.etl.theme.vrn.Message;
@@ -34,11 +23,18 @@ import nl.ipo.cds.validation.gml.codelists.CodeList;
 import nl.ipo.cds.validation.gml.codelists.CodeListException;
 import nl.ipo.cds.validation.gml.codelists.CodeListFactory;
 import nl.ipo.cds.validation.logical.AndExpression;
-
 import org.deegree.commons.uom.Measure;
 import org.deegree.geometry.Geometry;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.Assert;
+
+import javax.inject.Inject;
+import java.sql.Timestamp;
+import java.util.List;
+import java.util.Map;
+
+import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_BRONHOUDER;
+import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_DOEL_REALISATIE;
 
 /**
  * @author annes
@@ -52,16 +48,7 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 
 	private static final String METER = "urn:ogc:def:uom:EPSG:6.3:9001";
 
-	private IGeometryStore<AbstractGebied> geometryStore;
-
-	private IBulkValidator<AbstractGebied> bulkValidator;
-
 	private ManagerDao managerDao;
-
-	@Inject
-	public void setGeometryStore(IGeometryStore<AbstractGebied> geometryStore) {
-		this.geometryStore = geometryStore;
-	}
 
 	@Inject
 	public void setManagerDao(ManagerDao managerDao) {
@@ -230,30 +217,37 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 	/**
 	 * Perform overlap validation using a SpatialIndex.
 	 */
-	protected Validator<Message, Context> getOverlapValidator() {
+	public Validator<Message, Context> getGeometryOverlapValidator() {
 
-		final AbstractUnaryTestExpression<Message, Context, Geometry> overlapValidationTest = new
+		final AbstractUnaryTestExpression<Message, Context, Geometry> hasOverlap = new
 				AbstractUnaryTestExpression<Message, Context, Geometry>(
 				geometrie, "geometrie") {
 
+            /**
+             * Returns true iff overlap is detected between the provided geometry and one of the other geometries.
+             * @param geometry The geometry provided by the currently validating feature.
+             */
 			@Override
 			public boolean test(Geometry geometry, Context context) {
-				// Add envelope to
+				// Retrieve JTS envelope from provided geometry.
 				org.deegree.geometry.Envelope de = geometry.getEnvelope();
 				org.deegree.geometry.primitive.Point p1 = de.getMin();
 				org.deegree.geometry.primitive.Point p2 = de.getMax();
 				Envelope envelope = new Envelope(p1.get0(), p2.get0(), p1.get1(), p2.get1());
 
+				// Check for possible overlapping geometries already in the index.
 				SpatialIndex index = context.getSpatialIndex();
-
 				List possibleMatches = index.query(envelope);
 				boolean hasOverlap = false;
 				for ( Object o : possibleMatches) {
 					Assert.isInstanceOf(Geometry.class, o);
 					Geometry possibleMatch = (Geometry)o;
+
+					// Check if the possible match actually has an overlap (or the index provided a false positive).
 					hasOverlap |= geometry.intersects(possibleMatch) && !geometry.touches(possibleMatch);
 				}
 
+				// Add the current geometry to the index so it can be tested against features validated in future.
 				index.insert(envelope, geometry);
 
 				return hasOverlap;
@@ -261,16 +255,9 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 			}
 		};
 
-		/**
-		 * Build expression which has the sole purpose of inserting the feature into the feature store.
-		 */
-		return validate(overlapValidationTest).message(Message.OVERLAP_DETECTED);
+		return validate(not(hasOverlap)).message(Message.OVERLAP_DETECTED);
 	}
 
-	@Inject
-	public void setBulkValidator(IBulkValidator<AbstractGebied> bulkValidator) {
-		this.bulkValidator = bulkValidator;
-	}
 
 	/**
 	 * Check validity of doelRealisatie attribute. Note that the 'doel' attributes can contain multiple codes, seperated
