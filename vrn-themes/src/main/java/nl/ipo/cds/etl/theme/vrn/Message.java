@@ -1,12 +1,12 @@
 package nl.ipo.cds.etl.theme.vrn;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import nl.idgis.commons.jobexecutor.JobLogger.LogLevel;
 import nl.ipo.cds.etl.ValidatorMessageKey;
 import nl.ipo.cds.validation.AttributeExpression;
 import nl.ipo.cds.validation.Expression;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public enum Message implements ValidatorMessageKey<Message, Context> {
 	ATTRIBUTE_CODE_INVALID, 
@@ -26,7 +26,6 @@ public enum Message implements ValidatorMessageKey<Message, Context> {
 	GEOMETRY_SRS_NOT_RD,
 	GEOMETRY_OUTSIDE_BRONHOUDER_AREA,
 	GEOMETRY_INVALID_COORDINATES,
-	OVERLAP_DETECTION_FAILED,
 	OVERLAP_DETECTED,
 	HAS_MORE_ERRORS(LogLevel.WARNING);
 

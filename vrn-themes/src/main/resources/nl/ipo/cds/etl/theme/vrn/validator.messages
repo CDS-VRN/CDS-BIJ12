@@ -63,5 +63,4 @@ GEOMETRY_INVALID_COORDINATES=De meegegeven geometrie valt niet geheel binnen de 
 
 HAS_MORE_ERRORS=Er zijn meer meldingen die niet werden gerapporteerd
 
-OVERLAP_DETECTION_FAILED=Fout bij initialiseren overlapdetectie: ${0}
 OVERLAP_DETECTED=Overlappende gebieden gedetecteerd in de volgende twee features: ${FEATURE} en ${FEATURE2}
