@@ -2,6 +2,7 @@ package nl.ipo.cds.etl.theme.vrn;
 
 import javax.sql.DataSource;
 
+import com.vividsolutions.jts.index.SpatialIndex;
 import nl.ipo.cds.validation.DefaultValidatorContext;
 import nl.ipo.cds.validation.ValidationReporter;
 import nl.ipo.cds.validation.gml.codelists.CodeListFactory;
@@ -9,12 +10,14 @@ import org.deegree.geometry.Geometry;
 
 public class Context extends DefaultValidatorContext<Message, Context> {
 	
-	private final DataSource dataSource;
 	private final Geometry bronhouderGeometry;
-	
-	public DataSource getDataSource() {
-		return dataSource;
+
+	private final SpatialIndex spatialIndex;
+
+	public SpatialIndex getSpatialIndex() {
+		return spatialIndex;
 	}
+
 
 	/**
 	 * Return bronhouder geometry if any.
@@ -25,11 +28,11 @@ public class Context extends DefaultValidatorContext<Message, Context> {
 	}
 
 	public Context(final CodeListFactory codeListFactory,
-			final ValidationReporter<Message, Context> reporter, DataSource dataSource, Geometry bronhouderGeometry) {
+			final ValidationReporter<Message, Context> reporter, SpatialIndex spatialIndex, Geometry bronhouderGeometry) {
 		super(codeListFactory, reporter);
 		
-		this.dataSource=dataSource;
 		this.bronhouderGeometry = bronhouderGeometry;
+		this.spatialIndex = spatialIndex;
 	}
 
 }

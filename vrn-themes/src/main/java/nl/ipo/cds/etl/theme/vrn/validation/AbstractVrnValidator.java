@@ -1,25 +1,11 @@
 package nl.ipo.cds.etl.theme.vrn.validation;
 
-import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_BRONHOUDER;
-import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_DOEL_REALISATIE;
-
-import java.io.IOException;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-import javax.inject.Inject;
-import javax.sql.DataSource;
-
+import com.vividsolutions.jts.geom.Envelope;
+import com.vividsolutions.jts.index.SpatialIndex;
+import com.vividsolutions.jts.index.quadtree.Quadtree;
 import nl.ipo.cds.dao.ManagerDao;
 import nl.ipo.cds.domain.EtlJob;
-import nl.ipo.cds.domain.ImportJob;
-import nl.ipo.cds.domain.ValidateJob;
 import nl.ipo.cds.etl.AbstractValidator;
-import nl.ipo.cds.etl.postvalidation.IBulkValidator;
-import nl.ipo.cds.etl.postvalidation.IGeometryStore;
 import nl.ipo.cds.etl.theme.vrn.Constants;
 import nl.ipo.cds.etl.theme.vrn.Context;
 import nl.ipo.cds.etl.theme.vrn.Message;
@@ -30,7 +16,6 @@ import nl.ipo.cds.validation.ValidationReporter;
 import nl.ipo.cds.validation.Validator;
 import nl.ipo.cds.validation.callbacks.UnaryCallback;
 import nl.ipo.cds.validation.constants.Constant;
-import nl.ipo.cds.validation.domain.OverlapValidationPair;
 import nl.ipo.cds.validation.execute.CompilerException;
 import nl.ipo.cds.validation.geometry.GeometryExpression;
 import nl.ipo.cds.validation.gml.CodeExpression;
@@ -38,10 +23,18 @@ import nl.ipo.cds.validation.gml.codelists.CodeList;
 import nl.ipo.cds.validation.gml.codelists.CodeListException;
 import nl.ipo.cds.validation.gml.codelists.CodeListFactory;
 import nl.ipo.cds.validation.logical.AndExpression;
-
 import org.deegree.commons.uom.Measure;
 import org.deegree.geometry.Geometry;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.Assert;
+
+import javax.inject.Inject;
+import java.sql.Timestamp;
+import java.util.List;
+import java.util.Map;
+
+import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_BRONHOUDER;
+import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_DOEL_REALISATIE;
 
 /**
  * @author annes
@@ -55,16 +48,7 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 
 	private static final String METER = "urn:ogc:def:uom:EPSG:6.3:9001";
 
-	private IGeometryStore<AbstractGebied> geometryStore;
-
-	private IBulkValidator<AbstractGebied> bulkValidator;
-
 	private ManagerDao managerDao;
-
-	@Inject
-	public void setGeometryStore(IGeometryStore<AbstractGebied> geometryStore) {
-		this.geometryStore = geometryStore;
-	}
 
 	@Inject
 	public void setManagerDao(ManagerDao managerDao) {
@@ -96,23 +80,11 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 	public Context beforeJob(final EtlJob job, final CodeListFactory codeListFactory,
 			final ValidationReporter<Message, Context> reporter) {
 
-		DataSource ds = null;
-
-		// This check is redundant because other types of jobs do not run through this code. But it is safer to be on
-		// the defense.
-		if (job instanceof ImportJob || job instanceof ValidateJob) {
-			// Both Import and Validate jobs do validation.
-			try {
-				ds = geometryStore.createStore(UUID.randomUUID().toString());
-			} catch (SQLException e) {
-				throw new RuntimeException("Error creating geometryStore: " + e);
-			}
-		}
 
 		// Can be null for "Landelijke Bronhouders".
 		Geometry bronhouderGeometry = managerDao.getBronhouderGeometry(job.getBronhouder());
 
-		return new Context(codeListFactory, reporter, ds, bronhouderGeometry);
+		return new Context(codeListFactory, reporter, new Quadtree(), bronhouderGeometry);
 	}
 
 	/**
@@ -243,69 +215,49 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 	}
 
 	/**
-	 * Instead of validating, insert feature and its geometry into a temporary GeoDB (H2) database.
-	 * 
-	 * @return
+	 * Perform overlap validation using a SpatialIndex.
 	 */
-	public Validator<Message, Context> getGeometryIntersectionValidator() {
+	public Validator<Message, Context> getGeometryOverlapValidator() {
 
-		final UnaryCallback<Message, Context, Boolean, AbstractGebied> saveFeatureCallback = new UnaryCallback<Message, Context, Boolean, AbstractGebied>() {
+		final AbstractUnaryTestExpression<Message, Context, Geometry> hasOverlap = new
+				AbstractUnaryTestExpression<Message, Context, Geometry>(
+				geometrie, "geometrie") {
 
-			/**
-			 * Each feature will get inserted into the GeoDB (H2) database.
-			 */
+            /**
+             * Returns true iff overlap is detected between the provided geometry and one of the other geometries.
+             * @param geometry The geometry provided by the currently validating feature.
+             */
 			@Override
-			public Boolean call(final AbstractGebied abstractGebied, final Context context) throws Exception {
+			public boolean test(Geometry geometry, Context context) {
+				// Retrieve JTS envelope from provided geometry.
+				org.deegree.geometry.Envelope de = geometry.getEnvelope();
+				org.deegree.geometry.primitive.Point p1 = de.getMin();
+				org.deegree.geometry.primitive.Point p2 = de.getMax();
+				Envelope envelope = new Envelope(p1.get0(), p2.get0(), p1.get1(), p2.get1());
 
-				// Only import and validate jobs have a geometrystore allocated when reaching this code.
-				// Other job types have a NULL data source.
-				if ((context.getDataSource() != null) && (abstractGebied.getGeometrie()!=null) ) {
-					geometryStore.addToStore(context.getDataSource(), abstractGebied.getGeometrie(), abstractGebied);
+				// Check for possible overlapping geometries already in the index.
+				SpatialIndex index = context.getSpatialIndex();
+				List possibleMatches = index.query(envelope);
+				boolean hasOverlap = false;
+				for ( Object o : possibleMatches) {
+					Assert.isInstanceOf(Geometry.class, o);
+					Geometry possibleMatch = (Geometry)o;
+
+					// Check if the possible match actually has an overlap (or the index provided a false positive).
+					hasOverlap |= geometry.intersects(possibleMatch) && !geometry.touches(possibleMatch);
 				}
-				return true;
+
+				// Add the current geometry to the index so it can be tested against features validated in future.
+				index.insert(envelope, geometry);
+
+				return hasOverlap;
+
 			}
 		};
 
-		/**
-		 * Build expression which has the sole purpose of inserting the feature into the feature store.
-		 */
-		return validate(callback(Boolean.class, abstractGebiedExpression, saveFeatureCallback));
+		return validate(not(hasOverlap)).message(Message.OVERLAP_DETECTED);
 	}
 
-	/**
-	 * Overlap validation hook after job.
-	 */
-	@Override
-	public void afterJob(final EtlJob job, final Reporter reporter,
-			final Context context) {
-
-		// Only Import and Validate jobs do overlap validation (and have a geometry store saved on disk when reaching
-		// this code).
-		// This check is redundant because other types of jobs do not run through this code. But it is safer to be on
-		// the defense.
-		if (!(job instanceof ImportJob || job instanceof ValidateJob)) {
-			return;
-		}
-
-        try {
-            List<OverlapValidationPair<AbstractGebied>> overlapList = bulkValidator
-                    .overlapValidation(context.getDataSource());
-            if (!overlapList.isEmpty()) {
-                for (OverlapValidationPair<AbstractGebied> overlap : overlapList) {
-                    reporter.logEvent(context, Message.OVERLAP_DETECTED, overlap.f1.getId(), overlap.f1.getIdentificatie(), overlap.f2.getId(), overlap.f2.getIdentificatie());
-                }
-            }
-        } catch (ClassNotFoundException | IOException | SQLException e) {
-            reporter.logEvent(context, Message.OVERLAP_DETECTION_FAILED, e.getMessage());
-        } finally {
-            geometryStore.destroyStore(context.getDataSource());
-		}
-	}
-
-	@Inject
-	public void setBulkValidator(IBulkValidator<AbstractGebied> bulkValidator) {
-		this.bulkValidator = bulkValidator;
-	}
 
 	/**
 	 * Check validity of doelRealisatie attribute. Note that the 'doel' attributes can contain multiple codes, seperated

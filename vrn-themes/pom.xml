@@ -47,16 +47,6 @@
 		</dependency>
 		<dependency>
 			<groupId>nl.ipo.cds</groupId>
-			<artifactId>post-validation</artifactId>
-			<version>${cds.version}</version>
-		</dependency>	
-		<dependency>
-			<groupId>nl.ipo.cds</groupId>
-			<artifactId>post-validation</artifactId>
-			<version>${cds.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>nl.ipo.cds</groupId>
 			<artifactId>etl-test</artifactId>
 			<version>${cds.version}</version>
 			<scope>test</scope>
