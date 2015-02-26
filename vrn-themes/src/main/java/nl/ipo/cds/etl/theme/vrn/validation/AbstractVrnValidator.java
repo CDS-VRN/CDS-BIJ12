@@ -1,24 +1,11 @@
 package nl.ipo.cds.etl.theme.vrn.validation;
 
-import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_BRONHOUDER;
-import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_DOEL_REALISATIE;
-
-import java.io.IOException;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-import javax.inject.Inject;
-import javax.sql.DataSource;
-
+import geodb.GeoDB;
 import nl.ipo.cds.dao.ManagerDao;
 import nl.ipo.cds.domain.EtlJob;
 import nl.ipo.cds.domain.ImportJob;
 import nl.ipo.cds.domain.ValidateJob;
 import nl.ipo.cds.etl.AbstractValidator;
-import nl.ipo.cds.etl.postvalidation.IBulkValidator;
 import nl.ipo.cds.etl.postvalidation.IGeometryStore;
 import nl.ipo.cds.etl.theme.vrn.Constants;
 import nl.ipo.cds.etl.theme.vrn.Context;
@@ -30,7 +17,6 @@ import nl.ipo.cds.validation.ValidationReporter;
 import nl.ipo.cds.validation.Validator;
 import nl.ipo.cds.validation.callbacks.UnaryCallback;
 import nl.ipo.cds.validation.constants.Constant;
-import nl.ipo.cds.validation.domain.OverlapValidationPair;
 import nl.ipo.cds.validation.execute.CompilerException;
 import nl.ipo.cds.validation.geometry.GeometryExpression;
 import nl.ipo.cds.validation.gml.CodeExpression;
@@ -38,10 +24,23 @@ import nl.ipo.cds.validation.gml.codelists.CodeList;
 import nl.ipo.cds.validation.gml.codelists.CodeListException;
 import nl.ipo.cds.validation.gml.codelists.CodeListFactory;
 import nl.ipo.cds.validation.logical.AndExpression;
-
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.deegree.commons.uom.Measure;
+import org.deegree.geometry.Envelope;
 import org.deegree.geometry.Geometry;
+import org.deegree.geometry.io.WKBWriter;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+
+import javax.inject.Inject;
+import javax.sql.DataSource;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.*;
+
+import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_BRONHOUDER;
+import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_DOEL_REALISATIE;
 
 /**
  * @author annes
@@ -50,19 +49,20 @@ import org.springframework.beans.factory.annotation.Value;
  * @param <T>
  */
 public abstract class AbstractVrnValidator<T extends AbstractGebied> extends AbstractValidator<T, Message, Context> {
-	
+
+	private static final Log technicalLog = LogFactory.getLog(AbstractVrnValidator.class);
+
 	protected final Constant<Message, Context, String> doelRealisatieCodeSpace = constant(CODESPACE_DOEL_REALISATIE);
 
 	private static final String METER = "urn:ogc:def:uom:EPSG:6.3:9001";
 
-	private IGeometryStore<AbstractGebied> geometryStore;
+	private IGeometryStore geometryStore;
 
-	private IBulkValidator<AbstractGebied> bulkValidator;
 
 	private ManagerDao managerDao;
 
 	@Inject
-	public void setGeometryStore(IGeometryStore<AbstractGebied> geometryStore) {
+	public void setGeometryStore(IGeometryStore geometryStore) {
 		this.geometryStore = geometryStore;
 	}
 
@@ -249,63 +249,69 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 	 */
 	public Validator<Message, Context> getGeometryIntersectionValidator() {
 
-		final UnaryCallback<Message, Context, Boolean, AbstractGebied> saveFeatureCallback = new UnaryCallback<Message, Context, Boolean, AbstractGebied>() {
+		final AbstractUnaryTestExpression<Message, Context, AbstractGebied> geometryOverlapTest = new
+				AbstractUnaryTestExpression<Message, Context, AbstractGebied>(abstractGebiedExpression,
+						"abstractGebied") {
 
 			/**
-			 * Each feature will get inserted into the GeoDB (H2) database.
+			 * Test the current geometry against the geometries of the features that were are already validated to
+			 * see if there is overlap.
 			 */
 			@Override
-			public Boolean call(final AbstractGebied abstractGebied, final Context context) throws Exception {
-
-				// Only import and validate jobs have a geometrystore allocated when reaching this code.
-				// Other job types have a NULL data source.
-				if ((context.getDataSource() != null) && (abstractGebied.getGeometrie()!=null) ) {
-					geometryStore.addToStore(context.getDataSource(), abstractGebied.getGeometrie(), abstractGebied);
+			public boolean test(final AbstractGebied abstractGebied, final Context context) {
+				Geometry geom = abstractGebied.getGeometrie();
+				boolean hasOverlap = false;
+				if (context.getDataSource() == null || geom == null) {
+					return true;
 				}
-				return true;
+
+				// Extract envelope of current geometry.
+				Envelope e = geom.getEnvelope();
+				double x1 = e.getMin().get0();
+				double x2 = e.getMax().get0();
+				double y1 = e.getMin().get1();
+				double y2 = e.getMax().get1();
+				String sql = String.format(Locale.US,
+						"select feature_identifier, feature_local_id " +
+						"from geometries " +
+						"where " +
+								"id IN (select cast(hatbox_join_id as int) from HATBOX_MBR_INTERSECTS_ENV('PUBLIC', 'GEOMETRIES', %f, %f, %f, %f)) and " +
+								"ST_Intersects(geometry,:geometry) and " +
+								"not ST_Touches(geometry, :geometry)", x1, x2, y1, y2);
+
+				try {
+					NamedParameterJdbcTemplate t = new NamedParameterJdbcTemplate(context.getDataSource());
+
+					final Map<String, Object> params = new HashMap<>();
+					params.put("geometry", GeoDB.ST_GeomFromWKB(WKBWriter.write(geom), 28992));
+					List<Map<String, Object>> res = t.queryForList(sql, params);
+
+					for (Map<String, Object> row : res) {
+						technicalLog.debug(String.format("Overlap detected between %s and %s", abstractGebied
+								.getIdentificatie(), row.get("FEATURE_IDENTIFIER")));
+
+						// We need to add a duplicate ID because this is removed in the Reporter for some reason.
+						String[] errParams = new String[5];
+						errParams[0] = abstractGebied.getId();
+						errParams[1] = abstractGebied.getId();
+						errParams[2] = abstractGebied.getIdentificatie();
+						errParams[3] = (String)row.get("FEATURE_LOCAL_ID");
+						errParams[4] = (String)row.get("FEATURE_IDENTIFIER");
+						context.getReporter().reportValidationError(getGeometryIntersectionValidator(), context,
+								Message.OVERLAP_DETECTED, errParams);
+						hasOverlap = true;
+					}
+					geometryStore.addToStore(context.getDataSource(), geom, abstractGebied.getIdentificatie(),
+							abstractGebied.getId());
+				} catch(Exception ex) {
+					throw new RuntimeException(ex);
+				}
+				return hasOverlap;
 			}
 		};
-
-		/**
-		 * Build expression which has the sole purpose of inserting the feature into the feature store.
-		 */
-		return validate(callback(Boolean.class, abstractGebiedExpression, saveFeatureCallback));
+		return validate(not(geometryOverlapTest));
 	}
 
-	/**
-	 * Overlap validation hook after job.
-	 */
-	@Override
-	public void afterJob(final EtlJob job, final Reporter reporter,
-			final Context context) {
-
-		// Only Import and Validate jobs do overlap validation (and have a geometry store saved on disk when reaching
-		// this code).
-		// This check is redundant because other types of jobs do not run through this code. But it is safer to be on
-		// the defense.
-		if (!(job instanceof ImportJob || job instanceof ValidateJob)) {
-			return;
-		}
-
-        try {
-            List<OverlapValidationPair<AbstractGebied>> overlapList = bulkValidator
-                    .overlapValidation(context.getDataSource());
-            if (!overlapList.isEmpty()) {
-                for (OverlapValidationPair<AbstractGebied> overlap : overlapList) {
-                    reporter.logEvent(context, Message.OVERLAP_DETECTED, overlap.f1.getId(), overlap.f1.getIdentificatie(), overlap.f2.getId(), overlap.f2.getIdentificatie());
-                }
-            }
-        } catch (ClassNotFoundException | IOException | SQLException e) {
-            reporter.logEvent(context, Message.OVERLAP_DETECTION_FAILED, e.getMessage());
-        } finally {
-            geometryStore.destroyStore(context.getDataSource());
-		}
-	}
-
-	@Inject
-	public void setBulkValidator(IBulkValidator<AbstractGebied> bulkValidator) {
-		this.bulkValidator = bulkValidator;
-	}
 
 	/**
 	 * Check validity of doelRealisatie attribute. Note that the 'doel' attributes can contain multiple codes, seperated

@@ -1,34 +1,22 @@
 package nl.ipo.cds.etl.theme.vrn.config;
 
-import java.util.Properties;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import nl.ipo.cds.attributemapping.operations.discover.OperationDiscoverer;
+import nl.ipo.cds.etl.postvalidation.H2GeometryStore;
+import nl.ipo.cds.etl.postvalidation.IGeometryStore;
 import nl.ipo.cds.etl.theme.ThemeConfigException;
 import nl.ipo.cds.etl.theme.vrn.VrnThemeConfig;
-import nl.ipo.cds.etl.theme.vrn.domain.LandelijkGebiedBeheer;
-import nl.ipo.cds.etl.theme.vrn.domain.LandelijkGebiedInrichting;
-import nl.ipo.cds.etl.theme.vrn.domain.LandelijkGebiedVerwerving;
-import nl.ipo.cds.etl.theme.vrn.domain.ProvinciaalGebiedBeheer;
-import nl.ipo.cds.etl.theme.vrn.domain.ProvinciaalGebiedInrichting;
-import nl.ipo.cds.etl.theme.vrn.domain.ProvinciaalGebiedVerwerving;
-import nl.ipo.cds.etl.theme.vrn.validation.LandelijkGebiedBeheerValidator;
-import nl.ipo.cds.etl.theme.vrn.validation.LandelijkGebiedInrichtingValidator;
-import nl.ipo.cds.etl.theme.vrn.validation.LandelijkGebiedVerwervingValidator;
-import nl.ipo.cds.etl.theme.vrn.validation.ProvinciaalGebiedBeheerValidator;
-import nl.ipo.cds.etl.theme.vrn.validation.ProvinciaalGebiedInrichtingValidator;
-import nl.ipo.cds.etl.theme.vrn.validation.ProvinciaalGebiedVerwervingValidator;
+import nl.ipo.cds.etl.theme.vrn.domain.*;
+import nl.ipo.cds.etl.theme.vrn.validation.*;
 import nl.ipo.cds.validation.execute.CompilerException;
-
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.core.io.ClassPathResource;
 
-@ImportResource(value = { "classpath:nl/ipo/cds/etl/theme/vrn/overlap-applicationContext.xml" })
+import javax.inject.Inject;
+import javax.inject.Named;
+import java.util.Properties;
+
 @Configuration(value = "vrn.DatasetConfig")
 public class DatasetConfig {
 
@@ -139,6 +127,11 @@ public class DatasetConfig {
 			properties.setLocation(new ClassPathResource("nl/ipo/cds/etl/theme/vrn/validator.messages"));
 			return properties;
 		}
+	}
+
+	@Bean
+	public IGeometryStore vrnGeometryStore () {
+		return new H2GeometryStore();
 	}
 
 }

@@ -1,6 +1,21 @@
 package nl.ipo.cds.etl.theme.vrn.domain;
 
-import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_BRONHOUDER;
+import com.vividsolutions.jts.io.ParseException;
+import nl.ipo.cds.etl.PersistableFeature;
+import nl.ipo.cds.etl.db.annotation.Column;
+import nl.ipo.cds.etl.db.annotation.Table;
+import nl.ipo.cds.etl.theme.annotation.CodeSpace;
+import nl.ipo.cds.etl.theme.annotation.MappableAttribute;
+import nl.ipo.cds.etl.theme.vrn.VrnThemeConfig;
+import org.deegree.commons.tom.ows.CodeType;
+import org.deegree.cs.persistence.CRSManager;
+import org.deegree.cs.refs.coordinatesystem.CRSRef;
+import org.deegree.geometry.Geometry;
+import org.deegree.geometry.io.WKBReader;
+import org.deegree.geometry.io.WKBWriter;
+import org.deegree.geometry.multi.MultiGeometry;
+import org.deegree.geometry.multi.MultiSurface;
+import org.deegree.geometry.primitive.Surface;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -9,23 +24,7 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 
-import nl.ipo.cds.etl.PersistableFeature;
-import nl.ipo.cds.etl.db.annotation.Column;
-import nl.ipo.cds.etl.db.annotation.Table;
-import nl.ipo.cds.etl.theme.annotation.CodeSpace;
-import nl.ipo.cds.etl.theme.annotation.MappableAttribute;
-import nl.ipo.cds.etl.theme.vrn.VrnThemeConfig;
-
-import org.deegree.commons.tom.ows.CodeType;
-import org.deegree.cs.persistence.CRSManager;
-import org.deegree.cs.refs.coordinatesystem.CRSRef;
-import org.deegree.geometry.Geometry;
-import org.deegree.geometry.io.WKBReader;
-import org.deegree.geometry.io.WKBWriter;
-import org.deegree.geometry.multi.MultiSurface;
-import org.deegree.geometry.primitive.Surface;
-
-import com.vividsolutions.jts.io.ParseException;
+import static nl.ipo.cds.etl.theme.vrn.Constants.CODESPACE_BRONHOUDER;
 
 /**
  * @author annes
@@ -198,20 +197,29 @@ public abstract class AbstractGebied extends PersistableFeature implements Seria
 
 	@MappableAttribute
 	public void setGeometrie(Geometry geometrie) {
-		// prevent null replacement of multisurface
+		// Prevent null replacement of multisurface OR surface (if either one of them is null).
 		if (geometrie == null) {
 			return;
 		}
-		// replace contained surface if needed
-		// validator TODO now allows multisurfaces with single surface? 
+		// Replace contained surface if needed.
 		geometrie = extractSurface(geometrie);
-		// hack #1 override ESRI SRID style RD
-		for (String rdReplacement : VrnThemeConfig.getRdReplacements()) {
-			if (geometrie != null && geometrie.getCoordinateSystem().toString().contains(rdReplacement)) {
-				geometrie.setCoordinateSystem(rdCrsRef);
-				continue;
-			}
-		}
+
+		// Hack #1 override ESRI SRID style RD iff it is in the list with replacements.
+		if (geometrie != null &&
+				VrnThemeConfig.getRdReplacements().contains(geometrie.getCoordinateSystem().toString())) {
+
+			geometrie.setCoordinateSystem(rdCrsRef);
+
+            // For Multisurfaces we also need to change the individual surfaces within.
+			// We assume these surfaces to have the same SRID as their containers.
+            if (geometrie instanceof MultiGeometry) {
+                MultiGeometry multi = (MultiGeometry)geometrie;
+                for (Object o : multi) {
+                    Geometry g = (Geometry)o;
+                    g.setCoordinateSystem(rdCrsRef);
+                }
+            }
+        }
 		this.geometrie = geometrie;
 	}
 
