@@ -46,10 +46,13 @@ public class DeegreeVrnWebSecurityConfigurerAdapter extends WebSecurityConfigure
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-			.anyRequest().hasAuthority("ROLE_RAADPLEGER")
 			// no access restrictions on 'vastgesteld' services
-			.antMatchers("/services/vfs-vastgesteld").permitAll()
-			.antMatchers("/services/wms-vastgesteld").permitAll();
+			.antMatchers("/services/wfs-vastgesteld").permitAll()
+			.antMatchers("/services/wms-vastgesteld").permitAll()
+			.antMatchers("/services/wfs-vastgesteld/*").permitAll()
+			.antMatchers("/services/wms-vastgesteld/*").permitAll()
+			.anyRequest().hasAuthority("ROLE_RAADPLEGER");
+			
 		
 		http.httpBasic();
 		http.logout();
