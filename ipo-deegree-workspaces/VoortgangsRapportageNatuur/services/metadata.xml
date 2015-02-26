@@ -3,28 +3,28 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.deegree.org/services/metadata http://schemas.deegree.org/services/metadata/3.2.0/metadata.xsd">
 
   <ServiceIdentification>
-    <Title>My own OGC service</Title>
-    <Abstract>An OGC service with unconfigured metadata (needs configuration)</Abstract>
+    <Title>Voortgangsrapportage Natuur OGC service</Title>
+    <Abstract>Deze service ontsluit provinciale, landelijke en vastgestelde datasets voor Voortgangsrapportage Natuur</Abstract>
   </ServiceIdentification>
 
   <ServiceProvider>
-    <ProviderName>lat/lon GmbH</ProviderName>
-    <ProviderSite>http://www.lat-lon.de</ProviderSite>
+    <ProviderName>BIJ12</ProviderName>
+    <ProviderSite>http://www.bij12.nl/</ProviderSite>
     <ServiceContact>
-      <IndividualName>Andreas Schmitz</IndividualName>
-      <PositionName>Software developer</PositionName>
-      <Phone>0228/18496-0</Phone>
-      <Facsimile>0228/18496-29</Facsimile>
-      <ElectronicMailAddress>info@lat-lon.de</ElectronicMailAddress>
+      <IndividualName>Erik van Roosmalen</IndividualName>
+      <PositionName>Test consultant GBO</PositionName>
+      <Phone>085 – 486 22 22</Phone>
+      <Facsimile>085 – 486 22 23</Facsimile>
+      <ElectronicMailAddress>info@bij12.nl</ElectronicMailAddress>
       <Address>
-        <DeliveryPoint>Aennchenstr. 19</DeliveryPoint>
-        <City>Bonn</City>
-        <AdministrativeArea>NRW</AdministrativeArea>
-        <PostalCode>53177</PostalCode>
-        <Country>Germany</Country>
+        <DeliveryPoint>Leidseveer 2</DeliveryPoint>
+        <City>Utrecht</City>
+        <AdministrativeArea>Utrecht</AdministrativeArea>
+        <PostalCode>3511 SB</PostalCode>
+        <Country>Netherlands</Country>
       </Address>
-      <OnlineResource>http://www.deegree.org</OnlineResource>
-      <HoursOfService>24x7</HoursOfService>
+      <OnlineResource>http://www.bij12.nl/</OnlineResource>
+      <HoursOfService>5x8</HoursOfService>
       <ContactInstructions>Do not hesitate to call</ContactInstructions>
       <Role>PointOfContact</Role>
     </ServiceContact>
