@@ -3,10 +3,11 @@ package nl.ipo.cds.deegree;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSource;
+import org.deegree.sqldialect.SQLDialect;
+import org.deegree.sqldialect.postgis.PostGISDialect;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.core.support.BaseLdapPathContextSource;
 import org.springframework.security.ldap.DefaultSpringSecurityContextSource;
 
@@ -60,6 +61,11 @@ public class DataSourceConfig {
 		contextSource.setReferral("ignore");
 		contextSource.afterPropertiesSet();
 		return contextSource;
+	}
+
+	@Bean
+	public SQLDialect sqlDialect() {
+		return new PostGISDialect("1.5");
 	}
 
 }
