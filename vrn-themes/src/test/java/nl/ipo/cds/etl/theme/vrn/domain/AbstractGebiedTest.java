@@ -1,14 +1,15 @@
 package nl.ipo.cds.etl.theme.vrn.domain;
 
-import java.math.BigInteger;
-import java.sql.Timestamp;
-
+import com.vividsolutions.jts.io.ParseException;
 import org.deegree.commons.tom.ows.CodeType;
+import org.deegree.cs.persistence.CRSManager;
+import org.deegree.cs.refs.coordinatesystem.CRSRef;
 import org.deegree.geometry.io.WKTReader;
 import org.deegree.geometry.primitive.Polygon;
-
-import com.vividsolutions.jts.io.ParseException;
 import org.junit.rules.TemporaryFolder;
+
+import java.math.BigInteger;
+import java.sql.Timestamp;
 
 
 /**
@@ -21,6 +22,8 @@ public class AbstractGebiedTest <T extends AbstractGebied> {
 	private static final String TEST_ID = "TEST.ID.0";
 	private Polygon polygon;
 
+	private static CRSRef rdCrsRef = CRSManager.getCRSRef("EPSG:28992");
+
 	public final TemporaryFolder testFolder = new TemporaryFolder();
 
 	public void writeGebied(T gebied) throws ParseException {
@@ -29,10 +32,11 @@ public class AbstractGebiedTest <T extends AbstractGebied> {
 		gebied.setEindtijd(new Timestamp(1418651995565L));
 		WKTReader reader = new WKTReader(null);
 		polygon = (Polygon) reader.read("POLYGON((111446.5 566602,112035.5 566602,112035.5 566886,111446.5 566886,111446.5 566602))");
+		polygon.setCoordinateSystem(rdCrsRef);
 		gebied.setGeometrie(polygon);
 		gebied.setId(TEST_DATASET_ID);
 		gebied.setIdentificatie(TEST_ID);
-		gebied.setImnaBronhouder((new CodeType ("imnaBronhouder", "http://www.namespace.com")));
+		gebied.setImnaBronhouder((new CodeType("imnaBronhouder", "http://www.namespace.com")));
 		gebied.setContractnummer(BigInteger.valueOf(2));
 	}
 
