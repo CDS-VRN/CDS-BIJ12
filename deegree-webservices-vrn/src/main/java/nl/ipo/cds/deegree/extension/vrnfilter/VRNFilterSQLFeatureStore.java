@@ -1,18 +1,11 @@
 package nl.ipo.cds.deegree.extension.vrnfilter;
 
-import static org.slf4j.LoggerFactory.getLogger;
-
-import java.util.List;
-
-import javax.xml.namespace.QName;
-
 import nl.ipo.cds.dao.ManagerDao;
 import nl.ipo.cds.deegree.persistence.jaxb.VRNFilterSQLFeatureStoreConfig;
 import nl.ipo.cds.domain.Bronhouder;
 import nl.ipo.cds.domain.Gebruiker;
 import nl.ipo.cds.domain.GebruikerThemaAutorisatie;
 import nl.ipo.cds.domain.TypeGebruik;
-
 import org.deegree.commons.annotations.LoggingNotes;
 import org.deegree.commons.tom.gml.GMLObject;
 import org.deegree.feature.persistence.FeatureStore;
@@ -30,7 +23,6 @@ import org.deegree.filter.OperatorFilter;
 import org.deegree.filter.expression.ValueReference;
 import org.deegree.filter.logical.And;
 import org.deegree.filter.spatial.Intersects;
-import org.deegree.filter.spatial.Overlaps;
 import org.deegree.geometry.Envelope;
 import org.deegree.geometry.Geometry;
 import org.deegree.protocol.wfs.getfeature.TypeName;
@@ -41,6 +33,11 @@ import org.slf4j.Logger;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.Assert;
+
+import javax.xml.namespace.QName;
+import java.util.List;
+
+import static org.slf4j.LoggerFactory.getLogger;
 
 /**
  * @author annes
@@ -161,8 +158,8 @@ public class VRNFilterSQLFeatureStore implements FeatureStore {
 			// the featuretype that is requested
 			for (GebruikerThemaAutorisatie gta : themaAutorisaties) {
 				String themanaam = gta.getBronhouderThema().getThema().getNaam(); // ProvinciaalGebiedBeheer
-				if (themanaam.equals(localPart) && gta.getTypeGebruik() == TypeGebruik.RAADPLEGER) {
-					// gebruiker is autorized
+				if (themanaam.equals(localPart) && gta.getTypeGebruik().isAllowed(TypeGebruik.RAADPLEGER)) {
+					// gebruiker is authorized
 					if (config.isFilterBronHouderGeometry()) {
 						// add additional filter on bronhouder geometry
 						return filterBronHouderGeometry(query, gta.getBronhouderThema().getBronhouder(),
