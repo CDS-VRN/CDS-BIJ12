@@ -5,7 +5,7 @@
 	xmlns:l="http://www.deegree.org/layers/base" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.deegree.org/layers/feature http://schemas.deegree.org/layers/feature/3.2.0/feature.xsd"
 	configVersion="3.2.0">
-	<FeatureStoreId>gebiedbeheer_vastgesteld</FeatureStoreId>
+	<FeatureStoreId>gebiedbeheer_vastgesteld_filtered</FeatureStoreId>
 	<FeatureLayer>
 		<FeatureType>imna:VastgesteldGebiedBeheer</FeatureType>
 		<l:Name>gebiedbeheer_vastgesteld</l:Name>

@@ -19,6 +19,7 @@ import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.DelegatingFilterProxy;
+import org.springframework.web.filter.RequestContextFilter;
 
 /**
  * @author reinoldp
@@ -39,12 +40,18 @@ public class DeegreeVrnWebApplicationInitializer implements WebApplicationInitia
 		ServletRegistration.Dynamic ogcFrontController = container.addServlet("services", OGCFrontController.class);
 		ogcFrontController.addMapping("/services", "/services/*");
 		ogcFrontController.setLoadOnStartup(1);
-
+		
+		// keep request context for use in VRNFilterSQLFeatures
+		FilterRegistration requestContextFilter = container.addFilter("RequestContextFilter", RequestContextFilter.class);
+		requestContextFilter.addMappingForUrlPatterns(null, true, "/services/*");
+		
 		FilterRegistration crsFilter = container.addFilter("CrsFilter", CrsFilter.class);
 		crsFilter.addMappingForUrlPatterns(null, true, "/services/*");
 
 		FilterRegistration quirksFilter = container.addFilter("QuirksFilter", QuirksFilter.class);
 		quirksFilter.addMappingForUrlPatterns(null, true, "/services/*");
+		
+		
 
 		ServletRegistration.Dynamic resourcesServlet = container.addServlet("resources", ResourcesServlet.class);
 		resourcesServlet.addMapping("/resources", "/resources/*");
