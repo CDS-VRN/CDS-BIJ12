@@ -51,7 +51,6 @@ public class DeegreeVrnWebApplicationInitializer implements WebApplicationInitia
 		FilterRegistration quirksFilter = container.addFilter("QuirksFilter", QuirksFilter.class);
 		quirksFilter.addMappingForUrlPatterns(null, true, "/services/*");
 		
-		
 
 		ServletRegistration.Dynamic resourcesServlet = container.addServlet("resources", ResourcesServlet.class);
 		resourcesServlet.addMapping("/resources", "/resources/*");

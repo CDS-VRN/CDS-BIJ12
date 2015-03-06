@@ -11,13 +11,14 @@ import javax.xml.namespace.QName;
 import nl.ipo.cds.dao.ManagerDao;
 import nl.ipo.cds.deegree.persistence.jaxb.VRNFilterSQLFeatureStoreConfig;
 import nl.ipo.cds.deegree.persistence.jaxb.VRNFilterSQLFeatureStoreConfig.FilterVendorRequestKVP;
-import nl.ipo.cds.domain.Bronhouder;
+import nl.ipo.cds.domain.BronhouderThema;
 import nl.ipo.cds.domain.Gebruiker;
 import nl.ipo.cds.domain.GebruikerThemaAutorisatie;
 import nl.ipo.cds.domain.TypeGebruik;
 
 import org.deegree.commons.annotations.LoggingNotes;
 import org.deegree.commons.tom.gml.GMLObject;
+import org.deegree.commons.tom.gml.GMLObjectType;
 import org.deegree.commons.tom.primitive.PrimitiveValue;
 import org.deegree.feature.persistence.FeatureStore;
 import org.deegree.feature.persistence.FeatureStoreException;
@@ -41,6 +42,9 @@ import org.deegree.filter.logical.Or;
 import org.deegree.filter.spatial.Intersects;
 import org.deegree.geometry.Envelope;
 import org.deegree.geometry.Geometry;
+import org.deegree.geometry.Geometry.GeometryType;
+import org.deegree.geometry.primitive.Polygon;
+import org.deegree.geometry.standard.multi.DefaultMultiPolygon;
 import org.deegree.protocol.wfs.getfeature.TypeName;
 import org.deegree.workspace.Resource;
 import org.deegree.workspace.ResourceMetadata;
@@ -53,9 +57,20 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 /**
+ * Applies additional filtering on a delegate feature store.
+ * <ul>
+ * <li>if {@link VRNFilterSQLFeatureStoreConfig#isFilterGebruikerThemaAutorisatie()} the authorisations for a user for
+ * the requested feature types are checked</li>
+ * <li>if {@link VRNFilterSQLFeatureStoreConfig#isFilterBronHouderGeometry())} an additional filter on bronhouder
+ * geometry is added</li>
+ * <li>if {@link VRNFilterSQLFeatureStoreConfig#getFilterVendorRequestKVP()} is specified, an addiontal filter based on
+ * a request parameter is added geometry is added</li>
+ * </ul>
+ * 
  * @author annes
+ * @author reinoldp
+ * 
  */
-
 @LoggingNotes(info = "logs problems when connecting to the DB/getting data from the DB", debug = "logs the SQL statements sent to the SQL server", trace = "logs stack traces")
 public class VRNFilterSQLFeatureStore implements FeatureStore {
 	static final Logger LOG = getLogger(VRNFilterSQLFeatureStore.class);
@@ -170,21 +185,33 @@ public class VRNFilterSQLFeatureStore implements FeatureStore {
 			// Check that gebruiker is autorised: gebruiker needs role RAADPLEGER for the thema with the same name
 			// as
 			// the featuretype that is requested
+			boolean allowed = false;
+			List<Geometry> bronhouderGeometries = new ArrayList<Geometry>();
 			for (GebruikerThemaAutorisatie gta : themaAutorisaties) {
-				String themanaam = gta.getBronhouderThema().getThema().getNaam(); // ProvinciaalGebiedBeheer
+				BronhouderThema bronhouderThema = gta.getBronhouderThema();
+				String themanaam = bronhouderThema.getThema().getNaam(); // ProvinciaalGebiedBeheer
 				if (themanaam.equals(localPart) && gta.getTypeGebruik().isAllowed(TypeGebruik.RAADPLEGER)) {
 					// gebruiker is authorized
+					LOG.debug("User is allowed to query featuretype {} by bronhouder {}", new Object[] { localPart,
+							bronhouderThema.getBronhouder() });
+					allowed = true;
 					if (config.isFilterBronHouderGeometry()) {
 						// add additional filter on bronhouder geometry
-
-						return filterBronHouderGeometry(query, gta.getBronhouderThema().getBronhouder(), namespaceURI);
+						Geometry g = managerDao.getBronhouderGeometry(bronhouderThema.getBronhouder());
+						if (g != null) {
+							bronhouderGeometries.add(g);
+						}
 					}
-					// else return unmodified filter
-					return query;
 				}
-
 			}
-			// no matching autorisation was found. Return an empty iterator
+			if (allowed && !config.isFilterBronHouderGeometry()) {
+				// allowed and no additional spatial filtering is necessary
+				return query;
+			} else if (allowed && config.isFilterBronHouderGeometry() && bronhouderGeometries.size() >= 1) {
+				// allowed, but need to filter on bronhouder geometry
+				return filterBronHouderGeometry(query, bronhouderGeometries, namespaceURI);
+			}
+			// no matching autorisation or no valid geometry was found. Return an empty iterator
 			LOG.warn("Gebruiker {} is not autorized for featureType {}. Throwing Security Exception", new Object[] {
 					principal, featureTypeName });
 			throw new AccessDeniedException("Gebruiker " + principal + " heeft geen raadpleger rechten voor thema "
@@ -246,18 +273,18 @@ public class VRNFilterSQLFeatureStore implements FeatureStore {
 
 	}
 
-	private Query filterBronHouderGeometry(Query query, Bronhouder bronhouder, String namespaceURI) {
+	private Query filterBronHouderGeometry(Query query, List<Geometry> bronhouderGeometries, String namespaceURI) {
 
 		Filter filter = query.getFilter();
 		// need extra geo filtering
-		Geometry g = managerDao.getBronhouderGeometry(bronhouder);
-		if (g == null) {
-			LOG.warn("Bronhouder geometry is null for bronhouder{}. Throwing Security Exception",
-					new Object[] { bronhouder });
-			throw new AccessDeniedException("Bronhouder " + bronhouder.getNaam() + " heeft geen geldige geometrie.");
+		// create spatial join of bronhouderGeometries
+		Geometry filterGeometry = bronhouderGeometries.get(0);
+		for (int i = 1; i < bronhouderGeometries.size(); i++) {
+			filterGeometry = filterGeometry.getUnion(bronhouderGeometries.get(i));
 		}
+		
 		Expression exp = new ValueReference(new QName(namespaceURI, "geometrie"));
-		Intersects intersectsOperator = new Intersects(exp, g);
+		Intersects intersectsOperator = new Intersects(exp, filterGeometry);
 		if (filter == null) {
 			filter = new OperatorFilter(intersectsOperator);
 		} else {

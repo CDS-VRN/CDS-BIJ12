@@ -1,44 +1,22 @@
 package filter;
 
-import com.vividsolutions.jts.io.ParseException;
-import org.deegree.commons.tom.TypedObjectNode;
-import org.deegree.filter.*;
-import org.deegree.filter.expression.ValueReference;
-import org.deegree.filter.spatial.Contains;
-import org.deegree.filter.spatial.Overlaps;
-import org.deegree.filter.spatial.SpatialOperator;
-import org.deegree.geometry.io.WKTReader;
+import javax.xml.namespace.QName;
+
 import org.deegree.cs.coordinatesystems.ICRS;
-import org.deegree.cs.exceptions.TransformationException;
-import org.deegree.cs.exceptions.UnknownCRSException;
 import org.deegree.cs.persistence.CRSManager;
-import org.deegree.feature.Feature;
-import org.deegree.feature.FeatureCollection;
-import org.deegree.feature.persistence.FeatureStoreException;
 import org.deegree.feature.persistence.query.Query;
+import org.deegree.filter.Expression;
+import org.deegree.filter.Filter;
+import org.deegree.filter.OperatorFilter;
+import org.deegree.filter.expression.ValueReference;
 import org.deegree.filter.logical.And;
+import org.deegree.filter.spatial.Overlaps;
 import org.deegree.geometry.Geometry;
-import org.deegree.geometry.precision.PrecisionModel;
-import org.deegree.geometry.primitive.Polygon;
-import org.deegree.geometry.primitive.Ring;
-import org.deegree.geometry.standard.multi.DefaultMultiPolygon;
-import org.deegree.gml.GMLOutputFactory;
-import org.deegree.gml.GMLStreamWriter;
-import org.deegree.gml.GMLVersion;
+import org.deegree.geometry.io.WKTReader;
 import org.deegree.protocol.wfs.getfeature.TypeName;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
-import javax.xml.namespace.QName;
-import javax.xml.stream.XMLOutputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
+import com.vividsolutions.jts.io.ParseException;
 
 /**
  * Created by huub on 2/10/2015.
