@@ -1,12 +1,11 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>nl.ipo.cds</groupId>
 	<artifactId>deegree-webservices-vrn</artifactId>
 	<packaging>war</packaging>
 	<name>deegree-webservices-vrn</name>
 	<description>WAR that includes deegree WFS, WMS, WMTS and common datastore modules, with authentication and filtering specific to VRN</description>
-	<version>2.2-vrn-1.0-SNAPSHOT</version>
+	<version>2.2-vrn-0.5.0</version>
 
 	<properties>
 		<deegree.version>3.4-pre16</deegree.version>
