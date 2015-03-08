@@ -1,0 +1,6 @@
+<VRNFilterSQLFeatureStore xmlns="urn:cds-vrn:deegree-extension:filter">
+	<DelegateFeatureStoreId>gebiedverwerving_vastgesteld</DelegateFeatureStoreId>
+	<FilterBronHouderGeometry>false</FilterBronHouderGeometry>
+	<FilterGebruikerThemaAutorisatie>false</FilterGebruikerThemaAutorisatie>
+	<FilterVendorRequestKVP>tag</FilterVendorRequestKVP>
+</VRNFilterSQLFeatureStore>

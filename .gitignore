@@ -7,3 +7,4 @@ target/
 #intellij articacts
 *.iml
 *.db
+deegree-webservices-vrn/.springBeans

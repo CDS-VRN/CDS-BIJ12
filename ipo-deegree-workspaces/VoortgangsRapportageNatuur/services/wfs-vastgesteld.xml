@@ -13,7 +13,7 @@
 
 
 	<!-- Only service 'vastgesteld' features, because they have no access restrictions -->
-	<FeatureStoreId>gebiedbeheer_vastgesteld</FeatureStoreId>
+	<FeatureStoreId>gebiedbeheer_vastgesteld_filtered</FeatureStoreId>
 	<FeatureStoreId>gebiedinrichting_vastgesteld</FeatureStoreId>
 	<FeatureStoreId>gebiedverwerving_vastgesteld</FeatureStoreId>
 
