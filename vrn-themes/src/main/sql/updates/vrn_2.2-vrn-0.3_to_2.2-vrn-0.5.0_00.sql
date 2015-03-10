@@ -1,0 +1,1 @@
+-- Empty link file for upgrading from initial version to version just before a new SQL patch.
