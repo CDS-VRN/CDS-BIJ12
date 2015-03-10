@@ -11,10 +11,17 @@ import nl.ipo.cds.etl.theme.vrn.Context;
 import nl.ipo.cds.etl.theme.vrn.Message;
 import nl.ipo.cds.etl.theme.vrn.domain.AbstractGebied;
 import nl.ipo.cds.validation.execute.CompilerException;
+
 import org.deegree.commons.tom.ows.CodeType;
+import org.deegree.cs.coordinatesystems.ICRS;
+import org.deegree.cs.persistence.CRSManager;
+import org.deegree.geometry.Geometry;
+import org.deegree.geometry.io.WKTReader;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+
+import com.vividsolutions.jts.io.ParseException;
 
 /**
  * @author reinoldp
@@ -39,6 +46,25 @@ public abstract class AbstractVrnValidatorTest<G extends AbstractGebied, V exten
 
 	protected ValidationRunner<G, Message, Context>.Runner run(final String validationName) {
 		return runner.validation(validationName);
+	}
+
+	@Test
+	public final void testGetGeometryValidator() throws ParseException {
+		String validationName = "geometry";
+		// null geometry
+		run(validationName).with(null).assertOnlyKey(Message.ATTRIBUTE_NULL);
+		// multisurface
+		final Geometry multiSurface = createMultiSurface();
+		run(validationName).withFeature("geometrie",multiSurface).assertOnlyKey(Message.GEOMETRY_ONLY_SURFACE);
+
+	}
+
+	private Geometry createMultiSurface() throws ParseException {
+		ICRS srs = CRSManager.getCRSRef("EPSG:28992");
+		WKTReader reader = new WKTReader(srs);
+		Geometry g = reader
+				.read("MULTIPOLYGON (((150000.000000 420000.000000,160000.000000 420000.000000,160000.000000 430000.000000,150000.000000 430000.000000,150000.000000 420000.000000)),((120000.000000 420000.000000,130000.000000 420000.000000,130000.000000 430000.000000,120000.000000 430000.000000,120000.000000 420000.000000)))");
+		return g;
 	}
 
 	/**

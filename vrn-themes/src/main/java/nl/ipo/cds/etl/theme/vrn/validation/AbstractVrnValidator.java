@@ -58,7 +58,6 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 
 	private IGeometryStore geometryStore;
 
-
 	private ManagerDao managerDao;
 
 	@Inject
@@ -177,12 +176,12 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 
 		and(
 		// The following validations short-circuit, there must be a non-empty, Surface geometry:
-		validate(not(geometrie.isNull())).message(Message.ATTRIBUTE_NULL, constant(surfaceGeometry.name),
-		// Single polygon
-				validate((geometrie.isSurface())).message(Message.GEOMETRY_ONLY_SURFACE)),
+				validate(not(geometrie.isNull())).message(Message.ATTRIBUTE_NULL, constant(surfaceGeometry.name)),
+				// Single polygon
+				validate(geometrie.isSurface()).message(Message.GEOMETRY_ONLY_SURFACE),
 
-		// Short circuit to prevent the interiorDisconnected validation if
-		// any of the other validations fail:
+				// Short circuit to prevent the interiorDisconnected validation if
+				// any of the other validations fail:
 				and(
 						// Hole Outside Shell
 						validate(not(surfaceGeometry.hasInteriorRingOutsideExterior())).message(
@@ -213,8 +212,8 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 						validate(surfaceGeometry.isSrs(constant("28992"))).message(Message.GEOMETRY_SRS_NOT_RD,
 								surfaceGeometry.srsName()),
 						// check invalid coordinates
-						validate(surfaceGeometry.hasValidCoordinateRD()).message(Message.GEOMETRY_INVALID_COORDINATES)
-				).shortCircuit()));
+						validate(surfaceGeometry.hasValidCoordinateRD()).message(Message.GEOMETRY_INVALID_COORDINATES))
+						.shortCircuit()).shortCircuit());
 
 	}
 
@@ -231,8 +230,9 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 			@Override
 			public boolean test(Geometry value, Context context) {
 
-				return context.getBronhouderGeometry() == null ||
-						value.isWithin(context.getBronhouderGeometry().getBuffer(new Measure(bronhouderAreaMargin, METER)));
+				return context.getBronhouderGeometry() == null
+						|| value.isWithin(context.getBronhouderGeometry().getBuffer(
+								new Measure(bronhouderAreaMargin, METER)));
 			}
 		};
 
@@ -249,13 +249,12 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 	 */
 	public Validator<Message, Context> getGeometryIntersectionValidator() {
 
-		final AbstractUnaryTestExpression<Message, Context, AbstractGebied> geometryOverlapTest = new
-				AbstractUnaryTestExpression<Message, Context, AbstractGebied>(abstractGebiedExpression,
-						"abstractGebied") {
+		final AbstractUnaryTestExpression<Message, Context, AbstractGebied> geometryOverlapTest = new AbstractUnaryTestExpression<Message, Context, AbstractGebied>(
+				abstractGebiedExpression, "abstractGebied") {
 
 			/**
-			 * Test the current geometry against the geometries of the features that were are already validated to
-			 * see if there is overlap.
+			 * Test the current geometry against the geometries of the features that were are already validated to see
+			 * if there is overlap.
 			 */
 			@Override
 			public boolean test(final AbstractGebied abstractGebied, final Context context) {
@@ -271,13 +270,14 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 				double x2 = e.getMax().get0();
 				double y1 = e.getMin().get1();
 				double y2 = e.getMax().get1();
-				String sql = String.format(Locale.US,
-						"select feature_identifier, feature_local_id " +
-						"from geometries " +
-						"where " +
-								"id IN (select cast(hatbox_join_id as int) from HATBOX_MBR_INTERSECTS_ENV('PUBLIC', 'GEOMETRIES', %f, %f, %f, %f)) and " +
-								"ST_Intersects(geometry,:geometry) and " +
-								"not ST_Touches(geometry, :geometry)", x1, x2, y1, y2);
+				String sql = String
+						.format(Locale.US,
+								"select feature_identifier, feature_local_id "
+										+ "from geometries "
+										+ "where "
+										+ "id IN (select cast(hatbox_join_id as int) from HATBOX_MBR_INTERSECTS_ENV('PUBLIC', 'GEOMETRIES', %f, %f, %f, %f)) and "
+										+ "ST_Intersects(geometry,:geometry) and "
+										+ "not ST_Touches(geometry, :geometry)", x1, x2, y1, y2);
 
 				try {
 					NamedParameterJdbcTemplate t = new NamedParameterJdbcTemplate(context.getDataSource());
@@ -287,23 +287,23 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 					List<Map<String, Object>> res = t.queryForList(sql, params);
 
 					for (Map<String, Object> row : res) {
-						technicalLog.debug(String.format("Overlap detected between %s and %s", abstractGebied
-								.getIdentificatie(), row.get("FEATURE_IDENTIFIER")));
+						technicalLog.debug(String.format("Overlap detected between %s and %s",
+								abstractGebied.getIdentificatie(), row.get("FEATURE_IDENTIFIER")));
 
 						// We need to add a duplicate ID because this is removed in the Reporter for some reason.
 						String[] errParams = new String[5];
 						errParams[0] = abstractGebied.getId();
 						errParams[1] = abstractGebied.getId();
 						errParams[2] = abstractGebied.getIdentificatie();
-						errParams[3] = (String)row.get("FEATURE_LOCAL_ID");
-						errParams[4] = (String)row.get("FEATURE_IDENTIFIER");
+						errParams[3] = (String) row.get("FEATURE_LOCAL_ID");
+						errParams[4] = (String) row.get("FEATURE_IDENTIFIER");
 						context.getReporter().reportValidationError(getGeometryIntersectionValidator(), context,
 								Message.OVERLAP_DETECTED, errParams);
 						hasOverlap = true;
 					}
 					geometryStore.addToStore(context.getDataSource(), geom, abstractGebied.getIdentificatie(),
 							abstractGebied.getId());
-				} catch(Exception ex) {
+				} catch (Exception ex) {
 					throw new RuntimeException(ex);
 				}
 				return hasOverlap;
@@ -312,13 +312,12 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 		return validate(not(geometryOverlapTest));
 	}
 
-
 	/**
 	 * Check validity of doelRealisatie attribute. Note that the 'doel' attributes can contain multiple codes, seperated
 	 * by ';' characters.
 	 * 
 	 * @param constantDoelBeheer
-	 * @param doelBeheer 
+	 * @param doelBeheer
 	 * @return
 	 */
 	protected AndExpression<Message, Context> validateDoelRealisatie(
