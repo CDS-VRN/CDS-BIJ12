@@ -6,6 +6,8 @@ package nl.ipo.cds.deegree.web;
 import static org.deegree.commons.xml.CommonNamespaces.XLINK_PREFIX;
 import static org.deegree.commons.xml.CommonNamespaces.XLNNS;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,8 +46,33 @@ public class DeegreeServiceUrlAspects {
 
 	private List<String> vendorParameters = new ArrayList<>();
 
+	private String host;
+
+	private int port;
+
+	private String protocol;
+
+	@Value("${deegree.webservices.vrn.host:}")
+	public void setHost(String host) {
+		logger.info("Using host: {}", host);
+		this.host = host;
+	}
+
+	@Value("${deegree.webservices.vrn.port:-1}")
+	public void setPort(int port) {
+		logger.info("Using port: {}", port);
+		this.port = port;
+	}
+
+	@Value("${deegree.webservices.vrn.protocol:https}")
+	public void setProtocol(String protocol) {
+		logger.info("Using default service protocol: {}", protocol);
+		this.protocol = protocol;
+	}
+
 	@Value("#{'${deegree.webservices.vrn.vendorparameters:tag}'.split(',')}")
 	public void setVendorParameters(List<String> vendorParameters) {
+		logger.info("Using vendor parameters: {}", vendorParameters);
 		this.vendorParameters = vendorParameters;
 	}
 
@@ -137,11 +164,12 @@ public class DeegreeServiceUrlAspects {
 		writer.writeEndElement();
 	}
 
-	private String getServiceUrl() {
+	private String getServiceUrl() throws MalformedURLException {
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
 				.getRequest();
-		request.getRequestURL();
-		StringBuffer sb = new StringBuffer(request.getRequestURL().toString()).append("?");
+
+		String requestUrl = getRequestUrl(request);
+		StringBuffer sb = new StringBuffer(requestUrl).append("?");
 		for (String vendorParameter : vendorParameters) {
 			String value = request.getParameter(vendorParameter);
 			if (value != null) {
@@ -151,5 +179,39 @@ public class DeegreeServiceUrlAspects {
 		String url = sb.toString();
 		logger.debug("returning modified HttpGet request url including vendor parameters: {}", url);
 		return url;
+	}
+
+	/**
+	 * Create request url. Maybe overrule by baseUrl and x-forwarded headers. See
+	 * http://en.wikipedia.org/wiki/List_of_HTTP_header_fields
+	 * 
+	 * @param request
+	 * @return
+	 * @throws MalformedURLException
+	 */
+	private String getRequestUrl(HttpServletRequest request) throws MalformedURLException {
+		URL url = new URL(request.getRequestURL().toString());
+		String requestProtocol = url.getProtocol();
+		String requestHost = url.getHost();
+		int requestPort = url.getPort();
+		String requestPath = url.getPath();
+		// overrule protocol if necessary
+		if (protocol != null && protocol.length() >= 1) {
+			requestProtocol = protocol;
+		} else if (request.getHeader("X-Forwarded-Proto") != null) {
+			requestProtocol = request.getHeader("X-Forwarded-Proto");
+		}
+		// overrule host if necessary
+		if (host != null && host.length() >= 1) {
+			requestHost = host;
+		} else if (request.getHeader("X-Forwarded-Host") != null) {
+			requestHost = request.getHeader("X-Forwarded-Host");
+		}
+		// overrule port if necessary
+		if (port >= 1) {
+			requestPort = port;
+		}
+		// construct url
+		return new URL(requestProtocol, requestHost, requestPort, requestPath).toString();
 	}
 }
