@@ -48,4 +48,34 @@
 		<title>Waterleidingmaatschappij</title>
 		<category term="CodeListValue" />
 	</entry>
+	<entry>
+		<id>10</id>
+		<title>Lid Unie van Bosgroepen</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>11</id>
+		<title>Particulier</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>12</id>
+		<title>Collectief agrarisch natuurbeheerder</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>13</id>
+		<title>Overige erkende TBOs</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>14</id>
+		<title>Overige overheidspartij</title>
+		<category term="CodeListValue" />
+	</entry>
+	<entry>
+		<id>15</id>
+		<title>Overige partij</title>
+		<category term="CodeListValue" />
+	</entry>
 </feed>
