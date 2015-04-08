@@ -73,6 +73,9 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 	@Value("${bronhouderAreaMargin}")
 	private String bronhouderAreaMargin;
 
+	@Value("${overlapTolerance:0.002}")
+	private String overlapTolerance;
+
 	private final GeometryExpression<Message, Context, Geometry> geometrie = geometry("geometrie");
 	private final AbstractGebiedExpression<Message, Context, AbstractGebied> abstractGebiedExpression = new AbstractGebiedExpression<>(
 			"abstractGebied", AbstractGebied.class);
@@ -283,7 +286,10 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 					NamedParameterJdbcTemplate t = new NamedParameterJdbcTemplate(context.getDataSource());
 
 					final Map<String, Object> params = new HashMap<>();
-					params.put("geometry", GeoDB.ST_GeomFromWKB(WKBWriter.write(geom), 28992));
+
+					// We have a custom tolerance measure added because GIS tools have a different tolerance for intersects than ST_Intersects.
+					// This is implemented as a negative buffer.
+					params.put("geometry", GeoDB.ST_GeomFromWKB(WKBWriter.write(geom.getBuffer(new Measure("-"+overlapTolerance, METER))), 28992));
 					List<Map<String, Object>> res = t.queryForList(sql, params);
 
 					for (Map<String, Object> row : res) {
