@@ -368,4 +368,12 @@ public abstract class AbstractVrnValidator<T extends AbstractGebied> extends Abs
 				.shortCircuit();
 	}
 
+
+	@Override
+	public void afterJobCleanup (final EtlJob job, final Context context) {
+		// Release geometry store.
+		if (context.getDataSource() != null) {
+			geometryStore.destroyStore(context.getDataSource());
+		}
+	}
 }
